@@ -9,12 +9,16 @@
     tools:context=".MainActivity"
     android:clipToPadding="false">
 
-
+<!--    그림과 사이즈가 달라서 디자인과 다른 부분 존재-->
+<!--    파란색 배경에 있는 로고-->
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="387dp"
-        android:src="@drawable/logo2"/>
+        android:layout_width="429dp"
+        android:layout_height="416dp"
+        android:src="@drawable/logo2"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-38dp" />
 
+<!--    뒤로가기 버튼-->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +32,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/back"/>
 
+<!--    흰색 배경-->
     <View
         android:layout_width="match_parent"
         android:id="@+id/backwhite"
@@ -37,21 +42,22 @@
         android:layout_marginTop="165dp"
         app:layout_constraintTop_toBottomOf="@id/back" />
 
-    //여기 고쳐야 함!!
+<!--    동그라미 부분 -->
+<!--    로고와 배경이 모두 흰색이라 로고가 보이지 않는 것 같음-->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/centerImage"
         android:layout_width="99.26dp"
         android:layout_height="99.26dp"
-        android:layout_gravity="center"
         android:background="@drawable/logo_bg"
-        android:src="@drawable/logo2"
         app:civ_border_color="#1D2D69"
         app:civ_border_overlay="true"
         app:civ_border_width="1dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="163dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="173dp" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
+<!--    관심분야-->
     <TextView
         android:id="@+id/interesttitle"
         android:layout_width="wrap_content"
@@ -65,6 +71,7 @@
         android:layout_marginTop="13dp"
         android:textStyle="bold"/>
 
+<!--    버튼 부분-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -207,7 +214,9 @@
         </LinearLayout>
     </LinearLayout>
 
+<!--    완료버튼-->
     <android.widget.Button
+        android:id="@+id/finish"
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:layout_marginLeft="11dp"
