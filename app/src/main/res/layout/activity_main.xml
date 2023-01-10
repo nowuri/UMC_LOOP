@@ -25,7 +25,8 @@
         android:layout_width="429dp"
         android:layout_height="416dp"
         android:src="@drawable/logo2"
-        tools:layout_editor_absoluteX="-16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="-38dp" />
 
     <!--    뒤로가기 버튼-->
