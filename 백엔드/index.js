@@ -1,8 +1,10 @@
 // Configure dotenv
-require('dotenv').config({ path: './config/.env' });
+require('dotenv').config();
 
 const express = require('./config/express');
 const {logger} = require('./config/winston');
+
+console.log(process.env.PORT);
 
 const port = process.env.PORT || 3001;
 express().listen(port);
