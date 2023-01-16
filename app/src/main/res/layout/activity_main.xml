@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:background="#D9D9D9"
     android:clipToPadding="false"
     android:orientation="vertical"
@@ -254,6 +255,74 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
+=======
+    tools:context=".MainActivity"
+    android:background="#D9D9D9">
+
+    <View
+        android:layout_width="370dp"
+        android:layout_height="671dp"
+        android:background="#1D2D69"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/background"
+        android:layout_marginBottom="15dp"/>
+    
+    <ImageView
+        android:layout_width="555dp"
+        android:layout_height="589dp"
+        android:src="@drawable/logo1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="158dp"
+        android:layout_height="158dp"
+        android:background="@drawable/circle_logo"
+        android:src="@drawable/logo2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="230dp"
+        android:id="@+id/logo"/>
+
+<!--    그림자 안 들어감-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOPE"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        android:layout_marginTop="56dp"
+        android:id="@+id/lope"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="청년과 정책을 잇다"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lope"
+        android:textSize="24sp"
+        android:layout_marginTop="15dp"/>
+
+
+
+
+
+
+
+>>>>>>> b88f9dbbca486facc3b9ac1dafc55455bd99d1db
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

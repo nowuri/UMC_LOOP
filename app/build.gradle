@@ -7,7 +7,11 @@ android {
     compileSdk 32
 
     defaultConfig {
+<<<<<<< HEAD
         applicationId "com.example.interested"
+=======
+        applicationId "com.example.loading"
+>>>>>>> b88f9dbbca486facc3b9ac1dafc55455bd99d1db
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -29,9 +33,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+<<<<<<< HEAD
 
     viewBinding{
         enabled = true
+=======
+    viewBinding{
+        enabled=true
+>>>>>>> b88f9dbbca486facc3b9ac1dafc55455bd99d1db
     }
 }
 
@@ -43,6 +52,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
+<<<<<<< HEAD
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+=======
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+>>>>>>> b88f9dbbca486facc3b9ac1dafc55455bd99d1db
 }
