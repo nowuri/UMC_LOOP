@@ -1,3 +1,7 @@
 <resources>
+<<<<<<< HEAD
+    <string name="app_name">Interested</string>
+=======
     <string name="app_name">Loading</string>
+>>>>>>> b88f9dbbca486facc3b9ac1dafc55455bd99d1db
 </resources>
