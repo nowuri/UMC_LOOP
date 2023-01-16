@@ -1,5 +1,6 @@
 package com.example.interested
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -34,7 +35,8 @@ class SignUp3Activity: AppCompatActivity() {
         //뒤로가기 클릭했을 때
         viewBinding.back.setOnClickListener() {
 //            이전 화면으로 돌아갈 수 있도록 함
-//            val intent = Intent(this, )
+            val intent = Intent(this, SignUp2Activity::class.java)
+            startActivity(intent)
             Toast.makeText(this@SignUp3Activity, "뒤로 돌아가기", Toast.LENGTH_SHORT).show()
         }
 
@@ -55,10 +57,16 @@ class SignUp3Activity: AppCompatActivity() {
         viewBinding.checkboxSms.setOnCheckedChangeListener { buttonView, isChecked ->
             Toast.makeText(this, isChecked.toString(), Toast.LENGTH_SHORT).show();
             if (isChecked) { //체크를 할 때
+                viewBinding.checkboxSms.setChecked(true)
                 listItem.add(isChecked);
             } else { //체크 해제될 때
+                viewBinding.checkboxSms.setChecked(false)
                 listItem.remove(isChecked);
             }
+        }
+        viewBinding.next.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -68,9 +76,5 @@ class SignUp3Activity: AppCompatActivity() {
     //개인정보 제공동의
 
     //다음 버튼 클릭
-//        viewBinding.next.setOnClickListener{
-//            val intent = Intent(this, SignUp3Activity::class.java)
-//            startActivity(intent)
-//        }
 //
 }

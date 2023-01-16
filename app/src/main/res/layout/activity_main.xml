@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/margin_top"
+    android:layout_marginBottom="@dimen/margin_bottom"
+    android:layout_marginStart="@dimen/margin_left"
+    android:layout_marginEnd="@dimen/margin_right"
     android:background="#D9D9D9"
     android:clipToPadding="false"
     android:orientation="vertical"
@@ -62,15 +66,15 @@
         android:id="@+id/centerImage"
         android:layout_width="99.26dp"
         android:layout_height="99.26dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="163dp"
         android:background="@drawable/logo_bg"
+        android:src="@drawable/ic_helpinghand"
         app:civ_border_color="#1D2D69"
         app:civ_border_overlay="true"
         app:civ_border_width="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/logo3"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--    관심분야-->
     <TextView
