@@ -55,7 +55,7 @@ class SignUp2Activity: AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 inputUserName = viewBinding.ETName.text.toString()
-                viewBinding.ETName.setText(inputUserName)
+                //viewBinding.ETName.setText(inputUserName)
             }
             override fun afterTextChanged(p0: Editable?) {}
         })
@@ -65,7 +65,7 @@ class SignUp2Activity: AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 var inputUserTel = viewBinding.ETTelephone.text.toString()
-                viewBinding.ETTelephone.setText(inputUserTel)
+                //viewBinding.ETTelephone.setText(inputUserTel)
             }
             override fun afterTextChanged(p0: Editable?) {}
         })
