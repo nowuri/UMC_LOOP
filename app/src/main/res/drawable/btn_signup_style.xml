@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:shape="rectangle" >
+    <solid
+        android:color="#1D2D69"
+        android:textColor="@color/white"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="272dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="380dp"
+        android:background="#00000000" />
+
+    <corners
+        android:bottomLeftRadius="2dp"
+        android:bottomRightRadius="2dp"
+        android:topLeftRadius="2dp"
+        android:topRightRadius="2dp" />
+</shape>
