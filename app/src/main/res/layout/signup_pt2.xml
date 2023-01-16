@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/margin_top"
+    android:layout_marginBottom="@dimen/margin_bottom"
+    android:layout_marginStart="@dimen/margin_left"
+    android:layout_marginEnd="@dimen/margin_right"
+    android:background="#1D2D69"
+    android:orientation="vertical"
+    tools:context=".SignUp2Activity"
+    android:clipToPadding="false">
+
+    <!--    뒤로가기 버튼-->
+    <ImageView
+        android:layout_width="429dp"
+        android:layout_height="416dp"
+        android:src="@drawable/logo2"
+        app:layout_constraintBottom_toTopOf="@+id/backwhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⟨ 뒤로가기"
+        android:textSize="20sp"
+        android:background="#00000000"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/back"/>
+
+    <!--    흰색 배경-->
+    <View
+        android:id="@+id/backwhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="206dp"
+        android:background="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back"
+        app:layout_constraintVertical_bias="0.982"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/centerImage"
+        android:layout_width="99.26dp"
+        android:layout_height="99.26dp"
+        android:layout_marginTop="163dp"
+        android:background="@drawable/logo_bg"
+        android:src="@drawable/ic_helpinghand"
+        app:civ_border_color="#1D2D69"
+        app:civ_border_overlay="true"
+        app:civ_border_width="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--     회원가입-->
+    <TextView
+        android:id="@+id/signup_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:textColor="#1D2D69"
+        android:textSize="32sp"
+        app:layout_constraintTop_toBottomOf="@id/centerImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="13dp"
+        android:textStyle="bold"/>
+
+    <!--    가입 정보 입력 부분-->
+    <LinearLayout
+        android:id="@+id/signup_pt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical"
+        android:weightSum="7"
+        app:layout_constraintTop_toBottomOf="@id/signup_title"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/ic_name"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:src="@drawable/ic_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ET_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0" />
+
+            <EditText
+                android:id="@+id/ET_name"
+                android:layout_width="300dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="8dp"
+                android:background="@null"
+                android:inputType="textUri"
+                android:privateImeOptions="defaultInputmode=korean"
+
+                android:maxLength="10"
+                android:hint="@string/name"
+                android:textColor="#9B9B9B"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ic_name"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ic_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.25" />
+
+            <ImageView
+                android:id="@+id/line_signup_name"
+                android:layout_width="400dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="8dp"
+
+                android:src="@drawable/line_signup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ic_name" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="2">
+
+            <ImageView
+                android:id="@+id/ic_telephone"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:src="@drawable/ic_telephone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ET_telephone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.12" />
+
+            <EditText
+                android:id="@+id/ET_telephone"
+                android:layout_width="246dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:background="@null"
+                android:inputType="number"
+                android:maxLength="10"
+                android:hint="@string/telephone"
+                android:textColor="#9B9B9B"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ic_telephone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.25" />
+
+            <android.widget.Button
+                android:id="@+id/btn_numauth"
+                android:layout_width="55dp"
+                android:layout_height="32dp"
+                android:background="@drawable/btn_signup_style"
+                android:text="인증"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.246" />
+
+            <ImageView
+                android:id="@+id/line_signup_telephone"
+                android:layout_width="400dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/line_signup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ic_telephone" />
+
+            <ImageView
+                android:id="@+id/numauth_rectangle"
+                android:layout_width="271dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/rec_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.538"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_signup_telephone"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/ET_numauth"
+                android:layout_width="209dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="4dp"
+                android:background="@null"
+                android:inputType="number"
+                android:textColor="#9B9B9B"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/numauth_rectangle"
+                app:layout_constraintStart_toStartOf="@+id/numauth_rectangle"
+                app:layout_constraintTop_toTopOf="@+id/numauth_rectangle"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/numauth_status"
+                android:layout_width="51dp"
+                android:layout_height="31dp"
+                android:text="0:00"
+                android:textColor="#34000078"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@+id/numauth_rectangle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.076"
+                app:layout_constraintStart_toEndOf="@+id/ET_numauth"
+                app:layout_constraintTop_toTopOf="@+id/numauth_rectangle"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/ic_birth"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:src="@drawable/ic_birth"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.158" />
+
+            <TextView
+                android:id="@+id/birth"
+                android:layout_width="288dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="8dp"
+                android:background="@null"
+                android:inputType="text"
+                android:text="@string/birth"
+                android:textColor="#9B9B9B"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ic_birth"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.25" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_birth"
+                android:layout_width="42dp"
+                android:layout_height="33dp"
+                android:clickable="true"
+                android:background="@drawable/ic_calendar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.684"
+                app:layout_constraintStart_toEndOf="@+id/birth"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.171" />
+
+            <ImageView
+                android:id="@+id/line_signup_birth"
+                android:layout_width="400dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/line_signup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ic_birth" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="2">
+
+            <ImageView
+                android:id="@+id/ic_address"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:src="@drawable/ic_address"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.158" />
+
+            <TextView
+                android:id="@+id/address_pt1"
+                android:layout_width="75dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/rec_style"
+                android:text="@string/address"
+                android:textAlignment="center"
+                android:textColor="#9B9B9B"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ic_address"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.196" />
+
+            <EditText
+                android:id="@+id/address_pt2"
+                android:layout_width="242dp"
+                android:layout_height="29dp"
+                android:background="@drawable/rec_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/address_pt1"
+                app:layout_constraintTop_toBottomOf="@+id/address_pt1"
+                app:layout_constraintVertical_bias="0.272" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="63dp"
+                android:layout_height="29dp"
+                app:cardCornerRadius="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/address_pt2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.906">
+
+                <WebView
+                android:id="@+id/wv_address"
+                android:layout_width="63dp"
+                android:layout_height="29dp"
+                android:foreground="@color/blue"  />
+
+                <TextView
+                    android:id="@+id/text_wv_address"
+                    android:layout_width="63dp"
+                    android:layout_height="29dp"
+                    android:text="우편번호"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"/>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="2">
+
+            <!--    다음 버튼-->
+            <android.widget.Button
+                android:id="@+id/next"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:background="@drawable/changed_btn"
+                android:text="다음"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
