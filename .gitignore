@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
 # Logs
-logs
+log
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -122,8 +120,10 @@ dist
 
 #보안관련해서..
 package-lock.json
-=======
->>>>>>> b88f9dbbca486facc3b9ac1dafc55455bd99d1db
+
+# WebStorm
+.idea
+
 *.iml
 .gradle
 /local.properties
@@ -139,7 +139,3 @@ package-lock.json
 .externalNativeBuild
 .cxx
 local.properties
-<<<<<<< HEAD
-=======
->>>>>>> c8207b3 (1/10 완성)
->>>>>>> b88f9dbbca486facc3b9ac1dafc55455bd99d1db
