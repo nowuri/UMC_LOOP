@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Thread: ",i.toString())
                 if(num > 0){
                     viewBinding.finish.setBackgroundResource(R.drawable.changed_btn)
-                    viewBinding.finish.setTextColor(Color.parseColor("#1D2D69"))
+                    viewBinding.finish.setTextColor(Color.parseColor("#ffffff"))
                     possible = 1
                 }
                 else{
                     viewBinding.finish.setBackgroundResource(R.drawable.btn_style)
-                    viewBinding.finish.setTextColor(Color.parseColor("#ffffff"))
+                    viewBinding.finish.setTextColor(Color.parseColor("#1D2D69"))
                     possible = 0
                 }
                 Thread.sleep(100)
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         viewBinding.back.setOnClickListener(){
 //            이전 화면으로 돌아갈 수 있도록 함
-            val intent = Intent(this, SignUp2Activity::class.java)
+            val intent = Intent(this, SignUp3Activity::class.java)
             startActivity(intent)
             Toast.makeText(this@MainActivity,"뒤로 돌아가기",Toast.LENGTH_SHORT).show()
         }
