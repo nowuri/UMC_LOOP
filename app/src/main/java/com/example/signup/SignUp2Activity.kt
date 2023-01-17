@@ -17,6 +17,7 @@ import android.webkit.WebChromeClient
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.SignupPt2Binding
+import com.example.loading.MainActivity_Loading
 import java.util.*
 
 class SignUp2Activity: AppCompatActivity() {
@@ -42,7 +43,8 @@ class SignUp2Activity: AppCompatActivity() {
         //뒤로가기 클릭했을 때
         viewBinding.back.setOnClickListener(){
 //            이전 화면으로 돌아갈 수 있도록 함
-//            val intent = Intent(this, )
+//            var intent = Intent(this, )
+//            startActivity(intent)
             Toast.makeText(this@SignUp2Activity,"뒤로 돌아가기",Toast.LENGTH_SHORT).show()
         }
 

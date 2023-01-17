@@ -4,19 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/margin_top"
+    android:layout_marginBottom="@dimen/margin_bottom"
+    android:layout_marginStart="@dimen/margin_left"
+    android:layout_marginEnd="@dimen/margin_right"
+    android:clipToPadding="false"
     tools:context=".MainActivity"
     android:background="#D9D9D9">
 
     <View
-        android:layout_width="370dp"
-        android:layout_height="671dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#1D2D69"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/background"
-        android:layout_marginBottom="15dp"/>
+        android:id="@+id/background"/>
     
     <ImageView
         android:layout_width="555dp"
@@ -31,7 +35,7 @@
         android:layout_width="158dp"
         android:layout_height="158dp"
         android:background="@drawable/circle_logo"
-        android:src="@drawable/logo2"
+        android:src="@drawable/logo3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -50,7 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         android:id="@+id/lope"/>
 
     <TextView

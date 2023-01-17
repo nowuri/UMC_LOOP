@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Thread: ",i.toString())
                 if(num > 0){
                     viewBinding.finish.setBackgroundResource(R.drawable.changed_btn)
-                    viewBinding.finish.setTextColor(Color.parseColor("#1D2D69"))
+                    viewBinding.finish.setTextColor(Color.parseColor("#ffffff"))
                     possible = 1
                 }
                 else{
                     viewBinding.finish.setBackgroundResource(R.drawable.btn_style)
-                    viewBinding.finish.setTextColor(Color.parseColor("#ffffff"))
+                    viewBinding.finish.setTextColor(Color.parseColor("#1D2D69"))
                     possible = 0
                 }
                 Thread.sleep(100)
