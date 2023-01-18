@@ -18,9 +18,6 @@ class SignUp3Activity: AppCompatActivity() {
     private var handler: Handler? = null
     private val listItem = ArrayList<Any>()
 
-    var num = 0
-    var possible = -1
-
     // WebView 초기화
     //init_webView()
     // 핸들러를 통한 JavaScript 이벤트 반응
@@ -34,7 +31,6 @@ class SignUp3Activity: AppCompatActivity() {
 
         //뒤로가기 클릭했을 때
         viewBinding.back.setOnClickListener() {
-//            이전 화면으로 돌아갈 수 있도록 함
             val intent = Intent(this, SignUp2Activity::class.java)
             startActivity(intent)
             Toast.makeText(this@SignUp3Activity, "뒤로 돌아가기", Toast.LENGTH_SHORT).show()
@@ -46,7 +42,6 @@ class SignUp3Activity: AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 var inputUserEmail = viewBinding.ETEmail.text.toString()
-                //viewBinding.ETEmail.setText(inputUserEmail)
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -64,17 +59,18 @@ class SignUp3Activity: AppCompatActivity() {
                 listItem.remove(isChecked);
             }
         }
-        viewBinding.next.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     //카카오톡 정보수신
 
-    //개인정보 정책 더보기
-    //개인정보 제공동의
+    //개인정보 정책 더보기 클릭
+    //개인정보 제공동의 체크박스
 
     //다음 버튼 클릭
+//        viewBinding.next.setOnClickListener{
+//            val intent = Intent(this, SignUp3Activity::class.java)
+//            startActivity(intent)
+//        }
 //
 }
+
