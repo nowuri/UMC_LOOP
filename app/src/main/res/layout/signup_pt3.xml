@@ -112,6 +112,7 @@
 
             <EditText
                 android:id="@+id/ET_email"
+                android:textColor="#9B9B9B"
                 android:layout_width="281dp"
                 android:layout_height="31dp"
                 android:background="@drawable/rec_style"
