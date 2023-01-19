@@ -85,7 +85,7 @@ class SignUp3Activity: AppCompatActivity() {
 
         //다음 버튼 클릭
         viewBinding.next.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainActivity_interest::class.java)
             startActivity(intent)
         }
 

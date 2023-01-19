@@ -11,7 +11,7 @@
     android:background="#1D2D69"
     android:clipToPadding="false"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity_interest">
 
     <!--    그림과 사이즈가 달라서 디자인과 다른 부분 존재-->
     <!--    파란색 배경에 있는 로고-->

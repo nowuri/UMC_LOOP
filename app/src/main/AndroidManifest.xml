@@ -20,34 +20,28 @@
 
 <!--        android:theme="@style/Theme.Interested"-->
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity_interest"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
             android:name=".SignUp2Activity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
+        <activity
+            android:name="com.example.search.Search"
+            android:exported="true"/>
 
         <activity
             android:name=".SignUp3Activity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
-            android:name="com.example.loading.MainActivity_Loading"
+            android:name="com.example.loading.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
