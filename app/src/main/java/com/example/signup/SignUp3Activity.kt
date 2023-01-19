@@ -18,8 +18,6 @@ class SignUp3Activity: AppCompatActivity() {
     private var handler: Handler? = null
     private val listItem = ArrayList<Any>()
 
-    var num = 0
-    var possible = -1
 
     // WebView 초기화
     //init_webView()
@@ -34,47 +32,64 @@ class SignUp3Activity: AppCompatActivity() {
 
         //뒤로가기 클릭했을 때
         viewBinding.back.setOnClickListener() {
-//            이전 화면으로 돌아갈 수 있도록 함
             val intent = Intent(this, SignUp2Activity::class.java)
             startActivity(intent)
             Toast.makeText(this@SignUp3Activity, "뒤로 돌아가기", Toast.LENGTH_SHORT).show()
         }
-
 
         //이메일 입력
         viewBinding.ETEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 var inputUserEmail = viewBinding.ETEmail.text.toString()
-                //viewBinding.ETEmail.setText(inputUserEmail)
             }
 
             override fun afterTextChanged(p0: Editable?) {}
         })
 
-
         //SMS 정보수신
         viewBinding.checkboxSms.setOnCheckedChangeListener { buttonView, isChecked ->
             Toast.makeText(this, isChecked.toString(), Toast.LENGTH_SHORT).show();
             if (isChecked) { //체크를 할 때
-                viewBinding.checkboxSms.setChecked(true)
                 listItem.add(isChecked);
             } else { //체크 해제될 때
                 viewBinding.checkboxSms.setChecked(false)
                 listItem.remove(isChecked);
             }
         }
+        //카카오톡 정보수신
+        viewBinding.checkboxKkt.setOnCheckedChangeListener { buttonView, isChecked ->
+            Toast.makeText(this, isChecked.toString(), Toast.LENGTH_SHORT).show();
+            if (isChecked) { //체크를 할 때
+                listItem.add(isChecked);
+            } else { //체크 해제될 때
+                viewBinding.checkboxSms.setChecked(false)
+                listItem.remove(isChecked);
+            }
+        }
+
+        //개인정보 정책 더보기
+        viewBinding.privpolicyDetail.setOnClickListener() {
+        }
+
+        //개인정보 제공동의 체크박스
+        viewBinding.checkboxConsent.setOnCheckedChangeListener { buttonView, isChecked ->
+            Toast.makeText(this, isChecked.toString(), Toast.LENGTH_SHORT).show();
+            if (isChecked) { //체크를 할 때
+                listItem.add(isChecked);
+            } else { //체크 해제될 때
+                viewBinding.checkboxSms.setChecked(false)
+                listItem.remove(isChecked);
+            }
+        }
+
+        //다음 버튼 클릭
         viewBinding.next.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
     }
 
-    //카카오톡 정보수신
-
-    //개인정보 정책 더보기
-    //개인정보 제공동의
-
-    //다음 버튼 클릭
-//
 }
+

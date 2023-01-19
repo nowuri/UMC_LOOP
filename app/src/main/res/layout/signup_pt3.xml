@@ -112,6 +112,7 @@
 
             <EditText
                 android:id="@+id/ET_email"
+                android:textColor="#9B9B9B"
                 android:layout_width="281dp"
                 android:layout_height="31dp"
                 android:background="@drawable/rec_style"
@@ -127,8 +128,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/rec_style"
-                android:button="@null"
+                android:button="@drawable/selector_custom_check"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.046"
@@ -154,8 +154,7 @@
                 android:id="@+id/checkbox_kkt"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@drawable/rec_style"
-                android:button="@null"
+                android:button="@drawable/selector_custom_check"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.045"
@@ -212,11 +211,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/privpolicy_title"
                 app:layout_constraintVertical_bias="0.15" />
 
-            <TextView
+            <android.widget.Button
                 android:id="@+id/privpolicy_detail"
                 android:layout_width="40dp"
                 android:layout_height="17dp"
                 android:layout_marginTop="13dp"
+                android:background="@color/white"
+                android:stateListAnimator="@null"
                 android:text="@string/fordetail"
                 android:textColor="#878787"
                 android:textSize="10sp"
@@ -232,9 +233,7 @@
                 android:id="@+id/checkbox_consent"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@drawable/rec_style"
-                android:button="@null"
-
+                android:button="@drawable/selector_custom_check"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.048"

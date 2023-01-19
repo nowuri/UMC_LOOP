@@ -17,7 +17,6 @@ import android.webkit.WebChromeClient
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.SignupPt2Binding
-import com.example.loading.MainActivity_Loading
 import java.util.*
 
 class SignUp2Activity: AppCompatActivity() {
@@ -26,8 +25,10 @@ class SignUp2Activity: AppCompatActivity() {
     private var daum_webView: WebView? = null
     private var handler: Handler? = null
 
-    var num = 0
-    var possible=-1
+    var inputUserName : String =""
+    var inputUserTel : String =""
+    var inputUserTelAuth : String =""
+    var inputUserAddress : String =""
 
     // WebView 초기화
     //init_webView()
@@ -43,13 +44,11 @@ class SignUp2Activity: AppCompatActivity() {
         //뒤로가기 클릭했을 때
         viewBinding.back.setOnClickListener(){
 //            이전 화면으로 돌아갈 수 있도록 함
-//            var intent = Intent(this, )
+//            val intent = Intent(this, SignUp2Activity::class.java)
 //            startActivity(intent)
             Toast.makeText(this@SignUp2Activity,"뒤로 돌아가기",Toast.LENGTH_SHORT).show()
         }
-
         var inputUserName: String = ""
-
 
         //여기서부터는 회원정보 입력할 때
         //이름 입력값 저장하고 EditText에 표시
@@ -57,7 +56,6 @@ class SignUp2Activity: AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 inputUserName = viewBinding.ETName.text.toString()
-                //viewBinding.ETName.setText(inputUserName)
             }
             override fun afterTextChanged(p0: Editable?) {}
         })
@@ -66,8 +64,7 @@ class SignUp2Activity: AppCompatActivity() {
         viewBinding.ETTelephone.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                var inputUserTel = viewBinding.ETTelephone.text.toString()
-                //viewBinding.ETTelephone.setText(inputUserTel)
+                inputUserTel = viewBinding.ETTelephone.text.toString()
             }
             override fun afterTextChanged(p0: Editable?) {}
         })
@@ -82,8 +79,7 @@ class SignUp2Activity: AppCompatActivity() {
         viewBinding.ETNumauth.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                var inputUserTelAuth = viewBinding.ETNumauth.text.toString()
-                //viewBinding.ETNumauth.setText(inputUserTelAuth)
+                inputUserTelAuth = viewBinding.ETNumauth.text.toString()
             }
             override fun afterTextChanged(p0: Editable?) {}
         })
@@ -106,6 +102,14 @@ class SignUp2Activity: AppCompatActivity() {
         }
 
         //우편번호 클릭
+        //상세주소 입력 (address_pt2)
+        viewBinding.addressPt2.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                inputUserAddress = viewBinding.addressPt2.text.toString()
+            }
+            override fun afterTextChanged(p0: Editable?) {}
+        })
 
         //다음 버튼 클릭
         viewBinding.next.setOnClickListener{
