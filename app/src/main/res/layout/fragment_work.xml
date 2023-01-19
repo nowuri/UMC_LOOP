@@ -1,0 +1,46 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#1D2D69"
+    tools:context=".WorkFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:id="@+id/sort"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginRight="13dp">-->
+
+<!--        <Button-->
+<!--            android:layout_width="56dp"-->
+<!--            android:layout_height="14dp"-->
+<!--            android:text="지원마감순"-->
+<!--            android:background="@drawable/sort_btn"-->
+<!--            android:textSize="12sp"-->
+<!--            android:id="@+id/endDate"-->
+<!--            android:textColor="@color/white"/>-->
+
+<!--        <Button-->
+<!--            android:id="@+id/spelling"-->
+<!--            android:layout_width="56dp"-->
+<!--            android:layout_height="14dp"-->
+<!--            android:text="가나다순"-->
+<!--            android:background="@drawable/sort_btn"-->
+<!--            android:textSize="12sp"-->
+<!--            android:layout_marginLeft="8dp"-->
+<!--            android:textColor="@color/white"/>-->
+<!--    </LinearLayout>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="15dp"
+        android:id="@+id/rv_refrigerator"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

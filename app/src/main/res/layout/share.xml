@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="293dp"
+        android:layout_height="45dp"
+        android:background="#1D2D69"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="공유하기"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="28sp"
+        android:textAlignment="center"
+        android:id="@+id/share_title"/>
+
+    <LinearLayout
+        android:layout_width="293dp"
+        android:layout_height="160dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/share_title"
+        android:background="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="43dp">
+            <TextView
+                android:layout_width="139dp"
+                android:layout_height="28dp"
+                android:text="카카오톡 공유"
+                android:textSize="24sp"
+                android:textColor="#1D2D69"
+                android:textStyle="bold"
+                android:layout_marginRight="53dp"/>
+            <ImageButton
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/kakao"
+                android:id="@+id/kakao"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="43dp">
+            <TextView
+                android:layout_width="165dp"
+                android:layout_height="36dp"
+                android:text="Url"
+                android:textSize="24sp"
+                android:id="@+id/URL"
+                android:textColor="#1D2D69"
+                android:textStyle="bold"
+                android:layout_marginRight="8dp"/>
+
+            <Button
+                android:layout_width="56dp"
+                android:layout_height="28dp"
+                android:text="Copy"
+                android:textColor="@color/white"
+                android:id="@+id/copy"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_copy"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

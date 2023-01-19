@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="itemList">
+        <item>전체</item>
+        <item>이름</item>
+        <item>부서</item>
+        <item>해시태그</item>
+    </string-array>
+</resources>
