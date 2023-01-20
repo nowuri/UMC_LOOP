@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import java.security.AccessController.getContext
 import java.util.Calendar.getInstance
 import android.app.Dialog
+import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
 import com.example.interested.R
 import com.example.interested.databinding.ItemViewBinding
 
@@ -39,13 +41,15 @@ class DataRVAdapter(val context: Context, private val dataList: ArrayList<RVdata
             viewBinding.explain.text = data.explain
             viewBinding.hashtag.text = data.hashtag
             viewBinding.share.setOnClickListener(){
-                //Toast.makeText(context,"share",Toast.LENGTH_SHORT).show()
-                val dialog = Dialog(context)
-                dialog.setContentView(R.layout.share)
-                dialog.setCanceledOnTouchOutside(true)
-                dialog.setCancelable(true)
-                dialog.show()
-
+                val shareIntent = Intent().apply{
+                    action = Intent.ACTION_SEND
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        "URL 공유합니다"
+                    )
+                    type = "text/plain"
+                }
+                context.startActivity(Intent.createChooser(shareIntent,"Share"))
             }
             viewBinding.heart.setOnClickListener(){
                 if(i==true){

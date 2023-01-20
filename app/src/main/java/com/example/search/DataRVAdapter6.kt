@@ -1,6 +1,7 @@
 package com.example.search
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +34,15 @@ class DataRVAdapter6(val context: Context, private val dataList: ArrayList<RVdat
             viewBinding.explain.text = data.explain
             viewBinding.hashtag.text = data.hashtag
             viewBinding.share.setOnClickListener() {
-                Toast.makeText(context, "share", Toast.LENGTH_SHORT).show()
+                val shareIntent = Intent().apply{
+                    action = Intent.ACTION_SEND
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        "URL 공유합니다"
+                    )
+                    type = "text/plain"
+                }
+                context.startActivity(Intent.createChooser(shareIntent,"Share"))
 
             }
             viewBinding.heart.setOnClickListener() {
