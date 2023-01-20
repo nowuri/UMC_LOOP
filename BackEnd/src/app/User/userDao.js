@@ -22,9 +22,9 @@ async function selectUserEmail(connection, email) {
 // userId 회원 조회
 async function selectUserId(connection, userId) {
   const selectUserIdQuery = `
-                 SELECT id, email, nickname 
-                 FROM UserInfo 
-                 WHERE id = ?;
+                 SELECT * 
+                 FROM user
+                 WHERE user_id = ?;
                  `;
   const [userRow] = await connection.query(selectUserIdQuery, userId);
   return userRow;
@@ -51,8 +51,8 @@ async function selectUserPassword(connection, selectUserPasswordParams) {
         FROM UserInfo 
         WHERE email = ? AND password = ?;`;
   const selectUserPasswordRow = await connection.query(
-      selectUserPasswordQuery,
-      selectUserPasswordParams
+    selectUserPasswordQuery,
+    selectUserPasswordParams
   );
 
   return selectUserPasswordRow;
@@ -65,8 +65,8 @@ async function selectUserAccount(connection, email) {
         FROM UserInfo 
         WHERE email = ?;`;
   const selectUserAccountRow = await connection.query(
-      selectUserAccountQuery,
-      email
+    selectUserAccountQuery,
+    email
   );
   return selectUserAccountRow[0];
 }
