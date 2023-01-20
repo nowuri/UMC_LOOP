@@ -2,7 +2,7 @@
 require('dotenv').config();
 
 const express = require('./config/express');
-const {logger} = require('./config/winston');
+const { logger } = require('./config/winston');
 
 console.log(process.env.PORT);
 
