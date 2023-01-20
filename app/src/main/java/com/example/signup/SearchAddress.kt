@@ -16,7 +16,7 @@ class SearchAddress : AppCompatActivity() {
         @JavascriptInterface
         fun processDATA(data: String?) {
             // 주소검색창에서 주소를 선택하면 그 결과값이 data 에 들어옴
-            // 받아서 회원가임2창으로 넘김
+            // 받아서 회원가입2 창으로 넘김
             val intent = Intent()
             intent.putExtra("data", data)
             setResult(RESULT_OK, intent)
