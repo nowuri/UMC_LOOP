@@ -1,5 +1,6 @@
 package com.example.search
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -9,8 +10,12 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -34,15 +39,15 @@ class Search : AppCompatActivity() {
 
         //검색 부분
         val itemlist = resources.getStringArray(R.array.itemList)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,itemlist)
-        viewBinding.spinner.adapter = adapter
+        val adapter = ArrayAdapter(this,R.layout.spinner_list,itemlist)
+        viewBinding.spinner2.adapter = adapter
 
-        setupSpinnerHandler()
+        //setupSpinnerHandler()
 
         //검색어 입력
         var input: String =""
         viewBinding.search.isEnabled = false
-        viewBinding.searchinput.setBackgroundColor(Color.parseColor("#FFFFFF"))
+
         viewBinding.searchinput.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -55,10 +60,21 @@ class Search : AppCompatActivity() {
         })
 
         //검색 버튼
+        //엔터키 누르면 키보드는 내려가지만 검색 toast는 안됨
+        //키보드 or 검색 결과 toast 중 둘 중 하나만 되는 상황
         viewBinding.search.setOnClickListener(){
             Toast.makeText(this, input+"를/을 검색합니다", Toast.LENGTH_SHORT).show()
         }
-
+        viewBinding.searchinput.setOnKeyListener { v, keyCode, event ->
+            var handled = false
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
+                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(viewBinding.searchinput.windowToken,0)
+                handled = true
+                Toast.makeText(this,input+"을/를 검색합니다",Toast.LENGTH_SHORT).show()
+            }
+            handled
+        }
         //로그인
         viewBinding.login.setOnClickListener(){
             val intent = Intent(this,SignUp2Activity::class.java)
@@ -70,7 +86,7 @@ class Search : AppCompatActivity() {
         )
 
         val tabTitleArray2 = arrayOf(
-            "서울","경기","충청\n전라","강원\n경상","제주"
+            "서울","경기","충청 전라","강원 경상","제주"
         )
 
         //정책 어댑터
@@ -101,22 +117,20 @@ class Search : AppCompatActivity() {
                     tab, position-> tab.text = tabTitleArray2[position]
             }.attach()
         }
-
-//        TabLayoutMediator(viewBinding.tablayout, viewBinding.vpAdapter){
-//            tab, position-> tab.text = tabTitleArray[position]
-//        }.attach()
+        viewBinding.tablayout.setTabTextColors(Color.rgb(29,45,105), Color.rgb(255,255,255))
 
     }
 
+    /////////////////이거 뭐지..?
     private fun setupSpinnerHandler(){
-        viewBinding.spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+        viewBinding.spinner2.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-                viewBinding.tablayout.setTabTextColors(Color.rgb(29,45,105), Color.rgb(255,255,255))
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
