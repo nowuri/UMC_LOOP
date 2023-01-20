@@ -5,10 +5,12 @@ const baseResponse = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 
 const regexEmail = require("regex-email");
+const baseResponseStatus = require("../../../config/baseResponseStatus");
 
 
 /** 
 * API Name : 유저 아이디 중복 체크 API
+* Description : 중복된 아이디가 없을 경우 Success Return
 * [GET] /app/api/users/{userId}
 */
 exports.checkOverlappingUser = async (req, res) => {
@@ -21,8 +23,11 @@ exports.checkOverlappingUser = async (req, res) => {
   if (userId.match('/\s/g'))
     return res.send(errResponse( baseResponse.SIGNUP_USERID_ERROR_TYPE));
 
-  const userByUserID = await userProvider.retrieveUser(userId);
+  const userByUserId = await userProvider.retrieveUser(userId);
 
+  console.log(userByUserId);
+  
+  return (!userByUserId) ? res.send(response(baseResponseStatus.SUCCESS)) : res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
 };
 
 /**
