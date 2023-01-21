@@ -53,13 +53,14 @@
         android:textSize="12sp"
         android:textColor="@color/white"
         android:id="@+id/login"
+        style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/login_btn"
         app:layout_constraintTop_toTopOf="@id/titleback"
         app:layout_constraintBottom_toBottomOf="@id/titleback"
         app:layout_constraintEnd_toEndOf="@id/titleback"/>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="42.5dp"
+        android:layout_height="45dp"
         android:background="@drawable/spinner_background"
         app:layout_constraintTop_toBottomOf="@id/titleback"
         app:layout_constraintStart_toStartOf="@id/backWhite"
@@ -79,6 +80,7 @@
             android:layout_width="21dp"
             android:layout_height="21dp"
             android:layout_marginTop="10dp"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_marginRight="5dp"
             android:src="@drawable/undertir"
             android:id="@+id/undertri"
@@ -103,6 +105,7 @@
             android:src="@drawable/search"
             android:background="@color/white"
             android:layout_marginLeft="2dp"
+            style="?android:attr/borderlessButtonStyle"
             android:id="@+id/search"/>
 
         <EditText
@@ -135,6 +138,7 @@
             android:layout_width="34dp"
             android:layout_height="14dp"
             android:background="@drawable/search_btn"
+            style="?android:attr/borderlessButtonStyle"
             android:text="분야별"
             android:textSize="12sp"
             android:textColor="#1D2D69"/>
@@ -142,6 +146,7 @@
             android:id="@+id/region"
             android:layout_width="34dp"
             android:layout_height="14dp"
+            style="?android:attr/borderlessButtonStyle"
             android:background="@drawable/search_btn"
             android:text="지역별"
             android:textSize="12sp"
@@ -165,15 +170,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="#1D2D69"/>
-    
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+
+    <LinearLayout
         android:layout_width="380dp"
         android:layout_height="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/navi_menu"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/vpAdapter"
-        app:itemIconTint="@drawable/menu_selector_color"
-        app:menu="@menu/navi_menu"/>
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/home"
+            android:background="@drawable/menu_selector_color"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/menu_home"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="12dp"/>
+
+        <ImageButton
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:src="@drawable/menu_glass_selected"
+            android:background="@drawable/menu_seleted_color"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/menu_search"
+            android:layout_marginLeft="47dp"/>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/qa"
+            android:background="@drawable/menu_selector_color"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/menu_qna"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="9dp"/>
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/profile"
+            android:background="@drawable/menu_selector_color"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/menu_profile"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="12dp"/>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

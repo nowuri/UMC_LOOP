@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instanc
 import com.example.interested.R
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMainSearchBinding
+import com.example.qna.Question
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
@@ -121,12 +122,16 @@ class Search : AppCompatActivity() {
         }
         viewBinding.tablayout.setTabTextColors(Color.rgb(29,45,105), Color.rgb(255,255,255))
 
-        //하단바 액티비티
-//        viewBinding.naviMenu.setOnItemSelectedListener { item->
-//            when(item.itemId){
-//                R.id.searchmenu ->
-//            }
-//        }
+        viewBinding.menuHome.setOnClickListener(){
+            Toast.makeText(this,"홈 화면으로 이동합니다",Toast.LENGTH_SHORT).show()
+        }
+        viewBinding.menuQna.setOnClickListener(){
+            val intent = Intent(this,Question::class.java)
+            startActivity(intent)
+        }
+        viewBinding.menuProfile.setOnClickListener(){
+            Toast.makeText(this,"프로필로 이동합니다.",Toast.LENGTH_SHORT).show()
+        }
 
     }
 
