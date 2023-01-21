@@ -15,6 +15,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    defaultConfig{
+        applicationId "com.example.qna"
+    }
 
 
     buildTypes {
@@ -53,6 +56,7 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
