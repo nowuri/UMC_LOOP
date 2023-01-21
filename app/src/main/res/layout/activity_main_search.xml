@@ -165,4 +165,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="#1D2D69"/>
+    
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="380dp"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/navi_menu"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/vpAdapter"
+        app:itemIconTint="@drawable/menu_selector_color"
+        app:menu="@menu/navi_menu"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,8 @@ import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instanc
 import com.example.interested.R
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMainSearchBinding
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import java.lang.NullPointerException
 import java.lang.reflect.Type
@@ -118,6 +120,13 @@ class Search : AppCompatActivity() {
             }.attach()
         }
         viewBinding.tablayout.setTabTextColors(Color.rgb(29,45,105), Color.rgb(255,255,255))
+
+        //하단바 액티비티
+//        viewBinding.naviMenu.setOnItemSelectedListener { item->
+//            when(item.itemId){
+//                R.id.searchmenu ->
+//            }
+//        }
 
     }
 
