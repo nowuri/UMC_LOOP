@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.interested.R
+import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityQuestionBinding
 import com.example.search.Search
 
@@ -52,6 +53,10 @@ class Question : AppCompatActivity() {
         }
         viewBinding.menuProfile.setOnClickListener(){
             Toast.makeText(this,"프로필로 이동합니다", Toast.LENGTH_SHORT).show()
+        }
+        viewBinding.login.setOnClickListener(){
+            val intent = Intent(this, SignUp2Activity::class.java)
+            startActivity(intent)
         }
     }
 }
