@@ -9,6 +9,7 @@ import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.drawable.DrawableCompat.inflate
+import com.example.home.Home
 import com.example.interested.R
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityQuestionBinding
@@ -68,7 +69,8 @@ class Question : AppCompatActivity() {
         }
 
         viewBinding.menuHome.setOnClickListener(){
-            Toast.makeText(this,"홈화면으로 이동합니다",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
         }
 
         viewBinding.menuSearch.setOnClickListener(){

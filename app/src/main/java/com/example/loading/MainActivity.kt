@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.home.Home
 import com.example.interested.SignUp3Activity
 import com.example.interested.databinding.ActivityMainLoadingBinding
 import com.example.search.Search
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainLoadingBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
-        Handler().postDelayed({ startActivity(Intent(this, Search::class.java)) }, 2000L)
+        Handler().postDelayed({ startActivity(Intent(this, Home::class.java)) }, 2000L)
 
         //타 화면 테스트용 버튼 (삭제예정)
         viewBinding.button.setOnClickListener{

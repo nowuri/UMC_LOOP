@@ -11,4 +11,6 @@
     <string name="privacypolicy">개인정보수집이용동의</string>
     <string name="fordetail">자세히+</string>
     <string name="consent">동의합니다</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -22,6 +22,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
+import com.example.home.Home
 import com.example.interested.R
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMainSearchBinding
@@ -123,7 +124,8 @@ class Search : AppCompatActivity() {
         viewBinding.tablayout.setTabTextColors(Color.rgb(29,45,105), Color.rgb(255,255,255))
 
         viewBinding.menuHome.setOnClickListener(){
-            Toast.makeText(this,"홈 화면으로 이동합니다",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Home::class.java)
+            startActivity(intent)
         }
         viewBinding.menuQna.setOnClickListener(){
             val intent = Intent(this,Question::class.java)
