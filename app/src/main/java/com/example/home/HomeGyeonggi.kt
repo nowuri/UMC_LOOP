@@ -1,11 +1,16 @@
 package com.example.home
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.interested.R
+import com.example.interested.databinding.FragmentHomeGyeonggiBinding
+import com.example.interested.databinding.FragmentHomeSeoulBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +26,21 @@ class HomeGyeonggi : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var viewbinding: FragmentHomeGyeonggiBinding
+
+    lateinit var mainActivity: Home
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        mainActivity = context as Home
+    }
+    var dataList: ArrayList<Homedata> = arrayListOf(
+        Homedata("정책이름","부서이름"),
+        Homedata("정책이름","부서이름"),
+        Homedata("정책이름","부서이름"),
+        Homedata("정책이름","부서이름"),
+        Homedata("정책이름","부서이름")
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +55,15 @@ class HomeGyeonggi : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_gyeonggi, container, false)
+        viewbinding = FragmentHomeGyeonggiBinding.inflate(layoutInflater)
+        //setOnClickListener()
+
+        var list: ArrayList<Homedata> = dataList
+        val DataRVAdapter = HomeAdapter2(mainActivity,list)
+        viewbinding.rvRefrigerator.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL,false)
+        viewbinding.rvRefrigerator.adapter = DataRVAdapter
+
+        return viewbinding.root
     }
 
     companion object {
