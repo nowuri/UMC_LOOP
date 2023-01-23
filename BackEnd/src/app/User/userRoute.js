@@ -5,8 +5,11 @@ module.exports = function(app) {
 
   // 자체 작업 - 준/권준형
   // ----------------------------------------------
-  // 1. 닉제임 중복 확인 API
+  // 닉제임 중복 확인 API
   app.get('/app/users/api/:userId', user.checkOverlappingUser);
+
+  // SMS 전송 API
+  app.post('/app/users/api/tokens', user.sendTokenToSMS);
 
 
   // UMC Template
