@@ -14,13 +14,10 @@ import java.util.*
 
 class SignUp2Activity: AppCompatActivity() {
     private lateinit var viewBinding: SignupPt2Binding
-
-    //    lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     var inputUserName: String = ""
     var inputUserTel: String = ""
     var inputUserTelAuth: String = ""
     var inputUserAddress: String = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +30,6 @@ class SignUp2Activity: AppCompatActivity() {
             intent = Intent(this, SearchAddress::class.java)
             ChildForResult.launch(intent)
         })
-
 
         //뒤로가기 클릭했을 때
         viewBinding.back.setOnClickListener() {

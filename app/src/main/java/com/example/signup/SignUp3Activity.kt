@@ -1,12 +1,12 @@
 package com.example.interested
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.webkit.WebView
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.SignupPt3Binding
 import java.util.*
@@ -65,6 +65,17 @@ class SignUp3Activity: AppCompatActivity() {
 
         //개인정보 정책 더보기
         viewBinding.privpolicyDetail.setOnClickListener() {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("개인정보 정책 타이틀 입니다.")
+                .setMessage("개인정보 정책 본문입니다.")
+                .setPositiveButton("확인",
+                    DialogInterface.OnClickListener { dialog, id ->
+                    })
+                .setNegativeButton("취소",
+                    DialogInterface.OnClickListener { dialog, id ->
+                    })
+            // 다이얼로그를 띄워주기
+            builder.show()
         }
 
         //개인정보 제공동의 체크박스
