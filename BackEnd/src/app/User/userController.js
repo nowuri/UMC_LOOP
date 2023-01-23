@@ -6,12 +6,16 @@ const { response, errResponse } = require("../../../config/response");
 
 const regexEmail = require("regex-email");
 const baseResponseStatus = require("../../../config/baseResponseStatus");
+const { checkPhoneValidation, sendTokenToSMS, getToken } = require('../../../config/coolsms.js');
 
+
+// LOPE 작업 코드
+// ============================================================
 
 /** 
 * API Name : 유저 아이디 중복 체크 API
 * Description : 중복된 아이디가 없을 경우 Success Return
-* [GET] /app/api/users/{userId}
+* [GET] /app/users/api/{userId}
 */
 exports.checkOverlappingUser = async (req, res) => {
   const userId = req.params.userId;
@@ -25,10 +29,71 @@ exports.checkOverlappingUser = async (req, res) => {
 
   const userByUserId = await userProvider.retrieveUser(userId);
 
-  console.log(userByUserId);
+  // console.log(userByUserId);
   
   return (!userByUserId) ? res.send(response(baseResponseStatus.SUCCESS)) : res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
 };
+
+/**
+* @swagger
+* /app/users/api/token:
+*   get:
+*     summary: 인증번호 6자리 SMS 전송 API
+*     tags: [Board]
+*     requestBody:
+*       description: 인증번호를 전송할 전화번호
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               phoneNumber:
+*                 type: string
+*                 example: 01053971011
+*     responses:
+*       200:
+*         description: Success
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 isSucess:
+*                   type: boolean
+*                   example: true
+*                 code:
+*                   type: int
+*                   example: 1000
+*                 result:
+*                   type: object
+*                   properties:
+*                     token:
+*                       type: string
+*                       example: 712031
+*                   
+*/
+exports.sendTokenToSMS = async (req, res) => {
+  const phoneNumber = req.body.phoneNumber;
+  // 1. Check formal validation of phoneNumber.
+  const isValid = checkPhoneValidation(phoneNumber);
+
+  // 2. if isValid, get 6 digit token
+  if (isValid) {
+    const tok = getToken();
+
+    // 3. send SMS and return token in json
+    const result = await sendTokenToSMS(phoneNumber, tok);
+
+    // console.log(result);
+    // console.log(`token: ${tok}`);
+    res.send(response(baseResponse.SUCCESS, { token: tok}));
+  }
+  
+}
+
+// 템플릿 코드
+// ========================================================================
 
 /**
  * API No. 0
