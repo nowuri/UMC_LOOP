@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.home.Home
 import com.example.interested.databinding.ActivityMainBinding
 import com.example.search.Search
 
@@ -181,7 +182,7 @@ class MainActivity_interest : AppCompatActivity() {
             Log.e("finish num",num.toString())
             if(possible == 1){
                 Toast.makeText(this@MainActivity_interest,"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, Search::class.java)
+                val intent = Intent(this, Home::class.java)
                 startActivity(intent)
             }
             else{

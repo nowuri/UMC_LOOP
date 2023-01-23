@@ -53,66 +53,79 @@
         android:textSize="12sp"
         android:textStyle="bold"/>
 
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="350dp"
-        android:layout_height="31dp"
-        app:layout_constraintTop_toBottomOf="@id/Toptitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="37dp"
-        android:id="@+id/tab"
-        app:tabBackground="@drawable/tab_background"/>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="350dp"
-        android:layout_height="202dp"
-        app:layout_constraintTop_toBottomOf="@id/tab"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="#1D2D69"
-        android:id="@+id/vpAdapter3"/>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="350dp"
-        android:layout_height="180dp"
-        app:layout_constraintTop_toBottomOf="@id/vpAdapter3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="27dp"
-        android:id="@+id/recommendVPAdapter"/>
-
-    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:dotsColor="#1D2D69"
-        app:dotsCornerRadius="8dp"
-        app:dotsSize="16dp"
-        app:dotsSpacing="4dp"
-        app:selectedDotColor="#1D2D69"
-        app:layout_constraintTop_toBottomOf="@id/recommendVPAdapter"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Toptitle"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
-        android:id = "@+id/dotindicator"/>
+        android:id="@+id/scrollView"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <View
-        android:layout_width="350dp"
-        android:layout_height="145dp"
-        android:background="@color/purple_500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dotindicator"
-        android:layout_marginTop="27dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+                <com.google.android.material.tabs.TabLayout
+                    android:layout_width="350dp"
+                    android:layout_height="31dp"
+                    android:layout_marginTop="37dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/tab"
+                    app:tabBackground="@drawable/tab_background"/>
 
-<!--    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
-<!--        android:layout_width="350dp"-->
-<!--        android:layout_height="145dp"-->
-<!--        app:autoPlay="false"-->
-<!--        app:videoId="0_OqbQArcGg"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/dotindicator"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        android:layout_marginTop="27dp"/>-->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:layout_width="350dp"
+                    android:layout_height="202dp"
+                    android:layout_gravity="center"
+                    android:background="#1D2D69"
+                    android:id="@+id/vpAdapter3"/>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:layout_width="350dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="27dp"
+                    android:id="@+id/recommendVPAdapter"/>
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:dotsColor="#1D2D69"
+                    app:dotsCornerRadius="8dp"
+                    app:dotsSize="16dp"
+                    app:dotsSpacing="4dp"
+                    android:id="@+id/dotindicator"
+                    android:layout_marginTop="5dp"/>
+
+                    <View
+                        android:layout_width="350dp"
+                        android:layout_height="200dp"
+                        android:background="@color/purple_500"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/dotindicator"
+                        android:layout_marginTop="27dp"/>
+
+                <View
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:background="#FFFFFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dotindicator"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginBottom="50dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="380dp"

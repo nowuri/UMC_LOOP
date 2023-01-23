@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -92,5 +93,8 @@ class Home : AppCompatActivity() {
             val intent = Intent(this, SignUp2Activity::class.java)
             startActivity(intent)
         }
+
+        viewBinding.scrollView.fullScroll(ScrollView.FOCUS_DOWN)
+        viewBinding.scrollView.fullScroll(ScrollView.FOCUS_UP)
     }
 }

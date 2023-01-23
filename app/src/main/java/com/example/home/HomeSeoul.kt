@@ -1,11 +1,19 @@
 package com.example.home
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.interested.R
+import com.example.interested.databinding.FragmentHomeSeoulBinding
+import com.example.interested.databinding.FragmentMoneyBinding
+import com.example.search.DataRVAdapter4
+import com.example.search.RVdata
+import com.example.search.Search
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +29,21 @@ class HomeSeoul : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var viewbinding: FragmentHomeSeoulBinding
+
+    lateinit var mainActivity: Home
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        mainActivity = context as Home
+    }
+    var dataList: ArrayList<Homedata> = arrayListOf(
+        Homedata("정책이름","부서이름"),
+        Homedata("정책이름","부서이름"),
+        Homedata("정책이름","부서이름"),
+        Homedata("정책이름","부서이름"),
+        Homedata("정책이름","부서이름")
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +58,15 @@ class HomeSeoul : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_seoul, container, false)
+        viewbinding = FragmentHomeSeoulBinding.inflate(layoutInflater)
+        //setOnClickListener()
+
+        var list: ArrayList<Homedata> = dataList
+        val DataRVAdapter = HomeAdapter1(mainActivity,list)
+        viewbinding.rvRefrigerator.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL,false)
+        viewbinding.rvRefrigerator.adapter = DataRVAdapter
+
+        return viewbinding.root
     }
 
     companion object {
