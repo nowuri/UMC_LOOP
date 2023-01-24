@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.home.Home
 import com.example.interested.databinding.ActivityMainBinding
+import com.example.search.Search
 
-class MainActivity : AppCompatActivity() {
+class MainActivity_interest : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
 
     var num = 0
@@ -27,12 +29,12 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Thread: ",i.toString())
                 if(num > 0){
                     viewBinding.finish.setBackgroundResource(R.drawable.changed_btn)
-                    viewBinding.finish.setTextColor(Color.parseColor("#1D2D69"))
+                    viewBinding.finish.setTextColor(Color.parseColor("#ffffff"))
                     possible = 1
                 }
                 else{
                     viewBinding.finish.setBackgroundResource(R.drawable.btn_style)
-                    viewBinding.finish.setTextColor(Color.parseColor("#ffffff"))
+                    viewBinding.finish.setTextColor(Color.parseColor("#1D2D69"))
                     possible = 0
                 }
                 Thread.sleep(100)
@@ -41,9 +43,9 @@ class MainActivity : AppCompatActivity() {
 
         viewBinding.back.setOnClickListener(){
 //            이전 화면으로 돌아갈 수 있도록 함
-            val intent = Intent(this, SignUp2Activity::class.java)
+            val intent = Intent(this, SignUp3Activity::class.java)
             startActivity(intent)
-            Toast.makeText(this@MainActivity,"뒤로 돌아가기",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity_interest,"뒤로 돌아가기",Toast.LENGTH_SHORT).show()
         }
 
         //여기서부터는 관심분야 선택했을 때 일어날 activity
@@ -179,10 +181,12 @@ class MainActivity : AppCompatActivity() {
         viewBinding.finish.setOnClickListener{
             Log.e("finish num",num.toString())
             if(possible == 1){
-                Toast.makeText(this@MainActivity,"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity_interest,"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Home::class.java)
+                startActivity(intent)
             }
             else{
-                Toast.makeText(this@MainActivity,"선택된 관심분야가 없습니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity_interest,"선택된 관심분야가 없습니다.",Toast.LENGTH_SHORT).show()
             }
         }
     }

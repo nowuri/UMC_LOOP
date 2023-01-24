@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="48dp"
+    android:background="#1D2D69"
+    android:clipToPadding="false"
+    tools:context="com.example.qna.Question">
+
+    <View
+    android:layout_width="380dp"
+    android:layout_height="781dp"
+    android:background="@color/white"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:background="#1D2D69"
+        android:id="@+id/Toptitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:layout_width="42.95dp"
+        android:layout_height="42.95dp"
+        app:layout_constraintTop_toTopOf="@id/Toptitle"
+        app:layout_constraintStart_toStartOf="@id/Toptitle"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/logo1"
+        android:id="@+id/logoTop"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_btn"
+        android:text="로그인"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Toptitle"
+        android:layout_marginTop="8dp"
+        android:id="@+id/login"
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:layout_width="93dp"
+        android:layout_height="56dp"
+        android:text="QnA"
+        android:textColor="#1D2D69"
+        android:textSize="48sp"
+        app:layout_constraintTop_toBottomOf="@id/Toptitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="38dp"
+        android:id="@+id/titleQna"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/titleQna"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="56dp"
+        android:id="@+id/waytoQ"
+        android:layout_marginLeft="50dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/kakao"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="카카오톡 오픈채팅"
+                android:textStyle="bold"
+                android:textSize="28sp"
+                android:textColor="#1D2D69"
+                android:background="@drawable/btn_qna"
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/kakao"
+                android:layout_marginLeft="12dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="51dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/operator"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="심층상담"
+                android:textStyle="bold"
+                style="?android:attr/borderlessButtonStyle"
+                android:textSize="28sp"
+                android:textColor="#1D2D69"
+                android:background="@drawable/btn_qna"
+                android:id="@+id/operator"
+                android:layout_marginLeft="12dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="51dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/call"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전화상담"
+                style="?android:attr/borderlessButtonStyle"
+                android:textStyle="bold"
+                android:textSize="28sp"
+                android:textColor="#1D2D69"
+                android:background="@drawable/btn_qna"
+                android:id="@+id/call"
+                android:layout_marginLeft="12dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="51dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/board"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="게시판 상담"
+                android:textStyle="bold"
+                style="?android:attr/borderlessButtonStyle"
+                android:textSize="28sp"
+                android:textColor="#1D2D69"
+                android:background="@drawable/btn_qna"
+                android:id="@+id/board"
+                android:layout_marginLeft="12dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/home"
+            android:background="@drawable/menu_selector_color"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/menu_home"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="12dp"/>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/menu_glass"
+            android:background="@drawable/menu_selector_color"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/menu_search"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="12dp"/>
+
+        <ImageButton
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:src="@drawable/qa_selected"
+            android:background="@drawable/menu_seleted_color"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/menu_qna"
+            android:layout_marginLeft="47dp"/>
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/profile"
+            android:background="@drawable/menu_selector_color"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/menu_profile"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="12dp"/>
+            
+    </LinearLayout>
+    
+</androidx.constraintlayout.widget.ConstraintLayout>
