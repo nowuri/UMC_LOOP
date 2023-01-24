@@ -34,45 +34,7 @@ exports.checkOverlappingUser = async (req, res) => {
   return (!userByUserId) ? res.send(response(baseResponseStatus.SUCCESS)) : res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
 };
 
-/**
-* @swagger
-* /app/users/api/token:
-*   get:
-*     summary: 인증번호 6자리 SMS 전송 API
-*     tags: [Board]
-*     requestBody:
-*       description: 인증번호를 전송할 전화번호
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             type: object
-*             properties:
-*               phoneNumber:
-*                 type: string
-*                 example: 01053971011
-*     responses:
-*       200:
-*         description: Success
-*         content:
-*           application/json:
-*             schema:
-*               type: object
-*               properties:
-*                 isSucess:
-*                   type: boolean
-*                   example: true
-*                 code:
-*                   type: int
-*                   example: 1000
-*                 result:
-*                   type: object
-*                   properties:
-*                     token:
-*                       type: string
-*                       example: 712031
-*                   
-*/
+
 exports.sendTokenToSMS = async (req, res) => {
   const phoneNumber = req.body.phoneNumber;
   // 1. Check formal validation of phoneNumber.
@@ -95,14 +57,53 @@ exports.sendTokenToSMS = async (req, res) => {
 // 템플릿 코드
 // ========================================================================
 
+const passport = require('passport');
+const { myKakaoStrategy } = require("../../../config/passport");
+
+passport.use('kakao-login', myKakaoStrategy({
+}, async (accessToken, refreshToken, profile, done) => {
+    console.log(accessToken);
+    console.log(profile);
+}));
+
+
+passport.serializeUser((user,done)=>{ 
+    done(null,user);
+});
+passport.deserializeUser((user,done)=>{
+    done(null,user);
+});
+
+exports.kakaoLogin = async function (req, res) {
+
+    const {accessToken} = req.body; //값 확인을 위해 body로 token 값을 받아준다.
+
+	let kakaoProfile; //값을 수정해주어야 하므로 const가 아닌 let 사용
+
+	try{ //axios 모듈을 이용하여 Profile 정보를 가져온다.
+            kakaoProfile = await axios.get('https://kapi.kakao.com/v2/user/me', {
+                headers: {
+                    Authorization: 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json'
+                }
+            })
+     } catch (err) {
+          return res.send(errResponse(baseResponse.ACCESS_TOKEN_VERIFICATION_FAILURE));
+     }
+    
+};
+
+
+
+
 /**
  * API No. 0
  * API Name : 테스트 API
  * [GET] /app/test
  */
-// exports.getTest = async function (req, res) {
-//     return res.send(response(baseResponse.SUCCESS))
-// }
+exports.getTest = async function (req, res) {
+    return res.send(response(baseResponse.SUCCESS))
+}
 
 /**
  * API No. 1
@@ -227,6 +228,20 @@ exports.sendTokenToSMS = async (req, res) => {
 //     return res.send(editUserInfo);
 //   }
 // };
+
+// exports.kakaoCallback = async function (req, res) {
+    
+// }
+
+exports.addUser = function(newUser, callback){
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newUser.password, salt, (err, hash) => {
+        if(err) throw err;
+        newUser.password = hash;
+        newUser.save(callback);
+      });
+    });
+}
 
 
 
