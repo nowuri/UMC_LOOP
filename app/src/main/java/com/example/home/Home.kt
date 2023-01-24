@@ -9,13 +9,12 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.ScrollView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.RecommedVPAdpager
-import com.example.interested.R
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityHomeBinding
+import com.example.mypage.MyPage_MainActivity
 import com.example.qna.Question
 import com.example.search.Search
 import com.google.android.material.tabs.TabLayoutMediator
@@ -87,7 +86,8 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
         viewBinding.menuProfile.setOnClickListener(){
-            Toast.makeText(this,"프로필로 이동합니다.", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MyPage_MainActivity::class.java)
+            startActivity(intent)
         }
         viewBinding.login.setOnClickListener(){
             val intent = Intent(this, SignUp2Activity::class.java)

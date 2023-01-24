@@ -4,34 +4,24 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.Typeface.BOLD
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
-import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import com.example.home.Home
 import com.example.interested.R
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMainSearchBinding
+import com.example.mypage.MyPage_MainActivity
 import com.example.qna.Question
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
-import java.lang.NullPointerException
-import java.lang.reflect.Type
 
 class Search : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainSearchBinding
@@ -132,7 +122,8 @@ class Search : AppCompatActivity() {
             startActivity(intent)
         }
         viewBinding.menuProfile.setOnClickListener(){
-            Toast.makeText(this,"프로필로 이동합니다.",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MyPage_MainActivity::class.java)
+            startActivity(intent)
         }
 
     }
