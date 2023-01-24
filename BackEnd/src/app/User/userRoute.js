@@ -19,6 +19,10 @@ module.exports = function(app){
       res.redirect('/');
    },)
 
+  // Social Logins
+  // ================================================================
+  app.get('/app/users/oAuth/google');
+
 
    // 0. 테스트 API
    // app.get('/app/test', user.getTest)
