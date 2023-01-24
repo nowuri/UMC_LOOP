@@ -1,3 +1,33 @@
+/app/users/api/email:
+  get:
+    summary: 이메일 중복 유저 확인
+    tags: [User]
+    requestBody:
+      description: 유저 이메일
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              userEmail:
+                type: string
+                example: helptheyounglope@gmail.com
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isSucess:
+                  type: boolean
+                  example: true
+                code:
+                  type: int
+                  example: 1000
+
 /app/users/api/token:
   post:
     summary: 인증번호 6자리 SMS 전송 API
