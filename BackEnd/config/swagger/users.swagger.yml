@@ -1,5 +1,5 @@
 /app/users/api/token:
-  get:
+  post:
     summary: 인증번호 6자리 SMS 전송 API
     tags: [User]
     requestBody:
@@ -33,3 +33,22 @@
                     token:
                       type: string
                       example: 712031
+
+/app/test:
+  get:
+    summary: Test API - Always returns SUCCESS
+    tags: [Test]
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isSucess:
+                  type: boolean
+                  example: true
+                code:
+                  type: int
+                  example: 1000
