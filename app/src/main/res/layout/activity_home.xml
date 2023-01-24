@@ -103,26 +103,15 @@
                     android:id="@+id/dotindicator"
                     android:layout_marginTop="5dp"/>
 
-                    <View
-                        android:layout_width="350dp"
-                        android:layout_height="200dp"
-                        android:background="@color/purple_500"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_gravity="center"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/dotindicator"
-                        android:layout_marginTop="27dp"/>
-
-                <View
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                     android:layout_width="350dp"
-                    android:layout_height="50dp"
-                    android:background="#FFFFFF"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/youtube"
                     android:layout_gravity="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/dotindicator"
                     android:layout_marginTop="27dp"
-                    android:layout_marginBottom="50dp"/>
+                    app:autoPlay="false"
+                    app:videoId="0_OqbQArcGg"/>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -174,6 +163,5 @@
             android:id="@+id/menu_profile"
             android:layout_marginLeft="48dp"
             android:layout_marginTop="12dp"/>
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

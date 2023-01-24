@@ -18,6 +18,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import java.time.format.DateTimeFormatter
 import org.threeten.bp.LocalDate
 import java.text.SimpleDateFormat
+import java.util.*
 
 class Question : AppCompatActivity() {
     private lateinit var viewBinding: ActivityQuestionBinding
@@ -28,11 +29,14 @@ class Question : AppCompatActivity() {
 
         val currentTime : Long = System.currentTimeMillis()
         val dataFormat = SimpleDateFormat("HH")
+        val cal = Calendar.getInstance()
+        val nWeek = cal.get(Calendar.DAY_OF_WEEK)
 
         viewBinding.kakao.setOnClickListener(){
             val address = "https://www.youthcenter.go.kr/kakao/kakao.html"
 
-            if(dataFormat.format(currentTime).toInt() >= 8 && dataFormat.format(currentTime).toInt()<=20 ) {
+            if(dataFormat.format(currentTime).toInt() >= 8 && dataFormat.format(currentTime).toInt()<=20
+                && nWeek != 7 && nWeek != 1) {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(address))
                 startActivity(intent)
             }
@@ -51,7 +55,8 @@ class Question : AppCompatActivity() {
         viewBinding.call.setOnClickListener(){
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:18119876")
-            if(dataFormat.format(currentTime).toInt() >= 9 && dataFormat.format(currentTime).toInt()<=18 ) {
+            if(dataFormat.format(currentTime).toInt() >= 9 && dataFormat.format(currentTime).toInt()<=18
+                && nWeek != 7 && nWeek != 1) {
                 if(intent.resolveActivity(packageManager) != null){
                     startActivity(intent)
                 }

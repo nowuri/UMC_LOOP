@@ -2,6 +2,7 @@ package com.example.home
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +11,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ScrollView
 import android.widget.Toast
+import android.widget.VideoView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.RecommedVPAdpager
@@ -19,9 +21,12 @@ import com.example.interested.databinding.ActivityHomeBinding
 import com.example.qna.Question
 import com.example.search.Search
 import com.google.android.material.tabs.TabLayoutMediator
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 
 class Home : AppCompatActivity() {
     private lateinit var viewBinding: ActivityHomeBinding
+    public val API_KEY = "AIzaSyBw2owx9ckx0xwCtDdO7Xz4Dp3MnelSuTE"
+    public val VIDEO_ID = "0_OqbQArcGg&t=4s"
 
     inner class PagerRunnable: Runnable{
         var currentPage = 0
@@ -47,6 +52,7 @@ class Home : AppCompatActivity() {
             }
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         viewBinding = ActivityHomeBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -96,5 +102,7 @@ class Home : AppCompatActivity() {
 
         viewBinding.scrollView.fullScroll(ScrollView.FOCUS_DOWN)
         viewBinding.scrollView.fullScroll(ScrollView.FOCUS_UP)
+
     }
+
 }
