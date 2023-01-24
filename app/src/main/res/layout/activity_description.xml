@@ -76,13 +76,14 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageButton
-            android:layout_width="57dp"
-            android:layout_height="57dp"
-            android:src="@drawable/menu_home_selected"
-            android:background="@drawable/menu_seleted_color"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/home"
+            android:background="@drawable/menu_selector_color"
             style="?android:attr/borderlessButtonStyle"
             android:id="@+id/menu_home"
-            android:layout_marginLeft="42dp"/>
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="12dp"/>
 
         <ImageButton
             android:layout_width="40dp"
