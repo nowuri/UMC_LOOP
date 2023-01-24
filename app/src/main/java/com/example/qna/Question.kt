@@ -1,22 +1,14 @@
 package com.example.qna
 
-import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.core.graphics.drawable.DrawableCompat.inflate
 import com.example.home.Home
-import com.example.interested.R
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityQuestionBinding
+import com.example.mypage.MyPage_MainActivity
 import com.example.search.Search
-import com.jakewharton.threetenabp.AndroidThreeTen
-import java.time.format.DateTimeFormatter
-import org.threeten.bp.LocalDate
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -83,7 +75,8 @@ class Question : AppCompatActivity() {
             startActivity(intent)
         }
         viewBinding.menuProfile.setOnClickListener(){
-            Toast.makeText(this,"프로필로 이동합니다", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MyPage_MainActivity::class.java)
+            startActivity(intent)
         }
         viewBinding.login.setOnClickListener(){
             val intent = Intent(this, SignUp2Activity::class.java)

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="48dp"
+    android:background="#1D2D69"
+    android:clipToPadding="false"
+    tools:context="com.example.mypage.MyPage_MainActivity">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="380dp"
+        android:layout_height="781dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:background="#1D2D69"
+        android:id="@+id/Toptitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:layout_width="42.95dp"
+        android:layout_height="42.95dp"
+        app:layout_constraintTop_toTopOf="@id/Toptitle"
+        app:layout_constraintStart_toStartOf="@id/Toptitle"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/logo1"
+        android:id="@+id/logoTop"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_btn"
+        android:text="로그인"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Toptitle"
+        android:layout_marginTop="8dp"
+        android:id="@+id/login"
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:id="@+id/user_id_box"
+        android:layout_width="343dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/mypage_1"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/Toptitle">
+
+        <TextView
+            android:id="@+id/user_id_title"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:text="@string/user_id_title"
+
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/user_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/blue"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@id/mypage_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="0.5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_id_box">
+        <Button
+            android:id="@+id/mypage_profilechange"
+            android:layout_width="150dp"
+            android:layout_height="141dp"
+            android:background="@drawable/btn_profilechange"
+            android:gravity="center_vertical"
+            tools:layout_editor_absoluteX="190dp"
+            tools:layout_editor_absoluteY="147dp" />
+        <Button
+            android:id="@+id/mypage_notilist"
+            android:layout_width="150dp"
+            android:layout_height="141dp"
+            android:background="@drawable/btn_notilist"
+            android:gravity="center_vertical"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="147dp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/mypage_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="0.5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypage_1">
+        <Button
+            android:id="@+id/mypage_appliedlist"
+            android:layout_width="150dp"
+            android:layout_height="141dp"
+            android:background="@drawable/btn_appliedlist"
+            android:gravity="center_vertical"
+            tools:layout_editor_absoluteX="190dp"
+            tools:layout_editor_absoluteY="147dp" />
+        <Button
+            android:id="@+id/mypage_likedlist"
+            android:layout_width="150dp"
+            android:layout_height="141dp"
+            android:background="@drawable/btn_likelist"
+            android:gravity="center_vertical"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="147dp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/mypage_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="0.5dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypage_2">
+
+        <Button
+            android:id="@+id/mypage_notice"
+            android:layout_width="150dp"
+            android:layout_height="141dp"
+            android:background="@drawable/btn_notice"
+            android:gravity="center_vertical"
+            tools:layout_editor_absoluteX="190dp"
+            tools:layout_editor_absoluteY="147dp" />
+
+        <Button
+            android:id="@+id/mypage_faq"
+            android:layout_width="150dp"
+            android:layout_height="141dp"
+            android:background="@drawable/btn_faq"
+            android:gravity="center_vertical"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="147dp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--하단바 메뉴-->
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="380dp"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mypage_3"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageButton
+            android:id="@+id/menu_home"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/menu_selector_color"
+            android:src="@drawable/home" />
+
+        <ImageButton
+            android:id="@+id/menu_search"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/menu_selector_color"
+            android:src="@drawable/menu_glass" />
+
+        <ImageButton
+            android:id="@+id/menu_qa"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/menu_selector_color"
+            android:src="@drawable/qa" />
+
+
+        <ImageButton
+            android:id="@+id/menu_profile"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="47dp"
+            android:background="@drawable/menu_seleted_color"
+            android:src="@drawable/menu_profile_selected" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
