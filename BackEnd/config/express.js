@@ -4,7 +4,7 @@ const methodOverride = require('method-override');
 const cors = require('cors');
 const morgan = require('morgan');
 
-const passport = require('passport');
+// const passport = require('passport');
 
 const swaggerUi = require('swagger-ui-express');
 const { openapiSpecification } = require('./swagger/swaggerConfig.js');
@@ -27,14 +27,14 @@ module.exports = function() {
   app.use(cors());
 
 
-    // const passportConfig = require('../passport');
-    // passportConfig(app);
+  // const passportConfig = require('../passport');
+  // passportConfig(app);
 
-    const userRouter = require('../src/app/User/userRoute');
-    app.use('/app/users/oAuth', [userRouter]);
+  const userRouter = require('../src/app/User/userRoute');
+  // app.use('/app/users/oAuth', [userRouter]);
 
-    app.use(passport.initialize());
-    app.use(passport.session());
+  // app.use(passport.initialize());
+  // app.use(passport.session());
 
   // app.use(express.static(process.cwd() + '/public'));
 

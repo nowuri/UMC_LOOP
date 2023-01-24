@@ -13,25 +13,25 @@ const { checkPhoneValidation, sendTokenToSMS, getToken } = require('../../../con
 // ============================================================
 
 /** 
-* API Name : 유저 아이디 중복 체크 API
+* API Name : 유저 이메일 중복 체크 API
 * Description : 중복된 아이디가 없을 경우 Success Return
-* [GET] /app/users/api/{userId}
+* [GET] /app/users/api/email
 */
 exports.checkOverlappingUser = async (req, res) => {
-  const userId = req.params.userId;
+  const email = req.body.userEmail;
 
-  // Check Empty UserId (formal validation)
-  if (!userId)
-    return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
+  console.log(email);
+  // Check Empty email (formal validation)
+  if (!email)
+    return res.send(errResponse(baseResponse.USER_USEREMAIL_EMPTY));
   // Check Blank Char with Regex
-  if (userId.match('/\s/g'))
-    return res.send(errResponse( baseResponse.SIGNUP_USERID_ERROR_TYPE));
+  if (!regexEmail.test(email))
+    return res.send(errResponse(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
 
-  const userByUserId = await userProvider.retrieveUser(userId);
+  const userByEmail = await userProvider.emailCheck(email);
 
-  // console.log(userByUserId);
-  
-  return (!userByUserId) ? res.send(response(baseResponseStatus.SUCCESS)) : res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
+
+  return (userByEmail.length === 0) ? res.send(response(baseResponseStatus.SUCCESS)) : res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
 };
 
 
@@ -56,44 +56,6 @@ exports.sendTokenToSMS = async (req, res) => {
 
 // 템플릿 코드
 // ========================================================================
-
-const passport = require('passport');
-const { myKakaoStrategy } = require("../../../config/passport");
-
-passport.use('kakao-login', myKakaoStrategy({
-}, async (accessToken, refreshToken, profile, done) => {
-    console.log(accessToken);
-    console.log(profile);
-}));
-
-
-passport.serializeUser((user,done)=>{ 
-    done(null,user);
-});
-passport.deserializeUser((user,done)=>{
-    done(null,user);
-});
-
-exports.kakaoLogin = async function (req, res) {
-
-    const {accessToken} = req.body; //값 확인을 위해 body로 token 값을 받아준다.
-
-	let kakaoProfile; //값을 수정해주어야 하므로 const가 아닌 let 사용
-
-	try{ //axios 모듈을 이용하여 Profile 정보를 가져온다.
-            kakaoProfile = await axios.get('https://kapi.kakao.com/v2/user/me', {
-                headers: {
-                    Authorization: 'Bearer ' + accessToken,
-                    'Content-Type': 'application/json'
-                }
-            })
-     } catch (err) {
-          return res.send(errResponse(baseResponse.ACCESS_TOKEN_VERIFICATION_FAILURE));
-     }
-    
-};
-
-
 
 
 /**
