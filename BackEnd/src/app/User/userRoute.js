@@ -5,6 +5,9 @@ module.exports = function(app) {
 
   // 자체 작업 - 준/권준형
   // ----------------------------------------------
+  // 0. 테스트 API
+  app.get('/app/test', user.getTest)
+
   // 닉제임 중복 확인 API
   app.get('/app/users/api/:userId', user.checkOverlappingUser);
 

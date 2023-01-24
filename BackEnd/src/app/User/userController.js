@@ -34,45 +34,7 @@ exports.checkOverlappingUser = async (req, res) => {
   return (!userByUserId) ? res.send(response(baseResponseStatus.SUCCESS)) : res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
 };
 
-/**
-* @swagger
-* /app/users/api/token:
-*   get:
-*     summary: 인증번호 6자리 SMS 전송 API
-*     tags: [Board]
-*     requestBody:
-*       description: 인증번호를 전송할 전화번호
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             type: object
-*             properties:
-*               phoneNumber:
-*                 type: string
-*                 example: 01053971011
-*     responses:
-*       200:
-*         description: Success
-*         content:
-*           application/json:
-*             schema:
-*               type: object
-*               properties:
-*                 isSucess:
-*                   type: boolean
-*                   example: true
-*                 code:
-*                   type: int
-*                   example: 1000
-*                 result:
-*                   type: object
-*                   properties:
-*                     token:
-*                       type: string
-*                       example: 712031
-*                   
-*/
+
 exports.sendTokenToSMS = async (req, res) => {
   const phoneNumber = req.body.phoneNumber;
   // 1. Check formal validation of phoneNumber.
@@ -100,9 +62,9 @@ exports.sendTokenToSMS = async (req, res) => {
  * API Name : 테스트 API
  * [GET] /app/test
  */
-// exports.getTest = async function (req, res) {
-//     return res.send(response(baseResponse.SUCCESS))
-// }
+exports.getTest = async function (req, res) {
+    return res.send(response(baseResponse.SUCCESS))
+}
 
 /**
  * API No. 1
