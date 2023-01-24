@@ -7,6 +7,7 @@ const { response, errResponse } = require("../../../config/response");
 const regexEmail = require("regex-email");
 const baseResponseStatus = require("../../../config/baseResponseStatus");
 const { checkPhoneValidation, sendTokenToSMS, getToken } = require('../../../config/coolsms.js');
+const express = require("../../../config/express");
 
 
 // LOPE 작업 코드
@@ -92,6 +93,56 @@ exports.sendTokenToSMS = async (req, res) => {
   
 }
 
+/**
+ * API Name : 네이버 회원가입 API
+ * [POST] /app/users/oAuth/naver/login
+ */
+
+
+var redirectURI = encodeURI("http://127.0.0.1:3001/app/users/oAuth/naver/callback");
+const passport = require('passport')
+const NaverStrategy = require('passport-naver-v2').Strategy //얘랑 이위에도임.ㅋ.ㅋ
+
+passport.use('naver-login', new NaverStrategy({ //passport.js에이동. 하고 export로이동해서하기....인
+  clientID: process.env.NAVER_CLIENT,
+  callbackURL: redirectURI,
+  clientSecret: process.env.NAVER_SECRET
+}, async (accessToken, refreshToken, profile, done) => {
+  console.log(accessToken);
+  console.log("profile^^\n",JSON.stringify(profile));
+  const obj = JSON.parse(JSON.stringify(profile));
+  //res.send(obj);
+   //res.send로 데이터전송.. 중복 아이디인지 확인을 먼저 해야?
+  
+  //여기부터문.제
+
+  /*
+  try {
+    const exUser = await User.findOne({
+       // 네이버 플랫폼에서 로그인 했고 & snsId필드에 네이버 아이디가 일치할경우
+       where: { snsId: profile.id, provider: 'naver' },
+    });
+    // 이미 가입된 네이버 프로필이면 성공
+    if (exUser) {
+       done(null, exUser); 
+    } else {
+       // 가입되지 않는 유저면 회원가입 시키고 로그인을 시킨다
+       const newUser = await User.create({
+          email: profile.email,
+          nick: profile.name,
+          snsId: profile.id,
+          provider: 'naver', //이부분은 회원가입에 맞게 작성해야할듯
+       });
+       done(null, newUser);
+    }
+ } catch (error) {
+    console.error(error);
+    done(error);
+ }*/
+}));
+
+
+
 // 템플릿 코드
 // ========================================================================
 
@@ -139,6 +190,9 @@ exports.sendTokenToSMS = async (req, res) => {
 
 //   return res.send(signUpResponse);
 // };
+
+
+
 
 /**
  * API No. 2

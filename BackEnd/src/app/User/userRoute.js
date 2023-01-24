@@ -1,3 +1,7 @@
+const express = require("../../../config/express");
+var passport = require('passport');
+
+
 module.exports = function(app) {
   const user = require('./userController');
   const jwtMiddleware = require('../../../config/jwtMiddleware');
@@ -19,6 +23,19 @@ module.exports = function(app) {
 
   // 1. 유저 생성 (일반 회원가입) API
   // app.post('/app/users', user.postUsers);
+
+  // 1-1. 네이버 회원가입 API
+
+  
+  app.get('/app/users/oAuth/naver/login', passport.authenticate('naver-login'));
+//   app.get('/app/users/oAuth/naver/callback', passport.authenticate('naver-login', {
+//     failureRedirect: '/',
+// }), (req, res) => {
+//     res.redirect('/');
+// });
+//혹은 다른 v2블로그
+app.get('/app/users/oAuth/naver/callback', passport.authenticate('naver-login', { authType: 'reprompt' }));
+
 
 
   // 2. 유저 조회 API (+ 검색)
