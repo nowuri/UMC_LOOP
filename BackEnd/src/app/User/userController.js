@@ -7,6 +7,45 @@ const {response, errResponse} = require("../../../config/response");
 const regexEmail = require("regex-email");
 const {emit} = require("nodemon");
 
+const passport = require('passport');
+const { myKakaoStrategy } = require("../../../config/passport");
+
+passport.use('kakao-login', myKakaoStrategy({
+}, async (accessToken, refreshToken, profile, done) => {
+    console.log(accessToken);
+    console.log(profile);
+}));
+
+
+passport.serializeUser((user,done)=>{ 
+    done(null,user);
+});
+passport.deserializeUser((user,done)=>{
+    done(null,user);
+});
+
+exports.kakaoLogin = async function (req, res) {
+
+    const {accessToken} = req.body; //값 확인을 위해 body로 token 값을 받아준다.
+
+	let kakaoProfile; //값을 수정해주어야 하므로 const가 아닌 let 사용
+
+	try{ //axios 모듈을 이용하여 Profile 정보를 가져온다.
+            kakaoProfile = await axios.get('https://kapi.kakao.com/v2/user/me', {
+                headers: {
+                    Authorization: 'Bearer ' + accessToken,
+                    'Content-Type': 'application/json'
+                }
+            })
+     } catch (err) {
+          return res.send(errResponse(baseResponse.ACCESS_TOKEN_VERIFICATION_FAILURE));
+     }
+    
+};
+
+
+
+
 /**
  * API No. 0
  * API Name : 테스트 API
@@ -138,6 +177,20 @@ exports.patchUsers = async function (req, res) {
         return res.send(editUserInfo);
     }
 };
+
+// exports.kakaoCallback = async function (req, res) {
+    
+// }
+
+exports.addUser = function(newUser, callback){
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newUser.password, salt, (err, hash) => {
+        if(err) throw err;
+        newUser.password = hash;
+        newUser.save(callback);
+      });
+    });
+}
 
 
 

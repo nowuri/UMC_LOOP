@@ -90,3 +90,15 @@ module.exports = {
   selectUserAccount,
   updateUserInfo,
 };
+
+module.exports.addUser = function(newUser, callback){
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
+      if(err) throw err;
+      newUser.password = hash;
+      newUser.save(callback);
+    });
+  });
+}
+
+
