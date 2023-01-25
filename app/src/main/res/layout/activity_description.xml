@@ -96,7 +96,7 @@
         android:layout_height="395dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="12dp"
-        android:layout_marginright="10dp"
+        android:layout_marginRight="10dp"
 
         android:background="@color/blue"
         android:orientation="vertical"
