@@ -54,7 +54,7 @@ class DataRVAdapter5(val context: Context, private val dataList: ArrayList<RVdat
                 }
             }
             viewBinding.firstLine.setOnClickListener(){
-                Toast.makeText(context,"건강 "+adapterPosition.toString()+"번째 정책입니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"건강 "+bindingAdapterPosition.toString()+"번째 정책입니다.",Toast.LENGTH_SHORT).show()
                 Log.d("정책","누름")
             }
         }
