@@ -48,7 +48,9 @@
         <activity
             android:name="com.example.qna.Question"
             android:exported="true" />
-
+        <activity
+            android:name="com.example.description.Description"
+            android:exported="true" />
         <activity
             android:name="com.example.myprofile.MyProfileActivity"
             android:exported="true" />

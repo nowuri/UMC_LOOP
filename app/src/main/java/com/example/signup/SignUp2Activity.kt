@@ -14,8 +14,8 @@ import java.util.*
 
 class SignUp2Activity: AppCompatActivity() {
     private lateinit var viewBinding: SignupPt2Binding
-    var inputUserName: String = ""
-    var inputUserTel: String = ""
+    var name: String = ""
+    var tel: String = ""
     var inputUserTelAuth: String = ""
     var inputUserAddress: String = ""
 
@@ -23,13 +23,6 @@ class SignUp2Activity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewBinding = SignupPt2Binding.inflate(layoutInflater)
         setContentView(viewBinding.root)
-
-        //우편번호 클릭
-        // 버튼을 누르면 AddressActivity를 띄워주는 부분
-        viewBinding.btnPostnum.setOnClickListener(View.OnClickListener {
-            intent = Intent(this, SearchAddress::class.java)
-            ChildForResult.launch(intent)
-        })
 
         //뒤로가기 클릭했을 때
         viewBinding.back.setOnClickListener() {
@@ -44,7 +37,7 @@ class SignUp2Activity: AppCompatActivity() {
         viewBinding.ETName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                inputUserName = viewBinding.ETName.text.toString()
+                name = viewBinding.ETName.text.toString()
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -54,7 +47,7 @@ class SignUp2Activity: AppCompatActivity() {
         viewBinding.ETTelephone.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                inputUserTel = viewBinding.ETTelephone.text.toString()
+                tel = viewBinding.ETTelephone.text.toString()
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -92,6 +85,13 @@ class SignUp2Activity: AppCompatActivity() {
             }, year, month, date)
             dlg.show()
         }
+
+        //우편번호 클릭
+        // 버튼을 누르면 AddressActivity를 띄워주는 부분
+        viewBinding.btnPostnum.setOnClickListener(View.OnClickListener {
+            intent = Intent(this, SearchAddress::class.java)
+            ChildForResult.launch(intent)
+        })
 
         //상세주소 입력 (address_pt2)
         viewBinding.addressPt2.addTextChangedListener(object : TextWatcher {
