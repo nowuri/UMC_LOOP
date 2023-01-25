@@ -14,4 +14,4 @@ const options = {
   apis: ['./config/swagger/*.swagger.yml'],
 };
 
-exports.openapiSpecification = swaggerJsdoc(options);
+exports.openApiSpecification = swaggerJsdoc(options);
