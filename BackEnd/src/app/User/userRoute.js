@@ -18,9 +18,13 @@ module.exports = function(app) {
   // SMS 전송 API
   app.post('/app/users/api/tokens', user.sendTokenToSMS);
 
+  // Social Logins
+  // ================================================================
+  app.get('/app/users/oAuth/google');
+
 
   // 0. 테스트 API
-  // app.get('/app/test', user.getTest)
+  app.get('/app/test', user.getTest);
 
   //  // 1. 유저 생성 (회원가입) API
   //  app.post('/app/users', user.postUsers);
