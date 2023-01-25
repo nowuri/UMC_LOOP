@@ -1,4 +1,4 @@
-/app/users/api/email:
+/app/users/api/emails:
   post:
     summary: 이메일 중복 유저 확인
     tags: [User]
