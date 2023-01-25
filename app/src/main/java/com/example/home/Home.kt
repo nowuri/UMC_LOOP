@@ -22,7 +22,8 @@ import com.example.mypage.MyPage_MainActivity
 import com.example.qna.Question
 import com.example.search.Search
 import com.google.android.material.tabs.TabLayoutMediator
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+// 아직 유튜브를 구현안하신 것 같아 주석처리 해놓겠습니다!
+// import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 
 class Home : AppCompatActivity() {
     private lateinit var viewBinding: ActivityHomeBinding
