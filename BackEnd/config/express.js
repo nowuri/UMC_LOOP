@@ -7,12 +7,12 @@ const morgan = require('morgan');
 // const passport = require('passport');
 
 const swaggerUi = require('swagger-ui-express');
-const { openapiSpecification } = require('./swagger/swaggerConfig.js');
+const { openApiSpecification } = require('./swagger/swaggerConfig.js');
 
 module.exports = function() {
   const app = express();
 
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiSpecification));
 
   app.use(morgan('dev'));
 
