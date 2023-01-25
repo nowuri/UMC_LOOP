@@ -4,6 +4,121 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1D2D69"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="48dp"
+    android:clipToPadding="false"
     tools:context="com.example.mypage.MyLikedList">
+
+    <View
+        android:layout_width="380dp"
+        android:layout_height="850dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/backWhite"/>
+    <View
+        android:layout_width="380dp"
+        android:layout_height="61dp"
+        android:background="#1D2D69"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/backWhite"
+        android:id="@+id/titleback"/>
+    <ImageView
+        android:layout_width="42.95dp"
+        android:layout_height="45.51dp"
+        android:src="@drawable/logo"
+        app:layout_constraintTop_toTopOf="@id/titleback"
+        app:layout_constraintStart_toStartOf="@id/titleback"
+        app:layout_constraintBottom_toBottomOf="@id/titleback"
+        android:layout_marginLeft="13dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOPE"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/titleback"
+        app:layout_constraintTop_toTopOf="@id/titleback"
+        app:layout_constraintBottom_toBottomOf="@id/titleback"
+        android:layout_marginLeft="12dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:id="@+id/login"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@drawable/login_btn"
+        app:layout_constraintTop_toTopOf="@id/titleback"
+        app:layout_constraintBottom_toBottomOf="@id/titleback"
+        app:layout_constraintEnd_toEndOf="@id/titleback"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/search_line"
+        android:id="@+id/search_linear"
+        android:layout_marginTop="26dp"
+        android:layout_marginLeft="6dp"
+        android:padding="2dp"
+        app:layout_constraintTop_toBottomOf="@id/titleback"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <ImageButton
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/search"
+            android:background="@color/white"
+            android:layout_marginLeft="2dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/search"/>
+
+        <EditText
+            android:id="@+id/searchinput"
+            android:layout_width="280dp"
+            android:layout_height="55dp"
+            app:layout_constraintTop_toBottomOf="@id/titleback"
+            app:layout_constraintStart_toEndOf="@id/search"
+            android:layout_marginLeft="7dp"
+            android:hint="검색어를 입력하세요"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/black"
+            android:imeOptions="actionDone"
+            android:textSize="15sp"
+            android:textColorHint="#B3AFAF"
+            android:singleLine="true"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:text="내가 좋아한 정책"
+        android:textColor="#1D2D69"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        app:layout_constraintTop_toBottomOf="@id/search_linear"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="35dp"
+        android:id="@+id/title_like"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        app:layout_constraintTop_toBottomOf="@id/title_like"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="29dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/vplike"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

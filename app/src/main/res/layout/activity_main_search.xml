@@ -10,6 +10,7 @@
     android:layout_marginBottom="48dp"
     android:background="#1D2D69"
     tools:context=".MainActivity_interest">
+
     <View
         android:layout_width="380dp"
         android:layout_height="850dp"

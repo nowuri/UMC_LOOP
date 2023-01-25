@@ -24,7 +24,7 @@ import com.example.qna.Question
 import com.google.android.material.tabs.TabLayoutMediator
 
 class Search : AppCompatActivity() {
-    private lateinit var viewBinding: ActivityMainSearchBinding
+    private lateinit var viewBinding: com.example.interested.databinding.ActivityMainSearchBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         viewBinding = ActivityMainSearchBinding.inflate(layoutInflater)
