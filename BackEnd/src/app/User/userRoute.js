@@ -13,7 +13,7 @@ module.exports = function(app) {
 
   // Small APIs
   // 닉제임 중복 확인 API
-  app.get('/app/users/api/emails', user.checkOverlappingUser);
+  app.post('/app/users/api/emails', user.checkOverlappingUser);
 
   // SMS 전송 API
   app.post('/app/users/api/tokens', user.sendTokenToSMS);
