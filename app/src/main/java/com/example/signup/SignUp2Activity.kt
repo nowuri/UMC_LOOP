@@ -9,6 +9,7 @@ import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.SignupPt2Binding
+import com.example.signup.SignUp1Activity
 import java.util.*
 
 
@@ -27,9 +28,8 @@ class SignUp2Activity: AppCompatActivity() {
         //뒤로가기 클릭했을 때
         viewBinding.back.setOnClickListener() {
 //            이전 화면으로 돌아갈 수 있도록 함
-//            val intent = Intent(this, SignUp2Activity::class.java)
-//            startActivity(intent)
-            Toast.makeText(this@SignUp2Activity, "뒤로 돌아가기", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SignUp1Activity::class.java)
+            startActivity(intent)
         }
 
         //여기서부터는 회원정보 입력

@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.example.home.Home
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityQuestionBinding
+import com.example.login.Login
 import com.example.mypage.MyPage_MainActivity
 import com.example.search.Search
 import java.text.SimpleDateFormat
@@ -79,7 +80,7 @@ class Question : AppCompatActivity() {
             startActivity(intent)
         }
         viewBinding.login.setOnClickListener(){
-            val intent = Intent(this, SignUp2Activity::class.java)
+            val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
     }

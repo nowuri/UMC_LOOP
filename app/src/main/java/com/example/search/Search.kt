@@ -19,6 +19,7 @@ import com.example.home.Home
 import com.example.interested.R
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMainSearchBinding
+import com.example.login.Login
 import com.example.mypage.MyPage_MainActivity
 import com.example.qna.Question
 import com.google.android.material.tabs.TabLayoutMediator
@@ -123,6 +124,10 @@ class Search : AppCompatActivity() {
         }
         viewBinding.menuProfile.setOnClickListener(){
             val intent = Intent(this, MyPage_MainActivity::class.java)
+            startActivity(intent)
+        }
+        viewBinding.login.setOnClickListener(){
+            val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
 
