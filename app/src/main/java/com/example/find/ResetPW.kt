@@ -2,11 +2,13 @@ package com.example.find
 
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import com.example.home.Home
 import com.example.interested.databinding.ActivityResetPwBinding
 
 class ResetPW : AppCompatActivity() {
@@ -28,7 +30,10 @@ class ResetPW : AppCompatActivity() {
                 builder.setTitle("비밀번호 재설정")
                     .setMessage("비밀번호가 재설정되었습니다.")
                     .setPositiveButton("확인",
-                        DialogInterface.OnClickListener{ dialog, id -> }
+                        DialogInterface.OnClickListener{ dialog, id ->
+                            val intent = Intent(this,Home::class.java)
+                            startActivity(intent)
+                        }
                     )
                 builder.show()
             }
