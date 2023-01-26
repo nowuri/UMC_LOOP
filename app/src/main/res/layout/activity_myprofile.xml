@@ -73,7 +73,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/myprofile_id_rec" />
 
-        <Button
+        <ImageView
             android:id="@+id/myprofile_id_circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

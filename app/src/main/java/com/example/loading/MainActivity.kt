@@ -11,6 +11,7 @@ import com.example.search.Search
 //타 화면 테스트용으로 임시 버튼 추가하겠습니다!
 import com.example.interested.SignUp2Activity
 import com.example.mypage.MyPage_MainActivity
+import com.example.myprofile.MyProfileActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding : ActivityMainLoadingBinding
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         //타 화면 테스트용 버튼 (삭제예정)
         viewBinding.button.setOnClickListener{
-            val intent = Intent(this, MyPage_MainActivity::class.java)
+            val intent = Intent(this, MyProfileActivity::class.java)
             startActivity(intent)
         }
     }
