@@ -1,5 +1,5 @@
-/app/users/api/email:
-  get:
+/app/users/api/emails:
+  post:
     summary: 이메일 중복 유저 확인
     tags: [User]
     requestBody:
