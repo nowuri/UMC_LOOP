@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.find.Find
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityLoginBinding
 import com.example.signup.SignUp1Activity
@@ -32,6 +33,11 @@ class Login : AppCompatActivity() {
         }
         viewBinding.signup.setOnClickListener(){
             val intent = Intent(this, SignUp1Activity::class.java)
+            startActivity(intent)
+        }
+
+        viewBinding.find.setOnClickListener(){
+            val intent = Intent(this,Find::class.java)
             startActivity(intent)
         }
     }

@@ -166,6 +166,16 @@
             android:layout_marginTop="30dp"
             android:layout_gravity="right"
             android:id="@+id/signup"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 아이디 비밀번호 찾기 "
+            android:background="@drawable/googlelogin"
+            android:textColor="@color/black"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="right"
+            android:id="@+id/find"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
