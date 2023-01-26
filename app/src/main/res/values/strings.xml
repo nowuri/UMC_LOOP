@@ -22,7 +22,14 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="id">ID</string>
+    <string name="profilechange">프로필변경</string>
+    <string name="changeinfo">ㅤ회원정보 변경</string>
+    <string name="changeinterest">ㅤ관심분야 변경</string>
+    <string name="removeuser">ㅤ회원 탈퇴</string>
+
+
+
 </resources>

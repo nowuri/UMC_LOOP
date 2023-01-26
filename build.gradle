@@ -4,7 +4,6 @@ buildscript {
     ext.android_plugin_version = '2.2.0-alpha4'
     dependencies {
         classpath "com.android.tools.build:gradle:$android_plugin_version"
-        //... rest of the content
     }
 }
 
