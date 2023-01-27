@@ -8,19 +8,25 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.request.RequestOptions
 import com.example.interested.MainActivity_interest
+import com.example.interested.R
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMyprofileBinding
+import com.example.qna.Dialog1
 import java.io.File
 
 
-class MyProfileActivity : AppCompatActivity() {
+class MyProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object{
         const val REQ_GALLERY = 1
@@ -48,11 +54,12 @@ class MyProfileActivity : AppCompatActivity() {
             val SecondIntent = Intent(this, MainActivity_interest::class.java)
             startActivity(SecondIntent)
         }
+
         //회원 탈퇴 클릭 시 카드뷰 띄움
 
-
-
+        viewBinding.btnRemoveUser.setOnClickListener(this)
     }
+
     private val imageResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ){
@@ -156,4 +163,13 @@ class MyProfileActivity : AppCompatActivity() {
             ).show()
         }
     }
+
+    override fun onClick(v: View?) {
+            when(v?.id){
+                viewBinding.btnRemoveUser.id ->{
+                    val dlg = RemoveUserDialog(this)
+                    dlg.show()
+                }
+            }
+        }
 }
