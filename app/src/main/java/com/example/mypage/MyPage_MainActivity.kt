@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.home.Home
-import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMypageBinding
 import com.example.login.Login
 import com.example.myprofile.MyProfileActivity

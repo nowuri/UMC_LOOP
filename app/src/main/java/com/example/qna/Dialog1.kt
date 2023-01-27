@@ -13,7 +13,7 @@ class Dialog1 (context: Context) {
     private val dialog = Dialog(context)
 
     fun myDig(){
-        dialog.setContentView(R.layout.qna_dialog)
+        dialog.setContentView(R.layout.dialog_qna)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)

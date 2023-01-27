@@ -59,7 +59,7 @@ class Pwfind : Fragment() {
             }
             else{
                 viewBinding.result.setBackgroundColor(Color.parseColor("#EEF2FF"))
-                viewBinding.resulttext.setText("abc@abc.com으로 \n 메일을 보냈습니다.")
+                viewBinding.resulttext.setText(viewBinding.emailinput.getText().toString()+"으로 \n 메일을 보냈습니다.")
             }
         }
 

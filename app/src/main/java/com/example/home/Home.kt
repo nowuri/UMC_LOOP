@@ -2,7 +2,6 @@ package com.example.home
 
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -10,13 +9,9 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.ScrollView
-import android.widget.Toast
-import android.widget.VideoView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.RecommedVPAdpager
-import com.example.interested.R
-import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityHomeBinding
 import com.example.login.Login
 import com.example.mypage.MyPage_MainActivity

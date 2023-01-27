@@ -61,7 +61,7 @@ class Idfind : Fragment() {
             }
             else{
                 viewBinding.result.setBackgroundColor(Color.parseColor("#EEF2FF"))
-                viewBinding.resulttext.setText("000님의 아이디는 \n ____ 입니다.")
+                viewBinding.resulttext.setText(viewBinding.nameinput.getText().toString()+"님의 아이디는 \n ____ 입니다.")
             }
         }
         return viewBinding.root

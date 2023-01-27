@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/margin_top"
+    android:layout_marginBottom="@dimen/margin_bottom"
+    android:layout_marginStart="@dimen/margin_left"
+    android:layout_marginEnd="@dimen/margin_right"
+    android:background="#1D2D69"
+    android:orientation="vertical"
+    android:clipToPadding="false">
+
+    <ImageView
+        android:layout_width="429dp"
+        android:layout_height="416dp"
+        android:src="@drawable/logo2"
+        app:layout_constraintBottom_toTopOf="@+id/backwhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⟨ 뒤로가기"
+        android:textSize="20sp"
+        android:background="#00000000"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/back"/>
+
+    <!--    흰색 배경-->
+    <View
+        android:id="@+id/backwhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="206dp"
+        android:background="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back"
+        app:layout_constraintVertical_bias="0.982" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/centerImage"
+        android:layout_width="99.26dp"
+        android:layout_height="99.26dp"
+        android:layout_marginTop="163dp"
+        android:background="@drawable/logo_bg"
+        android:src="@drawable/ic_helpinghand"
+        app:civ_border_color="#1D2D69"
+        app:civ_border_overlay="true"
+        app:civ_border_width="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--     회원가입-->
+    <TextView
+        android:id="@+id/signup_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:textColor="#1D2D69"
+        android:textSize="32sp"
+        app:layout_constraintTop_toBottomOf="@id/centerImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="13dp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/signup_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="55dp">
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/personalinformation1"/>
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="44dp"
+                android:id="@+id/idinput"
+                android:textColor="@color/black"
+                android:hint="아이디 입력"
+                android:textColorHint="#9B9B9B"/>
+        </LinearLayout>
+        <View
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:background="#1D2D69"
+            android:layout_marginTop="5dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="48dp">
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/password1"/>
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="44dp"
+                android:id="@+id/pwinput"
+                android:textColor="@color/black"
+                android:hint="비밀번호 입력"
+                android:inputType="textPassword"
+                android:textColorHint="#9B9B9B"/>
+        </LinearLayout>
+        <View
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:background="#1D2D69"
+            android:layout_marginTop="5dp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="48dp">
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/padlock"/>
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="44dp"
+                android:id="@+id/pwcheckinput"
+                android:textColor="@color/black"
+                android:hint="비밀번호 입력"
+                android:inputType="textPassword"
+                android:textColorHint="#9B9B9B"/>
+        </LinearLayout>
+        <View
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:background="#1D2D69"
+            android:layout_marginTop="5dp"/>
+
+        <android.widget.Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@drawable/changed_btn"
+            android:text="다음"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:layout_marginTop="77dp"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

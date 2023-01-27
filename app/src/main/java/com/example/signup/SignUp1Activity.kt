@@ -7,17 +7,15 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.example.home.Home
 import com.example.interested.SignUp2Activity
-import com.example.interested.databinding.ActivitySignUp1Binding
+import com.example.interested.databinding.ActivitySignup1Binding
 import com.example.login.Login
-import java.sql.Types.NULL
 
 class SignUp1Activity : AppCompatActivity() {
-    private lateinit var viewBinding: ActivitySignUp1Binding
+    private lateinit var viewBinding: ActivitySignup1Binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewBinding = ActivitySignUp1Binding.inflate(layoutInflater)
+        viewBinding = ActivitySignup1Binding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
         val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
