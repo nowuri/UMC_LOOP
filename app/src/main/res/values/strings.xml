@@ -29,6 +29,11 @@
     <string name="changeinfo">ㅤ회원정보 변경</string>
     <string name="changeinterest">ㅤ관심분야 변경</string>
     <string name="removeuser">ㅤ회원 탈퇴</string>
+    <string name="removeuser_detail_1">정말로</string>
+    <string name="removeuser_detail_2">탈퇴하시겠습니까?</string>
+    <string name="confirm">예, 탈퇴하겠습니다.</string>
+
+
 
 
 </resources>
