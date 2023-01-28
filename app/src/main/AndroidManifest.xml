@@ -27,6 +27,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".NotRecommend"
+            android:exported="false" />
+        <activity
+            android:name=".Recommend"
+            android:exported="false" />
+        <activity
             android:name="com.example.find.ResetPW"
             android:exported="false" />
         <activity
@@ -69,7 +75,7 @@
             android:name="com.example.qna.Question"
             android:exported="true" />
         <activity
-            android:name="com.example.description.Description"
+            android:name=".Description"
             android:exported="true" />
         <activity
             android:name="com.example.myprofile.MyProfileActivity"
