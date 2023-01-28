@@ -57,6 +57,8 @@ class SignUp1Activity : AppCompatActivity() {
             if(viewBinding.idinput.getText().toString().length != 0){
                 if(viewBinding.pwinput.getText().toString().equals(viewBinding.pwcheckinput.getText().toString())){
                     val intent = Intent(this,SignUp2Activity::class.java)
+                    intent.putExtra("ID",viewBinding.idinput.getText().toString())
+                    intent.putExtra("PW",viewBinding.pwinput.getText().toString())
                     startActivity(intent)
                 }
                 else

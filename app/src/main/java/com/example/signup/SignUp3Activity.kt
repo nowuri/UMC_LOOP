@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,13 @@ class SignUp3Activity: AppCompatActivity() {
     private lateinit var viewBinding: SignupPt3Binding
     private val listItem = ArrayList<Any>()
     var checkbox_status : String =""
+    var ID : String = ""
+    var pw : String = ""
+    var Name: String = ""
+    var tel : String = ""
+    var birth: String = ""
+    var address: String = ""
+    var inputUserEmail: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +40,7 @@ class SignUp3Activity: AppCompatActivity() {
         viewBinding.ETEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                var inputUserEmail = viewBinding.ETEmail.text.toString()
+                inputUserEmail = viewBinding.ETEmail.text.toString()
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -91,9 +99,29 @@ class SignUp3Activity: AppCompatActivity() {
             Toast.makeText(this, checkbox_status.toString(), Toast.LENGTH_SHORT).show();
         }
 
+        if(intent.hasExtra("ID") && intent.hasExtra("PW") && intent.hasExtra("Name") && intent.hasExtra("tel")
+            && intent.hasExtra("birth") && intent.hasExtra("address")){
+            ID = intent.getStringExtra("ID").toString()
+            pw = intent.getStringExtra("PW").toString()
+            Name = intent.getStringExtra("Name").toString()
+            tel = intent.getStringExtra("tel").toString()
+            birth = intent.getStringExtra("birth").toString()
+            address = intent.getStringExtra("address").toString()
+            Log.e("가져온 값",ID+" "+ pw + " "+ Name + " "+ tel+" "+birth+ " "+address)
+        }
+        else{
+            Toast.makeText(this,"받은 값이 없습니다.",Toast.LENGTH_SHORT).show()
+        }
         //다음 버튼 클릭
         viewBinding.next.setOnClickListener{
             val intent = Intent(this, MainActivity_interest::class.java)
+            intent.putExtra("ID",ID)
+            intent.putExtra("pw",pw)
+            intent.putExtra("Name",Name)
+            intent.putExtra("tel",tel)
+            intent.putExtra("birth",birth)
+            intent.putExtra("address",address)
+            intent.putExtra("email",inputUserEmail)
             startActivity(intent)
         }
 
