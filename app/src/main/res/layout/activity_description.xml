@@ -222,13 +222,18 @@
             </Button>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/comment_box"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/comment_box"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+        </ScrollView>
+
         <Button
             android:id="@+id/policy_get_review"
             android:layout_width="wrap_content"
