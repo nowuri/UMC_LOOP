@@ -87,151 +87,187 @@
             />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/policy_des_box"
-        android:layout_width="354dp"
+    <ScrollView
+        android:id="@+id/SV_description"
+        android:layout_width="355dp"
         android:layout_height="395dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/rec_description"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/policy_title_box">
-
-        <ImageView
-            android:id="@+id/policy_img"
-            android:layout_width="319dp"
-            android:layout_height="264dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            tools:srcCompat="@color/white" />
-
-        <TextView
-            android:id="@+id/policy_date"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="#4A5787"
-            android:textColor="@color/white"
-            android:gravity="center_vertical"
-            android:text="@string/policy_date" />
-
-        <TextView
-            android:id="@+id/policy_description"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="#4A5787"
-            android:textColor="@color/white"
-            android:gravity="center_vertical"
-            android:text="@string/policy_description" />
-
-        <TextView
-            android:id="@+id/policy_homepage"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="#4A5787"
-            android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:text="@string/policy_homepage" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/policy_recomm_box"
-        android:layout_width="wrap_content"
-        android:layout_height="33dp"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/policy_des_box">
-
-        <Button
-            android:id="@+id/policy_recomm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="20dp"
-            android:drawableRight="@drawable/ic_recomm"
-            android:background="@drawable/btn_rec_recomm"
-            android:textStyle="bold"
-            android:textAlignment="viewStart"
-            android:paddingLeft="20dp"
-            android:textSize="18dp"
-            android:text="@string/policy_recommend"
-            android:textColor="@color/blue">
-        </Button>
-
-        <TextView
-            android:id="@+id/policy_contour"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="@color/blue"
-            android:text="@string/contour">
-        </TextView>
-
-        <Button
-            android:id="@+id/policy_unrecomm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="20dp"
-            android:drawableRight="@drawable/ic_unrecomm"
-            android:background="@drawable/btn_rec_recomm"
-            android:textStyle="bold"
-            android:textAlignment="viewStart"
-            android:paddingLeft="20dp"
-            android:textSize="18dp"
-            android:text="@string/policy_unrecommend"
-            android:textColor="@color/blue">
-        </Button>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/policy_get_review"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="10dp"
-        android:background="#00ff0000"
-        android:drawableRight="@drawable/ic_rightarrow"
-        android:text="@string/policy_get_review"
-        android:textColor="@color/blue"
-        android:textSize="13dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/policy_recomm_box" />
-
-    <Button
-        android:id="@+id/btn_apply"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_apply"
-        android:text="@string/apply"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center|center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/policy_get_review"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/policy_des_box"
+            android:layout_width="match_parent"
+            android:layout_height="419dp"
+            android:orientation="vertical"
+            android:background="@drawable/rec_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/policy_title_box">
+
+            <ImageView
+                android:id="@+id/policy_img"
+                android:layout_width="303dp"
+                android:layout_height="253dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                tools:srcCompat="@color/white" />
+
+            <TextView
+                android:id="@+id/policy_date"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#4A5787"
+                android:gravity="center_vertical"
+                android:text="@string/policy_date"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/policy_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:background="#4A5787"
+                android:gravity="center_vertical"
+                android:text="@string/policy_description"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/policy_homepage"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:background="#4A5787"
+                android:gravity="center_vertical"
+                android:text="@string/policy_homepage"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/description_btn_box"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/SV_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/policy_recomm_box"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:orientation="horizontal"
+            android:paddingLeft="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SV_description">
+
+            <Button
+                android:id="@+id/btn_recomm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="20dp"
+                android:drawableRight="@drawable/ic_recomm"
+                android:background="@drawable/btn_rec_recomm"
+                android:textStyle="bold"
+                android:textAlignment="viewStart"
+                android:paddingLeft="20dp"
+                android:textSize="18dp"
+                android:text="@string/policy_recommend"
+                android:textColor="@color/blue">
+            </Button>
+
+            <TextView
+                android:id="@+id/policy_contour"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@color/blue"
+                android:text="@string/contour">
+            </TextView>
+
+
+            <Button
+                android:id="@+id/btn_unrecomm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="20dp"
+                android:drawableRight="@drawable/ic_unrecomm"
+                android:background="@drawable/btn_rec_recomm"
+                android:textStyle="bold"
+                android:textAlignment="viewStart"
+                android:paddingLeft="20dp"
+                android:textSize="18dp"
+                android:text="@string/policy_unrecommend"
+                android:textColor="@color/blue">
+            </Button>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/comment_box"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/policy_get_review"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:background="#00ff0000"
+            android:drawableRight="@drawable/ic_rightarrow"
+            android:text="@string/policy_get_review"
+            android:textColor="@color/blue"
+            android:textSize="13dp"
+            android:paddingLeft="230dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/policy_recomm_box" />
+
+        <Button
+            android:id="@+id/btn_apply"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_apply"
+            android:text="@string/apply"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center|center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/policy_get_review" />
+
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
