@@ -32,6 +32,17 @@
     <string name="removeuser_detail_1">정말로</string>
     <string name="removeuser_detail_2">탈퇴하시겠습니까?</string>
     <string name="confirm">예, 탈퇴하겠습니다.</string>
+    <string name="policy_name">정책 이름</string>
+    <string name="policy_agency">| 정부 기관</string>
+    <string name="policy_date">*날짜</string>
+    <string name="policy_description">*내용</string>
+    <string name="policy_homepage">*홈페이지 URL</string>
+    <string name="policy_recommend">추천 </string>
+    <string name="policy_unrecommend">비추천 </string>
+    <string name="policy_get_review">다른 후기 보러가기</string>
+    <string name="apply">지원하기</string>
+    <string name="contour">|</string>
+
 
 
 

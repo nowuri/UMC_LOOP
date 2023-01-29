@@ -4,11 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.SignupPt2Binding
+import com.example.signup.SignUp1Activity
 import java.util.*
 
 
@@ -18,6 +20,8 @@ class SignUp2Activity: AppCompatActivity() {
     var tel: String = ""
     var inputUserTelAuth: String = ""
     var inputUserAddress: String = ""
+    var ID: String =""
+    var pw : String =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +31,8 @@ class SignUp2Activity: AppCompatActivity() {
         //뒤로가기 클릭했을 때
         viewBinding.back.setOnClickListener() {
 //            이전 화면으로 돌아갈 수 있도록 함
-//            val intent = Intent(this, SignUp2Activity::class.java)
-//            startActivity(intent)
-            Toast.makeText(this@SignUp2Activity, "뒤로 돌아가기", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SignUp1Activity::class.java)
+            startActivity(intent)
         }
 
         //여기서부터는 회원정보 입력
@@ -103,9 +106,24 @@ class SignUp2Activity: AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {}
         })
 
+        if(intent.hasExtra("ID") && intent.hasExtra("PW")){
+            ID = intent.getStringExtra("ID").toString()
+            pw = intent.getStringExtra("PW").toString()
+        }
+        else{
+            Toast.makeText(this,"받아온 값이 없습니다.",Toast.LENGTH_SHORT).show()
+        }
+
         //다음 버튼 클릭
         viewBinding.next.setOnClickListener {
             val intent = Intent(this, SignUp3Activity::class.java)
+            intent.putExtra("ID",ID)
+            intent.putExtra("PW",pw)
+            intent.putExtra("Name",name)
+            intent.putExtra("tel",tel)
+            intent.putExtra("birth",viewBinding.birth.getText().toString())
+            intent.putExtra("address",inputUserAddress)
+
             startActivity(intent)
         }
     }

@@ -5,8 +5,8 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.home.Home
-import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMypageBinding
+import com.example.login.Login
 import com.example.myprofile.MyProfileActivity
 import com.example.qna.Question
 import com.example.search.Search
@@ -68,7 +68,7 @@ class MyPage_MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         viewBinding.login.setOnClickListener(){
-            val intent = Intent(this, SignUp2Activity::class.java)
+            val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
     }

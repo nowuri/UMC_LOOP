@@ -11,7 +11,6 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -36,6 +35,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.example.description.NotRecommend"
+            android:exported="true" />
+        <activity
+            android:name="com.example.description.Recommend"
+            android:exported="true" />
+        <activity
+            android:name="com.example.find.ResetPW"
+            android:exported="true" />
+        <activity
+            android:name="com.example.find.Find"
+            android:exported="true" />
+        <activity
+            android:name="com.example.signup.SignUp1Activity"
+            android:exported="true" />
+        <activity
+            android:name="com.example.login.Login"
+            android:exported="true" />
         <activity
             android:name="com.example.home.Home"
             android:exported="true" />
@@ -71,6 +89,9 @@
             android:exported="true" />
         <activity
             android:name="com.example.mypage.MyLikedList"
+            android:exported="true" />
+        <activity
+            android:name="com.example.mypage.MyPage_MainActivity"
             android:exported="true" />
     </application>
 
