@@ -99,8 +99,8 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
-        viewBinding.scrollView.fullScroll(ScrollView.FOCUS_DOWN)
-        viewBinding.scrollView.fullScroll(ScrollView.FOCUS_UP)
+        viewBinding.scrollview.fullScroll(ScrollView.FOCUS_DOWN)
+        viewBinding.scrollview.fullScroll(ScrollView.FOCUS_UP)
 
     }
 
