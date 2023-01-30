@@ -25,6 +25,7 @@
         android:theme="@style/Theme.AppCompat"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name="com.example.loading.MainActivity"
             android:exported="true">
@@ -55,6 +56,9 @@
             android:exported="true" />
         <activity
             android:name="com.example.home.Home"
+            android:exported="true" />
+        <activity
+            android:name="com.example.mypage.MyPage_MainActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity_interest"

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.description.Description
 import com.example.home.Home
 import com.example.interested.SignUp3Activity
 import com.example.interested.databinding.ActivityMainLoadingBinding
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         //타 화면 테스트용 버튼 (삭제예정)
         viewBinding.button.setOnClickListener{
-            val intent = Intent(this, MyProfileActivity::class.java)
+            val intent = Intent(this, Description::class.java)
             startActivity(intent)
         }
     }

@@ -14,15 +14,19 @@ import java.util.*
 
 class SignUp3Activity: AppCompatActivity() {
     private lateinit var viewBinding: SignupPt3Binding
-    private val listItem = ArrayList<Any>()
-    var checkbox_status : String =""
+    //private val listItem = ArrayList<Any>()
+
     var ID : String = ""
     var pw : String = ""
     var Name: String = ""
     var tel : String = ""
     var birth: String = ""
     var address: String = ""
-    var inputUserEmail: String = ""
+    var email: String = ""
+
+    var checkbox_status_sms: String = ""
+    var checkbox_status_kkt: String = ""
+    var checkbox_status_info: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +44,7 @@ class SignUp3Activity: AppCompatActivity() {
         viewBinding.ETEmail.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                inputUserEmail = viewBinding.ETEmail.text.toString()
+                email = viewBinding.ETEmail.text.toString()
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -48,27 +52,23 @@ class SignUp3Activity: AppCompatActivity() {
 
         //SMS 정보수신
         viewBinding.checkboxSms.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) { //체크를 할 때
-                listItem.add(isChecked);
-                checkbox_status="수신"
+            if (isChecked) { //체크
+                //listItem.add(isChecked);
+                checkbox_status_sms = "1"
 
-            } else { //체크 해제될 때
-                listItem.remove(isChecked);
-                checkbox_status="미수신"
+            } else { //체크 해제
+                //listItem.remove(isChecked);
+                checkbox_status_sms = "0"
             }
-            Toast.makeText(this, checkbox_status.toString(), Toast.LENGTH_SHORT).show();
         }
 
         //카카오톡 정보수신
         viewBinding.checkboxKkt.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) { //체크를 할 때
-                listItem.add(isChecked);
-                checkbox_status="수신"
+                checkbox_status_kkt = "1"
             } else { //체크 해제될 때
-                listItem.remove(isChecked);
-                checkbox_status="미수신"
+                checkbox_status_kkt = "0"
             }
-            Toast.makeText(this, checkbox_status.toString(), Toast.LENGTH_SHORT).show();
         }
 
         //개인정보 정책 더보기
@@ -89,14 +89,10 @@ class SignUp3Activity: AppCompatActivity() {
         //개인정보 제공동의 체크박스
         viewBinding.checkboxConsent.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) { //체크를 할 때
-                listItem.add(isChecked);
-                checkbox_status="동의"
+                checkbox_status_info = "1"
             } else { //체크 해제될 때
-                viewBinding.checkboxSms.setChecked(false)
-                listItem.remove(isChecked);
-                checkbox_status="미동의"
+                checkbox_status_info = "0"
             }
-            Toast.makeText(this, checkbox_status.toString(), Toast.LENGTH_SHORT).show();
         }
 
         if(intent.hasExtra("ID") && intent.hasExtra("PW") && intent.hasExtra("Name") && intent.hasExtra("tel")
@@ -107,7 +103,13 @@ class SignUp3Activity: AppCompatActivity() {
             tel = intent.getStringExtra("tel").toString()
             birth = intent.getStringExtra("birth").toString()
             address = intent.getStringExtra("address").toString()
-            Log.e("가져온 값",ID+" "+ pw + " "+ Name + " "+ tel+" "+birth+ " "+address)
+
+            checkbox_status_sms = intent.getStringExtra("checkbox_status_sms").toString()
+            checkbox_status_kkt = intent.getStringExtra("checkbox_status_kkt").toString()
+            checkbox_status_info = intent.getStringExtra("checkbox_status_info").toString()
+
+            Log.e("가져온 값",ID+" "+ pw + " "+ Name + " "+ tel+" "+birth+ " "+address+" "
+                    +checkbox_status_sms+" "+checkbox_status_kkt+" "+checkbox_status_info)
         }
         else{
             Toast.makeText(this,"받은 값이 없습니다.",Toast.LENGTH_SHORT).show()
@@ -121,10 +123,12 @@ class SignUp3Activity: AppCompatActivity() {
             intent.putExtra("tel",tel)
             intent.putExtra("birth",birth)
             intent.putExtra("address",address)
-            intent.putExtra("email",inputUserEmail)
+            intent.putExtra("email",email)
+            intent.putExtra("checkbox_status_sms",checkbox_status_sms)
+            intent.putExtra("checkbox_status_kkt",checkbox_status_kkt)
+            intent.putExtra("checkbox_status_info",checkbox_status_info)
+
             startActivity(intent)
         }
-
     }
-
 }

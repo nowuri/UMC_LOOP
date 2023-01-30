@@ -2,11 +2,7 @@ package com.example.qna
 
 import android.app.Dialog
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
-import androidx.core.content.contentValuesOf
 import com.example.interested.R
 
 class Dialog1 (context: Context) {
