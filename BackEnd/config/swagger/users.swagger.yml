@@ -84,8 +84,8 @@
                   example: 1000
 
 /app/frontTest:
-  get:
-    summary: Test API - req.cookies, req.body, req.query, req.params를 반환하여 보여준다.
+  post:
+    summary: Test API - req.cookies, req.body, req.query, req.params를 반환하여 보여준다. 주의, 로그를 띄워서 확인할 것.
     tags: [Test]
     responses:
       200:
@@ -99,7 +99,6 @@
                   type: object
                 body:
                   type: object
-                  # example: 1000
                 query:
                   type: object
                 params:
