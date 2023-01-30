@@ -55,6 +55,9 @@ exports.localLogin = async (req, res) => {
         return res.send(errResponse(info));
       }
 
+      const token = createJwtToken(user);
+      return res.send(response(baseResponseStatus.SUCCESS, { token }));
+
       // req.login 함수가 passport.js의 serializeUser 함수를 호출
       // serializeUser 이후 deserializeUser 바로 호출
       // => jwt 사용 시에는 serialize, deserialize를 사용하지 않음.
