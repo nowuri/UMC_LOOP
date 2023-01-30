@@ -4,12 +4,7 @@ import com.example.interested.R
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import com.example.interested.databinding.ActivityDescriptionBinding
 
 class Description : AppCompatActivity() {
@@ -21,7 +16,7 @@ class Description : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
 
-        var commentView = LayoutInflater.from(this).inflate(R.layout.experience_details_row, null, false)
+        var commentView = LayoutInflater.from(this).inflate(R.layout.policy_comment, null, false)
 
         //TODO: 정책 정보들(이름, 기관, 날짜, 내용, 홈피) 넘어온 데이터로 텍스트 세팅
         //viewBinding.policyName.setText()
