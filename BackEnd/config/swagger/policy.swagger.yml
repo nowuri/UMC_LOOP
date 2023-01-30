@@ -1,0 +1,35 @@
+/app/policies:
+  get:
+    summary: Policy API
+    tags: [Policy]
+    parameters:
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: 정책분야 번호
+      - in: query
+        name: region
+        schema:
+          type: string
+        description: 정책지역 번호
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isSucess:
+                  type: boolean
+                  example: true
+                code:
+                  type: int
+                  example: 1000
+                message:
+                  type: string
+                  example: 성공
+                result:
+                  type: list
+                  example: []
