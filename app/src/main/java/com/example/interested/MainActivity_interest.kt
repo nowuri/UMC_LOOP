@@ -25,6 +25,10 @@ class MainActivity_interest : AppCompatActivity() {
     var address4: String = ""
     var email4: String = ""
 
+    var checkbox_status_sms4: String = ""
+    var checkbox_status_kkt4: String = ""
+    var checkbox_status_info4: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -196,6 +200,9 @@ class MainActivity_interest : AppCompatActivity() {
             birth4 = intent.getStringExtra("birth").toString()
             address4 = intent.getStringExtra("address").toString()
             email4 = intent.getStringExtra("email").toString()
+            checkbox_status_sms4 = intent.getStringExtra("checkbox_status_sms").toString()
+            checkbox_status_kkt4 = intent.getStringExtra("checkbox_status_kkt").toString()
+            checkbox_status_info4 = intent.getStringExtra("checkbox_status_info").toString()
 
         }
         else{
