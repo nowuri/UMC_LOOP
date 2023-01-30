@@ -7,6 +7,8 @@ module.exports = {
     TOKEN_EMPTY : { "isSuccess": false, "code": 2000, "message":"JWT 토큰을 입력해주세요." },
     TOKEN_VERIFICATION_FAILURE : { "isSuccess": false, "code": 3000, "message":"JWT 토큰 검증 실패" },
     TOKEN_VERIFICATION_SUCCESS : { "isSuccess": true, "code": 1001, "message":"JWT 토큰 검증 성공" }, // ?
+    LOGIN_NEEDED : { "isSuccess": false, "code": 2021, "message": "로그인 필요" },
+    LOGIN_DONE : { "isSuccess": false, "code": 2022, "message": "이미 로그인한 상태입니다." },
 
     //Request error
     SIGNUP_EMAIL_EMPTY : { "isSuccess": false, "code": 2001, "message":"이메일을 입력해주세요" },
@@ -22,16 +24,18 @@ module.exports = {
     SIGNIN_EMAIL_LENGTH : { "isSuccess": false, "code": 2010, "message":"이메일은 30자리 미만으로 입력해주세요." },
     SIGNIN_EMAIL_ERROR_TYPE : { "isSuccess": false, "code": 2011, "message":"이메일을 형식을 정확하게 입력해주세요." },
     SIGNIN_PASSWORD_EMPTY : { "isSuccess": false, "code": 2012, "message": "비밀번호를 입력 해주세요." },
+    SIGNIN_PASSWORD_NOT_MATCH : { "isSuccess": false, "code": 2012, "message": "옳지 않은 비밀번호입니다." },
+    SIGNIN_PASSPORT_AUTH_ERROR : { "isSuccess": false, "code": 2013, "message": "비밀번호를 입력 해주세요." },
 
-    USER_USERID_EMPTY : { "isSuccess": false, "code": 2013, "message": "userId를 입력해주세요." },
-    USER_USERID_NOT_EXIST : { "isSuccess": false, "code": 2014, "message": "해당 회원이 존재하지 않습니다." },
+    USER_USERID_EMPTY : { "isSuccess": false, "code": 2014, "message": "userId를 입력해주세요." },
+    USER_USERID_NOT_EXIST : { "isSuccess": false, "code": 2015, "message": "해당 회원이 존재하지 않습니다." },
 
-    USER_USEREMAIL_EMPTY : { "isSuccess": false, "code": 2015, "message": "이메일을 입력해주세요." },
-    USER_USEREMAIL_NOT_EXIST : { "isSuccess": false, "code": 2016, "message": "해당 이메일을 가진 회원이 존재하지 않습니다." },
-    USER_ID_NOT_MATCH : { "isSuccess": false, "code": 2017, "message": "유저 아이디 값을 확인해주세요" },
-    USER_NICKNAME_EMPTY : { "isSuccess": false, "code": 2018, "message": "변경할 닉네임 값을 입력해주세요" },
+    USER_USEREMAIL_EMPTY : { "isSuccess": false, "code": 2016, "message": "이메일을 입력해주세요." },
+    USER_USEREMAIL_NOT_EXIST : { "isSuccess": false, "code": 2017, "message": "해당 이메일을 가진 회원이 존재하지 않습니다." },
+    USER_ID_NOT_MATCH : { "isSuccess": false, "code": 2018, "message": "유저 아이디 값을 확인해주세요" },
+    USER_NICKNAME_EMPTY : { "isSuccess": false, "code": 2019, "message": "변경할 닉네임 값을 입력해주세요" },
 
-    USER_STATUS_EMPTY : { "isSuccess": false, "code": 2019, "message": "회원 상태값을 입력해주세요" },
+    USER_STATUS_EMPTY : { "isSuccess": false, "code": 2020, "message": "회원 상태값을 입력해주세요" },
 
     // Response error
     SIGNUP_REDUNDANT_EMAIL : { "isSuccess": false, "code": 3001, "message":"중복된 이메일입니다." },
