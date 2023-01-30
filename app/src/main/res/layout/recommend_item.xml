@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="303dp"
+    android:layout_height="201dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="48dp"
+    android:background="@drawable/recommend_back"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="9dp"
+        android:id="@+id/personalinfo">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="63dp"
+            android:layout_height="63dp"
+            android:background="@drawable/recommend_pic"
+            android:id="@+id/pic"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="13dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID ABCDEFG"
+                android:textColor="@color/black"
+                android:id="@+id/id"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="202n.00.00"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/date"
+                android:textColor="#DADADA"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="267dp"
+        android:layout_height="102dp"
+        app:layout_constraintTop_toBottomOf="@id/personalinfo"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="22dp"
+        android:id="@+id/reason"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        android:text="후기 적는 란입니다."
+        android:background="#F8F8F8"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

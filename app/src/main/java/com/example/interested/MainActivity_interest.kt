@@ -17,6 +17,19 @@ class MainActivity_interest : AppCompatActivity() {
     var l =0; var t=0; var m=0; var w=0; var e=0; var f=0; var h=0; var etc=0
     var possible=-1
 
+    var ID4 : String = ""
+    var pw4 : String = ""
+    var Name4: String = ""
+    var tel4 : String = ""
+    var birth4: String = ""
+    var address4: String = ""
+    var email4: String = ""
+
+    var checkbox_status_sms4: String = ""
+    var checkbox_status_kkt4: String = ""
+    var checkbox_status_info4: String = ""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -178,10 +191,29 @@ class MainActivity_interest : AppCompatActivity() {
             }
         }
 
+        if(intent.hasExtra("ID") && intent.hasExtra("pw") && intent.hasExtra("Name") && intent.hasExtra("tel")
+            && intent.hasExtra("birth") && intent.hasExtra("address") && intent.hasExtra("email")){
+            ID4 = intent.getStringExtra("ID").toString()
+            pw4 = intent.getStringExtra("pw").toString()
+            Name4 = intent.getStringExtra("Name").toString()
+            tel4 = intent.getStringExtra("tel").toString()
+            birth4 = intent.getStringExtra("birth").toString()
+            address4 = intent.getStringExtra("address").toString()
+            email4 = intent.getStringExtra("email").toString()
+            checkbox_status_sms4 = intent.getStringExtra("checkbox_status_sms").toString()
+            checkbox_status_kkt4 = intent.getStringExtra("checkbox_status_kkt").toString()
+            checkbox_status_info4 = intent.getStringExtra("checkbox_status_info").toString()
+
+        }
+        else{
+            Toast.makeText(this,"받은 값이 없습니다.",Toast.LENGTH_SHORT).show()
+        }
+
         viewBinding.finish.setOnClickListener{
             Log.e("finish num",num.toString())
             if(possible == 1){
                 Toast.makeText(this@MainActivity_interest,"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,ID4 + " "+ pw4 + " "+ email4,Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, Home::class.java)
                 startActivity(intent)
             }

@@ -54,10 +54,15 @@ class SignUp1Activity : AppCompatActivity() {
         }
 
         viewBinding.next.setOnClickListener(){
-            if(viewBinding.idinput.getText().toString().length != 0){
-                if(viewBinding.pwinput.getText().toString().equals(viewBinding.pwcheckinput.getText().toString())){
+            if(viewBinding.idinput.getText().toString().length >=6){
+                if(viewBinding.pwinput.getText().toString().equals(viewBinding.pwcheckinput.getText().toString()) && viewBinding.pwinput.getText().length >= 8){
                     val intent = Intent(this,SignUp2Activity::class.java)
+                    intent.putExtra("ID",viewBinding.idinput.getText().toString())
+                    intent.putExtra("PW",viewBinding.pwinput.getText().toString())
                     startActivity(intent)
+                }
+                else if(viewBinding.pwinput.getText().length < 8){
+                    Toast.makeText(this,"비밀번호를 8자리 미만입니다.",Toast.LENGTH_SHORT).show()
                 }
                 else
                     Toast.makeText(this,"비밀번호 확인 문자가 다릅니다.",Toast.LENGTH_SHORT).show()

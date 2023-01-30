@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -17,14 +18,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.request.RequestOptions
 import com.example.interested.MainActivity_interest
 import com.example.interested.R
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMyprofileBinding
 import com.example.qna.Dialog1
 import java.io.File
-
 
 class MyProfileActivity : AppCompatActivity(), View.OnClickListener {
 
