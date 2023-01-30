@@ -32,6 +32,30 @@ exports.createUser = async function(newUserData) {
   }
 };
 
+// 카카오 유저 CREATE
+exports.createKakaoUser = async function(user_email, user_name, provider, sns_id) {
+  try {
+    // // 이메일 중복 확인
+    const emailRows = await userProvider.emailCheck(user_email);
+    if (emailRows.length > 0)
+      return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
+
+    const insertKakaoUserInfoParams = [user_email, user_name, provider, sns_id];
+
+    const connection = await pool.getConnection(async (conn) => conn);
+
+    const kakaoUserIdResult = await userDao.insertKakaoUserInfo(connection, insertKakaoUserInfoParams);
+    console.log(`추가된 회원 : ${kakaoUserIdResult[0].insertId}`)
+    connection.release();
+    return response(baseResponse.SUCCESS);
+
+
+  } catch (err) {
+    logger.error(`App - createUser Service error\n: ${err.message}`);
+    return errResponse(baseResponse.DB_ERROR);
+  }
+};
+
 
 // TODO: After 로그인 인증 방법 (JWT)
 // exports.postSignIn = async function(email, password) {

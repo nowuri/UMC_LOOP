@@ -1,5 +1,6 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const axios = require('axios');
 
 const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 const userProvider = require("../../app/User/userProvider");
@@ -41,6 +42,46 @@ exports.localSignUp = async (req, res) => {
 9. 미들웨어 처리후, res.send(response(baseResponseStatus.SUCCESS, user))을 응답하면, 세션쿠키를 브라우저에 보내게 된다.
 10. 로그인 완료 처리 (이제 세션쿠키를 통해서 통신하며 로그인됨 상태를 알 수 있다.)
 */
+
+
+
+exports.kakaoLogin = async(req, res) => {
+  // 이미 카카오 로그인에서 중복회원검증햇으니까
+  // 여기는 그냥 db에 넣기..?
+  const { AccessToken } = req.body;
+  // try {
+    
+  //   const createKakaoUserResult = await userService.createKakaoUser(AccessToken);
+  //   console.log(createKakaoUserResult);
+  //   res.send(response(baseResponseStatus.SUCCESS, createKakaoUserResult));
+
+  // } catch (error) {
+  //   console.error(error);
+  //   return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
+  // }
+  // passport.authenticate('kakao-login', { session: false },
+  // (req, res) => {
+  //   //const createUserResult = await userService.createUser(newUserData);
+  //   console.log(req);
+  //   console.log(req.user);
+
+  //   res.send(response.baseResponseStatus.SUCCESS, req.user);
+  // }
+  // );
+
+  let kakaoProfile; //값을 수정해주어야 하므로 const가 아닌 let 사용
+
+	try{ //axios 모듈을 이용하여 Profile 정보를 가져온다.
+            kakaoProfile = await axios.get('https://kapi.kakao.com/v2/user/me', {
+                headers: {
+                    Authorization: 'Bearer ' + AccessToken,
+                    'Content-Type': 'application/json'
+                }
+            })
+     } catch (err) {
+          return res.send(errResponse(baseResponse.ACCESS_TOKEN_VERIFICATION_FAILURE));
+     }
+};
 exports.localLogin = async (req, res) => {
   // session이 아닌 jwt를 이용하므로 session: false 옵션을 넣어준다.
   passport.authenticate('local', { session: false },

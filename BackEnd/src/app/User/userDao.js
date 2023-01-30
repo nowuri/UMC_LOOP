@@ -55,6 +55,18 @@ async function insertUserInfo(connection, insertUserInfoParams) {
   return insertUserInfoRow;
 }
 
+// 카카오 유저 생성
+async function insertKakaoUserInfo(connection, insertKakaoUserInfoParams ) {
+  const insertKakaoUserInfoQuery = `INSERT INTO user(user_email, user_name, provider, sns_id) VALUES (?,?,?,?);`;
+
+  const insertKakaoUserInfoRow = await connection.query(
+    insertKakaoUserInfoQuery,
+    insertKakaoUserInfoParams
+  );
+
+  return insertKakaoUserInfoRow;
+}
+
 // 패스워드 체크
 async function selectUserPassword(connection, selectUserPasswordParams) {
   const selectUserPasswordQuery = `
@@ -98,6 +110,7 @@ module.exports = {
   selectUserIdx,
   selectUserId,
   insertUserInfo,
+  insertKakaoUserInfo,
   selectUserPassword,
   selectUserAccount,
   updateUserInfo,

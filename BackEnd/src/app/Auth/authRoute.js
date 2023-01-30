@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const { isLoggedIn, isNotLoggedIn } = require('../../../config/middlewares.js');
 const auth = require('./authController.js');
 const { jwtMiddleware } = require('../../../config/jwtMiddleware.js');
@@ -11,6 +12,18 @@ module.exports = function(app) {
   app.post('/app/auth/login', isNotLoggedIn, auth.localLogin);
 
   app.post('/app/auth', jwtMiddleware, auth.verifyJWT);
+
+  app.post('/app/users/oAuth/kakao-login', auth.kakaoLogin);
+  app.get('/app/users/oAuth/kakao', passport.authenticate('kakao-login'));
+  app.get('/app/users/oAuth/kakao/callback',passport.authenticate('kakao-login', {
+    failureRedirect: '/', // kakaoStrategy에서 실패한다면 실행
+  }),
+  // kakaoStrategy에서 성공한다면 콜백 실행
+  (req, res) => {
+     res.redirect('/');
+  },)
+
+  
 
 
 

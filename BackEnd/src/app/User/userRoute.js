@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 const user = require('./userController');
 const jwtMiddleware = require('../../../config/jwtMiddleware');
@@ -9,7 +10,8 @@ module.exports = function(app) {
   // Social Logins
   // ================================================================
   // app.get('/app/users/oAuth/google');
-  //
+  // 
+  
 
 
   // Small APIs
