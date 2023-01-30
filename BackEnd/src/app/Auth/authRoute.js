@@ -1,36 +1,18 @@
 const express = require('express');
-const router = express.Router();
-const user = require('./userController');
-const jwtMiddleware = require('../../../config/jwtMiddleware');
-
+const { isLoggedIn, isNotLoggedIn } = require('../../../config/middlewares.js');
+const auth = require('./authController.js');
+const { jwtMiddleware } = require('../../../config/jwtMiddleware.js');
 
 module.exports = function(app) {
+  // 로그인되어 있지 않다면, 회원가입 진행
+  app.post('/app/auth/signUp', isNotLoggedIn, auth.localSignUp);
 
-  // Social Logins
-  // ================================================================
-  // app.get('/app/users/oAuth/google');
-  //
+  // 
+  app.post('/app/auth/login', isNotLoggedIn, auth.localLogin);
 
-
-  // Small APIs
-  // 닉제임 중복 확인 API
-  app.post('/app/users/api/emails', user.checkOverlappingUser);
-
-  // SMS 전송 API
-  app.post('/app/users/api/tokens', user.sendTokenToSMS);
+  app.post('/app/auth', jwtMiddleware, auth.verifyJWT);
 
 
-  // 0. 테스트 API
-  app.get('/app/test', user.getTest);
-
-  //  // 1. 유저 생성 (회원가입) API
-  //  app.post('/app/users', user.postUsers);
-
-  //  // 2. 유저 조회 API (+ 검색)
-  //  app.get('/app/users',user.getUsers); 
-
-  //  // 3. 특정 유저 조회 API
-  //  app.get('/app/users/:userId', user.getUserById);
 
 
   //  // TODO: After 로그인 인증 방법 (JWT)
