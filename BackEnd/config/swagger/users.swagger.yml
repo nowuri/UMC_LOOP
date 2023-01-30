@@ -82,3 +82,25 @@
                 code:
                   type: int
                   example: 1000
+
+/app/frontTest:
+  get:
+    summary: Test API - req.cookies, req.body, req.query, req.params를 반환하여 보여준다.
+    tags: [Test]
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cookies:
+                  type: object
+                body:
+                  type: object
+                  # example: 1000
+                query:
+                  type: object
+                params:
+                  type: object

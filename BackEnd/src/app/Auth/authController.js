@@ -10,24 +10,24 @@ const { response, errResponse } = require("../../../config/response");
 // req.body.newUserData = {
 // userId, password, userEmail, userName, phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
 // }
-exports.localSignUp = async (req, res) => {
-  const { newUserData } = req.body;
+// exports.localSignUp = async (req, res) => {
+//   const { newUserData } = req.body;
 
-  try {
-    const exUser = await userProvider.retrieveUser(newUserData.userId);
-    if (exUser) {
-      return res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
-    }
-    // 비밀번호 암호화 - 보류 구현이 우선
-    const createUserResult = await userService.createUser(newUserData);
-    console.log(createUserResult);
-    res.send(response(baseResponseStatus.SUCCESS, createUserResult));
+//   try {
+//     const exUser = await userProvider.retrieveUser(newUserData.userId);
+//     if (exUser) {
+//       return res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
+//     }
+//     // 비밀번호 암호화 - 보류 구현이 우선
+//     const createUserResult = await userService.createUser(newUserData);
+//     console.log(createUserResult);
+//     res.send(response(baseResponseStatus.SUCCESS, createUserResult));
 
-  } catch (error) {
-    console.error(error);
-    return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
-  }
-};
+//   } catch (error) {
+//     console.error(error);
+//     return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
+//   }
+// };
 
 /*
 * Passsport Local Login 처리과정
