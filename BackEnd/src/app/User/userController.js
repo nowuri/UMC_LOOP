@@ -1,11 +1,10 @@
 const jwtMiddleware = require("../../../config/jwtMiddleware");
 const userProvider = require("../../app/User/userProvider");
 const userService = require("../../app/User/userService");
-const baseResponse = require("../../../config/baseResponseStatus");
+const baseResponseStatus = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 
 const regexEmail = require("regex-email");
-const baseResponseStatus = require("../../../config/baseResponseStatus");
 const { checkPhoneValidation, sendTokenToSMS, getToken } = require('../../../config/coolsms.js');
 
 
@@ -23,10 +22,10 @@ exports.checkOverlappingUser = async (req, res) => {
   console.log(email);
   // Check Empty email (formal validation)
   if (!email)
-    return res.send(errResponse(baseResponse.USER_USEREMAIL_EMPTY));
+    return res.send(errResponse(baseResponseStatus.USER_USEREMAIL_EMPTY));
   // Check Blank Char with Regex
   if (!regexEmail.test(email))
-    return res.send(errResponse(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
+    return res.send(errResponse(baseResponseStatus.SIGNUP_EMAIL_ERROR_TYPE));
 
   const userByEmail = await userProvider.emailCheck(email);
 
@@ -49,7 +48,7 @@ exports.sendTokenToSMS = async (req, res) => {
 
     // console.log(result);
     // console.log(`token: ${tok}`);
-    res.send(response(baseResponse.SUCCESS, { token: tok}));
+    res.send(response(baseResponseStatus.SUCCESS, { token: tok}));
   }
   
 }
@@ -64,7 +63,7 @@ exports.sendTokenToSMS = async (req, res) => {
  * [GET] /app/test
  */
 exports.getTest = async function (req, res) {
-    return res.send(response(baseResponse.SUCCESS))
+    return res.send(response(baseResponseStatus.SUCCESS))
 }
 
 /**
