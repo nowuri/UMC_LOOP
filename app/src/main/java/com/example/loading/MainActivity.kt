@@ -13,6 +13,7 @@ import com.example.search.Search
 import com.example.interested.SignUp2Activity
 import com.example.mypage.MyPage_MainActivity
 import com.example.myprofile.MyProfileActivity
+import com.example.signup.SignUp1Activity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding : ActivityMainLoadingBinding
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         //타 화면 테스트용 버튼 (삭제예정)
         viewBinding.button.setOnClickListener{
-            val intent = Intent(this, Description::class.java)
+            val intent = Intent(this, SignUp1Activity::class.java)
             startActivity(intent)
         }
     }

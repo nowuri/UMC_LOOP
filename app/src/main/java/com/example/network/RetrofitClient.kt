@@ -1,13 +1,17 @@
 package com.example.network
 
 import com.google.gson.GsonBuilder
+import okhttp3.Cache
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
-    private const val BASE_URL = "주어진 BASE_URL"
+    //private const val BASE_URL = "http://helptheyouth-lope.com/app/frontTest"
 
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
@@ -19,7 +23,7 @@ object RetrofitClient {
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl("http://helptheyouth-lope.com/app/frontTest/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient) // 로그캣에서 패킷 내용을 모니터링 할 수 있음 (인터셉터)
             .build()
