@@ -221,26 +221,32 @@
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
-
-
             <android.widget.Button
-                android:id="@+id/finish"
-                android:layout_width="50dp"
-                android:layout_height="57dp"
-                android:layout_marginLeft="11dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="11dp"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="15dp"
                 android:layout_weight="1"
-                android:background="@drawable/btn_style"
-                android:text="완료"
+                android:background="@color/white"
                 android:textColor="#1D2D69"
                 android:textSize="32sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.136"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/Buttons" />
+                android:textStyle="bold" />
         </LinearLayout>
+
+        <android.widget.Button
+            android:id="@+id/finish"
+            android:layout_width="330dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/btn_style"
+            android:text="완료"
+            android:textColor="#1D2D69"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Buttons" />
     </LinearLayout>
 
     <!--    완료버튼-->
