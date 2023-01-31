@@ -8,7 +8,7 @@ import retrofit2.http.*
 interface RetrofitService {
 
     @Headers("Content-Type: application/json")
-    @POST("signup")
+    @POST("frontTest")
     fun addUserByEnqueue(@Body userInfo: SignUpRequestBody): Call<SignUpResponseBody> // Call 은 흐름처리 기능을 제공해줌
 
 }
