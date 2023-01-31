@@ -26,27 +26,20 @@
         android:theme="@style/Theme.AppCompat"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".CommentDialog"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name="com.example.loading.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".NotRecommend"
+            android:name="com.example.description.Recommend"
             android:exported="true" />
         <activity
-            android:name=".Recommend"
+            android:name="com.example.description.NotRecommend"
             android:exported="true" />
         <activity
             android:name="com.example.find.ResetPW"
@@ -85,7 +78,7 @@
             android:name="com.example.qna.Question"
             android:exported="true" />
         <activity
-            android:name=".Description"
+            android:name="com.example.description.Description"
             android:exported="true" />
         <activity
             android:name="com.example.myprofile.MyProfileActivity"
@@ -95,9 +88,6 @@
             android:exported="true" />
         <activity
             android:name="com.example.mypage.MyLikedList"
-            android:exported="true" />
-        <activity
-            android:name="com.example.mypage.MyPage_MainActivity"
             android:exported="true" />
     </application>
 

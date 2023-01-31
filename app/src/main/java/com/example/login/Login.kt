@@ -23,10 +23,6 @@ class Login : AppCompatActivity() {
             Toast.makeText(this,"카카오 로그인을 시작합니다", Toast.LENGTH_SHORT).show()
         }
 
-        viewBinding.googlelogin.setOnClickListener(){
-            Toast.makeText(this,"구글 로그인을 시작합니다.", Toast.LENGTH_SHORT).show()
-        }
-
         viewBinding.login.setOnClickListener(){
             Toast.makeText(this,"로그인을 시작합니다.", Toast.LENGTH_SHORT).show()
         }

@@ -4,10 +4,12 @@ import com.example.interested.R
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.ActivityDescriptionBinding
+import com.example.myprofile.RemoveUserDialog
 
-class Description : AppCompatActivity() {
+class Description : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewBinding: ActivityDescriptionBinding
 
 
@@ -28,9 +30,7 @@ class Description : AppCompatActivity() {
         //viewBinding.policyHomepage.setText()
 
         //추천 버튼 클릭
-        viewBinding.btnRecomm.setOnClickListener(){
-            viewBinding.commentBox.addView(commentView)
-        }
+        viewBinding.btnRecomm.setOnClickListener(this)
 
         //비추천 버튼 클릭
         viewBinding.btnUnrecomm.setOnClickListener(){
@@ -44,11 +44,22 @@ class Description : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //회원 탈퇴 클릭 시 카드뷰 띄움
+
         //TODO: 지원하기 클릭시 신청 사이트 하이퍼링크로 연결
         //viewBinding.btnApply.setOnClickListener(){
         //    val intent = Intent(this,Recommend::class.java)
         //    startActivity(intent)
         //}
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            viewBinding.btnRecomm.id ->{
+                val dlg = CommentDialog(this)
+                dlg.show()
+            }
+        }
     }
 
     //private fun createView(v: View) {

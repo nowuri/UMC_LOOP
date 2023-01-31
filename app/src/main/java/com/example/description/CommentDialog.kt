@@ -18,7 +18,7 @@ class CommentDialog(private val context : AppCompatActivity) {
 
         //ok 버튼 동작
         binding.btnFinish.setOnClickListener {
-            //TODO: 탈퇴 처리 코드
+            //작성 완료
             dlg.dismiss()
         }
 
