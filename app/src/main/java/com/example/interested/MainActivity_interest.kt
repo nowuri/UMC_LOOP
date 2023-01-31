@@ -9,9 +9,20 @@ import android.widget.Toast
 import com.example.home.Home
 import com.example.interested.databinding.ActivityMainBinding
 import com.example.search.Search
+import retrofit2.Retrofit
+import com.example.network.RetrofitService
+import com.example.network.RetrofitClient
+import com.example.network.SignUpRequestBody
+import com.example.network.SignUpResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.converter.gson.GsonConverterFactory
+
 
 class MainActivity_interest : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
+
 
     var num = 0
     var l =0; var t=0; var m=0; var w=0; var e=0; var f=0; var h=0; var etc=0
@@ -214,6 +225,14 @@ class MainActivity_interest : AppCompatActivity() {
             if(possible == 1){
                 Toast.makeText(this@MainActivity_interest,"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
                 Toast.makeText(this,ID4 + " "+ pw4 + " "+ email4,Toast.LENGTH_SHORT).show()
+
+                val userData = SignUpRequestBody(
+                    "ID4"
+                )
+
+                val retrofitWork = RetrofitWork(userData)
+                retrofitWork.work()
+
                 val intent = Intent(this, Home::class.java)
                 startActivity(intent)
             }
@@ -221,5 +240,33 @@ class MainActivity_interest : AppCompatActivity() {
                 Toast.makeText(this@MainActivity_interest,"선택된 관심분야가 없습니다.",Toast.LENGTH_SHORT).show()
             }
         }
+
     }
+
+    class RetrofitWork(private val userInfo: SignUpRequestBody) {
+        fun work() {
+            val service = RetrofitClient.emgMedService
+
+//        Call 작업은 두 가지로 실행됨
+//        execute 를 사용하면 request 를 보내고 response 를 받는 행위를 동기적으로 수행한다.
+//        enqueue 작업을 실행하면 request 는 비동기적으로 보내고, response 는 콜백으로 받게 된다.
+            service.addUserByEnqueue(userInfo)
+                .enqueue(object : retrofit2.Callback<SignUpResponseBody> {
+                    override fun onResponse(
+                        call: Call<SignUpResponseBody>,
+                        response: Response<SignUpResponseBody>
+                    ) {
+                        if (response.isSuccessful) {
+                            val result = response.body()
+                            Log.d("회원가입 성공", "$result")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<SignUpResponseBody>, t: Throwable) {
+                        Log.d("회원가입 실패", t.message.toString())
+                    }
+                })
+        }
+    }
+
 }
