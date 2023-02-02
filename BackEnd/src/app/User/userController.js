@@ -1,10 +1,11 @@
 const jwtMiddleware = require("../../../config/jwtMiddleware");
+const emailValidator = require('email-validator');
+
 const userProvider = require("../../app/User/userProvider");
 const userService = require("../../app/User/userService");
 const baseResponseStatus = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 
-const regexEmail = require("regex-email");
 const { checkPhoneValidation, sendTokenToSMS, getToken } = require('../../../config/coolsms.js');
 
 
@@ -23,8 +24,9 @@ exports.checkOverlappingUser = async (req, res) => {
   // Check Empty email (formal validation)
   if (!email)
     return res.send(errResponse(baseResponseStatus.USER_USEREMAIL_EMPTY));
-  // Check Blank Char with Regex
-  if (!regexEmail.test(email))
+
+  // Validate Email
+  if (!emailValidator.validate(email))
     return res.send(errResponse(baseResponseStatus.SIGNUP_EMAIL_ERROR_TYPE));
 
   const userByEmail = await userProvider.emailCheck(email);
@@ -52,6 +54,15 @@ exports.sendTokenToSMS = async (req, res) => {
   }
   
 }
+
+
+exports.additionalSignUp = async (req, res) => {
+  const user = req.user;
+};
+
+
+
+
 
 // 템플릿 코드
 // ========================================================================
@@ -194,15 +205,15 @@ exports.getTest = async function (req, res) {
     
 // }
 
-exports.addUser = function(newUser, callback){
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newUser.password, salt, (err, hash) => {
-        if(err) throw err;
-        newUser.password = hash;
-        newUser.save(callback);
-      });
-    });
-}
+// exports.addUser = function(newUser, callback){
+//     bcrypt.genSalt(10, (err, salt) => {
+//       bcrypt.hash(newUser.password, salt, (err, hash) => {
+//         if(err) throw err;
+//         newUser.password = hash;
+//         newUser.save(callback);
+//       });
+//     });
+// }
 
 
 

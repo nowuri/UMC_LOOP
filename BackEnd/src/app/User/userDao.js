@@ -44,8 +44,8 @@ async function selectUserId(connection, userId) {
 // 유저 생성
 async function insertUserInfo(connection, insertUserInfoParams) {
   const insertUserInfoQuery = `
-        INSERT INTO user(user_email, user_id, user_name, password, user_phone, user_birth, user_postal, user_address, agree_PICU, agree_SMS, agree_Kakao)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        INSERT INTO user(user_email, user_name, password, status)
+        VALUES (?, ?, ?, 2);
     `;
   const insertUserInfoRow = await connection.query(
     insertUserInfoQuery,
@@ -58,9 +58,9 @@ async function insertUserInfo(connection, insertUserInfoParams) {
 // 패스워드 체크
 async function selectUserPassword(connection, selectUserPasswordParams) {
   const selectUserPasswordQuery = `
-        SELECT *
+        SELECT password
         FROM user 
-        WHERE user_id = ? AND password = ?;`;
+        WHERE user_email = ? AND password = ?;`;
   const selectUserPasswordRow = await connection.query(
     selectUserPasswordQuery,
     selectUserPasswordParams

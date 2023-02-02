@@ -1,5 +1,6 @@
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
+const emailValidator = require('email-validator');
+const bcrypt = require('bcrypt');
 
 const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 const userProvider = require("../../app/User/userProvider");
@@ -14,18 +15,23 @@ exports.localSignUp = async (req, res) => {
   const { newUserData } = req.body;
 
   try {
-    const exUser = await userProvider.retrieveUser(newUserData.userId);
-    if (exUser) {
-      return res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
+    // Validate Email
+    if (!emailValidator.validate(newUserData.userEmail)) {
+      return res.send(errResponse(baseResponseStatus.SIGNUP_EMAIL_ERROR_TYPE));
     }
-    // 비밀번호 암호화 - 보류 구현이 우선
+
+    // 비밀번호 암호화
+    const hashed = await bcrypt.hash(newUserData.password, 10);
+    newUserData.password = hashed;
+
     const createUserResult = await userService.createUser(newUserData);
-    console.log(createUserResult);
-    res.send(response(baseResponseStatus.SUCCESS, createUserResult));
+
+    // console.log(createUserResult);
+    res.send(createUserResult);
 
   } catch (error) {
     console.error(error);
-    return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
+    return res.status(500).send(errResponse(baseResponseStatus.SERVER_ERROR));
   }
 };
 

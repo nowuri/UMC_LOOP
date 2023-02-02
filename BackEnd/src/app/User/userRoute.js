@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const user = require('./userController');
-const jwtMiddleware = require('../../../config/jwtMiddleware');
+const { isAuthenticated, isNotAuthenticated } = require('../../../config/jwtMiddleware');
 
 
 module.exports = function(app) {
 
-  // Social Logins
-  // ================================================================
-  // app.get('/app/users/oAuth/google');
-  //
+  // app.patch('/app/users/additional', isAuthenticated, user.addtionalSignUp);
+  // app.patch('/app/users/:userIdx', isAuthenticated, user.patchUsers);
 
 
   // Small APIs
