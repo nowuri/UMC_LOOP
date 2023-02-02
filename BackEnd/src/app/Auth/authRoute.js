@@ -8,7 +8,7 @@ module.exports = function(app) {
   app.post('/app/auth/signUp', isNotLoggedIn, auth.localSignUp);
 
   // 
-  app.post('/app/auth/login', isNotLoggedIn, auth.localLogin);
+  app.post('/app/auth/signIn', isNotLoggedIn, auth.localSignIn);
 
   app.post('/app/auth', jwtMiddleware, auth.verifyJWT);
 
