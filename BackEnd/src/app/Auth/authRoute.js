@@ -2,6 +2,7 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('../../../config/middlewares.js');
 const auth = require('./authController.js');
 const { passportJWTMiddleware, isAuthenticated, isNotAuthenticated } = require('../../../config/jwtMiddleware.js');
+const passport = require('passport');
 
 module.exports = function(app) {
   // 로그인되어 있지 않다면, 회원가입 진행
