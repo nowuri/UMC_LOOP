@@ -44,10 +44,6 @@ exports.localSignUp = async (req, res) => {
   }
 };
 
-// phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
-exports.additionalSignUp = async (req, res) => {
-
-};
 /*
 * Passsport Local Login 처리과정
 1. 로그인 요청이 라우터로 들어옴.

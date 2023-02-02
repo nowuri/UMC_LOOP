@@ -1,7 +1,7 @@
 const { logger } = require("../../../config/winston");
 const { pool } = require("../../../config/database");
 const userProvider = require("./userProvider");
-const userDao = require("./userDao");
+const userDao = require("./userDao.js");
 const baseResponse = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 const { createJwtToken } = require('../../../config/jwtMiddleware.js');
@@ -34,13 +34,16 @@ exports.createUser = async function(newUserData) {
 
     // console.log(newUserData);
     // console.log(Object.values(newUserData));
-    const userIdResult = await userDao.insertUserInfo(connection, Object.values(newUserData));
-    console.log(`추가된 회원 : ${userIdResult[0].insertId}`)
-    const userIdx = userIdResult[0].inserId;
+    const userIdResult = await userDao.insertUserInfo(connection, [newUserData.userEmail, newUserData.userName, newUserData.password]);
+    // console.log(`추가된 회원 : ${userIdResult[0].insertId}`)
+    const userIdx = userIdResult[0].insertId;
+
+    const [userResult] = await userDao.selectUserIdx(connection, userIdx);
+    // console.log(userResult);
+    const token = createJwtToken(userResult)
     connection.release();
-    return response(baseResponse.SUCCESS, { userIdx });
 
-
+    return response(baseResponse.SUCCESS, { token, userIdx });
   } catch (err) {
     logger.error(`App - createUser Service error\n: ${err.message}`);
     return errResponse(baseResponse.DB_ERROR);
