@@ -54,14 +54,14 @@ class Description : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             viewBinding.btnRecomm.id ->{
-                viewBinding.btnRecomm.setBackgroundResource(R.drawable.btn_rec_selected)
+                viewBinding.btnRecomm.setBackgroundResource(R.drawable.btn_recomm_selected)
                 viewBinding.btnRecomm.setTextColor(Color.WHITE)
                 val dlg = CommentDialog(this)
                 dlg.show()
             }
             viewBinding.btnUnrecomm.id ->{
-                viewBinding.btnRecomm.setBackgroundResource(R.drawable.btn_rec_selected)
-                viewBinding.btnRecomm.setTextColor(Color.WHITE)
+                viewBinding.btnUnrecomm.setBackgroundResource(R.drawable.btn_unrecomm_selected)
+                viewBinding.btnUnrecomm.setTextColor(Color.WHITE)
                 val dlg = CommentDialog(this)
                 dlg.show()
             }
