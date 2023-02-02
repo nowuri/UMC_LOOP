@@ -31,9 +31,11 @@ exports.app = async function() {
 
   app.use(cors());
 
+
   app.use(cookieParser());
 
   app.use(passport.initialize());
+
   passportConfig();
 
   /* App (Android, iOS) */

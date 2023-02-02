@@ -6,17 +6,17 @@ const userProvider = require('../../src/app/User/userProvider.js');
 
 module.exports = () => {
 
-  // const jwtFromRequest = ExtractJwt.fromHeader('authorization');
+  const jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
   const JWTConfig = {
-    jwtFromRequest: req => req.cookies.jwt,
+    jwtFromRequest: jwtFromRequest,
     secretOrKey: process.env.JWT_SECRET,
   };
 
   const JWTVerify = async (jwtPayload, done) => {
     try {
       // payload의 id값으로 유저의 데이터 조회
-      console.log(jwtPayload);
-      const user = await userProvider.retrieveUserByIdx(jwtPayload.userIdx);
+      // console.log(jwtPayload);
+      const user = await userProvider.retrieveUserByIdx(jwtPayload.data.userIdx);
       // 유저 데이터가 있다면 유저 데이터 객체 전송
       if (user) {
         done(null, user);

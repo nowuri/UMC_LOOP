@@ -3,27 +3,42 @@ const { pool } = require("../../../config/database");
 const userProvider = require("./userProvider");
 const userDao = require("./userDao");
 const baseResponse = require("../../../config/baseResponseStatus");
-const { response } = require("../../../config/response");
-const { errResponse } = require("../../../config/response");
+const { response, errResponse } = require("../../../config/response");
+const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
+const bcrypt = require('bcrypt');
+const baseResponseStatus = require("../../../config/baseResponseStatus");
 
 // Service: Create, Update, Delete 비즈니스 로직 처리
 
 exports.createUser = async function(newUserData) {
   try {
     // 이메일 중복 확인
-    const emailRows = await userProvider.emailCheck(email);
-    if (emailRows.length > 0)
+    const emailRows = await userProvider.emailCheck(newUserData.userEmail);
+    if (emailRows.length > 0) {
+
+      // console.log(emailRows);
+      const user = emailRows[0];
+      console.log(user);
+      if (user.status === 2) {
+        // console.log(emailRows[0]);
+        const token = createJwtToken(user);
+        console.log(token);
+        const result = { token, 'userIdx': user.idx };
+        return response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, result );
+      }
       return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
+    }
 
     const connection = await pool.getConnection(async (conn) => conn);
 
-    const userIdResult = await userDao.insertUserInfo(connection, newUserData.values());
+    // console.log(newUserData);
+    // console.log(Object.values(newUserData));
+    const userIdResult = await userDao.insertUserInfo(connection, Object.values(newUserData));
     console.log(`추가된 회원 : ${userIdResult[0].insertId}`)
+    const userIdx = userIdResult[0].inserId;
     connection.release();
-    return response(baseResponse.SUCCESS);
+    return response(baseResponse.SUCCESS, { userIdx });
 
 
   } catch (err) {
