@@ -50,6 +50,9 @@ module.exports = {
     //Connection, Transaction 등의 서버 오류
     DB_ERROR : { "isSuccess": false, "code": 4000, "message": "데이터 베이스 에러"},
     SERVER_ERROR : { "isSuccess": false, "code": 4001, "message": "서버 에러"},
- 
- 
+
+    USER_POLICY_EMPTY : { "isSuccess": false, "code": 5001, "message": "유저 정책은 비어있을 수 없습니다."},
+    USER_REGION_EMPTY : { "isSuccess": false, "code": 5001, "message": "정책 지역은 비어있을 수 없습니다."},
+    SIGNUP_POLICY_ERROR_TYPE : { "isSuccess": false, "code": 5001, "message": "유저 정책 어쩌고 에러~~"},
+    POLICY_CALL_ERROR_TYPE : { "isSuccess": false, "code": 5002, "message": "알 수 없는 이유로 정책 조회에 실패하였습니다."},
 }
