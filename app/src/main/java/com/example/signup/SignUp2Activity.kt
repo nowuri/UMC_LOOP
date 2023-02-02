@@ -19,6 +19,9 @@ class SignUp2Activity: AppCompatActivity() {
     var name: String = ""
     var tel: String = ""
     var inputUserTelAuth: String = ""
+    var address_pt1: String = ""
+    var address_pt2: String = ""
+
     var inputUserAddress: String = ""
     var ID: String =""
     var pw : String =""
@@ -100,7 +103,7 @@ class SignUp2Activity: AppCompatActivity() {
         viewBinding.addressPt2.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                inputUserAddress = viewBinding.addressPt2.text.toString()
+                address_pt2 = viewBinding.addressPt2.text.toString()
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -117,13 +120,14 @@ class SignUp2Activity: AppCompatActivity() {
         //다음 버튼 클릭
         viewBinding.next.setOnClickListener {
             val intent = Intent(this, SignUp3Activity::class.java)
+            inputUserAddress = address_pt1 +" "+ address_pt2
+
             intent.putExtra("ID",ID)
             intent.putExtra("PW",pw)
             intent.putExtra("Name",name)
             intent.putExtra("tel",tel)
             intent.putExtra("birth",viewBinding.birth.getText().toString())
             intent.putExtra("address",inputUserAddress)
-
             startActivity(intent)
         }
     }
@@ -134,6 +138,7 @@ class SignUp2Activity: AppCompatActivity() {
                 if (result.getData() != null){
                     val myData: Intent? = result.getData()
                     val StringData: String? = myData?.getStringExtra("data")
+                    address_pt1 = StringData.toString()
                     viewBinding.addressPt1.setText(StringData)
                 }
             }
