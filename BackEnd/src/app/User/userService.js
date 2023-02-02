@@ -35,12 +35,14 @@ exports.createUser = async function(newUserData) {
 // 카카오 유저 CREATE
 exports.createKakaoUser = async function(user_email, user_name, provider, sns_id) {
   try {
+    //const user_email = profile._json && profile._json.kakao_account_email
     // // 이메일 중복 확인
     const emailRows = await userProvider.emailCheck(user_email);
     if (emailRows.length > 0)
       return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
 
     const insertKakaoUserInfoParams = [user_email, user_name, provider, sns_id];
+    console.log(`inside createKakaoUser Service, ${insertKakaoUserInfoParams}`);
 
     const connection = await pool.getConnection(async (conn) => conn);
 

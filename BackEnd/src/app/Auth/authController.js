@@ -1,6 +1,6 @@
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const axios = require('axios');
+const emailValidator = require('email-validator');
+const bcrypt = require('bcrypt');
 
 const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 const userProvider = require("../../app/User/userProvider");
@@ -9,27 +9,36 @@ const baseResponseStatus = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 
 // req.body.newUserData = {
-// userId, password, userEmail, userName, phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
+//  userEmail, userName, password, 
 // }
 exports.localSignUp = async (req, res) => {
   const { newUserData } = req.body;
 
   try {
-    const exUser = await userProvider.retrieveUser(newUserData.userId);
-    if (exUser) {
-      return res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
+    // Validate Email
+    if (!emailValidator.validate(newUserData.userEmail)) {
+      return res.send(errResponse(baseResponseStatus.SIGNUP_EMAIL_ERROR_TYPE));
     }
-    // 비밀번호 암호화 - 보류 구현이 우선
+
+    // 비밀번호 암호화
+    const hashed = await bcrypt.hash(newUserData.password, 10);
+    newUserData.password = hashed;
+
     const createUserResult = await userService.createUser(newUserData);
-    console.log(createUserResult);
-    res.send(response(baseResponseStatus.SUCCESS, createUserResult));
+
+    // console.log(createUserResult);
+    res.send(createUserResult);
 
   } catch (error) {
     console.error(error);
-    return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
+    return res.status(500).send(errResponse(baseResponseStatus.SERVER_ERROR));
   }
 };
 
+// phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
+exports.additionalSignUp = async (req, res) => {
+
+};
 /*
 * Passsport Local Login 처리과정
 1. 로그인 요청이 라우터로 들어옴.
@@ -43,47 +52,9 @@ exports.localSignUp = async (req, res) => {
 10. 로그인 완료 처리 (이제 세션쿠키를 통해서 통신하며 로그인됨 상태를 알 수 있다.)
 */
 
-
-
-exports.kakaoLogin = async(req, res) => {
-  // 이미 카카오 로그인에서 중복회원검증햇으니까
-  // 여기는 그냥 db에 넣기..?
-  const { AccessToken } = req.body;
-  // try {
-    
-  //   const createKakaoUserResult = await userService.createKakaoUser(AccessToken);
-  //   console.log(createKakaoUserResult);
-  //   res.send(response(baseResponseStatus.SUCCESS, createKakaoUserResult));
-
-  // } catch (error) {
-  //   console.error(error);
-  //   return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
-  // }
-  // passport.authenticate('kakao-login', { session: false },
-  // (req, res) => {
-  //   //const createUserResult = await userService.createUser(newUserData);
-  //   console.log(req);
-  //   console.log(req.user);
-
-  //   res.send(response.baseResponseStatus.SUCCESS, req.user);
-  // }
-  // );
-
-  let kakaoProfile; //값을 수정해주어야 하므로 const가 아닌 let 사용
-
-	try{ //axios 모듈을 이용하여 Profile 정보를 가져온다.
-            kakaoProfile = await axios.get('https://kapi.kakao.com/v2/user/me', {
-                headers: {
-                    Authorization: 'Bearer ' + AccessToken,
-                    'Content-Type': 'application/json'
-                }
-            })
-     } catch (err) {
-          return res.send(errResponse(baseResponse.ACCESS_TOKEN_VERIFICATION_FAILURE));
-     }
-};
-exports.localLogin = async (req, res) => {
-  // session이 아닌 jwt를 이용하므로 session: false 옵션을 넣어준다.
+// Session이 아닌 jwt를 활용하기에 session: false 옵션을 넣어준다
+// 주의할 점: authenticate 함수는 미들웨어이지만 즉시 실행 함수로 (req, res)를 전달하면 실행한다는 점에 유의
+exports.localSignIn = async (req, res) => {
   passport.authenticate('local', { session: false },
     (authError, user, info) => {
       if (authError) {
@@ -91,35 +62,48 @@ exports.localLogin = async (req, res) => {
         console.error(authError);
         return res.send(errResponse(baseResponseStatus.SIGNIN_PASSPORT_AUTH_ERROR));
       }
+
       if (!user) {
-        // console.log(info);
         return res.send(errResponse(info));
       }
 
-      // req.login 함수가 passport.js의 serializeUser 함수를 호출
-      // serializeUser 이후 deserializeUser 바로 호출
-      // => jwt 사용 시에는 serialize, deserialize를 사용하지 않음.
-      return req.login(user, (loginError) => {
-        // console.log(req.user);
-        if (loginError) {
-          console.error(loginError);
-          return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
-        }
-        // 클라이언트에게 jwt 생성 후 반환
-        const token = createJwtToken(user);
-        res.cookie('jwt', jwt, { httpOnly: true, secure: true });
-        return res.send(response(baseResponseStatus.SUCCESS, { accessToken: token }));
-      });
-    })(req, res);
-};
+      const token = createJwtToken(user);
+      return res.send(response(baseResponseStatus.SUCCESS, { token }));
+    }
+  )(req, res);
+}
+
 
 exports.verifyJWT = async (req, res) => {
-  passport.authenticate('jwt', { session: false }, 
-  (req, res) => {
-      console.log(req);
-      console.log(req.user);
+  console.log(req.user);
+  return res.send(response(baseResponseStatus.SUCCESS, req.user));
+};
 
-      res.send(response.baseResponseStatus.SUCCESS, req.user);
+
+exports.kakaoLogin = async(req, res) => {
+  passport.authenticate('kakao-login', { session: false },
+    (authError, user, info) => {
+      if (authError || !user) {
+        console.error(authError);
+        console.log(info);
+        return res.send(errResponse(baseResponseStatus.SIGNIN_PASSPORT_AUTH_ERROR));
+      }
+
+      return res.send(response(baseResponseStatus.SUCCESS, user));
     }
-  );
+  )(req, res);
+  
+
+  // let kakaoProfile; //값을 수정해주어야 하므로 const가 아닌 let 사용
+
+	// try{ //axios 모듈을 이용하여 Profile 정보를 가져온다.
+  //           kakaoProfile = await axios.get('https://kapi.kakao.com/v2/user/me', {
+  //               headers: {
+  //                   Authorization: 'Bearer ' + AccessToken,
+  //                   'Content-Type': 'application/json'
+  //               }
+  //           })
+  //    } catch (err) {
+  //         return res.send(errResponse(baseResponse.ACCESS_TOKEN_VERIFICATION_FAILURE));
+  //    }
 };

@@ -57,7 +57,8 @@ async function insertUserInfo(connection, insertUserInfoParams) {
 
 // 카카오 유저 생성
 async function insertKakaoUserInfo(connection, insertKakaoUserInfoParams ) {
-  const insertKakaoUserInfoQuery = `INSERT INTO user(user_email, user_name, provider, sns_id) VALUES (?,?,?,?);`;
+  console.log(insertKakaoUserInfoParams);
+  const insertKakaoUserInfoQuery = "INSERT INTO user(user_email, user_name, provider, sns_id) VALUES (?, ?, ?, ?);";
 
   const insertKakaoUserInfoRow = await connection.query(
     insertKakaoUserInfoQuery,
