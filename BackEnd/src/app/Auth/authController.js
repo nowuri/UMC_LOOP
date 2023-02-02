@@ -8,7 +8,7 @@ const baseResponseStatus = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 
 // req.body.newUserData = {
-// userId, password, userEmail, userName, phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
+//  userEmail, userName, password, 
 // }
 exports.localSignUp = async (req, res) => {
   const { newUserData } = req.body;
@@ -29,6 +29,10 @@ exports.localSignUp = async (req, res) => {
   }
 };
 
+// phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
+exports.additionalSignUp = async (req, res) => {
+
+};
 /*
 * Passsport Local Login 처리과정
 1. 로그인 요청이 라우터로 들어옴.
@@ -63,13 +67,8 @@ exports.localSignIn = async (req, res) => {
   )(req, res);
 }
 
-exports.verifyJWT = async (req, res) => {
-  passport.authenticate('jwt', { session: false }, 
-  (req, res) => {
-      console.log(req);
-      console.log(req.user);
 
-      res.send(response.baseResponseStatus.SUCCESS, req.user);
-    }
-  );
+exports.verifyJWT = async (req, res) => {
+  console.log(req.user);
+  return res.send(response(baseResponseStatus.SUCCESS, req.user));
 };
