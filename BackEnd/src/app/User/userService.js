@@ -3,11 +3,11 @@ const { pool } = require("../../../config/database");
 const userProvider = require("./userProvider");
 const userDao = require("./userDao");
 const baseResponse = require("../../../config/baseResponseStatus");
-const { response } = require("../../../config/response");
-const { errResponse } = require("../../../config/response");
+const { response, errResponse } = require("../../../config/response");
+const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
+const bcrypt = require('bcrypt');
+const baseResponseStatus = require("../../../config/baseResponseStatus");
 
 // Service: Create, Update, Delete 비즈니스 로직 처리
 
@@ -33,27 +33,36 @@ exports.createUser = async function(newUserData) {
 };
 
 // 카카오 유저 CREATE
-exports.createKakaoUser = async function(user_email, user_name, provider, sns_id) {
+exports.createKakaoUser = async function(newKakaoUserData) {
   try {
-    //const user_email = profile._json && profile._json.kakao_account_email
-    // // 이메일 중복 확인
-    const emailRows = await userProvider.emailCheck(user_email);
-    if (emailRows.length > 0)
-      return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
+    // 이메일 중복 확인
 
-    const insertKakaoUserInfoParams = [user_email, user_name, provider, sns_id];
-    console.log(`inside createKakaoUser Service, ${insertKakaoUserInfoParams}`);
+    const emailRows = await userProvider.emailCheck(newKakaoUserData.user_email);
+    if (emailRows.length > 0) {
+
+      // console.log(emailRows);
+      const user = emailRows[0];
+      console.log(user);
+      if (user.status === 2) {
+        // console.log(emailRows[0]);
+        const token = createJwtToken(user);
+        console.log(token);
+        const result = { token, 'userIdx': user.idx };
+        return response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, result );
+      }
+      return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
+    }
 
     const connection = await pool.getConnection(async (conn) => conn);
 
-    const kakaoUserIdResult = await userDao.insertKakaoUserInfo(connection, insertKakaoUserInfoParams);
+    const kakaoUserIdResult = await userDao.insertKakaoUserInfo(connection, Object.values(newKakaoUserData));
     console.log(`추가된 회원 : ${kakaoUserIdResult[0].insertId}`)
     connection.release();
     return response(baseResponse.SUCCESS);
 
 
   } catch (err) {
-    logger.error(`App - createUser Service error\n: ${err.message}`);
+    logger.error(`App - createKakaoUser Service error\n: ${err.message}`);
     return errResponse(baseResponse.DB_ERROR);
   }
 };

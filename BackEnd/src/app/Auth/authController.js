@@ -2,6 +2,7 @@ const passport = require('passport');
 const emailValidator = require('email-validator');
 const bcrypt = require('bcrypt');
 
+
 const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 const userProvider = require("../../app/User/userProvider");
 const userService = require("../../app/User/userService");
@@ -80,30 +81,44 @@ exports.verifyJWT = async (req, res) => {
 };
 
 
-exports.kakaoLogin = async(req, res) => {
-  passport.authenticate('kakao-login', { session: false },
-    (authError, user, info) => {
-      if (authError || !user) {
-        console.error(authError);
-        console.log(info);
-        return res.send(errResponse(baseResponseStatus.SIGNIN_PASSPORT_AUTH_ERROR));
-      }
+// exports.kakaoLogin = async(req, res, next) => {
+//   passport.authenticate('kakao', { session: false },
+//     (authError, user, info) => {
+//       if (authError || !user) {
+//         console.error(authError);
+//         console.log(info);
+//         return res.send(errResponse(baseResponseStatus.SIGNIN_PASSPORT_AUTH_ERROR));
+//       }
+//       const token = createJwtToken(user);
+//       return res.send(response(baseResponseStatus.SUCCESS, { token }));
+//     }
+//   )(req, res, next);
+// };
 
-      return res.send(response(baseResponseStatus.SUCCESS, user));
+exports.kakaoLogin = async (req, res) => {
+  passport.authenticate('kakao', {session: false},
+  (authError, user, info) => {
+    if (authError) {
+      console.log(info);
+      console.error(authError);
+      return res.status(500).send(errResponse(baseResponseStatus.SIGNIN_PASSPORT_AUTH_ERROR));
     }
-  )(req, res);
-  
 
-  // let kakaoProfile; //값을 수정해주어야 하므로 const가 아닌 let 사용
+    if (!user) {
+      if (parseInt(info.code / 2000))
+        res.status(400);
+      return res.send(errResponse(info));
+    }
 
-	// try{ //axios 모듈을 이용하여 Profile 정보를 가져온다.
-  //           kakaoProfile = await axios.get('https://kapi.kakao.com/v2/user/me', {
-  //               headers: {
-  //                   Authorization: 'Bearer ' + AccessToken,
-  //                   'Content-Type': 'application/json'
-  //               }
-  //           })
-  //    } catch (err) {
-  //         return res.send(errResponse(baseResponse.ACCESS_TOKEN_VERIFICATION_FAILURE));
-  //    }
-};
+    const token = createJwtToken(user);
+    console.log(token + "jwt 토큰**************");
+    // 만약 유저의 회원가입이 완료되지 않았다면
+    if (user.status === 2) {
+      res.status(300);
+      return res.send(response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, { token, "userIdx": user.idx }));
+    }  
+
+    return res.send(response(baseResponseStatus.SUCCESS, { token }));
+  }
+)(req, res);
+}
