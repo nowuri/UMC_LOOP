@@ -3,14 +3,11 @@ const compression = require('compression');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 // Passport.js 관련 모듈 import
 const passport = require('passport');
 const passportConfig = require('./passport/passport.js');
-
-// const session = require('express-session');
-// const MySQLStore = require('express-mysql-session')(session);
-// const { pool } = require('./database.js');
 
 // Swagger.js 관련 모듈 import
 const swaggerUi = require('swagger-ui-express');
@@ -34,22 +31,11 @@ exports.app = async function() {
 
   app.use(cors());
 
-  // const connection = await pool.getConnection((async (conn) => conn));
-  // const sessionStore = new MySQLStore({}, connection);
 
-  // app.use(session({
-  //   resave: false,
-  //   saveUninitialized: false,
-  //   secret: 'secret',
-  //   cookie: {
-  //     httpOnly: true,
-  //     secure: false,
-  //   },
-  //   store: sessionStore,
-  // }));
+  app.use(cookieParser());
 
   app.use(passport.initialize());
-  // app.use(passport.session());
+
   passportConfig();
 
   /* App (Android, iOS) */

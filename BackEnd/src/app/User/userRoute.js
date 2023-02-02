@@ -21,6 +21,8 @@ module.exports = function(app) {
   // 0. 테스트 API
   app.get('/app/test', user.getTest);
 
+  app.post('/app/frontTest', user.frontTestAPI);
+
   //  // 1. 유저 생성 (회원가입) API
   //  app.post('/app/users', user.postUsers);
 

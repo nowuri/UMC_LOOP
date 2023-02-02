@@ -50,9 +50,9 @@ exports.sendTokenToSMS = async (req, res) => {
 
     // console.log(result);
     // console.log(`token: ${tok}`);
-    res.send(response(baseResponseStatus.SUCCESS, { token: tok}));
+    res.send(response(baseResponseStatus.SUCCESS, { token: tok }));
   }
-  
+
 }
 
 
@@ -73,9 +73,15 @@ exports.additionalSignUp = async (req, res) => {
  * API Name : 테스트 API
  * [GET] /app/test
  */
-exports.getTest = async function (req, res) {
-    return res.send(response(baseResponseStatus.SUCCESS))
+exports.getTest = async function(req, res) {
+  return res.send(response(baseResponseStatus.SUCCESS));
 }
+
+exports.frontTestAPI = async (req, res) => {
+  let { cookies, body, query, params } = req;
+
+  return res.status(200).send({ cookies, body, query, params });
+};
 
 /**
  * API No. 1
@@ -202,8 +208,9 @@ exports.getTest = async function (req, res) {
 // };
 
 // exports.kakaoCallback = async function (req, res) {
-    
+
 // }
+
 
 // exports.addUser = function(newUser, callback){
 //     bcrypt.genSalt(10, (err, salt) => {
@@ -214,6 +221,7 @@ exports.getTest = async function (req, res) {
 //       });
 //     });
 // }
+
 
 
 
