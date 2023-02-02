@@ -2,10 +2,12 @@ package com.example.description
 
 import com.example.interested.R
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.interested.databinding.ActivityDescriptionBinding
 import com.example.myprofile.RemoveUserDialog
 
@@ -31,12 +33,8 @@ class Description : AppCompatActivity(), View.OnClickListener {
 
         //추천 버튼 클릭
         viewBinding.btnRecomm.setOnClickListener(this)
-
         //비추천 버튼 클릭
-        viewBinding.btnUnrecomm.setOnClickListener(){
-            val intent = Intent(this,NotRecommend::class.java)
-            startActivity(intent)
-        }
+        viewBinding.btnUnrecomm.setOnClickListener(this)
 
         //후기 보러 가기 클릭
         viewBinding.policyGetReview.setOnClickListener(){
@@ -56,6 +54,14 @@ class Description : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             viewBinding.btnRecomm.id ->{
+                viewBinding.btnRecomm.setBackgroundResource(R.drawable.btn_rec_selected)
+                viewBinding.btnRecomm.setTextColor(Color.WHITE)
+                val dlg = CommentDialog(this)
+                dlg.show()
+            }
+            viewBinding.btnUnrecomm.id ->{
+                viewBinding.btnRecomm.setBackgroundResource(R.drawable.btn_rec_selected)
+                viewBinding.btnRecomm.setTextColor(Color.WHITE)
                 val dlg = CommentDialog(this)
                 dlg.show()
             }
