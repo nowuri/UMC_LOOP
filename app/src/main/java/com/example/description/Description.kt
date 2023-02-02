@@ -6,13 +6,14 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.interested.databinding.ActivityDescriptionBinding
-import com.example.myprofile.RemoveUserDialog
 
 class Description : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewBinding: ActivityDescriptionBinding
+    var recomm_comment: String = ""
+    var unrecomm_comment: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,21 +59,29 @@ class Description : AppCompatActivity(), View.OnClickListener {
                 viewBinding.btnRecomm.setTextColor(Color.WHITE)
                 val dlg = CommentDialog(this)
                 dlg.show()
+
+                //입력 데이터 전달
+                dlg.setOnClickedListener(object : CommentDialog.ButtonClickListener {
+                    override fun onClicked(inputComment: String) {
+                        recomm_comment = inputComment
+                        Log.e("받은 코멘트 값", recomm_comment)
+                    }
+                })
             }
             viewBinding.btnUnrecomm.id ->{
                 viewBinding.btnUnrecomm.setBackgroundResource(R.drawable.btn_unrecomm_selected)
                 viewBinding.btnUnrecomm.setTextColor(Color.WHITE)
                 val dlg = CommentDialog(this)
                 dlg.show()
+
+                //입력 데이터 전달
+                dlg.setOnClickedListener(object : CommentDialog.ButtonClickListener {
+                    override fun onClicked(inputComment: String) {
+                        unrecomm_comment = inputComment
+                        Log.e("받은 코멘트 값", unrecomm_comment)
+                    }
+                })
             }
         }
     }
-
-    //private fun createView(v: View) {
-
-     //   val recommend: EditText = EditText(applicationContext)
-     //   recommend.setHint("이유를 작성해주세요")
-      //  recommend
-
-    //}
 }
