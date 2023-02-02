@@ -40,15 +40,19 @@ module.exports = {
     // Response error
     SIGNUP_REDUNDANT_EMAIL : { "isSuccess": false, "code": 3001, "message":"중복된 이메일입니다." },
     SIGNUP_REDUNDANT_USERID : { "isSuccess": false, "code": 3002, "message":"중복된 아이디입니다." },
+    SIGNUP_ADDITIONAL_INFO_NEEDED : { "isSuccess": false, "code": 3003, "message": "회원의 추가 정보가 필요합니다. 해당 토큰과 idx를 가지고 PATCH /app/users/:userIdx 로 Redirect 하십시오"},
 
-    SIGNIN_EMAIL_WRONG : { "isSuccess": false, "code": 3003, "message": "아이디가 잘못 되었습니다." },
-    SIGNIN_PASSWORD_WRONG : { "isSuccess": false, "code": 3004, "message": "비밀번호가 잘못 되었습니다." },
-    SIGNIN_INACTIVE_ACCOUNT : { "isSuccess": false, "code": 3005, "message": "비활성화 된 계정입니다. 고객센터에 문의해주세요." },
-    SIGNIN_WITHDRAWAL_ACCOUNT : { "isSuccess": false, "code": 3006, "message": "탈퇴 된 계정입니다. 고객센터에 문의해주세요." },
+    SIGNIN_EMAIL_WRONG : { "isSuccess": false, "code": 3100, "message": "아이디가 잘못 되었습니다." },
+    SIGNIN_PASSWORD_WRONG : { "isSuccess": false, "code": 3101, "message": "비밀번호가 잘못 되었습니다." },
+    SIGNIN_INACTIVE_ACCOUNT : { "isSuccess": false, "code": 3102, "message": "비활성화 된 계정입니다. 고객센터에 문의해주세요." },
+    SIGNIN_WITHDRAWAL_ACCOUNT : { "isSuccess": false, "code": 3103, "message": "탈퇴 된 계정입니다. 고객센터에 문의해주세요." },
 
     //Connection, Transaction 등의 서버 오류
     DB_ERROR : { "isSuccess": false, "code": 4000, "message": "데이터 베이스 에러"},
     SERVER_ERROR : { "isSuccess": false, "code": 4001, "message": "서버 에러"},
- 
- 
+
+    USER_POLICY_EMPTY : { "isSuccess": false, "code": 5001, "message": "유저 정책은 비어있을 수 없습니다."},
+    USER_REGION_EMPTY : { "isSuccess": false, "code": 5001, "message": "정책 지역은 비어있을 수 없습니다."},
+    SIGNUP_POLICY_ERROR_TYPE : { "isSuccess": false, "code": 5001, "message": "유저 정책 어쩌고 에러~~"},
+    POLICY_CALL_ERROR_TYPE : { "isSuccess": false, "code": 5002, "message": "알 수 없는 이유로 정책 조회에 실패하였습니다."},
 }

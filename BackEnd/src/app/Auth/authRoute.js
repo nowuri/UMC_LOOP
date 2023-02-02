@@ -1,16 +1,17 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('../../../config/middlewares.js');
 const auth = require('./authController.js');
-const { jwtMiddleware } = require('../../../config/jwtMiddleware.js');
+const { passportJWTMiddleware, isAuthenticated, isNotAuthenticated } = require('../../../config/jwtMiddleware.js');
 
 module.exports = function(app) {
   // 로그인되어 있지 않다면, 회원가입 진행
-  // app.post('/app/auth/signUp', isNotLoggedIn, auth.localSignUp);
+  app.post('/app/auth/signUp', isNotAuthenticated, auth.localSignUp);
 
-  // 
-  // app.post('/app/auth/login', isNotLoggedIn, auth.localLogin);
+  app.post('/app/auth/signIn', isNotAuthenticated, auth.localSignIn);
 
-  // app.post('/app/auth', jwtMiddleware, auth.verifyJWT);
+  // JWT - Authorization Bearer Token 미들웨어 확인후 다음 미들웨어로 이동
+  app.post('/app/auth', isAuthenticated, auth.verifyJWT);
+
 
 
 

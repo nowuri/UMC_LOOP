@@ -67,6 +67,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/centerImage"
         tools:layout_editor_absoluteY="225dp">
 
         <LinearLayout
@@ -153,7 +154,7 @@
             android:id="@+id/next"
             android:layout_width="match_parent"
             android:layout_height="57dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="31dp"
             android:background="@drawable/changed_btn"
             android:text="다음"
             android:textColor="@color/white"

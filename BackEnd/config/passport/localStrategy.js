@@ -1,4 +1,5 @@
 const passport = require('passport');
+const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const baseResponseStatus = require('../baseResponseStatus.js');
 
@@ -11,7 +12,7 @@ module.exports = () => {
     new LocalStrategy(
       {
         //* req.body 객체인자 하고 키값이 일치해야 한다.
-        usernameField: 'userId', // req.body.userId
+        usernameField: 'userEmail', // req.body.userId
         passwordField: 'password', // req.body.password
         passReqToCallback: true,
         session: false,
@@ -23,18 +24,17 @@ module.exports = () => {
         */
       },
       //* 콜백함수의  userId과 password는 위에서 설정한 필드이다. 위에서 객체가 전송되면 콜백이 실행된다.
-      async function verify(req, userId, password, done) {
+      async function verify(req, userEmail, password, done) {
         try {
           // 가입된 회원인지 아닌지 확인
-          const User = await userProvider.retrieveUser(userId);
+          const exUser = await userProvider.retrieveUserByEmail(userEmail);
           // 만일 가입된 회원이면
-          if (User) {
+          // console.log(exUser);
+          if (exUser) {
             // 해시비번을 비교
-            // const result = await bcrypt.compare(password, exUser.password);
-            const result = await userProvider.passwordCheck([userId, password]);
-            // console.log(result.length);
-            if (result.length !== 0) {
-              done(null, User); //? 성공이면 done()의 2번째 인수에 선언
+            const result = await bcrypt.compare(password, exUser.password);
+            if (result) {
+              done(null, exUser); //? 성공이면 done()의 2번째 인수에 선언
             } else {
               done(null, false, baseResponseStatus.SIGNIN_PASSWORD_NOT_MATCH); //? 실패면 done()의 2번째 인수는 false로 주고 3번째 인수에 선언
             }
