@@ -60,7 +60,6 @@
             android:background="@drawable/myprofile_id_rec"
             android:paddingLeft="20dp"
             android:hint="이유를 작성해주세요"
-            android:textColor="#FF0000"
             android:textColorHint="#D9D9D9"
             android:textSize="18sp"
             android:textStyle="bold" />
