@@ -47,6 +47,43 @@ exports.createUser = async function(newUserData) {
   }
 };
 
+exports.createNaverUser = async function(newNaverUserData) {
+  try {
+    /*
+    // 이메일 중복 확인
+    const emailRows = await userProvider.emailCheck(newNaverUserData.userEmail);
+    if (emailRows.length > 0) {
+
+      // console.log(emailRows);
+      const user = emailRows[0];
+      // console.log(user);
+      if (user.status === 2) {
+        // console.log(emailRows[0]);
+        const token = createJwtToken(user);
+        // console.log(token);
+        const result = { token, 'userIdx': user.idx };
+        return response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, result );
+      }
+
+      return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
+    }
+*/
+    const connection = await pool.getConnection(async (conn) => conn);
+
+    // console.log(newUserData);
+    // console.log(Object.values(newUserData));
+    const userIdResult = await userDao.insertNaverUserInfo(connection, Object.values(newNaverUserData));
+    console.log(`추가된 회원 : ${userIdResult[0].insertId}`)
+    const userIdx = userIdResult[0].inserId;
+    connection.release();
+    return response(baseResponse.SUCCESS, { userIdx });
+
+
+  } catch (err) {
+    logger.error(`App - createUser Service error\n: ${err.message}`);
+    return errResponse(baseResponse.DB_ERROR);
+  }
+};
 
 // TODO: After 로그인 인증 방법 (JWT)
 // exports.postSignIn = async function(email, password) {
