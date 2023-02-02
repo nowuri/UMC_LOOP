@@ -14,7 +14,7 @@ module.exports = function(app) {
   app.post('/app/auth', isAuthenticated, auth.verifyJWT);
 
 
-  //app.post('/app/auth/naver/login', auth.naverLogin);
+//  app.post('/app/auth/naver/login', auth.naverLogin);
   app.get('/app/auth/naver/login', passport.authenticate('naver-login'));
   app.get('/app/auth/naver/callback', passport.authenticate('naver-login', {
     failureRedirect: '/',
