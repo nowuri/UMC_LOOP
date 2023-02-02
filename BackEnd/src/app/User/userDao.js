@@ -58,8 +58,8 @@ async function insertUserInfo(connection, insertUserInfoParams) {
 // 네이버 유저 생성
 async function insertNaverUserInfo(connection, insertNaverUserInfoParams) {
   const insertNaverUserInfoQuery = `
-        INSERT INTO user(user_email, user_name, provider, status)
-        VALUES (?, ?, 'naver', 2);
+        INSERT INTO user(user_email, user_name, provider, sns_id, status)
+        VALUES (?, ?, ?, ?, 2);
     `;
   const insertNaverUserInfoRow = await connection.query(
     insertNaverUserInfoQuery,
