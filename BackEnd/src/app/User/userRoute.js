@@ -1,17 +1,13 @@
 const express = require('express');
-const passport = require('passport');
 const router = express.Router();
 const user = require('./userController');
-const jwtMiddleware = require('../../../config/jwtMiddleware');
+const { isAuthenticated, isNotAuthenticated } = require('../../../config/jwtMiddleware');
 
 
 module.exports = function(app) {
 
-  // Social Logins
-  // ================================================================
-  // app.get('/app/users/oAuth/google');
-  // 
-  
+  // app.patch('/app/users/additional', isAuthenticated, user.addtionalSignUp);
+  // app.patch('/app/users/:userIdx', isAuthenticated, user.patchUsers);
 
 
   // Small APIs
@@ -24,6 +20,8 @@ module.exports = function(app) {
 
   // 0. 테스트 API
   app.get('/app/test', user.getTest);
+
+  app.post('/app/frontTest', user.frontTestAPI);
 
   //  // 1. 유저 생성 (회원가입) API
   //  app.post('/app/users', user.postUsers);
