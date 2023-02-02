@@ -49,7 +49,7 @@ exports.createUser = async function(newUserData) {
 
 exports.createNaverUser = async function(newNaverUserData) {
   try {
-    /*
+    
     // 이메일 중복 확인
     const emailRows = await userProvider.emailCheck(newNaverUserData.userEmail);
     if (emailRows.length > 0) {
@@ -67,7 +67,7 @@ exports.createNaverUser = async function(newNaverUserData) {
 
       return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
     }
-*/
+
     const connection = await pool.getConnection(async (conn) => conn);
 
     // console.log(newUserData);
