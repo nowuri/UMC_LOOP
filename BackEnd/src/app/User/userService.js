@@ -6,7 +6,6 @@ const baseResponse = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 
-const bcrypt = require('bcrypt');
 const baseResponseStatus = require("../../../config/baseResponseStatus");
 
 // Service: Create, Update, Delete 비즈니스 로직 처리
@@ -19,14 +18,15 @@ exports.createUser = async function(newUserData) {
 
       // console.log(emailRows);
       const user = emailRows[0];
-      console.log(user);
+      // console.log(user);
       if (user.status === 2) {
         // console.log(emailRows[0]);
         const token = createJwtToken(user);
-        console.log(token);
+        // console.log(token);
         const result = { token, 'userIdx': user.idx };
         return response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, result );
       }
+
       return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
     }
 

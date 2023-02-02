@@ -15,22 +15,21 @@ const { checkPhoneValidation, sendTokenToSMS, getToken } = require('../../../con
 /** 
 * API Name : 유저 이메일 중복 체크 API
 * Description : 중복된 아이디가 없을 경우 Success Return
-* [GET] /app/users/api/email
+* [GET] /app/users/api/email?userEmail=jaykwon1234@naver.com
 */
 exports.checkOverlappingUser = async (req, res) => {
-  const email = req.body.userEmail;
+  const email = req.query.userEmail;
 
   console.log(email);
   // Check Empty email (formal validation)
   if (!email)
-    return res.send(errResponse(baseResponseStatus.USER_USEREMAIL_EMPTY));
+    return res.status(406).send(errResponse(baseResponseStatus.USER_USEREMAIL_EMPTY));
 
   // Validate Email
   if (!emailValidator.validate(email))
-    return res.send(errResponse(baseResponseStatus.SIGNUP_EMAIL_ERROR_TYPE));
+    return res.status(406).send(errResponse(baseResponseStatus.SIGNUP_EMAIL_ERROR_TYPE));
 
   const userByEmail = await userProvider.emailCheck(email);
-
 
   return (userByEmail.length === 0) ? res.send(response(baseResponseStatus.SUCCESS)) : res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
 };

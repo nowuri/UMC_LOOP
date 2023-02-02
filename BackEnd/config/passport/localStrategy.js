@@ -1,4 +1,5 @@
 const passport = require('passport');
+const emailValidator = require('email-validator');
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const baseResponseStatus = require('../baseResponseStatus.js');
@@ -27,6 +28,8 @@ module.exports = () => {
       async function verify(req, userEmail, password, done) {
         try {
           // 가입된 회원인지 아닌지 확인
+          if (!emailValidator.validate(userEmail))
+            done(null, false, baseResponseStatus.SIGNIN_EMAIL_ERROR_TYPE);
           const exUser = await userProvider.retrieveUserByEmail(userEmail);
           // 만일 가입된 회원이면
           // console.log(exUser);
@@ -34,7 +37,7 @@ module.exports = () => {
             // 해시비번을 비교
             const result = await bcrypt.compare(password, exUser.password);
             if (result) {
-              done(null, exUser); //? 성공이면 done()의 2번째 인수에 선언
+                done(null, exUser); //? 성공이면 done()의 2번째 인수에 선언
             } else {
               done(null, false, baseResponseStatus.SIGNIN_PASSWORD_NOT_MATCH); //? 실패면 done()의 2번째 인수는 false로 주고 3번째 인수에 선언
             }
