@@ -44,6 +44,21 @@ async function insertUserInfo(connection, insertUserInfoParams) {
   return insertUserInfoRow;
 }
 
+// 네이버 유저 생성
+async function insertNaverUserInfo(connection, insertNaverUserInfoParams) {
+  const insertNaverUserInfoQuery = `
+        INSERT INTO user(user_email, user_name, provider, status)
+        VALUES (?, ?, 'naver', 2);
+    `;
+  const insertNaverUserInfoRow = await connection.query(
+    insertNaverUserInfoQuery,
+    insertNaverUserInfoParams,
+  );
+
+  return insertNaverUserInfoRow;
+}
+
+
 // 패스워드 체크
 async function selectUserPassword(connection, selectUserPasswordParams) {
   const selectUserPasswordQuery = `
@@ -86,6 +101,7 @@ module.exports = {
   selectUserEmail,
   selectUserId,
   insertUserInfo,
+  insertNaverUserInfo,
   selectUserPassword,
   selectUserAccount,
   updateUserInfo,
