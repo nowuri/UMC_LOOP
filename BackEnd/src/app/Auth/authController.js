@@ -97,25 +97,12 @@ exports.verifyJWT = async (req, res) => {
   return res.send(response(baseResponseStatus.SUCCESS, req.user));
 };
 
+exports.naverLogin = async (req, res) => {
+  passport.authenticate('naver-login', {session: false},
 exports.verifyJWT = async (req, res) => {
   console.log(req.user);
   return res.send(response(baseResponseStatus.SUCCESS, req.user));
 };
-
-
-// exports.kakaoLogin = async(req, res, next) => {
-//   passport.authenticate('kakao', { session: false },
-//     (authError, user, info) => {
-//       if (authError || !user) {
-//         console.error(authError);
-//         console.log(info);
-//         return res.send(errResponse(baseResponseStatus.SIGNIN_PASSPORT_AUTH_ERROR));
-//       }
-//       const token = createJwtToken(user);
-//       return res.send(response(baseResponseStatus.SUCCESS, { token }));
-//     }
-//   )(req, res, next);
-// };
 
 exports.kakaoLogin = async (req, res) => {
   passport.authenticate('kakao', {session: false},
@@ -143,4 +130,5 @@ exports.kakaoLogin = async (req, res) => {
     return res.send(response(baseResponseStatus.SUCCESS, { token }));
   }
 )(req, res);
+}
 }

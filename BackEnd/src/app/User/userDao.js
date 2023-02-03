@@ -55,6 +55,19 @@ async function insertUserInfo(connection, insertUserInfoParams) {
   return insertUserInfoRow;
 }
 
+// 네이버 유저 생성
+async function insertNaverUserInfo(connection, insertNaverUserInfoParams) {
+  const insertNaverUserInfoQuery = `
+        INSERT INTO user(user_email, user_name, provider, sns_id, status)
+        VALUES (?, ?, ?, ?, 2);
+    `;
+  const insertNaverUserInfoRow = await connection.query(
+    insertNaverUserInfoQuery,
+    insertNaverUserInfoParams,
+  );
+
+  return insertNaverUserInfoRow;
+
 // 카카오 유저 생성
 async function insertKakaoUserInfo(connection, insertKakaoUserInfoParams ) {
   console.log(insertKakaoUserInfoParams);
@@ -125,6 +138,7 @@ module.exports = {
   selectUserIdx,
   selectUserId,
   insertUserInfo,
+  insertNaverUserInfo,
   insertKakaoUserInfo,
   selectUserPassword,
   selectUserAccount,
