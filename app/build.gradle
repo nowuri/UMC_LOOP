@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.example.interested"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -87,6 +87,9 @@ dependencies {
     // Coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
 
+    implementation 'com.auth0:java-jwt:3.8.1'
+
+
 }
-//tasks.register("prepareKotlinBuildScriptModel"){}
+tasks.register("prepareKotlinBuildScriptModel"){}
 
