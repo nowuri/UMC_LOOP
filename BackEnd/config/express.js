@@ -15,6 +15,7 @@ const { openApiSpecification } = require('./swagger/swaggerConfig.js');
 
 exports.app = async function() {
   const app = express();
+  
 
 
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiSpecification));
@@ -34,9 +35,8 @@ exports.app = async function() {
 
   app.use(cookieParser());
 
-  app.use(passport.initialize());
-
   passportConfig();
+  app.use(passport.initialize());
 
   /* App (Android, iOS) */
   // TODO: 도메인을 추가할 경우 이곳에 Route를 추가하세요.
