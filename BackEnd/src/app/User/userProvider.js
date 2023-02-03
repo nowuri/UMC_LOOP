@@ -32,7 +32,7 @@ exports.retrieveUserByEmail = async function(userEmail) {
 };
 
 exports.retrieveUserByIdx = async function(userIdx) {
-  console.log(`in retrieveUserByIdx, userIdx: ${userIdx}`);
+  // console.log(`in retrieveUserByIdx, userIdx: ${userIdx}`);
   const connection = await pool.getConnection(async (conn) => conn);
   const userResult = await userDao.selectUserIdx(connection, userIdx);
 

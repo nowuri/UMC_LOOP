@@ -52,7 +52,7 @@ exports.createJwtToken = (user) => {
 exports.isAuthenticated = async (req, res, next) => {
   passport.authenticate('jwt', { session: false },
     async (authErr, user, info) => {
-      console.log(authErr, user, info);
+      // console.log(authErr, user, info);
       if (authErr || !user) {
         console.error(authErr);
         // console.error(info);

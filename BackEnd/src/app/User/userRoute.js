@@ -8,12 +8,17 @@ module.exports = function(app) {
   // 2차 마무리 회원가입
   app.patch('/app/users/additional', isAuthenticated, user.additionalSignUp);
 
+  // 관심 카테고리 변경 API
+  app.put('/app/users/interests', isAuthenticated, user.changeInterest);
+
+
   // Small APIs
   // 닉제임 중복 확인 API
   app.post('/app/users/api/emails', user.checkOverlappingUser);
 
   // SMS 전송 API
   app.post('/app/users/api/tokens', user.sendTokenToSMS);
+
 
 
   // 0. 테스트 API
