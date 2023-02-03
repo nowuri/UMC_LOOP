@@ -140,6 +140,18 @@ async function selectUserAccount(connection, email) {
   return selectUserAccountRow[0];
 }
 
+async function upsertInterest(connection, userIdx, code, val) {
+  const upsertInterestQuery = `
+    INSERT INTO table_name (column1, column2, column3, ...)
+    VALUES (value1, value2, value3, ...)
+    ON DUPLICATE KEY UPDATE column1 = VALUES(column1), column2 = VALUES(column2), column3 = VALUES(column3), ...
+  ;`;
+
+  const upsertInterestRow = await connection.query(
+    upsertInterestQuery,userIdx);
+
+    return upsertInterestRow[0];
+  }
 
 module.exports = {
   selectUser,
@@ -153,5 +165,6 @@ module.exports = {
   selectUserIdForPassword,
   selectUserAccount,
   updateUserInfo,
-  updateUserPasswordInfo
+  updateUserPasswordInfo,
+  upsertInterest
 };
