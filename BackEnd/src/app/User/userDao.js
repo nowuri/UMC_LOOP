@@ -67,6 +67,7 @@ async function insertNaverUserInfo(connection, insertNaverUserInfoParams) {
   );
 
   return insertNaverUserInfoRow;
+}
 
 // 카카오 유저 생성
 async function insertKakaoUserInfo(connection, insertKakaoUserInfoParams ) {
@@ -80,6 +81,7 @@ async function insertKakaoUserInfo(connection, insertKakaoUserInfoParams ) {
 
   return insertKakaoUserInfoRow;
 }
+
 
 // 패스워드 체크
 async function selectUserPassword(connection, selectUserPasswordParams) {
@@ -95,15 +97,15 @@ async function selectUserPassword(connection, selectUserPasswordParams) {
   return selectUserPasswordRow;
 }
 
-// 유저 계정 상태 체크 (jwt 생성 위해 id 값도 가져온다.)
-async function selectUserAccount(connection, email) {
+// 비번 찾기 유저 계정 존재 여부 체크 (status 가입 탈퇴 1차가입 상태 확인 필요??)
+async function selectUserIdForPassword(connection, name, email) {
   const selectUserAccountQuery = `
-        SELECT status, id
-        FROM UserInfo 
-        WHERE email = ?;`;
+        SELECT id
+        FROM user 
+        WHERE user_email = ? AND user_name = ?;`;
   const selectUserAccountRow = await connection.query(
     selectUserAccountQuery,
-    email
+    name, email
   );
   return selectUserAccountRow[0];
 }
@@ -117,20 +119,27 @@ async function updateUserInfo(connection, id, nickname) {
   return updateUserRow[0];
 }
 
-async function upsertInterest(connection, userIdx, code, val) {
-  const upsertInterestQuery = `
-    INSERT INTO table_name (column1, column2, column3, ...)
-    VALUES (value1, value2, value3, ...)
-    ON DUPLICATE KEY UPDATE column1 = VALUES(column1), column2 = VALUES(column2), column3 = VALUES(column3), ...
-  ;`;
-
-  const upsertInterestRow = await connection.query(
-    upsertInterestQuery,
-    userIdx
-  );
-
-  return upsertInterestRow[0];
+async function updateUserPasswordInfo(connection, user_email, hash) {
+  const updateUserPasswordQuery= `
+  UPDATE user
+  SET password = ?
+  WHERE user_email = ?;`;
+  const updateUserRow = await connection.query(updateUserPasswordQuery, [hash, user_email]);
+  return updateUserRow[0];
 }
+
+async function selectUserAccount(connection, email) {
+  const selectUserAccountQuery = `
+        SELECT status, id
+        FROM UserInfo 
+        WHERE email = ?;`;
+  const selectUserAccountRow = await connection.query(
+    selectUserAccountQuery,
+    email
+  );
+  return selectUserAccountRow[0];
+}
+
 
 module.exports = {
   selectUser,
@@ -141,7 +150,8 @@ module.exports = {
   insertNaverUserInfo,
   insertKakaoUserInfo,
   selectUserPassword,
+  selectUserIdForPassword,
   selectUserAccount,
   updateUserInfo,
-  upsertInterest,
+  updateUserPasswordInfo
 };
