@@ -9,11 +9,11 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.interested.databinding.SignupPt3Binding
+import com.example.interested.databinding.ActivitySignup3Binding
 import java.util.*
 
 class SignUp3Activity: AppCompatActivity() {
-    private lateinit var viewBinding: SignupPt3Binding
+    private lateinit var viewBinding: ActivitySignup3Binding
     //private val listItem = ArrayList<Any>()
 
     var ID : String = ""
@@ -30,7 +30,7 @@ class SignUp3Activity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewBinding = SignupPt3Binding.inflate(layoutInflater)
+        viewBinding = ActivitySignup3Binding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
         //뒤로가기
@@ -39,16 +39,6 @@ class SignUp3Activity: AppCompatActivity() {
             startActivity(intent)
             Toast.makeText(this@SignUp3Activity, "뒤로 돌아가기", Toast.LENGTH_SHORT).show()
         }
-
-        //이메일 입력
-        viewBinding.ETEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                email = viewBinding.ETEmail.text.toString()
-            }
-
-            override fun afterTextChanged(p0: Editable?) {}
-        })
 
         //SMS 정보수신
         viewBinding.checkboxSms.setOnCheckedChangeListener { buttonView, isChecked ->

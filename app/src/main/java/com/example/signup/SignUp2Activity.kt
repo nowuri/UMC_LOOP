@@ -41,14 +41,14 @@ class SignUp2Activity: AppCompatActivity() {
 
         //여기서부터는 회원정보 입력
         //이름 입력
-        viewBinding.ETName.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                name = viewBinding.ETName.text.toString()
-            }
+        //viewBinding.ETName.addTextChangedListener(object : TextWatcher {
+        //    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        //    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        //        name = viewBinding.ETName.text.toString()
+        //    }
 
-            override fun afterTextChanged(p0: Editable?) {}
-        })
+        //    override fun afterTextChanged(p0: Editable?) {}
+        //})
 
         //전화번호 입력
         viewBinding.ETTelephone.addTextChangedListener(object : TextWatcher {
