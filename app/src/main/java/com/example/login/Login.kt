@@ -6,14 +6,23 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.find.Find
 import com.example.interested.databinding.ActivityLoginBinding
+import com.example.network.PreferenceUtil
 import com.example.signup.SignUp1Activity
+import kotlinx.coroutines.CoroutineExceptionHandler
 
 class Login : AppCompatActivity() {
     private lateinit var viewBinding: ActivityLoginBinding
+
+    companion object {
+        lateinit var prefs: PreferenceUtil
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         viewBinding = ActivityLoginBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
+
+        prefs = PreferenceUtil(applicationContext)
 
         viewBinding.naverlogin.setOnClickListener(){
             Toast.makeText(this,"네이버 로그인을 시작합니다.", Toast.LENGTH_SHORT).show()
