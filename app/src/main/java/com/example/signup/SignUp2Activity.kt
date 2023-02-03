@@ -9,13 +9,13 @@ import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.interested.databinding.SignupPt2Binding
+import com.example.interested.databinding.ActivitySignup2Binding
 import com.example.signup.SignUp1Activity
 import java.util.*
 
 
 class SignUp2Activity: AppCompatActivity() {
-    private lateinit var viewBinding: SignupPt2Binding
+    private lateinit var viewBinding: ActivitySignup2Binding
     var name: String = ""
     var tel: String = ""
     var inputUserTelAuth: String = ""
@@ -28,7 +28,7 @@ class SignUp2Activity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewBinding = SignupPt2Binding.inflate(layoutInflater)
+        viewBinding = ActivitySignup2Binding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
         //뒤로가기 클릭했을 때
