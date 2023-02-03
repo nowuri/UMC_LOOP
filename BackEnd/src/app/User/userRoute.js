@@ -1,13 +1,15 @@
 const express = require('express');
-const router = express.Router();
 const user = require('./userController');
 const { isAuthenticated, isNotAuthenticated } = require('../../../config/jwtMiddleware');
 
 
 module.exports = function(app) {
 
-  // app.patch('/app/users/additional', isAuthenticated, user.addtionalSignUp);
-  // app.patch('/app/users/:userIdx', isAuthenticated, user.patchUsers);
+  // 2차 마무리 회원가입
+  app.patch('/app/users/additional', isAuthenticated, user.additionalSignUp);
+
+  // 관심 카테고리 변경 API
+  app.put('/app/users/interests', isAuthenticated, user.changeInterest);
 
 
   // Small APIs
@@ -18,9 +20,10 @@ module.exports = function(app) {
   app.post('/app/users/api/tokens', user.sendTokenToSMS);
 
 
+
   // 0. 테스트 API
   app.get('/app/test', user.getTest);
-
+  
   app.post('/app/frontTest', user.frontTestAPI);
 
   //  // 1. 유저 생성 (회원가입) API

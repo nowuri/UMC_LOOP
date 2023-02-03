@@ -51,15 +51,59 @@ exports.sendTokenToSMS = async (req, res) => {
     // console.log(`token: ${tok}`);
     res.send(response(baseResponseStatus.SUCCESS, { token: tok }));
   }
-
 }
 
 
-exports.additionalSignUp = async (req, res) => {
+exports.changeInterest = async (req, res) => {
   const user = req.user;
+  const { interested, unInterested } = req.body;
+  console.log(req.user);
+  console.log(req.body);
+
+  const interestPatchResult = await userService.patchInterests(user, { interested, unInterested });
+
+  console.log(interestPatchResult);
+
+  return interestPatchResult;
 };
 
 
+// phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
+// req.body = {
+//  phoneNumber: string,
+//  postalCode: string, 
+//  address: string, 
+//  agreePICU: int, 
+//  agreeSMS: int, 
+//  agreeKakao: int
+// }
+// Interested
+// : Array of Category Code Strings
+// ex) req.body = 
+// {
+//    "interested" : [ "004001001", "004001002", "004003001" ],
+//    "unInterested" : [""]
+// }
+exports.additionalSignUp = async (req, res) => {
+  const user = req.user;
+
+  const { phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao, userBirth, interests } = req.body;
+
+  // 만약 비어있는 폼 문항이 있다면
+  if (!(phoneNumber && postalCode && address && userBirth))
+    return res.status(400).send(errResponse(baseResponseStatus.USER_DATA_EMPTY));
+
+  if (phoneNumber.length !== 11) 
+    return res.status(400).send(errResponse(baseResponseStatus.USER_PHONENUMBER_ERROR_TYPE));
+
+  // Additional info Patch : phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
+
+
+  // Interest Patch
+  const interestPatchResult = await this.changeInterest(req, res);
+
+  return res.send(response(baseResponseStatus.SUCCESS, interestPatchResult));
+};
 
 
 

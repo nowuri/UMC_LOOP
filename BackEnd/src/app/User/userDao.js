@@ -67,6 +67,18 @@ async function insertNaverUserInfo(connection, insertNaverUserInfoParams) {
   );
 
   return insertNaverUserInfoRow;
+
+// 카카오 유저 생성
+async function insertKakaoUserInfo(connection, insertKakaoUserInfoParams ) {
+  console.log(insertKakaoUserInfoParams);
+  const insertKakaoUserInfoQuery = "INSERT INTO user(user_email, user_name, provider, sns_id, status) VALUES (?, ?, ?, ?, 2);";
+
+  const insertKakaoUserInfoRow = await connection.query(
+    insertKakaoUserInfoQuery,
+    insertKakaoUserInfoParams
+  );
+
+  return insertKakaoUserInfoRow;
 }
 
 // 패스워드 체크
@@ -105,6 +117,20 @@ async function updateUserInfo(connection, id, nickname) {
   return updateUserRow[0];
 }
 
+async function upsertInterest(connection, userIdx, code, val) {
+  const upsertInterestQuery = `
+    INSERT INTO table_name (column1, column2, column3, ...)
+    VALUES (value1, value2, value3, ...)
+    ON DUPLICATE KEY UPDATE column1 = VALUES(column1), column2 = VALUES(column2), column3 = VALUES(column3), ...
+  ;`;
+
+  const upsertInterestRow = await connection.query(
+    upsertInterestQuery,
+    userIdx
+  );
+
+  return upsertInterestRow[0];
+}
 
 module.exports = {
   selectUser,
@@ -113,7 +139,9 @@ module.exports = {
   selectUserId,
   insertUserInfo,
   insertNaverUserInfo,
+  insertKakaoUserInfo,
   selectUserPassword,
   selectUserAccount,
   updateUserInfo,
+  upsertInterest,
 };

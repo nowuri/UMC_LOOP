@@ -34,13 +34,15 @@ module.exports = {
     USER_USEREMAIL_NOT_EXIST : { "isSuccess": false, "code": 2017, "message": "해당 이메일을 가진 회원이 존재하지 않습니다." },
     USER_ID_NOT_MATCH : { "isSuccess": false, "code": 2018, "message": "유저 아이디 값을 확인해주세요" },
     USER_NICKNAME_EMPTY : { "isSuccess": false, "code": 2019, "message": "변경할 닉네임 값을 입력해주세요" },
-
     USER_STATUS_EMPTY : { "isSuccess": false, "code": 2020, "message": "회원 상태값을 입력해주세요" },
+    USER_DATA_EMPTY : { "isSuccess": false, "code": 2023, "message": "Form 데이터 중 비어있는 곳이 있습니다." },
+    USER_PHONENUMBER_ERROR_TYPE : { "isSuccess": false, "code": 2024, "message": "옳지 않은 전화번호 형식입니다." },
 
     // Response error
     SIGNUP_REDUNDANT_EMAIL : { "isSuccess": false, "code": 3001, "message":"중복된 이메일입니다." },
     SIGNUP_REDUNDANT_USERID : { "isSuccess": false, "code": 3002, "message":"중복된 아이디입니다." },
-    SIGNUP_ADDITIONAL_INFO_NEEDED : { "isSuccess": false, "code": 3003, "message": "회원의 추가 정보가 필요합니다. 해당 토큰과 idx를 가지고 PATCH /app/users/:userIdx 로 Redirect 하십시오"},
+    SIGNUP_ADDITIONAL_INFO_NEEDED : { "isSuccess": false, "code": 3003, "message": "회원의 추가 정보가 필요합니다. 해당 토큰과 idx를 가지고 PATCH /app/users/additional 로 Redirect 하십시오"},
+
 
     SIGNIN_EMAIL_WRONG : { "isSuccess": false, "code": 3100, "message": "아이디가 잘못 되었습니다." },
     SIGNIN_PASSWORD_WRONG : { "isSuccess": false, "code": 3101, "message": "비밀번호가 잘못 되었습니다." },

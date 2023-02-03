@@ -1,8 +1,7 @@
 const { logger } = require("../../../config/winston");
 const { pool } = require("../../../config/database");
 const userProvider = require("./userProvider");
-const userDao = require("./userDao");
-const baseResponse = require("../../../config/baseResponseStatus");
+const userDao = require("./userDao.js");
 const { response, errResponse } = require("../../../config/response");
 const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 
@@ -27,22 +26,93 @@ exports.createUser = async function(newUserData) {
         return response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, result );
       }
 
+      return errResponse(baseResponseStatus.SIGNUP_REDUNDANT_EMAIL);
+    }
+
+    const connection = await pool.getConnection(async (conn) => conn);
+
+    const userIdResult = await userDao.insertUserInfo(connection, [newUserData.userEmail, newUserData.userName, newUserData.password]);
+    const userIdx = userIdResult[0].insertId;
+
+
+    // Create JWT Token with Userdata
+    const [userResult] = await userDao.selectUserIdx(connection, userIdx);
+    // console.log(userResult);
+    const token = createJwtToken(userResult)
+    connection.release();
+
+    return response(baseResponseStatus.SUCCESS, { token, userIdx });
+  } catch (err) {
+    logger.error(`App - createUser Service error\n: ${err.message}`);
+    return errResponse(baseResponseStatus.DB_ERROR);
+  }
+};
+
+
+// Gets User Object(from JWT) and interest (array of category code strings)
+// interests = {
+//    "interested": [],
+//    "unInterested": []
+// }
+exports.patchInterests = async (user, interests) => {
+  try {
+    const connection = await pool.getConnection(async (conn) => conn);
+
+    const interestedResults = [];
+    interests.interested.forEach(async (code) => {
+      interestedResults.push(await userDao.upsertInterest(connection, user.idx, code, 1));
+    });
+
+    const unInterestedResults = [];
+    interests.unInterested.forEach(async (code) => {
+      unInterestedResults.push(await userDao.upsertInterest(connection, user.idx, code, 0));
+    });
+
+    console.log('interestedResults');
+    console.log(interestedResults);
+    console.log('unInterestedResults');
+    console.log(unInterestedResults);
+
+    connection.release();
+
+    return response(baseResponseStatus.SUCCESS);
+  } catch (error) {
+    console.error(error);
+    return errResponse(baseResponseStatus.DB_ERROR);
+  }
+};
+
+// 카카오 유저 CREATE
+exports.createKakaoUser = async function(newKakaoUserData) {
+  try {
+    // 이메일 중복 확인
+
+    const emailRows = await userProvider.emailCheck(newKakaoUserData.user_email);
+    if (emailRows.length > 0) {
+
+      // console.log(emailRows);
+      const user = emailRows[0];
+      console.log(user);
+      if (user.status === 2) {
+        // console.log(emailRows[0]);
+        const token = createJwtToken(user);
+        console.log(token);
+        const result = { token, 'userIdx': user.idx };
+        return response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, result );
+      }
       return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
     }
 
     const connection = await pool.getConnection(async (conn) => conn);
 
-    // console.log(newUserData);
-    // console.log(Object.values(newUserData));
-    const userIdResult = await userDao.insertUserInfo(connection, Object.values(newUserData));
-    console.log(`추가된 회원 : ${userIdResult[0].insertId}`)
-    const userIdx = userIdResult[0].inserId;
+    const kakaoUserIdResult = await userDao.insertKakaoUserInfo(connection, Object.values(newKakaoUserData));
+    console.log(`추가된 회원 : ${kakaoUserIdResult[0].insertId}`)
     connection.release();
-    return response(baseResponse.SUCCESS, { userIdx });
+    return response(baseResponse.SUCCESS);
 
 
   } catch (err) {
-    logger.error(`App - createUser Service error\n: ${err.message}`);
+    logger.error(`App - createKakaoUser Service error\n: ${err.message}`);
     return errResponse(baseResponse.DB_ERROR);
   }
 };
