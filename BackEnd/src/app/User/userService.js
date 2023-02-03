@@ -121,7 +121,7 @@ exports.createNaverUser = async function(newNaverUserData) {
   try {
     
     // 이메일 중복 확인
-    const emailRows = await userProvider.emailCheck(newNaverUserData.userEmail);
+    const emailRows = await userProvider.emailCheck(newNaverUserData.user_email);
     if (emailRows.length > 0) {
 
       // console.log(emailRows);
