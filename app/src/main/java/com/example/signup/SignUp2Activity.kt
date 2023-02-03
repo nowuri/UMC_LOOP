@@ -1,6 +1,7 @@
 package com.example.interested
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -87,6 +88,7 @@ class SignUp2Activity: AppCompatActivity() {
             val dlg = DatePickerDialog(this, object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                     viewBinding.birth.setText("${year}년 ${month + 1}월 ${dayOfMonth}일")
+                    viewBinding.birth.setTextColor(Color.BLACK)
                 }
             }, year, month, date)
             dlg.show()
