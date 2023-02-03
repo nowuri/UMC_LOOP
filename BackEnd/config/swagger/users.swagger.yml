@@ -2,17 +2,23 @@
   post:
     summary: 이메일 중복 유저 확인
     tags: [User]
-    requestBody:
-      description: 유저 이메일
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              userEmail:
-                type: string
-                example: helptheyounglope@gmail.com
+    parameters:
+      - in: query
+        name: userEmail
+        schema:
+          type: string
+          description: 중복을 확인하려는 유저의 이메일
+    # requestBody:
+    #   description: 유저 이메일
+    #   required: true
+    #   content:
+    #     application/json:
+    #       schema:
+    #         type: object
+    #         properties:
+    #           userEmail:
+    #             type: string
+    #             example: helptheyounglope@gmail.com
     responses:
       200:
         description: Success
@@ -27,6 +33,20 @@
                 code:
                   type: int
                   example: 1000
+      406:
+        description: Client측 전송 데이터 요구량 부족(required not satisfied, userEmail not filled)
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isSucess:
+                  type: boolean
+                  example: false
+                code:
+                  type: int
+                  example: 2000
+
 
 /app/users/api/token:
   post:
@@ -64,21 +84,3 @@
                       type: string
                       example: 712031
 
-/app/test:
-  get:
-    summary: Test API - Always returns SUCCESS
-    tags: [Test]
-    responses:
-      200:
-        description: Success
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                isSucess:
-                  type: boolean
-                  example: true
-                code:
-                  type: int
-                  example: 1000

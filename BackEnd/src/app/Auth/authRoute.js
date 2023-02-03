@@ -2,7 +2,6 @@ const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('../../../config/middlewares.js');
 const auth = require('./authController.js');
 const { passportJWTMiddleware, isAuthenticated, isNotAuthenticated } = require('../../../config/jwtMiddleware.js');
-const passport = require('passport');
 
 module.exports = function(app) {
   // 로그인되어 있지 않다면, 회원가입 진행
@@ -12,7 +11,6 @@ module.exports = function(app) {
 
   // JWT - Authorization Bearer Token 미들웨어 확인후 다음 미들웨어로 이동
   app.post('/app/auth', isAuthenticated, auth.verifyJWT);
-
 
   //app.post('/app/auth/kakao', auth.kakaoLogin);
   app.get('/app/auth/kakao', auth.kakaoLogin);

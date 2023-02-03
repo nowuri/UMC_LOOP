@@ -1,14 +1,12 @@
 const express = require('express');
-const router = express.Router();
 const user = require('./userController');
 const { isAuthenticated, isNotAuthenticated } = require('../../../config/jwtMiddleware');
 
 
 module.exports = function(app) {
 
-  // app.patch('/app/users/additional', isAuthenticated, user.addtionalSignUp);
-  // app.patch('/app/users/:userIdx', isAuthenticated, user.patchUsers);
-
+  // 2차 마무리 회원가입
+  app.patch('/app/users/additional', isAuthenticated, user.additionalSignUp);
 
   // Small APIs
   // 닉제임 중복 확인 API
@@ -20,8 +18,8 @@ module.exports = function(app) {
 
   // 0. 테스트 API
   app.get('/app/test', user.getTest);
-
-  //app.post('/app/frontTest', user.frontTestAPI);
+  
+  app.post('/app/frontTest', user.frontTestAPI);
 
   //  // 1. 유저 생성 (회원가입) API
   //  app.post('/app/users', user.postUsers);

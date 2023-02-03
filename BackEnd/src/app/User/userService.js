@@ -1,12 +1,11 @@
 const { logger } = require("../../../config/winston");
 const { pool } = require("../../../config/database");
 const userProvider = require("./userProvider");
-const userDao = require("./userDao");
+const userDao = require("./userDao.js");
 const baseResponse = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 
-const bcrypt = require('bcrypt');
 const baseResponseStatus = require("../../../config/baseResponseStatus");
 
 // Service: Create, Update, Delete 비즈니스 로직 처리
@@ -14,18 +13,37 @@ const baseResponseStatus = require("../../../config/baseResponseStatus");
 exports.createUser = async function(newUserData) {
   try {
     // 이메일 중복 확인
-    const emailRows = await userProvider.emailCheck(email);
-    if (emailRows.length > 0)
+    const emailRows = await userProvider.emailCheck(newUserData.userEmail);
+    if (emailRows.length > 0) {
+
+      // console.log(emailRows);
+      const user = emailRows[0];
+      // console.log(user);
+      if (user.status === 2) {
+        // console.log(emailRows[0]);
+        const token = createJwtToken(user);
+        // console.log(token);
+        const result = { token, 'userIdx': user.idx };
+        return response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, result );
+      }
+
       return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL);
+    }
 
     const connection = await pool.getConnection(async (conn) => conn);
 
-    const userIdResult = await userDao.insertUserInfo(connection, newUserData.values());
-    console.log(`추가된 회원 : ${userIdResult[0].insertId}`)
+    // console.log(newUserData);
+    // console.log(Object.values(newUserData));
+    const userIdResult = await userDao.insertUserInfo(connection, [newUserData.userEmail, newUserData.userName, newUserData.password]);
+    // console.log(`추가된 회원 : ${userIdResult[0].insertId}`)
+    const userIdx = userIdResult[0].insertId;
+
+    const [userResult] = await userDao.selectUserIdx(connection, userIdx);
+    // console.log(userResult);
+    const token = createJwtToken(userResult)
     connection.release();
-    return response(baseResponse.SUCCESS);
 
-
+    return response(baseResponse.SUCCESS, { token, userIdx });
   } catch (err) {
     logger.error(`App - createUser Service error\n: ${err.message}`);
     return errResponse(baseResponse.DB_ERROR);

@@ -1,0 +1,39 @@
+/app/test:
+  get:
+    summary: Test API - Always returns SUCCESS
+    tags: [Test]
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isSucess:
+                  type: boolean
+                  example: true
+                code:
+                  type: int
+                  example: 1000
+
+/app/frontTest:
+  post:
+    summary: Test API - req.cookies, req.body, req.query, req.params를 반환하여 보여준다. 주의, 로그를 띄워서 확인할 것.
+    tags: [Test]
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cookies:
+                  type: object
+                body:
+                  type: object
+                query:
+                  type: object
+                params:
+                  type: object

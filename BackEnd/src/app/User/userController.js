@@ -1,10 +1,11 @@
 const jwtMiddleware = require("../../../config/jwtMiddleware");
+const emailValidator = require('email-validator');
+
 const userProvider = require("../../app/User/userProvider");
 const userService = require("../../app/User/userService");
 const baseResponseStatus = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 
-const regexEmail = require("regex-email");
 const { checkPhoneValidation, sendTokenToSMS, getToken } = require('../../../config/coolsms.js');
 
 
@@ -14,21 +15,21 @@ const { checkPhoneValidation, sendTokenToSMS, getToken } = require('../../../con
 /** 
 * API Name : 유저 이메일 중복 체크 API
 * Description : 중복된 아이디가 없을 경우 Success Return
-* [GET] /app/users/api/email
+* [GET] /app/users/api/email?userEmail=jaykwon1234@naver.com
 */
 exports.checkOverlappingUser = async (req, res) => {
-  const email = req.body.userEmail;
+  const email = req.query.userEmail;
 
   console.log(email);
   // Check Empty email (formal validation)
   if (!email)
-    return res.send(errResponse(baseResponseStatus.USER_USEREMAIL_EMPTY));
-  // Check Blank Char with Regex
-  if (!regexEmail.test(email))
-    return res.send(errResponse(baseResponseStatus.SIGNUP_EMAIL_ERROR_TYPE));
+    return res.status(406).send(errResponse(baseResponseStatus.USER_USEREMAIL_EMPTY));
+
+  // Validate Email
+  if (!emailValidator.validate(email))
+    return res.status(406).send(errResponse(baseResponseStatus.SIGNUP_EMAIL_ERROR_TYPE));
 
   const userByEmail = await userProvider.emailCheck(email);
-
 
   return (userByEmail.length === 0) ? res.send(response(baseResponseStatus.SUCCESS)) : res.send(errResponse(baseResponseStatus.SIGNUP_REDUNDANT_USERID));
 };
@@ -48,10 +49,42 @@ exports.sendTokenToSMS = async (req, res) => {
 
     // console.log(result);
     // console.log(`token: ${tok}`);
-    res.send(response(baseResponseStatus.SUCCESS, { token: tok}));
+    res.send(response(baseResponseStatus.SUCCESS, { token: tok }));
   }
-  
+
 }
+
+// phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
+// req.body = {
+//  phoneNumber: string,
+//  postalCode: string, 
+//  address: string, 
+//  agreePICU: int, 
+//  agreeSMS: int, 
+//  agreeKakao: int
+// }
+// Interested
+// : Array of Category Code Strings
+// ex) req.body.interests = [ "004001001", "004001002", "004003001" ]
+exports.additionalSignUp = async (req, res) => {
+  const user = req.user;
+  const { phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao, userBirth, interests } = req.body;
+  // 만약 비어있는 폼 문항이 있다면
+  if (!(phoneNumber && postalCode && address && agreeSMS && agreePICU && agreeKakao && userBirth))
+    return res.status(400).send(errResponse(baseResponseStatus.USER_DATA_EMPTY));
+
+  if (phoneNumber.length !== 11) 
+    return res.status(400).send(errResponse(baseResponseStatus.USER_PHONENUMBER_ERROR_TYPE));
+
+  // Additional info Patch : phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
+
+
+  // Interest Patch
+};
+
+
+
+
 
 // 템플릿 코드
 // ========================================================================
@@ -62,9 +95,15 @@ exports.sendTokenToSMS = async (req, res) => {
  * API Name : 테스트 API
  * [GET] /app/test
  */
-exports.getTest = async function (req, res) {
-    return res.send(response(baseResponseStatus.SUCCESS))
+exports.getTest = async function(req, res) {
+  return res.send(response(baseResponseStatus.SUCCESS));
 }
+
+exports.frontTestAPI = async (req, res) => {
+  let { cookies, body, query, params } = req;
+
+  return res.status(200).send({ cookies, body, query, params });
+};
 
 /**
  * API No. 1
@@ -191,18 +230,20 @@ exports.getTest = async function (req, res) {
 // };
 
 // exports.kakaoCallback = async function (req, res) {
-    
+
 // }
 
-exports.addUser = function(newUser, callback){
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newUser.password, salt, (err, hash) => {
-        if(err) throw err;
-        newUser.password = hash;
-        newUser.save(callback);
-      });
-    });
-}
+
+// exports.addUser = function(newUser, callback){
+//     bcrypt.genSalt(10, (err, salt) => {
+//       bcrypt.hash(newUser.password, salt, (err, hash) => {
+//         if(err) throw err;
+//         newUser.password = hash;
+//         newUser.save(callback);
+//       });
+//     });
+// }
+
 
 
 

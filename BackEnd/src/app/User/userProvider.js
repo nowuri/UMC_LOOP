@@ -22,9 +22,9 @@ exports.retrieveUserList = async function(email) {
   }
 };
 
-exports.retrieveUser = async function(userId) {
+exports.retrieveUserByEmail = async function(userEmail) {
   const connection = await pool.getConnection(async (conn) => conn);
-  const userResult = await userDao.selectUserId(connection, userId);
+  const userResult = await userDao.selectUserEmail(connection, userEmail);
 
   connection.release();
 
@@ -32,8 +32,9 @@ exports.retrieveUser = async function(userId) {
 };
 
 exports.retrieveUserByIdx = async function(userIdx) {
+  console.log(`in retrieveUserByIdx, userIdx: ${userIdx}`);
   const connection = await pool.getConnection(async (conn) => conn);
-  const userResult = await userDao.selectUserId(connection, userIdx);
+  const userResult = await userDao.selectUserIdx(connection, userIdx);
 
   connection.release();
 
@@ -45,6 +46,7 @@ exports.emailCheck = async function(email) {
   const emailCheckResult = await userDao.selectUserEmail(connection, email);
   connection.release();
 
+  // console.log(emailCheckResult);
   return emailCheckResult;
 };
 

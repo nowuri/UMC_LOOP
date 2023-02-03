@@ -3,14 +3,11 @@ const compression = require('compression');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 // Passport.js 관련 모듈 import
 const passport = require('passport');
 const passportConfig = require('./passport/passport.js');
-
-const session = require('express-session');
-const MySQLStore = require('express-mysql-session')(session);
-const { pool } = require('./database.js');
 
 // Swagger.js 관련 모듈 import
 const swaggerUi = require('swagger-ui-express');
@@ -35,30 +32,17 @@ exports.app = async function() {
 
   app.use(cors());
 
-  const connection = await pool.getConnection((async (conn) => conn));
-  const sessionStore = new MySQLStore({}, connection);
 
-  app.use(session({
-    resave: false,
-    saveUninitialized: false,
-    secret: 'secret',
-    cookie: {
-      httpOnly: true,
-      secure: false,
-    },
-    store: sessionStore,
-  }));
+  app.use(cookieParser());
 
   passportConfig();
   app.use(passport.initialize());
-  app.use(passport.session());
-  
-  
 
   /* App (Android, iOS) */
   // TODO: 도메인을 추가할 경우 이곳에 Route를 추가하세요.
   require('../src/app/User/userRoute')(app);
   require('../src/app/Auth/authRoute')(app);
+  require('../src/app/Policy/policyRoute')(app);
 
   return app;
 };

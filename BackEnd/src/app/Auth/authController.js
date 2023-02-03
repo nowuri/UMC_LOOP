@@ -2,7 +2,6 @@ const passport = require('passport');
 const emailValidator = require('email-validator');
 const bcrypt = require('bcrypt');
 
-
 const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 const userProvider = require("../../app/User/userProvider");
 const userService = require("../../app/User/userService");
@@ -13,9 +12,11 @@ const { response, errResponse } = require("../../../config/response");
 //  userEmail, userName, password, 
 // }
 exports.localSignUp = async (req, res) => {
-  const { newUserData } = req.body;
-
   try {
+    const { newUserData } = req.body;
+    if (!newUserData)
+      return res.status(400).send(errResponse(baseResponseStatus.SIGNUP_EMAIL_EMPTY));
+
     // Validate Email
     if (!emailValidator.validate(newUserData.userEmail)) {
       return res.send(errResponse(baseResponseStatus.SIGNUP_EMAIL_ERROR_TYPE));
@@ -28,7 +29,15 @@ exports.localSignUp = async (req, res) => {
     const createUserResult = await userService.createUser(newUserData);
 
     // console.log(createUserResult);
-    res.send(createUserResult);
+
+    if (createUserResult.code === 1000) {
+      return res.send(createUserResult);
+    }
+    else if (createUserResult.code === 3003) {
+      return res.status(300).send(createUserResult);
+    }
+
+    res.status(400).send(createUserResult);
 
   } catch (error) {
     console.error(error);
@@ -61,19 +70,32 @@ exports.localSignIn = async (req, res) => {
       if (authError) {
         console.log(info);
         console.error(authError);
-        return res.send(errResponse(baseResponseStatus.SIGNIN_PASSPORT_AUTH_ERROR));
+        return res.status(500).send(errResponse(baseResponseStatus.SIGNIN_PASSPORT_AUTH_ERROR));
       }
 
       if (!user) {
+        if (parseInt(info.code / 2000))
+          res.status(400);
         return res.send(errResponse(info));
       }
 
       const token = createJwtToken(user);
+            // 만약 유저의 회원가입이 완료되지 않았다면
+      if (user.status === 2) {
+        res.status(300);
+        return res.send(response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, { token, "userIdx": user.idx }));
+      }  
+
       return res.send(response(baseResponseStatus.SUCCESS, { token }));
     }
   )(req, res);
 }
 
+
+exports.verifyJWT = async (req, res) => {
+  console.log(req.user);
+  return res.send(response(baseResponseStatus.SUCCESS, req.user));
+};
 
 exports.verifyJWT = async (req, res) => {
   console.log(req.user);
