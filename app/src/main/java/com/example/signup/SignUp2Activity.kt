@@ -3,6 +3,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.ActivitySignup2Binding
 import com.example.signup.SignUp1Activity
 import java.util.*
+import kotlin.math.roundToInt
 
 
 class SignUp2Activity: AppCompatActivity() {
@@ -69,6 +71,9 @@ class SignUp2Activity: AppCompatActivity() {
 
         //SMS 인증번호 확인
         //1분 카운트다운
+        viewBinding.btnNumauth.setOnClickListener{
+            mCountDown.start()
+        }
 
         //생년월일 입력
         viewBinding.btnBirth.setOnClickListener {
@@ -125,6 +130,17 @@ class SignUp2Activity: AppCompatActivity() {
             startActivity(intent)
         }
     }
+    private val mCountDown: CountDownTimer = object : CountDownTimer(20000, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            //update the UI with the new count
+            viewBinding.numauthStatus.setText("${(millisUntilFinished.toFloat() / 1000.0f).roundToInt()}")
+        }
+
+        override fun onFinish() {
+            viewBinding.numauthStatus.setText("0:00")
+        }
+    }
+
     private val ChildForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         {result ->
