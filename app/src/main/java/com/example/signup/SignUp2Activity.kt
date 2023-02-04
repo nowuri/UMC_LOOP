@@ -40,15 +40,6 @@ class SignUp2Activity: AppCompatActivity() {
         }
 
         //여기서부터는 회원정보 입력
-        //이름 입력
-        //viewBinding.ETName.addTextChangedListener(object : TextWatcher {
-        //    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        //    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        //        name = viewBinding.ETName.text.toString()
-        //    }
-
-        //    override fun afterTextChanged(p0: Editable?) {}
-        //})
 
         //전화번호 입력
         viewBinding.ETTelephone.addTextChangedListener(object : TextWatcher {
@@ -111,9 +102,10 @@ class SignUp2Activity: AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {}
         })
 
-        if(intent.hasExtra("ID") && intent.hasExtra("PW")){
+        if(intent.hasExtra("ID") && intent.hasExtra("PW")&& intent.hasExtra("name")   ){
             ID = intent.getStringExtra("ID").toString()
             pw = intent.getStringExtra("PW").toString()
+            name = intent.getStringExtra("name").toString()
         }
         else{
             Toast.makeText(this,"받아온 값이 없습니다.",Toast.LENGTH_SHORT).show()
