@@ -6,7 +6,6 @@ import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.DialogCommentBinding
-import com.example.interested.databinding.SignupPt2Binding
 import com.example.signup.SignUp1Activity
 
 class CommentDialog(private val context : AppCompatActivity) {

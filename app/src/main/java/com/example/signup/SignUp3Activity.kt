@@ -22,7 +22,6 @@ class SignUp3Activity: AppCompatActivity() {
     var tel : String = ""
     var birth: String = ""
     var address: String = ""
-    var email: String = ""
 
     var checkbox_status_sms: String = ""
     var checkbox_status_kkt: String = ""
@@ -113,7 +112,6 @@ class SignUp3Activity: AppCompatActivity() {
             intent.putExtra("tel",tel)
             intent.putExtra("birth",birth)
             intent.putExtra("address",address)
-            intent.putExtra("email",email)
             intent.putExtra("checkbox_status_sms",checkbox_status_sms)
             intent.putExtra("checkbox_status_kkt",checkbox_status_kkt)
             intent.putExtra("checkbox_status_info",checkbox_status_info)

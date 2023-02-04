@@ -3,6 +3,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.ActivitySignup2Binding
 import com.example.signup.SignUp1Activity
 import java.util.*
+import kotlin.math.roundToInt
 
 
 class SignUp2Activity: AppCompatActivity() {
@@ -40,15 +42,6 @@ class SignUp2Activity: AppCompatActivity() {
         }
 
         //여기서부터는 회원정보 입력
-        //이름 입력
-        //viewBinding.ETName.addTextChangedListener(object : TextWatcher {
-        //    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        //    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        //        name = viewBinding.ETName.text.toString()
-        //    }
-
-        //    override fun afterTextChanged(p0: Editable?) {}
-        //})
 
         //전화번호 입력
         viewBinding.ETTelephone.addTextChangedListener(object : TextWatcher {
@@ -78,6 +71,9 @@ class SignUp2Activity: AppCompatActivity() {
 
         //SMS 인증번호 확인
         //1분 카운트다운
+        viewBinding.btnNumauth.setOnClickListener{
+            mCountDown.start()
+        }
 
         //생년월일 입력
         viewBinding.btnBirth.setOnClickListener {
@@ -111,9 +107,10 @@ class SignUp2Activity: AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {}
         })
 
-        if(intent.hasExtra("ID") && intent.hasExtra("PW")){
+        if(intent.hasExtra("ID") && intent.hasExtra("PW")&& intent.hasExtra("name")   ){
             ID = intent.getStringExtra("ID").toString()
             pw = intent.getStringExtra("PW").toString()
+            name = intent.getStringExtra("name").toString()
         }
         else{
             Toast.makeText(this,"받아온 값이 없습니다.",Toast.LENGTH_SHORT).show()
@@ -133,6 +130,22 @@ class SignUp2Activity: AppCompatActivity() {
             startActivity(intent)
         }
     }
+    private val mCountDown: CountDownTimer = object : CountDownTimer(120000, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            val min = millisUntilFinished / 60000
+            val sec = millisUntilFinished % 60000 / 1000
+
+            var timeLeftText = "$min:"
+            timeLeftText += sec
+
+            viewBinding.numauthStatus.setText(timeLeftText)
+        }
+
+        override fun onFinish() {
+            viewBinding.numauthStatus.setText("0:00")
+        }
+    }
+
     private val ChildForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         {result ->
