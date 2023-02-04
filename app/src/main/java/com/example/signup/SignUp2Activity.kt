@@ -130,10 +130,15 @@ class SignUp2Activity: AppCompatActivity() {
             startActivity(intent)
         }
     }
-    private val mCountDown: CountDownTimer = object : CountDownTimer(20000, 1000) {
+    private val mCountDown: CountDownTimer = object : CountDownTimer(120000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
-            //update the UI with the new count
-            viewBinding.numauthStatus.setText("${(millisUntilFinished.toFloat() / 1000.0f).roundToInt()}")
+            val min = millisUntilFinished / 60000
+            val sec = millisUntilFinished % 60000 / 1000
+
+            var timeLeftText = "$min:"
+            timeLeftText += sec
+
+            viewBinding.numauthStatus.setText(timeLeftText)
         }
 
         override fun onFinish() {
