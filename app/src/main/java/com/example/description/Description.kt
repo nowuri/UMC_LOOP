@@ -43,8 +43,6 @@ class Description : AppCompatActivity(), View.OnClickListener {
             startActivity(intent)
         }
 
-        //회원 탈퇴 클릭 시 카드뷰 띄움
-
         //TODO: 지원하기 클릭시 신청 사이트 하이퍼링크로 연결
         //viewBinding.btnApply.setOnClickListener(){
         //    val intent = Intent(this,Recommend::class.java)
@@ -54,6 +52,7 @@ class Description : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id){
+            //추천
             viewBinding.btnRecomm.id ->{
                 viewBinding.btnRecomm.setBackgroundResource(R.drawable.btn_recomm_selected)
                 viewBinding.btnRecomm.setTextColor(Color.WHITE)
@@ -68,6 +67,7 @@ class Description : AppCompatActivity(), View.OnClickListener {
                     }
                 })
             }
+            //비추천
             viewBinding.btnUnrecomm.id ->{
                 viewBinding.btnUnrecomm.setBackgroundResource(R.drawable.btn_unrecomm_selected)
                 viewBinding.btnUnrecomm.setTextColor(Color.WHITE)
