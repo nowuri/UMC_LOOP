@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         //타 화면 테스트용 버튼 (삭제예정)
         viewBinding.button.setOnClickListener{
-            val intent = Intent(this, SignUp2Activity::class.java)
+            val intent = Intent(this, Description::class.java)
             startActivity(intent)
         }
     }
