@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.interested.SignUp3Activity
 import com.example.interested.databinding.ActivityDescriptionBinding
 
 class Description : AppCompatActivity(), View.OnClickListener {
@@ -66,6 +67,9 @@ class Description : AppCompatActivity(), View.OnClickListener {
                         Log.e("받은 코멘트 값", recomm_comment)
                     }
                 })
+                val intent = Intent(this, Recommend::class.java)
+                intent.putExtra("recomm_comment",recomm_comment)
+
                 viewBinding.btnRecomm.setClickable(false)
                 viewBinding.btnUnrecomm.setClickable(false)
             }
@@ -83,6 +87,9 @@ class Description : AppCompatActivity(), View.OnClickListener {
                         Log.e("받은 코멘트 값", unrecomm_comment)
                     }
                 })
+                val intent = Intent(this, NotRecommend::class.java)
+                intent.putExtra("unrecomm_comment",unrecomm_comment)
+
                 viewBinding.btnRecomm.setClickable(false)
                 viewBinding.btnUnrecomm.setClickable(false)
             }
