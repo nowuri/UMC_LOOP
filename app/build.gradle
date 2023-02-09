@@ -89,6 +89,9 @@ dependencies {
 
     implementation 'com.auth0:java-jwt:3.8.1'
 
+    //notification
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
 
 }
 tasks.register("prepareKotlinBuildScriptModel"){}
