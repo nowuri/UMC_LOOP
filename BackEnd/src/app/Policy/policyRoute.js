@@ -10,14 +10,14 @@ module.exports = function(app) {
     app.get('/app/policies', policy.getPolicies);
     
     // 지역별 정책 목록
-    app.get('/app/policies/region', policy.getPolicyListForRegion);
+    //app.get('/app/policies/region', policy.getPolicyListForRegion);
 
     // 분야별 정책 목록
-    app.get('/app/policies/category', policy.getPolicyListForCategory);
+    //app.get('/app/policies/category', policy.getPolicyListForCategory);
 
     // 정책 검색 api
-    app.get('/app/policies/search/:keyWord', policy.SearchPolicies);
-    //app.get('/app/policies/search', policy.SearchPolicies);
+    app.get('/app/policies/search/:keyword/region', policy.SearchPoliciesForRegion); // 지역별
+    app.get('/app/policies/search/field', policy.SearchPoliciesForField); // 분야별
 
     // 특정 정책 상세 정보 api
     app.get('/app/policies/:policyId', policy.getPolicyById);
