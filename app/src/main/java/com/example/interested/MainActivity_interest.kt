@@ -2,6 +2,7 @@ package com.example.interested
 
 import android.content.Intent
 import android.graphics.Color
+import android.location.Geocoder.isPresent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,8 @@ import com.example.network.RetrofitService
 import com.example.network.RetrofitClient
 import com.example.network.SignUpRequestBody
 import com.example.network.SignUpResponseBody
+import com.google.gson.JsonArray
+import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,6 +43,10 @@ class MainActivity_interest : AppCompatActivity() {
     var checkbox_status_kkt4: String = ""
     var checkbox_status_info4: String = ""
 
+    val jsonInterest = JSONArray(String)
+    val jsonUnInterest = JSONArray(String)
+    val interest = ArrayList<String>()
+    val uninterest = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,12 +88,19 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.live.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
+                if(uninterest.contains("004003002"))
+                    uninterest.remove("004003002")
+                interest.add("004003002")
             }
             else{
                 viewBinding.live.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.live.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
+                if(interest.contains("004003002")){
+                    interest.remove("004003002")
+                }
+                uninterest.add("004003002")
             }
         }
 
@@ -97,12 +111,18 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.transport.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
+                if(uninterest.contains("004004002"))
+                    uninterest.remove("004004002")
+                interest.add("004004002")
             }
             else{
                 viewBinding.transport.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.transport.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
+                if(interest.contains("004004002"))
+                    interest.remove("004004002")
+                uninterest.add("004004002")
             }
         }
 
@@ -113,12 +133,24 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.money.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
+                if(uninterest.contains("004003001")) {
+                    uninterest.remove("004003001")
+                    uninterest.remove("004003003")
+                }
+                interest.add("004003001")
+                interest.add("004003003")
             }
             else{
                 viewBinding.money.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.money.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
+                if(interest.contains("004003001")) {
+                    interest.remove("004003001")
+                    interest.remove("004003003")
+                }
+                uninterest.add("004003001")
+                uninterest.add("004003003")
             }
         }
 
@@ -129,12 +161,18 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.work.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
+                if(uninterest.contains("004001"))
+                    uninterest.remove("004001")
+                interest.add("004001")
             }
             else{
                 viewBinding.work.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.work.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
+                if(interest.contains("004001"))
+                    interest.remove("004001")
+                uninterest.add("004001")
             }
         }
 
@@ -145,12 +183,18 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.edu.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
+                if(uninterest.contains("004006"))
+                    uninterest.remove("004006")
+                interest.add("004006")
             }
             else{
                 viewBinding.edu.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.edu.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
+                if(interest.contains("004006"))
+                    interest.remove("004006")
+                uninterest.add("004006")
             }
         }
 
@@ -161,12 +205,18 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.found.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
+                if(uninterest.contains("004002"))
+                    uninterest.remove("004002")
+                interest.add("004002")
             }
             else{
                 viewBinding.found.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.found.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
+                if(interest.contains("004002"))
+                    interest.remove("004002")
+                uninterest.add("004002")
             }
         }
 
@@ -177,12 +227,18 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.health.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
+                if(uninterest.contains("004004001"))
+                    uninterest.remove("004004001")
+                interest.add("004004001")
             }
             else{
                 viewBinding.health.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.health.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
+                if(interest.contains("004004001"))
+                    interest.remove("004004001")
+                uninterest.add("004004001")
             }
         }
 
@@ -193,12 +249,18 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.etc.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
+                if(uninterest.contains("004005"))
+                    uninterest.remove("004005")
+                interest.add("004005")
             }
             else{
                 viewBinding.etc.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.etc.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
+                if(interest.contains("004005"))
+                    interest.remove("004005")
+                interest.add("004005")
             }
         }
 
@@ -222,6 +284,14 @@ class MainActivity_interest : AppCompatActivity() {
 
         viewBinding.finish.setOnClickListener{
             Log.e("finish num",num.toString())
+            for(i in 0..interest.size-1){
+                val v = interest.get(i)
+                jsonInterest.put(v)
+            }
+            for(i in 0..uninterest.size-1){
+                val v = uninterest.get(i)
+                jsonUnInterest.put(v)
+            }
             if(possible == 1){
                 Toast.makeText(this@MainActivity_interest,"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
                 Toast.makeText(this,ID4 + " "+ pw4 + " "+ email4,Toast.LENGTH_SHORT).show()

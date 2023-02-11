@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
+        android:layout_width="293dp"
         android:layout_height="45dp"
         android:orientation="horizontal"
         android:background="#1D2D69"
@@ -22,9 +22,10 @@
             android:layout_height="45dp"
             android:text="코멘트창"
             android:textColor="@color/white"
-            android:textSize="28sp"
+            android:textSize="26sp"
             android:textStyle="bold"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="95dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,12 +33,16 @@
         <Button
             android:id="@+id/btn_close"
             android:layout_width="61dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
             android:background="@color/blue"
             android:text="건너뛰기"
             android:textColor="@color/white"
+            android:textSize="13sp"
+            android:layout_marginTop="5dp"
+
             app:layout_constraintEnd_toEndOf="parent">
+
         </Button>
     </LinearLayout>
 
@@ -54,24 +59,26 @@
 
         <EditText
             android:id="@+id/inputComment"
-            android:layout_width="match_parent"
+            android:layout_width="290dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:background="@drawable/myprofile_id_rec"
             android:paddingLeft="20dp"
             android:hint="이유를 작성해주세요"
             android:textColorHint="#D9D9D9"
-            android:textSize="18sp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_finish"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="5dp"
             android:text="작성완료"
             android:textColor="@color/white"
+            android:textSize="18dp"
             android:gravity="center"
             android:background="@drawable/btn_confirm"
             app:layout_constraintEnd_toEndOf="parent">

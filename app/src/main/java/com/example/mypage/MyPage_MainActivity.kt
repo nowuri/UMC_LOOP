@@ -1,15 +1,33 @@
 package com.example.mypage
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.example.home.Home
+import com.example.interested.R
 import com.example.interested.databinding.ActivityMypageBinding
 import com.example.login.Login
 import com.example.myprofile.MyProfileActivity
 import com.example.qna.Question
 import com.example.search.Search
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.*
+import kotlin.random.Random.Default.nextInt
 
 class MyPage_MainActivity : AppCompatActivity() {
     private lateinit var viewBinding : ActivityMypageBinding
@@ -26,10 +44,10 @@ class MyPage_MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         //알림 목록 (수정필요)
-        viewBinding.mypageNotilist.setOnClickListener(){
-            val intent = Intent(this, MyProfileActivity::class.java)
-            startActivity(intent)
+        viewBinding.mypageNotilist.setOnClickListener() {
+
         }
+
         //지원한 정책
         viewBinding.mypageAppliedlist.setOnClickListener(){
             val intent = Intent(this, MyAppliedList::class.java)
