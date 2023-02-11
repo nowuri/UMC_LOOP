@@ -17,12 +17,15 @@ module.exports = function(app) {
   // 회원 탈퇴 API
   app.patch('/app/users/withdraw', isAuthenticated, user.withdrawUser);
 
+  // 회원 정보 수정 API
+  app.patch('/app/users/info', isAuthenticated, user.changeInfo);
+
   // Small APIs
   // 닉제임 중복 확인 API
-  app.post('/app/users/api/emails', user.checkOverlappingUser);
+  app.post('/app/api/emails', user.checkOverlappingUser);
 
   // SMS 전송 API
-  app.post('/app/users/api/tokens', user.sendTokenToSMS);
+  app.post('/app/api/tokens', user.sendTokenToSMS);
 
 
 

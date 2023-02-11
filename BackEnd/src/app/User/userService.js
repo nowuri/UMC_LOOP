@@ -66,7 +66,7 @@ exports.patchAdditionalInfo = async (user, info) => {
   try {
     const connection = await pool.getConnection(async (conn) => conn);
     
-    const updateUserInfoResult = await userDao.updateUserInfo(connection, user.idx, info);
+    const updateUserInfoResult = await userDao.updateUserAdditionalInfo(connection, user.idx, info);
 
     connection.release();
 
@@ -123,7 +123,25 @@ exports.patchUserStatus = async (user, val) => {
     console.error(error);
     return errResponse(baseResponseStatus.DB_ERROR)
   }
-  
+};
+
+exports.updateUserInfo = async (user, info) => {
+  try {
+    const connection = await pool.getConnection(async (conn) => conn);
+
+    const updateUserInfoResult = await userDao.updateUserInfo(connection, user.idx, info);
+
+    console.log(updateUserInfoResult);
+
+    connection.release();
+
+    return response(baseResponseStatus.SUCCESS);
+    
+  } catch (error) {
+    console.error(error);
+    return errResponse(baseResponseStatus.DB_ERROR);
+  }
+
 };
 
 // 카카오 유저 CREATE

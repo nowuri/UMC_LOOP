@@ -61,7 +61,7 @@ exports.changeInterest = async (req, res) => {
 
   const result = await userService.patchInterests(user, { interested, unInterested });
 
-   res.send(result);
+  res.send(result);
 };
 
 
@@ -105,7 +105,7 @@ exports.additionalSignUp = async (req, res) => {
   const userStatus = await userProvider.statusCheck(user);
   if (userStatus === 1) {
     return res.status(400).send(errResponse(baseResponseStatus.SIGNUP_ALREADY_DONE));
-  } 
+  }
 
   // Additional info Patch : phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
   const infoPatchResult = await userService.patchAdditionalInfo(user, { phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao, userBirth });
@@ -115,7 +115,7 @@ exports.additionalSignUp = async (req, res) => {
 
   // Change User SignUp Status to 1
   const patchUserStatusResult = await userService.patchUserStatus(user, 1);
-  
+
   return res.send(response(baseResponseStatus.SUCCESS));
 };
 
@@ -128,13 +128,26 @@ exports.withdrawUser = async (req, res) => {
 };
 
 
+exports.changeInfo = async (req, res) => {
+  const user = req.user;
+
+  const changeInfoResult = await userService.updateUserInfo(user, info);
+
+  if (changeInfoResult.code === 4000) {
+    return res.status(400).send(changeInfoResult);
+  }
+  return res.send(changeInfoResult);
+
+};
+
+
 exports.changePasswd = async (req, res) => {
   const user = req.user;
   const { user_email, user_name } = req.body;
 
 
   // 만약 비어있는 폼 문항이 있다면
-  const userData = {user_email: user_email, user_name: user_name};
+  const userData = { user_email: user_email, user_name: user_name };
   userService.updateUserPassword(userData);
   //여기서 일치한지 확인 (일치하지 않으면 return errResponse)
 

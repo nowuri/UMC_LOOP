@@ -121,7 +121,7 @@ async function selectUserIdForPassword(connection, name, email) {
 // *    "agreeSMS": int, 
 // *    "agreeKakao": int,
 // * }
-async function updateUserInfo(connection, idx, infoParams) {
+async function updateUserAdditionalInfo(connection, idx, infoParams) {
   // console.log(idx, infoParams);
   const { phoneNumber, userBirth, postalCode, address, agreeSMS, agreePICU, agreeKakao } = infoParams;
 
@@ -179,6 +179,16 @@ async function updateUserStatus(connection, userIdx, val) {
   return updateUserStatusRow[0];
 };
 
+async function updateUserInfo(connection, userIdx, info) {
+  const updateuserInfoQuery = SQL`
+
+  `;
+
+  const [ updateUserInfoRow ] = await connection.query(updateuserInfoQuery);
+
+  return updateUserInfoRow;
+}
+
 module.exports = {
   selectUser,
   selectUserEmail,
@@ -191,6 +201,7 @@ module.exports = {
   selectUserIdForPassword,
   selectUserAccount,
   updateUserPasswordInfo,
+  updateUserAdditionalInfo,
   updateUserInfo,
   upsertInterest,
   updateUserStatus,
