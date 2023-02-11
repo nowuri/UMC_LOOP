@@ -1,3 +1,5 @@
+const SQL = require('sql-template-strings');
+
 // 모든 유저 조회
 async function selectUser(connection) {
   const selectUserListQuery = `
@@ -67,9 +69,10 @@ async function insertNaverUserInfo(connection, insertNaverUserInfoParams) {
   );
 
   return insertNaverUserInfoRow;
+}
 
 // 카카오 유저 생성
-async function insertKakaoUserInfo(connection, insertKakaoUserInfoParams ) {
+async function insertKakaoUserInfo(connection, insertKakaoUserInfoParams) {
   console.log(insertKakaoUserInfoParams);
   const insertKakaoUserInfoQuery = "INSERT INTO user(user_email, user_name, provider, sns_id, status) VALUES (?, ?, ?, ?, 2);";
 
@@ -108,28 +111,39 @@ async function selectUserAccount(connection, email) {
   return selectUserAccountRow[0];
 }
 
-async function updateUserInfo(connection, id, nickname) {
-  const updateUserQuery = `
-  UPDATE UserInfo 
-  SET nickname = ?
-  WHERE id = ?;`;
-  const updateUserRow = await connection.query(updateUserQuery, [nickname, id]);
+// * infoParams = {
+// *    "phoneNumber": string,
+// *    "userBirth": string,
+// *    "postalCode": string, 
+// *    "address": string, 
+// *    "agreePICU": int, 
+// *    "agreeSMS": int, 
+// *    "agreeKakao": int,
+// * }
+async function updateUserInfo(connection, idx, infoParams) {
+  // console.log(idx, infoParams);
+  const { phoneNumber, userBirth, postalCode, address, agreeSMS, agreePICU, agreeKakao } = infoParams;
+
+  const updateUserQuery = SQL`
+  UPDATE user 
+  SET user_phone = ${phoneNumber}, user_birth = ${userBirth}, user_postal = ${postalCode}, user_address = ${address}, agree_SMS = ${agreeSMS}, agree_kakao = ${agreeKakao}, agree_PICU = ${agreePICU}
+  WHERE idx = ${idx};`;
+
+  const updateUserRow = await connection.query(updateUserQuery);
+
   return updateUserRow[0];
 }
 
 async function upsertInterest(connection, userIdx, code, val) {
-  const upsertInterestQuery = `
-    INSERT INTO table_name (column1, column2, column3, ...)
-    VALUES (value1, value2, value3, ...)
-    ON DUPLICATE KEY UPDATE column1 = VALUES(column1), column2 = VALUES(column2), column3 = VALUES(column3), ...
-  ;`;
 
-  const upsertInterestRow = await connection.query(
-    upsertInterestQuery,
-    userIdx
-  );
+  const onDuplicateKeyUpdateQuery = SQL`
+    INSERT INTO interest (user_idx, category_code, status) VALUES (${userIdx}, ${code}, ${val})
+    ON DUPLICATE KEY 
+    UPDATE status=${val};`;
 
-  return upsertInterestRow[0];
+  connection.query(onDuplicateKeyUpdateQuery);
+
+  return;
 }
 
 module.exports = {

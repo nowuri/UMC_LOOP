@@ -60,11 +60,9 @@ exports.changeInterest = async (req, res) => {
   console.log(req.user);
   console.log(req.body);
 
-  const interestPatchResult = await userService.patchInterests(user, { interested, unInterested });
+  await userService.patchInterests(user, { interested, unInterested });
 
-  console.log(interestPatchResult);
-
-  return interestPatchResult;
+  return response(baseResponseStatus.SUCCESS);
 };
 
 
@@ -81,28 +79,37 @@ exports.changeInterest = async (req, res) => {
 // : Array of Category Code Strings
 // ex) req.body = 
 // {
-//    "interested" : [ "004001001", "004001002", "004003001" ],
-//    "unInterested" : [""]
+//    "phoneNumber": string,
+//    "postalCode": string, 
+//    "userBirth": string,
+//    "address": string, 
+//    "agreePICU": int, 
+//    "agreeSMS": int, 
+//    "agreeKakao": int,
+//    "interested" : [ "004001001", "004001002", "004003001", "004003002" ],
+//    "unInterested" : ["004001003", "004001004", "004002001", "004002002", "004002003", "004003003", "004004001", "004004002", "004005001", "004005002", "004005003", 
+//    "004006001", "004006002", "004006003", "004006004", "004006005", "004006006"]
 // }
 exports.additionalSignUp = async (req, res) => {
   const user = req.user;
 
-  const { phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao, userBirth, interests } = req.body;
+  const { phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao, userBirth, interested, unInterested } = req.body;
 
   // 만약 비어있는 폼 문항이 있다면
   if (!(phoneNumber && postalCode && address && userBirth))
     return res.status(400).send(errResponse(baseResponseStatus.USER_DATA_EMPTY));
 
-  if (phoneNumber.length !== 11) 
+  if (phoneNumber.length !== 11)
     return res.status(400).send(errResponse(baseResponseStatus.USER_PHONENUMBER_ERROR_TYPE));
 
   // Additional info Patch : phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
 
+  const infoPatchResult = await userService.patchAdditionalInfo(user, { phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao, userBirth });
 
   // Interest Patch
-  const interestPatchResult = await this.changeInterest(req, res);
-
-  return res.send(response(baseResponseStatus.SUCCESS, interestPatchResult));
+  await userService.patchInterests(user, { interested, unInterested });
+  
+  res.send(response(baseResponseStatus.SUCCESS));
 };
 
 

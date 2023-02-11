@@ -27,7 +27,7 @@ exports.getPolicies = async function(req, res) {
       openApiVlak: '2809748344615158ecb64134',
       bizTycdSel: fields, //정책 id
       srchPolyBizSecd: region, //지역 id
-      display: 10,
+      display: 15,
       pageIndex: 1
     },
   }

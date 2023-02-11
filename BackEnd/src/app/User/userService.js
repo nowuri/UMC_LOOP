@@ -49,37 +49,65 @@ exports.createUser = async function(newUserData) {
 };
 
 
+/**
+  * Gets User Object, and additional User entered Data
+  * info = {
+  *    "phoneNumber": string,
+  *    "userBirth": string,
+  *    "postalCode": string, 
+  *    "address": string, 
+  *    "agreePICU": int, 
+  *    "agreeSMS": int, 
+  *    "agreeKakao": int,
+  * }
+  */
+exports.patchAdditionalInfo = async (user, info) => {
+  try {
+    const connection = await pool.getConnection(async (conn) => conn);
+    
+    const updateUserInfoResult = await userDao.updateUserInfo(connection, user.idx, info);
+
+    connection.release();
+
+    // console.log(updateUserInfoResult);
+
+    return updateUserInfoResult;
+
+  } catch (error) {
+    console.error(error);
+    return errResponse(baseResponseStatus.DB_ERROR);
+  }
+};
+
+
 // Gets User Object(from JWT) and interest (array of category code strings)
 // interests = {
 //    "interested": [],
 //    "unInterested": []
 // }
 exports.patchInterests = async (user, interests) => {
+  const connection = await pool.getConnection(async (conn) => conn);
   try {
-    const connection = await pool.getConnection(async (conn) => conn);
+    const { interested, unInterested } = interests;
 
-    const interestedResults = [];
-    interests.interested.forEach(async (code) => {
-      interestedResults.push(await userDao.upsertInterest(connection, user.idx, code, 1));
-    });
+    for (let i in interested) {
+      code = interested[i];
+      await userDao.upsertInterest(connection, user.idx, code, 1);
+    }
 
-    const unInterestedResults = [];
-    interests.unInterested.forEach(async (code) => {
-      unInterestedResults.push(await userDao.upsertInterest(connection, user.idx, code, 0));
-    });
-
-    console.log('interestedResults');
-    console.log(interestedResults);
-    console.log('unInterestedResults');
-    console.log(unInterestedResults);
+    for (let i in unInterested) {
+      code = unInterested[i];
+      await userDao.upsertInterest(connection, user.idx, code, 0);
+    }
 
     connection.release();
 
-    return response(baseResponseStatus.SUCCESS);
+    return;
+
   } catch (error) {
     console.error(error);
     return errResponse(baseResponseStatus.DB_ERROR);
-  }
+  } 
 };
 
 // 카카오 유저 CREATE
