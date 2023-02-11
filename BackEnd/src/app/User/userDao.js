@@ -167,6 +167,18 @@ async function upsertInterest(connection, userIdx, code, val) {
   return;
 }
 
+async function updateUserStatus(connection, userIdx, val) {
+  const updateUserStatusQuery = SQL`
+    UPDATE user
+    set status = ${val}
+    WHERE idx = ${userIdx};
+  `;
+
+  const updateUserStatusRow = await connection.query(updateUserStatusQuery);
+
+  return updateUserStatusRow[0];
+};
+
 module.exports = {
   selectUser,
   selectUserEmail,
@@ -178,7 +190,8 @@ module.exports = {
   selectUserPassword,
   selectUserIdForPassword,
   selectUserAccount,
-  updateUserInfo,
   updateUserPasswordInfo,
-  upsertInterest
+  updateUserInfo,
+  upsertInterest,
+  updateUserStatus,
 };

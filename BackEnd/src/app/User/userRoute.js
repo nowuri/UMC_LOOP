@@ -9,7 +9,7 @@ module.exports = function(app) {
   app.patch('/app/users/additional', isAuthenticated, user.additionalSignUp);
 
   // 관심 카테고리 변경 API
-  app.put('/app/users/interests', isAuthenticated, user.changeInterest);
+  app.patch('/app/users/interests', isAuthenticated, user.changeInterest);
 
   // 비밀번호 변경
   app.get('/app/users/changePasswd', isAuthenticated, user.changePasswd);

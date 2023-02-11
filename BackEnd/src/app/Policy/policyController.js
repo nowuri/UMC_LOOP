@@ -17,8 +17,6 @@ exports.getPolicies = async function(req, res) {
   // request 에서 원하는 필터 받아오기(지역, 정책)
   const fields = req.params.fields; // bizTycdSel (정책)
   const region = req.params.region; // srchPolyBizSecd (지역)
-  // let fields = req.param('fields'); // bizTycdSel (정책)
-  // let region = req.param('region'); // srchPolyBizSecd (지역)
 
   const config = {
     method: 'get',
@@ -31,15 +29,15 @@ exports.getPolicies = async function(req, res) {
       pageIndex: 1
     },
   }
-  
+
   try {
     const policyResponse = await axios(config);
     console.log(policyResponse.data);
     const parsedData = await axiosConfig.myParser(policyResponse.data);
-  
+
     console.dir(parsedData, { depth: null });
     return res.send(response(baseResponseStatus.SUCCESS, parsedData));
-  
+
   } catch (error) {
     console.error(error);
     return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
@@ -47,11 +45,11 @@ exports.getPolicies = async function(req, res) {
 };
 
 // 지역별 정책 조회
-exports.getPolicyListForRegion = async function(req,res){
+exports.getPolicyListForRegion = async function(req, res) {
 
   let region = '제주';
 
-  switch(region){
+  switch (region) {
     case '서울':
       region = '003002001';
       break;
@@ -69,8 +67,8 @@ exports.getPolicyListForRegion = async function(req,res){
       break;
     case '제주':
       region = '003002016';
-      break;           
-       
+      break;
+
   }
   console.log(region + "지역이름");
 
@@ -92,10 +90,10 @@ exports.getPolicyListForRegion = async function(req,res){
   //   const policyResponse = await axios(config);
   //   //console.log(policyResponse.data);
   //   const parsedData = await axiosConfig.myParser(policyResponse.data);
-  
+
   //   //console.dir(parsedData, { depth: null });
   //   return res.send(response(baseResponseStatus.SUCCESS, parsedData));
-  
+
   // } catch (error) {
   //   console.error(error);
   //   return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
@@ -104,11 +102,11 @@ exports.getPolicyListForRegion = async function(req,res){
 
 
 // 분야별 정책 조회
-exports.getPolicyListForCategory = async function(req,res){
+exports.getPolicyListForCategory = async function(req, res) {
 
   let field = '주거';
   // 주거 문화 금융 일자리 코로나 창업 건강 기타
-  switch(field){
+  switch (field) {
     case '주거':
       field = '004003002';
       break;
@@ -132,8 +130,8 @@ exports.getPolicyListForCategory = async function(req,res){
       break;
     case '기타':
       field = '004005';
-      break;                   
-       
+      break;
+
   }
 
   const config = {
@@ -151,10 +149,10 @@ exports.getPolicyListForCategory = async function(req,res){
     const policyResponse = await axios(config);
     //console.log(policyResponse.data);
     const parsedData = await axiosConfig.myParser(policyResponse.data);
-  
+
     //console.dir(parsedData, { depth: null });
     return res.send(response(baseResponseStatus.SUCCESS, parsedData));
-  
+
   } catch (error) {
     console.error(error);
     return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
@@ -162,14 +160,14 @@ exports.getPolicyListForCategory = async function(req,res){
 };
 
 // 정책 검색 (지역별)
-exports.SearchPoliciesForRegion = async function(req,res){
+exports.SearchPoliciesForRegion = async function(req, res) {
 
   //const keyWord = '창업';
   const keyWord = req.body.keyWord;
   //let region = '제주'; 
   let region = req.body.region;
 
-  switch(region){
+  switch (region) {
     case '서울':
       region = '003002001';
       break;
@@ -187,8 +185,8 @@ exports.SearchPoliciesForRegion = async function(req,res){
       break;
     case '제주':
       region = '003002016';
-      break;           
-       
+      break;
+
   }
   console.log(region + "지역이름");
   // const category = req.params.category;
@@ -209,10 +207,10 @@ exports.SearchPoliciesForRegion = async function(req,res){
     const policyResponse = await axios(config);
     console.log(policyResponse.data);
     const parsedData = await axiosConfig.myParser(policyResponse.data);
-  
+
     console.dir(parsedData, { depth: null });
     return res.send(response(baseResponseStatus.SUCCESS, parsedData));
-  
+
   } catch (error) {
     console.error(error);
     return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
@@ -220,7 +218,7 @@ exports.SearchPoliciesForRegion = async function(req,res){
 }
 
 // 정책 검색 (분야별)
-exports.SearchPoliciesForField = async function(req,res){
+exports.SearchPoliciesForField = async function(req, res) {
 
   //const keyWord = '창업'; 
   const keyword = req.body.keyword;
@@ -228,7 +226,7 @@ exports.SearchPoliciesForField = async function(req,res){
   let field = req.body.field;
 
   // 주거 문화 금융 일자리 코로나 창업 건강 기타
-  switch(field){
+  switch (field) {
     case '주거':
       field = '004003002';
       break;
@@ -252,7 +250,7 @@ exports.SearchPoliciesForField = async function(req,res){
       break;
     case '기타':
       field = '004005';
-      break;                   
+      break;
   }
   console.log(field + "지역이름");
 
@@ -272,10 +270,10 @@ exports.SearchPoliciesForField = async function(req,res){
     const policyResponse = await axios(config);
     console.log(policyResponse.data);
     const parsedData = await axiosConfig.myParser(policyResponse.data);
-  
+
     console.dir(parsedData, { depth: null });
     return res.send(response(baseResponseStatus.SUCCESS, parsedData));
-  
+
   } catch (error) {
     console.error(error);
     return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
@@ -284,7 +282,7 @@ exports.SearchPoliciesForField = async function(req,res){
 
 
 // 특정 정책 상세 정보 조회
-exports.getPolicyById = async function(req,res){
+exports.getPolicyById = async function(req, res) {
 
   const policyId = req.params.policyId;
 
@@ -303,10 +301,10 @@ exports.getPolicyById = async function(req,res){
     const policyResponse = await axios(config);
     console.log(policyResponse.data);
     const parsedData = await axiosConfig.myParser(policyResponse.data);
-  
+
     console.dir(parsedData, { depth: null });
     return res.send(response(baseResponseStatus.SUCCESS, parsedData));
-  
+
   } catch (error) {
     console.error(error);
     return res.send(errResponse(baseResponseStatus.SERVER_ERROR));

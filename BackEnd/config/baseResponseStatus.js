@@ -42,6 +42,7 @@ module.exports = {
     SIGNUP_REDUNDANT_EMAIL : { "isSuccess": false, "code": 3001, "message":"중복된 이메일입니다." },
     SIGNUP_REDUNDANT_USERID : { "isSuccess": false, "code": 3002, "message":"중복된 아이디입니다." },
     SIGNUP_ADDITIONAL_INFO_NEEDED : { "isSuccess": false, "code": 3003, "message": "회원의 추가 정보가 필요합니다. 해당 토큰과 idx를 가지고 PATCH /app/users/additional 로 Redirect 하십시오"},
+    SIGNUP_ALREADY_DONE : { "isSuccess": false, "code" : 3004, "message": "이미 회원가입이 완료된 회원입니다." },
 
 
     SIGNIN_EMAIL_WRONG : { "isSuccess": false, "code": 3100, "message": "아이디가 잘못 되었습니다." },

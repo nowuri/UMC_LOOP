@@ -58,12 +58,10 @@ exports.sendTokenToSMS = async (req, res) => {
 exports.changeInterest = async (req, res) => {
   const user = req.user;
   const { interested, unInterested } = req.body;
-  console.log(req.user);
-  console.log(req.body);
 
-  await userService.patchInterests(user, { interested, unInterested });
+  const result = await userService.patchInterests(user, { interested, unInterested });
 
-  return response(baseResponseStatus.SUCCESS);
+   res.send(result);
 };
 
 
@@ -103,14 +101,22 @@ exports.additionalSignUp = async (req, res) => {
   if (phoneNumber.length !== 11)
     return res.status(400).send(errResponse(baseResponseStatus.USER_PHONENUMBER_ERROR_TYPE));
 
-  // Additional info Patch : phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
+  // Check if User status is not 2
+  const userStatus = await userProvider.statusCheck(user);
+  if (userStatus === 1) {
+    return res.status(400).send(errResponse(baseResponseStatus.SIGNUP_ALREADY_DONE));
+  } 
 
+  // Additional info Patch : phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
   const infoPatchResult = await userService.patchAdditionalInfo(user, { phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao, userBirth });
 
   // Interest Patch
   await userService.patchInterests(user, { interested, unInterested });
+
+  // Change User SignUp Status to 1
+  const patchUserStatusResult = await userService.patchUserStatus(user, 1);
   
-  res.send(response(baseResponseStatus.SUCCESS));
+  return res.send(response(baseResponseStatus.SUCCESS));
 };
 
 

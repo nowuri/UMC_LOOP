@@ -103,12 +103,27 @@ exports.patchInterests = async (user, interests) => {
 
     connection.release();
 
-    return;
+    return response(baseResponseStatus.SUCCESS);
 
   } catch (error) {
     console.error(error);
     return errResponse(baseResponseStatus.DB_ERROR);
   } 
+};
+
+exports.patchUserStatus = async (user, val) => {
+  try {
+    const connection = await pool.getConnection(async (conn) => conn);
+    const updateUserStatusResult = await userDao.updateUserStatus(connection, user.idx, val);
+    connection.release();
+
+    return response(baseResponseStatus.SUCCESS);
+
+  } catch (error) {
+    console.error(error);
+    return errResponse(baseResponseStatus.DB_ERROR)
+  }
+  
 };
 
 // 카카오 유저 CREATE

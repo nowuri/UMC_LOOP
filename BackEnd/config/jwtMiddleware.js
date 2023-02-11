@@ -55,8 +55,8 @@ exports.isAuthenticated = async (req, res, next) => {
       // console.log(authErr, user, info);
       if (authErr || !user) {
         console.error(authErr);
-        // console.error(info);
-        return res.send(errResponse(baseResponseStatus.TOKEN_VERIFICATION_FAILURE));
+        console.error(info);
+        return res.status(400).send(errResponse(baseResponseStatus.TOKEN_VERIFICATION_FAILURE));
       }
 
       req.user = user;
@@ -71,7 +71,7 @@ exports.isNotAuthenticated = async (req, res, next) => {
       if (authErr || !user) 
         next();
       else {
-        return res.send(errResponse(baseResponseStatus.LOGIN_DONE));
+        return res.status(400).send(errResponse(baseResponseStatus.LOGIN_DONE));
       }
     }
   )(req, res);
