@@ -80,6 +80,7 @@ exports.localSignIn = async (req, res) => {
       }
 
       const token = createJwtToken(user);
+      console.log(token);
             // 만약 유저의 회원가입이 완료되지 않았다면
       if (user.status === 2) {
         res.status(300);
@@ -117,7 +118,7 @@ exports.naverLogin = async (req, res) => {
     if (user.status === 2) {
       res.status(300);
       return res.send(response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, { token, "userIdx": user.idx }));
-    }  
+    }
 
     return res.send(response(baseResponseStatus.SUCCESS, { token }));
   }
@@ -151,4 +152,3 @@ exports.kakaoLogin = async (req, res) => {
   }
 )(req, res);
 }
-

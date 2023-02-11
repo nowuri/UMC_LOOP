@@ -39,6 +39,7 @@ exports.createUser = async function(newUserData) {
     const [userResult] = await userDao.selectUserIdx(connection, userIdx);
     // console.log(userResult);
     const token = createJwtToken(userResult)
+    console.log(token);
     connection.release();
 
     return response(baseResponseStatus.SUCCESS, { token, userIdx });
@@ -166,7 +167,6 @@ exports.updateUserPassword = async function(userData) {
       //임시비번생성
       const tempPassword = Math.floor(Math.random() * 10 ** 8).toString().padStart("0", 8);
       const hashed = await bcrypt.hash(tempPassword, 10);
-
       const userIdResult = await userDao.updateUserPasswordInfo(connection, userData.userEmail, hashed);
       console.log(`userIdResult : ${userIdResult[0].insertId}`)
       connection.release();

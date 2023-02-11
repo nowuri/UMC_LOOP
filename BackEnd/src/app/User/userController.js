@@ -5,6 +5,7 @@ const userProvider = require("../../app/User/userProvider");
 const userService = require("../../app/User/userService");
 const baseResponseStatus = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
+const { createJwtToken } = require('../../../config/jwtMiddleware.js');
 
 const { checkPhoneValidation, sendTokenToSMS, getToken } = require('../../../config/coolsms.js');
 
@@ -105,6 +106,23 @@ exports.additionalSignUp = async (req, res) => {
   return res.send(response(baseResponseStatus.SUCCESS, interestPatchResult));
 };
 
+
+exports.changePasswd = async (req, res) => {
+  const user = req.user;
+  const { user_email, user_name } = req.body;
+
+
+  // 만약 비어있는 폼 문항이 있다면
+  const userData = {user_email: user_email, user_name: user_name};
+  userService.updateUserPassword(userData);
+  //여기서 일치한지 확인 (일치하지 않으면 return errResponse)
+
+  //일치하면 임시비번 메일 보내기
+
+  //비번 업데이트 하기.  
+  return res.send(response(baseResponseStatus.SUCCESS));
+
+};
 
 
 // 템플릿 코드
