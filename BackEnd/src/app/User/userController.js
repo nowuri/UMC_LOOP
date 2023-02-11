@@ -50,8 +50,10 @@ exports.sendTokenToSMS = async (req, res) => {
 
     // console.log(result);
     // console.log(`token: ${tok}`);
-    res.send(response(baseResponseStatus.SUCCESS, { token: tok }));
+    return res.send(response(baseResponseStatus.SUCCESS, { token: tok }));
   }
+  
+  return res.send(errResponse(baseResponseStatus.USER_PHONENUMBER_ERROR_TYPE))
 }
 
 
