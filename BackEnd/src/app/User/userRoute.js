@@ -14,6 +14,9 @@ module.exports = function(app) {
   // 비밀번호 변경
   app.get('/app/users/changePasswd', isAuthenticated, user.changePasswd);
 
+  // 회원 탈퇴 API
+  app.patch('/app/users/withdraw', isAuthenticated, user.withdrawUser);
+
   // Small APIs
   // 닉제임 중복 확인 API
   app.post('/app/users/api/emails', user.checkOverlappingUser);

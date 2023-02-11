@@ -119,6 +119,14 @@ exports.additionalSignUp = async (req, res) => {
   return res.send(response(baseResponseStatus.SUCCESS));
 };
 
+exports.withdrawUser = async (req, res) => {
+  const user = req.user;
+
+  await userService.patchUserStatus(user, 3);
+
+  return res.send(response(baseResponseStatus.SUCCESS));
+};
+
 
 exports.changePasswd = async (req, res) => {
   const user = req.user;
