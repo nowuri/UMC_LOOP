@@ -67,3 +67,10 @@ exports.accountCheck = async function(email) {
 
   return userAccountResult;
 };
+
+exports.emailNameCheck = async function(userEmail, userId) {
+  const connection = await pool.getConnection(async (conn) => conn);
+  const userResult = await userDao.selectUserIdForPassword(connection, userEmail, userId);
+  connection.release();
+  return userResult;
+}
