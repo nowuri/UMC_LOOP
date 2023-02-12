@@ -17,6 +17,7 @@ import com.example.network.SignUpRequestBody
 import com.example.network.SignUpResponseBody
 import com.google.gson.JsonArray
 import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,8 +44,8 @@ class MainActivity_interest : AppCompatActivity() {
     var checkbox_status_kkt4: String = ""
     var checkbox_status_info4: String = ""
 
-    val jsonInterest = JSONArray(String)
-    val jsonUnInterest = JSONArray(String)
+    val jsonInterest = JSONArray()
+    val jsonUnInterest = JSONArray()
     val interest = ArrayList<String>()
     val uninterest = ArrayList<String>()
 
@@ -52,6 +53,16 @@ class MainActivity_interest : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
+        uninterest.add("004003002")
+        uninterest.add("004004002")
+        uninterest.add("004003001")
+        uninterest.add("004003003")
+        uninterest.add("004001")
+        uninterest.add("004006")
+        uninterest.add("004002")
+        uninterest.add("004004001")
+        uninterest.add("004005")
 
         Thread{
             var i=0
@@ -294,7 +305,8 @@ class MainActivity_interest : AppCompatActivity() {
             }
             if(possible == 1){
                 Toast.makeText(this@MainActivity_interest,"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
-                Toast.makeText(this,ID4 + " "+ pw4 + " "+ email4,Toast.LENGTH_SHORT).show()
+                Log.d("Interest",jsonInterest.toString())
+                Log.d("UnInterest",jsonUnInterest.toString())
 
                 val userData = SignUpRequestBody(
                     "ID4"
