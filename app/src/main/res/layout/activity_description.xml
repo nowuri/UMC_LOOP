@@ -97,19 +97,22 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="265dp"
+        android:layout_height="330dp"
         app:layout_constraintTop_toBottomOf="@id/underView"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
         android:id="@+id/SV_description">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <androidx.viewpager2.widget.ViewPager2
-                android:layout_width="match_parent"
-                android:layout_height="265dp"
+                android:layout_width="375dp"
+                android:layout_height="match_parent"
                 android:id="@+id/vp2"
                 app:layout_constraintTop_toBottomOf="@id/underView"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
     </ScrollView>
 
