@@ -45,10 +45,6 @@ exports.localSignUp = async (req, res) => {
   }
 };
 
-// phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
-exports.additionalSignUp = async (req, res) => {
-
-};
 /*
 * Passsport Local Login 처리과정
 1. 로그인 요청이 라우터로 들어옴.
@@ -80,11 +76,12 @@ exports.localSignIn = async (req, res) => {
       }
 
       const token = createJwtToken(user);
-            // 만약 유저의 회원가입이 완료되지 않았다면
+      console.log(token);
+      // 만약 유저의 회원가입이 완료되지 않았다면
       if (user.status === 2) {
         res.status(300);
         return res.send(response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, { token, "userIdx": user.idx }));
-      }  
+      }
 
       return res.send(response(baseResponseStatus.SUCCESS, { token }));
     }
@@ -97,28 +94,8 @@ exports.verifyJWT = async (req, res) => {
   return res.send(response(baseResponseStatus.SUCCESS, req.user));
 };
 
-exports.verifyJWT = async (req, res) => {
-  console.log(req.user);
-  return res.send(response(baseResponseStatus.SUCCESS, req.user));
-};
-
-
-// exports.kakaoLogin = async(req, res, next) => {
-//   passport.authenticate('kakao', { session: false },
-//     (authError, user, info) => {
-//       if (authError || !user) {
-//         console.error(authError);
-//         console.log(info);
-//         return res.send(errResponse(baseResponseStatus.SIGNIN_PASSPORT_AUTH_ERROR));
-//       }
-//       const token = createJwtToken(user);
-//       return res.send(response(baseResponseStatus.SUCCESS, { token }));
-//     }
-//   )(req, res, next);
-// };
-
-exports.kakaoLogin = async (req, res) => {
-  passport.authenticate('kakao', {session: false},
+exports.naverLogin = async (req, res) => {
+  passport.authenticate('naver-login', {session: false},
   (authError, user, info) => {
     if (authError) {
       console.log(info);
@@ -133,14 +110,43 @@ exports.kakaoLogin = async (req, res) => {
     }
 
     const token = createJwtToken(user);
-    console.log(token + "jwt 토큰**************");
     // 만약 유저의 회원가입이 완료되지 않았다면
     if (user.status === 2) {
       res.status(300);
       return res.send(response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, { token, "userIdx": user.idx }));
-    }  
+    }
+
+    return res.send(response(baseResponseStatus.SUCCESS, { token }));
+  }
+)(req, res);
+
+}
+
+exports.kakaoLogin = async (req, res) => {
+  passport.authenticate('kakao', { session: false },
+    (authError, user, info) => {
+      if (authError) {
+        console.log(info);
+        console.error(authError);
+        return res.status(500).send(errResponse(baseResponseStatus.SIGNIN_PASSPORT_AUTH_ERROR));
+      }
+
+      if (!user) {
+        if (parseInt(info.code / 2000))
+          res.status(400);
+        return res.send(errResponse(info));
+      }
+
+      const token = createJwtToken(user);
+      console.log(token + "jwt 토큰**************");
+      // 만약 유저의 회원가입이 완료되지 않았다면
+      if (user.status === 2) {
+        res.status(300);
+        return res.send(response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, { token, "userIdx": user.idx }));
+      }
 
     return res.send(response(baseResponseStatus.SUCCESS, { token }));
   }
 )(req, res);
 }
+

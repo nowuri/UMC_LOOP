@@ -1,18 +1,21 @@
 package com.example.network
 
+import com.example.login.Login
 import com.google.gson.GsonBuilder
 import okhttp3.Cache
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.io.File
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
-    //private const val BASE_URL = "http://helptheyouth-lope.com/app/"
-
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
@@ -32,4 +35,5 @@ object RetrofitClient {
     val emgMedService: RetrofitService by lazy {
         retrofit.create(RetrofitService::class.java)
     }
+
 }

@@ -8,7 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.interested.SignUp3Activity
 import com.example.interested.databinding.ActivityDescriptionBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class Description : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewBinding: ActivityDescriptionBinding
@@ -21,6 +24,15 @@ class Description : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
 
+        val tabTitle = arrayOf("신청 정보", "정책 정보", "심사 절차")
+        val desAdapter =VPAdapter4(this)
+        viewBinding.vp2.adapter = desAdapter
+
+        TabLayoutMediator(viewBinding.tab, viewBinding.vp2){
+            tab,position -> tab.text = tabTitle[position]
+        }.attach()
+
+        viewBinding.tab.setTabTextColors(Color.rgb(147,147,147), Color.rgb(255,255,255))
         var commentView = LayoutInflater.from(this).inflate(R.layout.policy_comment, null, false)
 
         //TODO: 정책 정보들(이름, 기관, 날짜, 내용, 홈피) 넘어온 데이터로 텍스트 세팅
@@ -43,8 +55,6 @@ class Description : AppCompatActivity(), View.OnClickListener {
             startActivity(intent)
         }
 
-        //회원 탈퇴 클릭 시 카드뷰 띄움
-
         //TODO: 지원하기 클릭시 신청 사이트 하이퍼링크로 연결
         //viewBinding.btnApply.setOnClickListener(){
         //    val intent = Intent(this,Recommend::class.java)
@@ -54,6 +64,7 @@ class Description : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id){
+            //추천
             viewBinding.btnRecomm.id ->{
                 viewBinding.btnRecomm.setBackgroundResource(R.drawable.btn_recomm_selected)
                 viewBinding.btnRecomm.setTextColor(Color.WHITE)
@@ -67,7 +78,13 @@ class Description : AppCompatActivity(), View.OnClickListener {
                         Log.e("받은 코멘트 값", recomm_comment)
                     }
                 })
+                val intent = Intent(this, Recommend::class.java)
+                intent.putExtra("recomm_comment",recomm_comment)
+
+                viewBinding.btnRecomm.setClickable(false)
+                viewBinding.btnUnrecomm.setClickable(false)
             }
+            //비추천
             viewBinding.btnUnrecomm.id ->{
                 viewBinding.btnUnrecomm.setBackgroundResource(R.drawable.btn_unrecomm_selected)
                 viewBinding.btnUnrecomm.setTextColor(Color.WHITE)
@@ -81,6 +98,11 @@ class Description : AppCompatActivity(), View.OnClickListener {
                         Log.e("받은 코멘트 값", unrecomm_comment)
                     }
                 })
+                val intent = Intent(this, NotRecommend::class.java)
+                intent.putExtra("unrecomm_comment",unrecomm_comment)
+
+                viewBinding.btnRecomm.setClickable(false)
+                viewBinding.btnUnrecomm.setClickable(false)
             }
         }
     }

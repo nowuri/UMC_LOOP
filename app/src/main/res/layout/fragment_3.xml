@@ -1,0 +1,58 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.description.Fragment3"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="257dp"
+                    android:layout_height="31dp"
+                    android:width="251dp"
+                    android:height="31dp"
+                    android:background="#E6E6E6"
+                    android:text="* 심사발표"
+                    android:textColor="#1D2D69"
+                    android:textSize="20sp"
+                    android:paddingLeft="10dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/resultdate"/>
+
+                <TextView
+                    android:layout_width="307dp"
+                    android:layout_height="232dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/resultdate"
+                    android:layout_marginTop="21dp"
+                    android:text="* 신청절차"
+                    android:textColor="#1D2D69"
+                    android:layout_marginLeft="13dp"
+                    android:textSize="20sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="13dp"
+                    android:id="@+id/explain"
+                    android:background="@drawable/description_con_back"/>
+            </LinearLayout>
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

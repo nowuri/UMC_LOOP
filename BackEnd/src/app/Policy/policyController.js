@@ -11,16 +11,15 @@ const axiosConfig = require('../../../config/axios.js');
  * [GET] /app/policies
  */
 
-
 // 정책 검색 (지역별)
-exports.SearchPoliciesForRegion = async function(req,res){
+exports.SearchPoliciesForRegion = async function(req, res) {
 
   //const keyword = '창업';
   const keyword = req.body.keyword;
   //let region = '제주'; 
   let region = req.body.region;
 
-  switch(region){
+  switch (region) {
     case '서울':
       region = '003002001';
       break;
@@ -38,8 +37,8 @@ exports.SearchPoliciesForRegion = async function(req,res){
       break;
     case '제주':
       region = '003002016';
-      break;           
-       
+      break;
+
   }
   console.log(region + "지역이름");
 
@@ -59,10 +58,10 @@ exports.SearchPoliciesForRegion = async function(req,res){
     const policyResponse = await axios(config);
     console.log(policyResponse.data);
     const parsedData = await axiosConfig.myParser(policyResponse.data);
-  
+
     console.dir(parsedData, { depth: null });
     return res.send(response(baseResponseStatus.SUCCESS, parsedData));
-  
+
   } catch (error) {
     console.error(error);
     return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
@@ -70,7 +69,7 @@ exports.SearchPoliciesForRegion = async function(req,res){
 }
 
 // 정책 검색 (분야별)
-exports.SearchPoliciesForField = async function(req,res){
+exports.SearchPoliciesForField = async function(req, res) {
 
   //const keyword = '창업'; 
   const keyword = req.body.keyword;
@@ -78,7 +77,7 @@ exports.SearchPoliciesForField = async function(req,res){
   let field = req.body.field;
 
   // 주거 문화 금융 일자리 코로나 창업 건강 기타
-  switch(field){
+  switch (field) {
     case '주거':
       field = '004003002';
       break;
@@ -102,7 +101,7 @@ exports.SearchPoliciesForField = async function(req,res){
       break;
     case '기타':
       field = '004005';
-      break;                   
+      break;
   }
   console.log(field + "지역이름");
 
@@ -122,10 +121,10 @@ exports.SearchPoliciesForField = async function(req,res){
     const policyResponse = await axios(config);
     console.log(policyResponse.data);
     const parsedData = await axiosConfig.myParser(policyResponse.data);
-  
+
     console.dir(parsedData, { depth: null });
     return res.send(response(baseResponseStatus.SUCCESS, parsedData));
-  
+
   } catch (error) {
     console.error(error);
     return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
@@ -134,7 +133,7 @@ exports.SearchPoliciesForField = async function(req,res){
 
 
 // 특정 정책 상세 정보 조회
-exports.getPolicyById = async function(req,res){
+exports.getPolicyById = async function(req, res) {
 
   const policyId = req.body.policyId;
 
@@ -151,10 +150,10 @@ exports.getPolicyById = async function(req,res){
     const policyResponse = await axios(config);
     console.log(policyResponse.data);
     const parsedData = await axiosConfig.myParser(policyResponse.data);
-  
+
     console.dir(parsedData, { depth: null });
     return res.send(response(baseResponseStatus.SUCCESS, parsedData));
-  
+
   } catch (error) {
     console.error(error);
     return res.send(errResponse(baseResponseStatus.SERVER_ERROR));
