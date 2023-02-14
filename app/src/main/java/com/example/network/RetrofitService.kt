@@ -22,4 +22,8 @@ interface RetrofitService {
     @POST("auth/signIn")
     fun login(@Body login: SigninRequestBody): Call<SigninResponseBody>
 
+    //인증번호 번호 post
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("api/tokens")
+    fun snsToken(@Body token: NumberSendRequestBody): Call<NumberSendResponseBody>
 }

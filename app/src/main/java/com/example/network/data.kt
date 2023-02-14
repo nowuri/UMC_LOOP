@@ -36,3 +36,14 @@ data class SigninResponseBody(
     @SerializedName("status")
     val ststus: String?
 )
+
+data class NumberSendRequestBody(
+    val phoneNumber: String?
+)
+
+data class NumberSendResponseBody(
+    @SerializedName("result")
+    val result: String?,
+    @SerializedName("status")
+    val ststus: String?
+)
