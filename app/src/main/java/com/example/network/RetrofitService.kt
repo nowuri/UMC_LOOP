@@ -12,10 +12,14 @@ interface RetrofitService {
     fun addUserByEnqueue(@Body userInfo: SignUpRequestBody): Call<SignUpResponseBody> // Call 은 흐름처리 기능을 제공해줌
 
     //1차 회원가입 POST
+    @Headers("accept: application/json", "Content-Type: application/json")
     @POST("auth/signUp")
     fun addUser(@Body userInfo1: SignUp1RequestBody): Call<SignUp1ResponseBody>
 
-    //1차 회원가입 끝나고 토근 GET
-    //@GET("SignUp1tokenTest")
-    //fun getToken(@)
+
+    //로그인
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("auth/signIn")
+    fun login(@Body login: SigninRequestBody): Call<SigninResponseBody>
+
 }

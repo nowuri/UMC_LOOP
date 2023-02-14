@@ -125,6 +125,7 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/btn_signup_style"
             android:text="로그인"
+            android:id="@+id/loginbtn"
             android:textColor="@color/white"
             android:textSize="36sp"
             android:textStyle="bold"/>

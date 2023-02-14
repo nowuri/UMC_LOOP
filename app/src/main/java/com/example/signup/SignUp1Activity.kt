@@ -2,7 +2,6 @@ package com.example.signup
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,13 +9,15 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.example.interested.MainActivity_interest
+import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivitySignup1Binding
 import com.example.login.Login
 import com.example.network.RetrofitClient
 import com.example.network.SignUp1RequestBody
 import com.example.network.SignUp1ResponseBody
+import com.google.gson.JsonObject
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 
@@ -30,6 +31,7 @@ class SignUp1Activity : AppCompatActivity() {
         viewBinding = ActivitySignup1Binding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
+        val newUserData = JSONObject()
         val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         val id = viewBinding.idinput
         val pw = viewBinding.pwinput.getText().toString()
@@ -80,11 +82,12 @@ class SignUp1Activity : AppCompatActivity() {
             val Id = viewBinding.idinput.getText().toString()
             val pw = viewBinding.pwinput.getText().toString()
 
-            val userData = SignUp1RequestBody(
-                "$Id",
-                "$name",
-                "$pw"
-            )
+            newUserData.put("userEmail",Id)
+            newUserData.put("userPassword",pw)
+            newUserData.put("userName",name)
+
+            val userData = SignUp1RequestBody(newUserData)
+            Log.d("userData",newUserData.toString())
 
             if(viewBinding.idinput.getText().toString().length >=6){
                 if(viewBinding.pwinput.getText().toString().equals(viewBinding.pwcheckinput.getText().toString()) && viewBinding.pwinput.getText().length >= 8){
@@ -93,9 +96,6 @@ class SignUp1Activity : AppCompatActivity() {
 
                     val intent = Intent(this,SignUp2Activity::class.java)
                     startActivity(intent)
-//                    intent.putExtra("ID",viewBinding.idinput.getText().toString())
-//                    intent.putExtra("PW",viewBinding.pwinput.getText().toString())
-//                    intent.putExtra("name",name)
 
                 }
                 else if(viewBinding.pwinput.getText().length < 8){
