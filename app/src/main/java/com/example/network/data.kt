@@ -15,7 +15,9 @@ data class SignUpResponseBody(
 )
 
 data class SignUp1RequestBody(
-    val newUserData: JSONObject,
+    val userEmail: String?,
+    val userName: String?,
+    val password: String?
 )
 
 data class SignUp1ResponseBody(
@@ -46,4 +48,26 @@ data class NumberSendResponseBody(
     val result: String?,
     @SerializedName("status")
     val ststus: String?
+)
+
+//data class kakaoRequestBody(
+
+//)
+data class kakaoResponseBody(
+    @SerializedName("result")
+    val result: String?,
+    @SerializedName("status")
+    val status: String?
+)
+
+data class regionSearchRequestBody(
+    val keyword: String,
+    val region: String
+)
+
+data class regionSearchResponseBody(
+    @SerializedName("result")
+    val result: String?,
+    @SerializedName("status")
+    val status: String?,
 )

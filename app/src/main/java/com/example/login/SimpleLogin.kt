@@ -1,8 +1,10 @@
 package com.example.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.find.Find
 import com.example.interested.R
 import com.example.interested.databinding.ActivitySimpleLoginBinding
 import com.example.network.*
@@ -20,13 +22,24 @@ class SimpleLogin : AppCompatActivity() {
         setContentView(viewBinding.root)
 
         viewBinding.login.setOnClickListener(){
-            val id = viewBinding.id.getText().toString()
-            val pw = viewBinding.pw.getText().toString()
+            val id = viewBinding.idinput.getText().toString()
+            val pw = viewBinding.pwinput.getText().toString()
 
             val login = SigninRequestBody(id, pw)
 
             val retrofitWork = Login.RetrofitWork(login)
             retrofitWork.work()
+        }
+
+
+        viewBinding.find.setOnClickListener(){
+            val intent = Intent(this, Find::class.java)
+            startActivity(intent)
+        }
+
+        viewBinding.signup.setOnClickListener(){
+            val intent = Intent(this, SignUp1Activity::class.java)
+            startActivity(intent)
         }
     }
 

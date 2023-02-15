@@ -31,9 +31,8 @@ class SignUp1Activity : AppCompatActivity() {
         viewBinding = ActivitySignup1Binding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        val newUserData = JSONObject()
         val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        val id = viewBinding.idinput
+        val id = viewBinding.idinput.getText().toString()
         val pw = viewBinding.pwinput.getText().toString()
         val pwcheck = viewBinding.pwcheckinput.getText().toString()
 
@@ -79,15 +78,7 @@ class SignUp1Activity : AppCompatActivity() {
         }
 
         viewBinding.next.setOnClickListener(){
-            val Id = viewBinding.idinput.getText().toString()
-            val pw = viewBinding.pwinput.getText().toString()
-
-            newUserData.put("userEmail",Id)
-            newUserData.put("userPassword",pw)
-            newUserData.put("userName",name)
-
-            val userData = SignUp1RequestBody(newUserData)
-            Log.d("userData",newUserData.toString())
+            val userData = SignUp1RequestBody(id, pw, name)
 
             if(viewBinding.idinput.getText().toString().length >=6){
                 if(viewBinding.pwinput.getText().toString().equals(viewBinding.pwcheckinput.getText().toString()) && viewBinding.pwinput.getText().length >= 8){

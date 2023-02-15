@@ -16,7 +16,6 @@ interface RetrofitService {
     @POST("auth/signUp")
     fun addUser(@Body userInfo1: SignUp1RequestBody): Call<SignUp1ResponseBody>
 
-
     //로그인
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("auth/signIn")
@@ -26,4 +25,9 @@ interface RetrofitService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("api/tokens")
     fun snsToken(@Body token: NumberSendRequestBody): Call<NumberSendResponseBody>
+
+    //kakao 로그인 GET
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @GET("auth/kakao")
+    fun kakaoLogin(): Call<kakaoResponseBody>
 }

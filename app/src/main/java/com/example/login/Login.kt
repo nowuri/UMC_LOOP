@@ -7,10 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.find.Find
 import com.example.interested.databinding.ActivityLoginBinding
-import com.example.network.PreferenceUtil
-import com.example.network.RetrofitClient
-import com.example.network.SigninRequestBody
-import com.example.network.SigninResponseBody
+import com.example.network.*
 import com.example.signup.SignUp1Activity
 import kotlinx.coroutines.CoroutineExceptionHandler
 import retrofit2.Call
@@ -36,6 +33,8 @@ class Login : AppCompatActivity() {
 
         viewBinding.kakologin.setOnClickListener(){
             Toast.makeText(this,"카카오 로그인을 시작합니다", Toast.LENGTH_SHORT).show()
+
+            getKakaoLogin()
         }
 
         viewBinding.loginbtn.setOnClickListener(){
@@ -71,6 +70,28 @@ class Login : AppCompatActivity() {
 
                     override fun onFailure(call: Call<SigninResponseBody>, t: Throwable) {
                         Log.d("로그인 실패",t.message.toString())
+                    }
+
+                })
+        }
+    }
+
+    private fun getKakaoLogin(){
+        Log.d("Kakao Login","카카오로그인 시작")
+        fun work(){
+            val service = RetrofitClient.emgMedService
+
+            service.kakaoLogin()
+                .enqueue(object: retrofit2.Callback<kakaoResponseBody>{
+                    override fun onResponse(call: Call<kakaoResponseBody>, response: Response<kakaoResponseBody>) {
+                        if(response.isSuccessful){
+                            val result = response.body()
+                            Log.d("카카오 로그인 성공","$result")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<kakaoResponseBody>, t: Throwable) {
+                        Log.d("카카오 로그인 실패",t.message.toString())
                     }
 
                 })

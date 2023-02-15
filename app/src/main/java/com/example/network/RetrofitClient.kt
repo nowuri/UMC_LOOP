@@ -35,5 +35,4 @@ object RetrofitClient {
     val emgMedService: RetrofitService by lazy {
         retrofit.create(RetrofitService::class.java)
     }
-
 }
