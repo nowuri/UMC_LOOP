@@ -60,14 +60,20 @@ data class kakaoResponseBody(
     val status: String?
 )
 
-data class regionSearchRequestBody(
-    val keyword: String,
-    val region: String
+data class Signup2RequestBody(
+    val phoneNumber: String?,
+    val postalCode: String?,
+    val address: String?,
+    val agreePICU: Int,
+    val agreeeSMS: Int,
+    val agreeKakao: Int,
+    val interested: ArrayList<String>,
+    val uninterested: ArrayList<String>,
 )
 
-data class regionSearchResponseBody(
+data class Signup2ResponseBody(
     @SerializedName("result")
     val result: String?,
     @SerializedName("status")
-    val status: String?,
+    val status: String?
 )

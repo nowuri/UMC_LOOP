@@ -78,7 +78,7 @@ class SignUp1Activity : AppCompatActivity() {
         }
 
         viewBinding.next.setOnClickListener(){
-            val userData = SignUp1RequestBody(id, pw, name)
+            val userData = SignUp1RequestBody(id,name,pw)
 
             if(viewBinding.idinput.getText().toString().length >=6){
                 if(viewBinding.pwinput.getText().toString().equals(viewBinding.pwcheckinput.getText().toString()) && viewBinding.pwinput.getText().length >= 8){

@@ -30,4 +30,9 @@ interface RetrofitService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("auth/kakao")
     fun kakaoLogin(): Call<kakaoResponseBody>
+
+    //2차회원가입 PATCH
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @PATCH("users/additional")
+    fun Signup23Patch(@Header("authorization") accessToken: String, @Body userInfo2: Signup2RequestBody): Call<Signup2ResponseBody>
 }

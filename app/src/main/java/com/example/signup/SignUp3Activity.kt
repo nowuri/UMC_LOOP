@@ -10,6 +10,12 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.ActivitySignup3Binding
+import com.example.network.RetrofitClient
+import com.example.network.Signup2RequestBody
+import com.example.network.Signup2ResponseBody
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
 import java.util.*
 
 class SignUp3Activity: AppCompatActivity() {
@@ -93,9 +99,9 @@ class SignUp3Activity: AppCompatActivity() {
             birth = intent.getStringExtra("birth").toString()
             address = intent.getStringExtra("address").toString()
 
-            checkbox_status_sms = intent.getStringExtra("checkbox_status_sms").toString()
-            checkbox_status_kkt = intent.getStringExtra("checkbox_status_kkt").toString()
-            checkbox_status_info = intent.getStringExtra("checkbox_status_info").toString()
+//            checkbox_status_sms = intent.getStringExtra("checkbox_status_sms").toString()
+//            checkbox_status_kkt = intent.getStringExtra("checkbox_status_kkt").toString()
+//            checkbox_status_info = intent.getStringExtra("checkbox_status_info").toString()
 
             Log.e("가져온 값",ID+" "+ pw + " "+ Name + " "+ tel+" "+birth+ " "+address+" "
                     +checkbox_status_sms+" "+checkbox_status_kkt+" "+checkbox_status_info)
@@ -119,4 +125,5 @@ class SignUp3Activity: AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 }
