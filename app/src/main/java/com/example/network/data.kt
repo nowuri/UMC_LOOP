@@ -50,9 +50,6 @@ data class NumberSendResponseBody(
     val ststus: String?
 )
 
-//data class kakaoRequestBody(
-
-//)
 data class kakaoResponseBody(
     @SerializedName("result")
     val result: String?,
@@ -72,6 +69,30 @@ data class Signup2RequestBody(
 )
 
 data class Signup2ResponseBody(
+    @SerializedName("result")
+    val result: String?,
+    @SerializedName("status")
+    val status: String?
+)
+
+data class interestChangeRequestBody(
+    val userphone: String,
+    val interested: ArrayList<String>,
+    val uninterested: ArrayList<String>
+)
+
+data class interestChangeResponseBody(
+    @SerializedName("result")
+    val result: String?,
+    @SerializedName("status")
+    val status: String?
+)
+
+data class eraseUserRequestBody(
+    val token: String
+)
+
+data class eraseUserResponseBody(
     @SerializedName("result")
     val result: String?,
     @SerializedName("status")

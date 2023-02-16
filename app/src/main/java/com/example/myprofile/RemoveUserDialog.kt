@@ -1,8 +1,15 @@
 package com.example.myprofile
 import android.app.Dialog
+import android.util.Log
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.DialogRemoveuserBinding
+import com.example.login.Login
+import com.example.network.RetrofitClient
+import com.example.network.eraseUserRequestBody
+import com.example.network.eraseUserResponseBody
+import retrofit2.Call
+import retrofit2.Response
 
 class RemoveUserDialog(private val context : AppCompatActivity) {
 
@@ -18,7 +25,14 @@ class RemoveUserDialog(private val context : AppCompatActivity) {
 
         //ok 버튼 동작
         binding.btnConfirm.setOnClickListener {
-            //TODO: 탈퇴 처리 코드
+            val token = "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
+                    "eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJJZCI6ImpheSIsInVzZXJuYW1lI" +
+                    "joi6raM7KSA7ZiVIn0sImlhdCI6MTY3NTMxMzc5N30.rJuQ2oo3C0-L0ksH" +
+                    "thWG8brqCmkwUiPVt6OxLDw5hTc"
+
+            val retrofitWork = RetrofitWork(token)
+            retrofitWork.work()
+
             dlg.dismiss()
         }
 
@@ -28,5 +42,27 @@ class RemoveUserDialog(private val context : AppCompatActivity) {
         }
 
         dlg.show()
+    }
+
+    class RetrofitWork(private val token: String){
+        fun work(){
+            val service = RetrofitClient.emgMedService
+
+            service.eraseUser(token)
+                .enqueue(object: retrofit2.Callback<eraseUserResponseBody>{
+                    override fun onResponse(
+                        call: Call<eraseUserResponseBody>,
+                        response: Response<eraseUserResponseBody>,
+                    ) {
+                        val result = response.body()
+                        Log.d("회원탈퇴 성공", "$result")
+                    }
+
+                    override fun onFailure(call: Call<eraseUserResponseBody>, t: Throwable) {
+                        Log.d("회원탈퇴 실패",t.message.toString())
+                    }
+
+                })
+        }
     }
 }

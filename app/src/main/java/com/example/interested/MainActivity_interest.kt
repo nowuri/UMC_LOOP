@@ -359,4 +359,26 @@ class MainActivity_interest : AppCompatActivity() {
         }
     }
 
+    class interestChange(private val token: String, private val changeInterest: interestChangeRequestBody){
+        fun work(){
+            val service = RetrofitClient.emgMedService
+
+            service.interestChange(token, changeInterest)
+                .enqueue(object: retrofit2.Callback<interestChangeResponseBody>{
+                    override fun onResponse(
+                        call: Call<interestChangeResponseBody>,
+                        response: Response<interestChangeResponseBody>,
+                    ) {
+                        val result = response.body()
+                        Log.d("관심분야 변경 성공", " $result")
+                    }
+
+                    override fun onFailure(call: Call<interestChangeResponseBody>, t: Throwable) {
+                        Log.d("관심분야 변경 실패",t.message.toString())
+                    }
+
+                })
+        }
+    }
+
 }

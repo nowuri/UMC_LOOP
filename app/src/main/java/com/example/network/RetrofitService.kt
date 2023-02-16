@@ -35,4 +35,14 @@ interface RetrofitService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @PATCH("users/additional")
     fun Signup23Patch(@Header("authorization") accessToken: String, @Body userInfo2: Signup2RequestBody): Call<Signup2ResponseBody>
+
+    //관심분야 변경 PATCH
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @PATCH("users/interests")
+    fun interestChange(@Header("authorization") accessToken: String, @Body changeInterest: interestChangeRequestBody): Call <interestChangeResponseBody>
+
+    //회원 탈퇴 PATCH
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @PATCH("users/withdraw")
+    fun eraseUser(@Header("authorization") accessToken: String): Call<eraseUserResponseBody>
 }

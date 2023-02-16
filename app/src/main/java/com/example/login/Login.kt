@@ -32,9 +32,7 @@ class Login : AppCompatActivity() {
         }
 
         viewBinding.kakologin.setOnClickListener(){
-            Toast.makeText(this,"카카오 로그인을 시작합니다", Toast.LENGTH_SHORT).show()
-
-            getKakaoLogin()
+            getKakaoLogin().work()
         }
 
         viewBinding.loginbtn.setOnClickListener(){
@@ -76,9 +74,9 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun getKakaoLogin(){
-        Log.d("Kakao Login","카카오로그인 시작")
+    class getKakaoLogin(){
         fun work(){
+            Log.e("카카오로그인","시작")
             val service = RetrofitClient.emgMedService
 
             service.kakaoLogin()
