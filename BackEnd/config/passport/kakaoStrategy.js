@@ -7,7 +7,7 @@ const userService = require('../../src/app/User/userService.js');
 module.exports = () => {
     passport.use('kakao', new KakaoStrategy({
         clientID: process.env.KAKAO_CLIENT_ID,
-        callbackURL: 'http://localhost:3001/app/auth/kakao/callback',
+        callbackURL: 'http://helptheyouth-lope.com/app/auth/kakao/callback',
         session: false,
     }, async (accessToken, refreshToken, profile, done) => {
         console.log(accessToken);
