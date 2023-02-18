@@ -71,7 +71,14 @@ exports.getInterest = async (req, res) => {
   
   const result = await userProvider.retrieveInterest(user);
 
-  return res.send(result);
+  if (result.code === 1000) {
+    return res.send(result);
+  }
+  else if (result.code === 3000){
+    return res.staus(400).send(result);
+  } else {
+    return res.status(500).send(result);
+  }
 };
 
 // phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
