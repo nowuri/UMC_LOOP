@@ -63,9 +63,16 @@ exports.changeInterest = async (req, res) => {
 
   const result = await userService.patchInterests(user, { interested, unInterested });
 
-  res.send(result);
+  return res.send(result);
 };
 
+exports.getInterest = async (req, res) => {
+  const user = req.user;
+  
+  const result = await userProvider.retrieveInterest(user);
+
+  return res.send(result);
+};
 
 // phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
 // req.body = {

@@ -57,6 +57,15 @@ async function insertUserInfo(connection, insertUserInfoParams) {
   return insertUserInfoRow;
 }
 
+async function selectUserInterest(connection, userIdx) {
+  const selectInterestQuery = SQL`
+    SELECT category_code, status FROM interest WHERE user_idx = ${userIdx};
+  `;
+  const [ selectInterestRow ] = await connection.query(selectInterestQuery);
+
+  return selectInterestRow;
+}
+
 // 네이버 유저 생성
 async function insertNaverUserInfo(connection, insertNaverUserInfoParams) {
   const insertNaverUserInfoQuery = `
@@ -205,4 +214,5 @@ module.exports = {
   updateUserInfo,
   upsertInterest,
   updateUserStatus,
+  selectUserInterest,
 };

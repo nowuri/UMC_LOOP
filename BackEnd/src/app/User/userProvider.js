@@ -1,9 +1,33 @@
+const baseResponseStatus = require("../../../config/baseResponseStatus");
 const { pool } = require("../../../config/database");
+const { response, errResponse } = require("../../../config/response");
 const { logger } = require("../../../config/winston");
 
 const userDao = require("./userDao");
 
 // Provider: Read 비즈니스 로직 처리
+//
+exports.retrieveInterest = async (user) => {
+  try {
+    const userIdx = user.idx;
+
+    const connection = await pool.getConnection(async (conn) => conn);
+    const userInterestResult = await userDao.selectUserInterest(connection, userIdx);
+
+    connection.release();
+
+    const checked = userInterestResult.filter(item => item.status === 1).map(item => item.category_code);
+    const unChecked = userInterestResult.filter(item => item.status === 0).map(item => item.category_code);
+
+    return response(baseResponseStatus.SUCCESS, {checked, unChecked});
+    
+  } catch (error) {
+    console.error(error);
+    return errResponse(baseResponseStatus.DB_ERROR);
+  }
+
+  
+};
 
 exports.retrieveUserList = async function(email) {
   if (!email) {
@@ -40,6 +64,7 @@ exports.retrieveUserByIdx = async function(userIdx) {
 
   return userResult[0];
 };
+
 
 exports.emailCheck = async function(email) {
   const connection = await pool.getConnection(async (conn) => conn);

@@ -8,6 +8,9 @@ module.exports = function(app) {
   // 2차 마무리 회원가입
   app.patch('/app/users/additional', isAuthenticated, user.additionalSignUp);
 
+  // 유저가 선택한 관심 카테고리 가져오기 API
+  app.get('/app/users/interests', isAuthenticated, user.getInterest);
+
   // 관심 카테고리 변경 API
   app.patch('/app/users/interests', isAuthenticated, user.changeInterest);
 
