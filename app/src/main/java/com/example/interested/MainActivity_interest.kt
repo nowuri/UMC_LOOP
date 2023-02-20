@@ -1,5 +1,7 @@
 package com.example.interested
 
+import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.location.Geocoder.isPresent
@@ -7,18 +9,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.load.PreferredColorSpace
 import com.example.home.Home
 import com.example.interested.databinding.ActivityMainBinding
+import com.example.login.Login.Companion.prefs
 import com.example.network.*
 import com.example.search.Search
 import retrofit2.Retrofit
 import com.google.gson.JsonArray
+import okhttp3.Interceptor
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.converter.gson.GsonConverterFactory
+import java.sql.Types.NULL
 
 
 class MainActivity_interest : AppCompatActivity() {
@@ -35,7 +41,6 @@ class MainActivity_interest : AppCompatActivity() {
     var tel4 : String = ""
     var birth4: String = ""
     var address4: String = ""
-    var email4: String = ""
 
     var checkbox_status_sms4: String = ""
     var checkbox_status_kkt4: String = ""
@@ -45,6 +50,11 @@ class MainActivity_interest : AppCompatActivity() {
     val jsonUnInterest = JSONArray()
     val interest = ArrayList<String>()
     val uninterest = ArrayList<String>()
+
+    val token : String = "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
+            "eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJJZCI6ImpheSIsInVzZXJuYW1lIjoi6ra" +
+            "M7KSA7ZiVIn0sImlhdCI6MTY3NTMxMzc5N30.rJuQ2oo3C0-L0ksHthWG8brqCmkwUiPVt6OxLDw5hTc"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -305,21 +315,21 @@ class MainActivity_interest : AppCompatActivity() {
                 Log.d("Interest",jsonInterest.toString())
                 Log.d("UnInterest",jsonUnInterest.toString())
 
+                //우편번호를 받아오지 않음음
+                Log.e("가져온 값",ID4+" "+ pw4 + " "+ Name4 + " "+ tel4+" "+birth4+ " "+address4+" / "
+                        +checkbox_status_sms4+" / "+checkbox_status_kkt4+" / "+checkbox_status_info4)
+
                 val userData = Signup2RequestBody(tel4, "06009",address4,
                     checkbox_status_info4.toInt(), checkbox_status_sms4.toInt(), checkbox_status_kkt4.toInt(),
                     interest,uninterest
                 )
 
-                //우편번호를 받아오지 않음음
-               Log.e("가져온 값",ID4+" "+ pw4 + " "+ Name4 + " "+ tel4+" "+birth4+ " "+address4+" "
-                        +checkbox_status_sms4+" "+checkbox_status_kkt4+" "+checkbox_status_info4)
+
+
 
                 Log.d("userData","$userData")
 
-                //토큰 발급이 안되서 임시로 api 시트에 있는 것 적어둠 수정 필요
-                val retrofitWork = RetrofitWork("yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
-                        "eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJJZCI6ImpheSIsInVzZXJuYW1lIjoi6raM7KS" +
-                        "A7ZiVIn0sImlhdCI6MTY3NTMxMzc5N30.rJuQ2oo3C0-L0ksHthWG8brqCmkwUiPVt6OxLDw5hTc",userData)
+                val retrofitWork = RetrofitWork(token,userData)
                 retrofitWork.work()
 
                 val intent = Intent(this, Home::class.java)
@@ -332,6 +342,18 @@ class MainActivity_interest : AppCompatActivity() {
 
     }
 
+    class MainApplication: Application(){
+        companion object{
+            lateinit var pref: PreferenceUtil
+        }
+
+        override fun onCreate(){
+            super.onCreate()
+            pref = PreferenceUtil(applicationContext)
+        }
+    }
+
+
     class RetrofitWork(private val token: String, private val userInfo: Signup2RequestBody){
         fun work(){
             val service= RetrofitClient.emgMedService
@@ -339,10 +361,11 @@ class MainActivity_interest : AppCompatActivity() {
             //        Call 작업은 두 가지로 실행됨
 //        execute 를 사용하면 request 를 보내고 response 를 받는 행위를 동기적으로 수행한다.
 //        enqueue 작업을 실행하면 request 는 비동기적으로 보내고, response 는 콜백으로 받게 된다.
-            service.Signup23Patch(token, userInfo)
+            service.Signup23Patch("Bearer "+ token, userInfo)
                 .enqueue(object: retrofit2.Callback<Signup2ResponseBody>{
                     override fun onFailure(call: Call<Signup2ResponseBody>, t: Throwable) {
                         Log.d("회원가입 실패",t.message.toString())
+
                     }
 
                     override fun onResponse(

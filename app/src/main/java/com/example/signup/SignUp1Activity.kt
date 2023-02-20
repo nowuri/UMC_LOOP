@@ -25,6 +25,8 @@ class SignUp1Activity : AppCompatActivity() {
     private lateinit var viewBinding: ActivitySignup1Binding
 
     var name: String = ""
+    var id: String = ""
+    var pw: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +34,7 @@ class SignUp1Activity : AppCompatActivity() {
         setContentView(viewBinding.root)
 
         val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        val id = viewBinding.idinput.getText().toString()
-        val pw = viewBinding.pwinput.getText().toString()
+
         val pwcheck = viewBinding.pwcheckinput.getText().toString()
 
         //일단 이름 edittext로 해놨음. 추후 데이터 받아오는 것으로 바꿔야 됨
@@ -78,7 +79,10 @@ class SignUp1Activity : AppCompatActivity() {
         }
 
         viewBinding.next.setOnClickListener(){
-            val userData = SignUp1RequestBody(id,name,pw)
+            id = viewBinding.idinput.text.toString()
+            pw = viewBinding.pwinput.text.toString()
+            val userData = SignUp1RequestBody(viewBinding.idinput.text.toString(),name, viewBinding.pwinput.text.toString())
+            Log.e("test","id: $id, name: $name, pw: $pw")
 
             if(viewBinding.idinput.getText().toString().length >=6){
                 if(viewBinding.pwinput.getText().toString().equals(viewBinding.pwcheckinput.getText().toString()) && viewBinding.pwinput.getText().length >= 8){

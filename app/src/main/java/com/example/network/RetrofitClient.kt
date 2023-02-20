@@ -1,6 +1,9 @@
 package com.example.network
 
+import android.view.PixelCopy.request
+import com.example.interested.MainActivity_interest
 import com.example.login.Login
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Cache
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -16,6 +19,7 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
+
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
@@ -35,4 +39,30 @@ object RetrofitClient {
     val emgMedService: RetrofitService by lazy {
         retrofit.create(RetrofitService::class.java)
     }
+
+    fun getApiClient(): Retrofit{
+        return Retrofit.Builder()
+            .baseUrl("http://helptheyouth-lope.com/app/")
+            .client(provideOKHttpClient(AppInterceptor()))
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private fun provideOKHttpClient(interceptor: AppInterceptor): OkHttpClient
+        = OkHttpClient.Builder().run{
+            addInterceptor(interceptor)
+            build()
+    }
+
+    class AppInterceptor: Interceptor{
+        @Throws(IOException::class)
+        override fun intercept(chain: Interceptor.Chain): okhttp3.Response = with(chain){
+            val newRequest = request().newBuilder()
+                .addHeader("Authorization","")
+                .build()
+            proceed(newRequest)
+        }
+    }
+
+    val api = getApiClient().create(RetrofitService::class.java)
 }

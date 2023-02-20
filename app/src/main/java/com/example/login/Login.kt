@@ -1,10 +1,14 @@
 package com.example.login
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.example.find.Find
 import com.example.interested.databinding.ActivityLoginBinding
 import com.example.network.*
@@ -33,6 +37,9 @@ class Login : AppCompatActivity() {
 
         viewBinding.kakologin.setOnClickListener(){
             getKakaoLogin().work()
+            val uri = "https://accounts.kakao.com/login/?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26redirect_uri%3Dhttp%253A%252F%252Fhelptheyouth-lope.com%252Fapp%252Fauth%252Fkakao%252Fcallback%26through_account%3Dtrue%26client_id%3D563af4f084cf7785bf173ce9f7af43a5#login"
+            val intent = Intent(Intent.ACTION_VIEW,Uri.parse(uri))
+            startActivity(intent)
         }
 
         viewBinding.loginbtn.setOnClickListener(){

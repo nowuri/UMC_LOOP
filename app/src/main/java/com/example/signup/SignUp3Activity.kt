@@ -29,9 +29,9 @@ class SignUp3Activity: AppCompatActivity() {
     var birth: String = ""
     var address: String = ""
 
-    var checkbox_status_sms: String = ""
-    var checkbox_status_kkt: String = ""
-    var checkbox_status_info: String = ""
+    var checkbox_status_sms: String = "0"
+    var checkbox_status_kkt: String = "0"
+    var checkbox_status_info: String = "0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
