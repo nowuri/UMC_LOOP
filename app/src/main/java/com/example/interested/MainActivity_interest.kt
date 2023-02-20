@@ -51,9 +51,9 @@ class MainActivity_interest : AppCompatActivity() {
     val interest = ArrayList<String>()
     val uninterest = ArrayList<String>()
 
-    val token : String = "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
-            "eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJJZCI6ImpheSIsInVzZXJuYW1lIjoi6ra" +
-            "M7KSA7ZiVIn0sImlhdCI6MTY3NTMxMzc5N30.rJuQ2oo3C0-L0ksHthWG8brqCmkwUiPVt6OxLDw5hTc"
+    val token : String = "Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
+            "eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJJZCI6ImpheSIsInVzZXJuYW1" +
+            "lIjoi6raM7KSA7ZiVIn0sImlhdCI6MTY3NTMxMzc5N30.rJuQ2oo3C0-L0ksHthWG8brqCmkwUiPVt6OxLDw5hTc"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -361,7 +361,7 @@ class MainActivity_interest : AppCompatActivity() {
             //        Call 작업은 두 가지로 실행됨
 //        execute 를 사용하면 request 를 보내고 response 를 받는 행위를 동기적으로 수행한다.
 //        enqueue 작업을 실행하면 request 는 비동기적으로 보내고, response 는 콜백으로 받게 된다.
-            service.Signup23Patch("Bearer "+ token, userInfo)
+            service.Signup23Patch(token, userInfo)
                 .enqueue(object: retrofit2.Callback<Signup2ResponseBody>{
                     override fun onFailure(call: Call<Signup2ResponseBody>, t: Throwable) {
                         Log.d("회원가입 실패",t.message.toString())
@@ -381,27 +381,4 @@ class MainActivity_interest : AppCompatActivity() {
                 })
         }
     }
-
-    class interestChange(private val token: String, private val changeInterest: interestChangeRequestBody){
-        fun work(){
-            val service = RetrofitClient.emgMedService
-
-            service.interestChange(token, changeInterest)
-                .enqueue(object: retrofit2.Callback<interestChangeResponseBody>{
-                    override fun onResponse(
-                        call: Call<interestChangeResponseBody>,
-                        response: Response<interestChangeResponseBody>,
-                    ) {
-                        val result = response.body()
-                        Log.d("관심분야 변경 성공", " $result")
-                    }
-
-                    override fun onFailure(call: Call<interestChangeResponseBody>, t: Throwable) {
-                        Log.d("관심분야 변경 실패",t.message.toString())
-                    }
-
-                })
-        }
-    }
-
 }

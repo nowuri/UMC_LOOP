@@ -111,18 +111,23 @@ class SignUp3Activity: AppCompatActivity() {
         }
         //다음 버튼 클릭
         viewBinding.next.setOnClickListener{
-            val intent = Intent(this, MainActivity_interest::class.java)
-            intent.putExtra("ID",ID)
-            intent.putExtra("pw",pw)
-            intent.putExtra("Name",Name)
-            intent.putExtra("tel",tel)
-            intent.putExtra("birth",birth)
-            intent.putExtra("address",address)
-            intent.putExtra("checkbox_status_sms",checkbox_status_sms)
-            intent.putExtra("checkbox_status_kkt",checkbox_status_kkt)
-            intent.putExtra("checkbox_status_info",checkbox_status_info)
+            if(viewBinding.checkboxConsent.text == "0"){
+                Toast.makeText(this,"개인 정보 동의에 체크해주세요",Toast.LENGTH_SHORT).show()
+            }
+            else{
 
-            startActivity(intent)
+                val intent = Intent(this, MainActivity_interest::class.java)
+                intent.putExtra("ID",ID)
+                intent.putExtra("pw",pw)
+                intent.putExtra("Name",Name)
+                intent.putExtra("tel",tel)
+                intent.putExtra("birth",birth)
+                intent.putExtra("address",address)
+                intent.putExtra("checkbox_status_sms",checkbox_status_sms)
+                intent.putExtra("checkbox_status_kkt",checkbox_status_kkt)
+                intent.putExtra("checkbox_status_info",checkbox_status_info)
+                startActivity(intent)
+            }
         }
     }
 

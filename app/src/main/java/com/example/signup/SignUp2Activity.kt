@@ -119,14 +119,14 @@ class SignUp2Activity: AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {}
         })
 
-        if(intent.hasExtra("ID") && intent.hasExtra("PW")&& intent.hasExtra("name")   ){
-            ID = intent.getStringExtra("ID").toString()
-            pw = intent.getStringExtra("PW").toString()
-            name = intent.getStringExtra("name").toString()
-        }
-        else{
-            Toast.makeText(this,"받아온 값이 없습니다.",Toast.LENGTH_SHORT).show()
-        }
+//        if(intent.hasExtra("ID") && intent.hasExtra("PW")&& intent.hasExtra("name")   ){
+//            ID = intent.getStringExtra("ID").toString()
+//          pw = intent.getStringExtra("PW").toString()
+//            name = intent.getStringExtra("name").toString()
+//        }
+//        else{
+//            Log.e("받아온 값","받아온 값이 없습니다.")
+//        }
 
         //다음 버튼 클릭
         viewBinding.next.setOnClickListener {

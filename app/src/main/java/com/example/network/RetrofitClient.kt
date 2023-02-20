@@ -63,6 +63,4 @@ object RetrofitClient {
             proceed(newRequest)
         }
     }
-
-    val api = getApiClient().create(RetrofitService::class.java)
 }
