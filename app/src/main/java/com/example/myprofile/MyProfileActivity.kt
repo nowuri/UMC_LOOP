@@ -55,7 +55,6 @@ class MyProfileActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         //회원 탈퇴 클릭 시 카드뷰 띄움
-
         viewBinding.btnRemoveUser.setOnClickListener(this)
     }
 
