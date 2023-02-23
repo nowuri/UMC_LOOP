@@ -9,7 +9,7 @@ const userDao = require("./userDao");
 //
 exports.retrieveInterest = async (user) => {
   try {
-    const userIdx = user.idx;
+    const userIdx = user.userIdx;
 
     const connection = await pool.getConnection(async (conn) => conn);
     const userInterestResult = await userDao.selectUserInterest(connection, userIdx);

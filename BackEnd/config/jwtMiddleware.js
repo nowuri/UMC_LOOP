@@ -76,3 +76,15 @@ exports.isNotAuthenticated = async (req, res, next) => {
     }
   )(req, res);
 };
+
+exports.myIsAuthenticated = async (req, res, next) => {
+  try {
+    const token = req.body.token;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded.data;
+    next();
+  } catch (error) {
+    console.error(error);
+    return res.status(400).send(errResponse(baseResponseStatus.TOKEN_VERIFICATION_FAILURE));
+  }
+};
