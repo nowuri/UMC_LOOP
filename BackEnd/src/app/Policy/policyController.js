@@ -15,9 +15,9 @@ const axiosConfig = require('../../../config/axios.js');
 exports.SearchPoliciesForRegion = async function(req, res) {
 
   //const keyword = '창업';
-  const keyword = req.body.keyword;
+  const keyword = req.query.keyword;
   //let region = '제주'; 
-  let region = req.body.region;
+  let region = req.query.region;
 
   switch (region) {
     case '서울':

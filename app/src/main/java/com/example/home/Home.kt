@@ -12,12 +12,18 @@ import android.widget.ScrollView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.RecommedVPAdpager
+import com.example.interested.MainActivity_interest
+import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityHomeBinding
 import com.example.login.Login
 import com.example.mypage.MyPage_MainActivity
+import com.example.network.*
 import com.example.qna.Question
 import com.example.search.Search
 import com.google.android.material.tabs.TabLayoutMediator
+import retrofit2.Call
+import retrofit2.Response
+
 // 아직 유튜브를 구현안하신 것 같아 주석처리 해놓겠습니다!
 // import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 
@@ -99,9 +105,37 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+
+        //val Info = HomeDataRequestBody("주거", "서울")
+        val retrofitWork = RetrofitWork()
+        retrofitWork.work()
+
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_DOWN)
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_UP)
 
+    }
+
+    class RetrofitWork(){
+        fun work(){
+            Log.e("정책 불러오기","시작")
+            val service = RetrofitClient.emgMedService
+
+            service.HomeDataGet()
+                .enqueue(object: retrofit2.Callback<HomeDataResponseBody>{
+                    override fun onResponse(call: Call<HomeDataResponseBody>, response: Response<HomeDataResponseBody>) {
+                        if(response.isSuccessful){
+                            val result = response.body()
+                            Log.d("정책 불러오기 성공","$result")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<HomeDataResponseBody>, t: Throwable) {
+                        Log.d("정책 불러오기 실패",t.message.toString())
+                    }
+
+                })
+        }
     }
 
 }
