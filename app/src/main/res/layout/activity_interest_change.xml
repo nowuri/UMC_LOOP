@@ -11,10 +11,8 @@
     android:background="#1D2D69"
     android:clipToPadding="false"
     android:orientation="vertical"
-    tools:context=".MainActivity_interest">
+    tools:context="com.example.myprofile.InterestChange">
 
-    <!--    그림과 사이즈가 달라서 디자인과 다른 부분 존재-->
-    <!--    파란색 배경에 있는 로고-->
     <View
         android:layout_width="368dp"
         android:layout_height="689dp"
@@ -35,7 +33,7 @@
 
     <!--    뒤로가기 버튼-->
     <Button
-        android:id="@+id/back"
+        android:id="@+id/back2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -55,7 +53,7 @@
         android:layout_marginTop="206dp"
         android:background="@drawable/background"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back"
+        app:layout_constraintTop_toBottomOf="@id/back2"
         app:layout_constraintVertical_bias="0.982"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -260,6 +258,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
