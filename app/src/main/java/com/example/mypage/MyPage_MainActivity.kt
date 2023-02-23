@@ -32,10 +32,15 @@ import kotlin.random.Random.Default.nextInt
 class MyPage_MainActivity : AppCompatActivity() {
     private lateinit var viewBinding : ActivityMypageBinding
 
+    private val CHANNEL_ID = "TestChannel"   // Channel for notification
+    private var notificationManager: NotificationManager? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMypageBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
+        createNotificationChannel(CHANNEL_ID, "testChannel", "this is a test Channel")
 
         //버튼 클릭 시 해당 페이지 이동
         //프로필 변경
@@ -45,7 +50,7 @@ class MyPage_MainActivity : AppCompatActivity() {
         }
         //알림 목록 (수정필요)
         viewBinding.mypageNotilist.setOnClickListener() {
-
+            displayNotification()
         }
 
         //지원한 정책
@@ -71,7 +76,6 @@ class MyPage_MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         //상단 로그인, 하단바
         viewBinding.menuHome.setOnClickListener(){
             val intent = Intent(this, Home::class.java)
@@ -88,6 +92,33 @@ class MyPage_MainActivity : AppCompatActivity() {
         viewBinding.login.setOnClickListener(){
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
+        }
+    }
+
+    //알림
+    private fun displayNotification() {
+        val notificationId = 45
+
+        val notification = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Notification.Builder(applicationContext, CHANNEL_ID)
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle("알림")
+                .setContentText("Notification Test 입니다.")
+                .build()
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+        notificationManager?.notify(notificationId, notification)
+    }
+
+    private fun createNotificationChannel(channelId: String, name: String, channelDescription: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, name, importance).apply {
+                description = channelDescription
+            }
+            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager?.createNotificationChannel(channel)
         }
     }
 }

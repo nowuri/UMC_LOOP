@@ -25,7 +25,7 @@ import retrofit2.Call
 import retrofit2.Response
 
 // 아직 유튜브를 구현안하신 것 같아 주석처리 해놓겠습니다!
-// import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 
 class Home : AppCompatActivity() {
     private lateinit var viewBinding: ActivityHomeBinding
