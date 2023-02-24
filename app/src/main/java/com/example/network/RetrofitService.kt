@@ -33,8 +33,18 @@ interface RetrofitService {
 
     //2차회원가입 PATCH
     @Headers("accept: application/json", "Content-Type: application/json")
-    @PATCH("users/additional")
-    fun Signup23Patch(@Header("Authorization") accessToken: String, @Body userInfo2: Signup2RequestBody): Call<Signup2ResponseBody>
+    @HTTP(method="PATCH", path="users/additional", hasBody = true)
+    //@PATCH("users/additional")
+    fun Signup23Patch(
+        @Header("Authorization") accessToken: String,
+        @Body userInfo:Signup2RequestBody
+    ): Call<Signup2ResponseBody>
+
+    //관심분야 변경 GET
+    @Headers("accept: application/json", "Content-Type: application/json")
+    //@HTTP(method = "GET", path = "users/interests", hasBody = true)
+    @POST("users/interests")
+    fun getInterest(@Body Token: String): Call<changeGetResponseBody>
 
     //관심분야 변경 PATCH
     @Headers("accept: application/json", "Content-Type: application/json")

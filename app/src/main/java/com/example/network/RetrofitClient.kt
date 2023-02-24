@@ -1,5 +1,7 @@
 package com.example.network
 
+import android.app.Application
+import android.content.Context
 import android.view.PixelCopy.request
 import com.example.interested.MainActivity_interest
 import com.example.login.Login
@@ -16,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import java.io.File
 import java.io.IOException
+import java.sql.Types.NULL
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
@@ -38,29 +41,5 @@ object RetrofitClient {
 
     val emgMedService: RetrofitService by lazy {
         retrofit.create(RetrofitService::class.java)
-    }
-
-    fun getApiClient(): Retrofit{
-        return Retrofit.Builder()
-            .baseUrl("http://helptheyouth-lope.com/app/")
-            .client(provideOKHttpClient(AppInterceptor()))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
-    private fun provideOKHttpClient(interceptor: AppInterceptor): OkHttpClient
-        = OkHttpClient.Builder().run{
-            addInterceptor(interceptor)
-            build()
-    }
-
-    class AppInterceptor: Interceptor{
-        @Throws(IOException::class)
-        override fun intercept(chain: Interceptor.Chain): okhttp3.Response = with(chain){
-            val newRequest = request().newBuilder()
-                .addHeader("Authorization","")
-                .build()
-            proceed(newRequest)
-        }
     }
 }

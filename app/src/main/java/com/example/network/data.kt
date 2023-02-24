@@ -99,6 +99,13 @@ data class eraseUserResponseBody(
     val status: String?
 )
 
+data class changeGetResponseBody(
+    @SerializedName("result")
+    val result: String?,
+    @SerializedName("status")
+    val status: String?
+)
+
 
 data class HomeDataResponseBody(
     @SerializedName("result")

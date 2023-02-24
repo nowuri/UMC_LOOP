@@ -50,7 +50,7 @@ class MyProfileActivity : AppCompatActivity(), View.OnClickListener {
         }
         //관심분야 변경 클릭 시 관심분야 페이지로 이동
         viewBinding.btnChangeInterest.setOnClickListener(){
-            val SecondIntent = Intent(this, MainActivity_interest::class.java)
+            val SecondIntent = Intent(this, InterestChange::class.java)
             startActivity(SecondIntent)
         }
 
