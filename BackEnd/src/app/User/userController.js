@@ -188,6 +188,10 @@ exports.getTest = async function(req, res) {
   return res.send(response(baseResponseStatus.SUCCESS));
 }
 
+exports.jwtTest = async function(req, res) {
+  return res.send(response(baseResponseStatus.SUCCESS, req.user));
+}
+
 exports.frontTestAPI = async (req, res) => {
   let { cookies, body, query, params } = req;
 
