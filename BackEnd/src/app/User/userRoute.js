@@ -36,6 +36,7 @@ module.exports = function(app) {
 
   // 0. 테스트 API
   app.get('/app/api/test', user.getTest);
+  app.get('/app/api/jwtTest', isAuthenticated, user.getTest);
   
   app.post('/app/api/frontTest', user.frontTestAPI);
 
