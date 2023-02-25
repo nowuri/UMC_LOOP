@@ -42,9 +42,8 @@ interface RetrofitService {
 
     //관심분야 변경 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    //@HTTP(method = "GET", path = "users/interests", hasBody = true)
     @POST("users/interests")
-    fun getInterest(@Body Token: String): Call<changeGetResponseBody>
+    fun getInterest(@Body Token: token): Call<changeGetResponseBody>
 
     //관심분야 변경 PATCH
     @Headers("accept: application/json", "Content-Type: application/json")

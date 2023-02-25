@@ -10,9 +10,14 @@ import com.example.interested.R
 import com.example.interested.databinding.ActivityInterestChangeBinding
 import com.example.network.RetrofitClient
 import com.example.network.changeGetResponseBody
+import com.example.network.token
+import com.google.gson.JsonParser
 import org.json.JSONArray
+import org.json.JSONObject
+import org.json.JSONStringer
 import retrofit2.Call
 import retrofit2.Response
+import java.util.logging.Level.parse
 
 class InterestChange : AppCompatActivity() {
 
@@ -26,10 +31,10 @@ class InterestChange : AppCompatActivity() {
     val jsonUnInterest = JSONArray()
     val interest = ArrayList<String>()
     val uninterest = ArrayList<String>()
-    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
-            "eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9." +
-            "MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8"
-
+    val jsonObject = JSONObject("{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8\"}")
+    val data = token(
+        jsonObject.getString("token")
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +42,7 @@ class InterestChange : AppCompatActivity() {
         setContentView(viewBinding.root)
 
         Log.e("관심분야 수정","관심분야 가져오기 시작")
-        RetrofitWork(token).work()
+        RetrofitWork(data).work()
 
         uninterest.add("004003002")
         uninterest.add("004004002")
@@ -285,7 +290,7 @@ class InterestChange : AppCompatActivity() {
 
     }
 
-    class RetrofitWork(private val token: String){
+    class RetrofitWork(private val token: token){
         fun work(){
             val service = RetrofitClient.emgMedService
 
