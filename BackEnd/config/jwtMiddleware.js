@@ -17,35 +17,6 @@ exports.createJwtToken = (user) => {
   return token;
 };
 
-
-// exports.isAuthenticated = async (req, res, next) => {
-//   passport.authenticate('jwt', { session: false },
-//     async (authErr, user, info) => {
-//       // console.log(authErr, user, info);
-//       if (authErr || !user) {
-//         console.error(authErr);
-//         console.error(info);
-//         return res.status(400).send(errResponse(baseResponseStatus.TOKEN_VERIFICATION_FAILURE));
-//       }
-
-//       req.user = user;
-//       next();
-//     }
-//   )(req, res);
-// };
-
-// exports.isNotAuthenticated = async (req, res, next) => {
-//   passport.authenticate('jwt', { session: false },
-//     async(authErr, user, info) => {
-//       if (authErr || !user) 
-//         next();
-//       else {
-//         return res.status(400).send(errResponse(baseResponseStatus.LOGIN_DONE));
-//       }
-//     }
-//   )(req, res);
-// };
-
 exports.isAuthenticated = async (req, res, next) => {
   try {
     const token = req.body.token;
@@ -57,5 +28,18 @@ exports.isAuthenticated = async (req, res, next) => {
   } catch (error) {
     console.error(error);
     return res.status(400).send(errResponse(baseResponseStatus.TOKEN_VERIFICATION_FAILURE));
+  }
+};
+
+exports.isNotAuthenticated = async (req, res, next) => {
+  try {
+    const token = req.body.token;
+    if (!token) {
+      next();
+    }
+
+    return res.status(400).send(errResponse(baseResponseStatus.LOGIN_DONE));
+  } catch (error) {
+    console.error(error);
   }
 };
