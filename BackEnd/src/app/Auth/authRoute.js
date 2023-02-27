@@ -6,9 +6,9 @@ const passport = require('passport');
 
 module.exports = function(app) {
   // 로그인되어 있지 않다면, 회원가입 진행
-  app.post('/app/auth/signUp', isNotAuthenticated, auth.localSignUp);
+  // app.post('/app/auth/signUp', isNotAuthenticated, auth.localSignUp);
 
-  app.post('/app/auth/signIn', isNotAuthenticated, auth.localSignIn);
+  // app.post('/app/auth/signIn', isNotAuthenticated, auth.localSignIn);
 
   // JWT - Authorization Bearer Token 미들웨어 확인후 다음 미들웨어로 이동
   app.post('/app/auth', isAuthenticated, auth.verifyJWT);
