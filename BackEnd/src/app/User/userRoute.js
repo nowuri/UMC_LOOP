@@ -1,13 +1,12 @@
 const express = require('express');
 const user = require('./userController');
-// const { isAuthenticated, isNotAuthenticated } = require('../../../config/jwtMiddleware');
 const { isAuthenticated } = require('../../../config/jwtMiddleware.js');
 
 
 module.exports = function(app) {
 
   // 2차 마무리 회원가입
-  // app.patch('/app/users/additional', isAuthenticated, user.additionalSignUp);
+  app.patch('/app/users/additional', isAuthenticated, user.additionalSignUp);
 
   // 유저가 선택한 관심 카테고리 가져오기 API
   app.post('/app/users/interests', isAuthenticated, user.getInterest);

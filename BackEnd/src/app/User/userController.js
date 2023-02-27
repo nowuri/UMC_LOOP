@@ -81,21 +81,10 @@ exports.getInterest = async (req, res) => {
   }
 };
 
-// phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
-// req.body = {
-//  phoneNumber: string,
-//  postalCode: string, 
-//  address: string, 
-//  agreePICU: int, 
-//  agreeSMS: int, 
-//  agreeKakao: int
-// }
-// Interested
-// : Array of Category Code Strings
-// ex) req.body = 
+// req.body = 
 // {
+//    "token": string,
 //    "phoneNumber": string,
-//    "postalCode": string, 
 //    "userBirth": string,
 //    "address": string, 
 //    "agreePICU": int, 
@@ -108,10 +97,10 @@ exports.getInterest = async (req, res) => {
 exports.additionalSignUp = async (req, res) => {
   const user = req.user;
 
-  const { phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao, userBirth, interested, unInterested } = req.body;
+  const { phoneNumber, address, agreePICU, agreeSMS, agreeKakao, userBirth, interested, unInterested } = req.body;
 
   // 만약 비어있는 폼 문항이 있다면
-  if (!(phoneNumber && postalCode && address && userBirth))
+  if (!(phoneNumber && address && userBirth))
     return res.status(400).send(errResponse(baseResponseStatus.USER_DATA_EMPTY));
 
   if (phoneNumber.length !== 11)
@@ -123,8 +112,8 @@ exports.additionalSignUp = async (req, res) => {
     return res.status(400).send(errResponse(baseResponseStatus.SIGNUP_ALREADY_DONE));
   }
 
-  // Additional info Patch : phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao
-  const infoPatchResult = await userService.patchAdditionalInfo(user, { phoneNumber, postalCode, address, agreePICU, agreeSMS, agreeKakao, userBirth });
+  // Additional info Patch : phoneNumber, address, agreePICU, agreeSMS, agreeKakao
+  const infoPatchResult = await userService.patchAdditionalInfo(user, { phoneNumber, address, agreePICU, agreeSMS, agreeKakao, userBirth });
 
   // Interest Patch
   await userService.patchInterests(user, { interested, unInterested });

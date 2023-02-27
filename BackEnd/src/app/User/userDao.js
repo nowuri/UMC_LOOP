@@ -124,19 +124,17 @@ async function selectUserIdForPassword(connection, name, email) {
 // * infoParams = {
 // *    "phoneNumber": string,
 // *    "userBirth": string,
-// *    "postalCode": string, 
 // *    "address": string, 
 // *    "agreePICU": int, 
 // *    "agreeSMS": int, 
 // *    "agreeKakao": int,
 // * }
 async function updateUserAdditionalInfo(connection, idx, infoParams) {
-  // console.log(idx, infoParams);
-  const { phoneNumber, userBirth, postalCode, address, agreeSMS, agreePICU, agreeKakao } = infoParams;
+  const { phoneNumber, userBirth, address, agreeSMS, agreePICU, agreeKakao } = infoParams;
 
   const updateUserQuery = SQL`
   UPDATE user 
-  SET user_phone = ${phoneNumber}, user_birth = ${userBirth}, user_postal = ${postalCode}, user_address = ${address}, agree_SMS = ${agreeSMS}, agree_kakao = ${agreeKakao}, agree_PICU = ${agreePICU}
+  SET user_phone = ${phoneNumber}, user_birth = ${userBirth}, user_address = ${address}, agree_SMS = ${agreeSMS}, agree_kakao = ${agreeKakao}, agree_PICU = ${agreePICU}
   WHERE idx = ${idx};`;
 
   const updateUserRow = await connection.query(updateUserQuery);
