@@ -90,7 +90,7 @@ class Login : AppCompatActivity() {
                 .enqueue(object: retrofit2.Callback<kakaoResponseBody>{
                     override fun onResponse(call: Call<kakaoResponseBody>, response: Response<kakaoResponseBody>) {
                         if(response.isSuccessful){
-                            val result = response.body()
+                            val result = response
                             Log.d("카카오 로그인 성공","$result")
                         }
                     }

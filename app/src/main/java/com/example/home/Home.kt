@@ -26,11 +26,17 @@ import retrofit2.Response
 
 // 아직 유튜브를 구현안하신 것 같아 주석처리 해놓겠습니다!
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import org.json.JSONObject
 
 class Home : AppCompatActivity() {
     private lateinit var viewBinding: ActivityHomeBinding
     public val API_KEY = "AIzaSyBw2owx9ckx0xwCtDdO7Xz4Dp3MnelSuTE"
     public val VIDEO_ID = "0_OqbQArcGg&t=4s"
+
+    val jsonObject = JSONObject("{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8\"}")
+    val data = token(
+        jsonObject.getString("token")
+    )
 
     inner class PagerRunnable: Runnable{
         var currentPage = 0
@@ -109,7 +115,7 @@ class Home : AppCompatActivity() {
 
         //val Info = HomeDataRequestBody("주거", "서울")
         val retrofitWork = RetrofitWork()
-        retrofitWork.work()
+        //retrofitWork.work()
 
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_DOWN)
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_UP)
@@ -137,5 +143,4 @@ class Home : AppCompatActivity() {
                 })
         }
     }
-
 }

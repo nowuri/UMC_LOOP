@@ -329,7 +329,7 @@ class MainActivity_interest : AppCompatActivity() {
                 Log.e("가져온 값",ID4+" "+ pw4 + " "+ Name4 + " "+ tel4+" "+birth4+ " "+address4+" / "
                         +checkbox_status_sms4+" / "+checkbox_status_kkt4+" / "+checkbox_status_info4)
 
-                val userData = Signup2RequestBody(tel4, "06009",address4,
+                val userData = Signup2RequestBody(tel4, address4,
                     checkbox_status_info4.toInt(), checkbox_status_sms4.toInt(), checkbox_status_kkt4.toInt(),
                     interest,uninterest
                 )

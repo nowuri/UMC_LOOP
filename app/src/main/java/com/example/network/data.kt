@@ -2,6 +2,8 @@ package com.example.network
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
 data class SignUpRequestBody(
     val id: String?,
@@ -59,7 +61,6 @@ data class kakaoResponseBody(
 
 data class Signup2RequestBody(
     val phoneNumber: String?,
-    val postalCode: String?,
     val address: String?,
     val agreePICU: Int,
     val agreeeSMS: Int,
@@ -76,7 +77,7 @@ data class Signup2ResponseBody(
 )
 
 data class interestChangeRequestBody(
-    val userphone: String,
+    val token: String,
     val interested: ArrayList<String>,
     val uninterested: ArrayList<String>
 )
@@ -105,7 +106,7 @@ data class token(
 
 data class changeGetResponseBody(
     @SerializedName("result")
-    val result: String?,
+    val result: Object?,
     @SerializedName("status")
     val status: String?
 )
