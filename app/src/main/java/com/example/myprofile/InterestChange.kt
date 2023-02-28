@@ -198,7 +198,7 @@ class InterestChange : AppCompatActivity() {
                 }
                 Thread.sleep(100)
             }
-        }
+        }.start()
 
         viewBinding.back2.setOnClickListener(){
 //            이전 화면으로 돌아갈 수 있도록 함
@@ -233,7 +233,7 @@ class InterestChange : AppCompatActivity() {
 
         viewBinding.transport.setOnClickListener(){
             t++
-            if(l % 2 == 1){
+            if(t % 2 == 1){
                 viewBinding.transport.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.transport.setTextColor(Color.parseColor("#ffffff"))
                 num++
