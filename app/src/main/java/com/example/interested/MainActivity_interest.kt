@@ -59,11 +59,10 @@ class MainActivity_interest : AppCompatActivity() {
     val interest = ArrayList<String>()
     val uninterest = ArrayList<String>()
 
-    val token : String = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJkYXRhI" +
-            "jp7InVzZXJJZHgiOjEsInVzZXJJZCI6ImpheSIsInVzZXJuYW1lIjoi6raM7KSA" +
-            "7ZiVIn0sImlhdCI6MTY3NTMxMzc5N30.M39IJ0ZjHs4Y2GHp9GDJsN_YRUzlvwi5Hy5L-n45weg"
-
-    val token2 : String ="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    val jsonObject = JSONObject("{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8\"}")
+    val data = token(
+        jsonObject.getString("token")
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -329,27 +328,15 @@ class MainActivity_interest : AppCompatActivity() {
                 Log.e("가져온 값",ID4+" "+ pw4 + " "+ Name4 + " "+ tel4+" "+birth4+ " "+address4+" / "
                         +checkbox_status_sms4+" / "+checkbox_status_kkt4+" / "+checkbox_status_info4)
 
-                val userData = Signup2RequestBody(tel4, address4,
+                val userData = Signup2RequestBody(token(jsonObject.getString("token")),tel4, address4,
                     checkbox_status_info4.toInt(), checkbox_status_sms4.toInt(), checkbox_status_kkt4.toInt(),
                     interest,uninterest
                 )
 
                 Log.d("userData","$userData")
 
-                val retrofitWork = RetrofitWork(token,userData)
+                val retrofitWork = RetrofitWork(userData)
                 retrofitWork.work()
-                try{
-                    retrofitWork.work()
-                }
-                catch(e: IllegalArgumentException){
-                    Log.d("예외","an error occuered during getting username from token")
-                }
-                catch(e: TokenExpiredException){
-                    Log.d("예외","the token is expired and not valid anymore")
-                }
-                catch(e: SignatureException){
-                    Log.d("예외","Authentication Failed. Username or Password not valid.")
-                }
 
                 val intent = Intent(this, Home::class.java)
                 startActivity(intent)
@@ -362,14 +349,14 @@ class MainActivity_interest : AppCompatActivity() {
     }
 }
 
-    class RetrofitWork(private val token: String, private val userInfo: Signup2RequestBody){
+    class RetrofitWork(private val userInfo: Signup2RequestBody){
         fun work(){
             val service= RetrofitClient.emgMedService
 
             //        Call 작업은 두 가지로 실행됨
 //        execute 를 사용하면 request 를 보내고 response 를 받는 행위를 동기적으로 수행한다.
 //        enqueue 작업을 실행하면 request 는 비동기적으로 보내고, response 는 콜백으로 받게 된다.
-            service.Signup23Patch(token,userInfo)
+            service.Signup23Patch(userInfo)
                 .enqueue(object: retrofit2.Callback<Signup2ResponseBody>{
                     override fun onFailure(call: Call<Signup2ResponseBody>, t: Throwable) {
                         Log.d("회원가입 실패",t.message.toString())

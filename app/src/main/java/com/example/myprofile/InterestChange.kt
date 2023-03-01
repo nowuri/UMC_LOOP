@@ -421,28 +421,6 @@ class InterestChange : AppCompatActivity() {
 
     }
 
-    class RetrofitWork(private val token: token){
-        fun work(){
-            val service = RetrofitClient.emgMedService
-
-            service.getInterest(token)
-                .enqueue(object: retrofit2.Callback<changeGetResponseBody>{
-                    override fun onResponse(
-                        call: Call<changeGetResponseBody>,
-                        response: Response<changeGetResponseBody>,
-                    ) {
-                        val result = response.body()
-                        Log.e("관심분야 가져오기 성공","$result")
-                    }
-
-                    override fun onFailure(call: Call<changeGetResponseBody>, t: Throwable) {
-                        Log.e("관심분야 가져오기 실패",t.message.toString())
-                    }
-
-                })
-        }
-    }
-
     class patch(private val info: interestChangeRequestBody){
         fun work(){
             val service = RetrofitClient.emgMedService

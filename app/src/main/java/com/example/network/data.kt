@@ -60,6 +60,7 @@ data class kakaoResponseBody(
 )
 
 data class Signup2RequestBody(
+    val token: token,
     val phoneNumber: String?,
     val address: String?,
     val agreePICU: Int,
@@ -87,10 +88,6 @@ data class interestChangeResponseBody(
     val result: String?,
     @SerializedName("status")
     val status: String?
-)
-
-data class eraseUserRequestBody(
-    val token: String
 )
 
 data class eraseUserResponseBody(
