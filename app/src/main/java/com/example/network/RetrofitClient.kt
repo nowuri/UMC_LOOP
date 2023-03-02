@@ -15,7 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
+//import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.create
 import java.io.File
 import java.io.IOException
@@ -35,7 +35,7 @@ object RetrofitClient {
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl("http://helptheyouth-lope.com/app/")
-            .addConverterFactory(ScalarsConverterFactory.create())
+            //.addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient) // 로그캣에서 패킷 내용을 모니터링 할 수 있음 (인터셉터)
             .build()

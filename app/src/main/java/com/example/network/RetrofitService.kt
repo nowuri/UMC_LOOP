@@ -52,12 +52,9 @@ interface RetrofitService {
     @PATCH("users/withdraw")
     fun eraseUser(@Body accessToken: token): Call<eraseUserResponseBody>
 
-    //홈화면 정책 지역별 GET
+    //홈화면 정책 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @GET("policies/search/region")
-    fun HomeDataGet(
-        @Query("keyword") keyword: String?="청년",
-        @Query("region") region: String?="서울"
-    ): Call<HomeDataResponseBody>
+    @POST("policies/home")
+    fun HomeDataGet(@Body PolicyList: HomeDataRequestBody): Call<HomeDataResponseBody>
 
 }

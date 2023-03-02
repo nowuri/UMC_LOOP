@@ -108,10 +108,11 @@ data class changeGetResponseBody(
     val status: String?
 )
 
+data class HomeDataRequestBody(
+    val region: String?
+)
 
 data class HomeDataResponseBody(
     @SerializedName("result")
-    val result: String?,
-    @SerializedName("status")
-    val status: String?
+    val result: String?
 )
