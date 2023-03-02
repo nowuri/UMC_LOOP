@@ -12,11 +12,10 @@ import android.widget.ScrollView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.RecommedVPAdpager
-import com.example.interested.MainActivity_interest
-import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityHomeBinding
 import com.example.login.Login
 import com.example.mypage.MyPage_MainActivity
+import com.example.myprofile.InterestChange
 import com.example.network.*
 import com.example.qna.Question
 import com.example.search.Search
@@ -111,35 +110,41 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
-        //val Info = HomeDataRequestBody("주거", "서울")
-        val retrofitWork = RetrofitWork()
+        //val retrofitWork = RetrofitWork()
         //retrofitWork.work()
+
+        val region = HomeDataRequestBody("서울")
+        RetrofitWork(region).work()
 
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_DOWN)
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_UP)
 
     }
 
-    class RetrofitWork(){
+    class RetrofitWork(private val region: HomeDataRequestBody){
         fun work(){
             Log.e("정책 불러오기","시작")
             val service = RetrofitClient.emgMedService
 
-            service.HomeDataGet()
-                .enqueue(object: retrofit2.Callback<HomeDataResponseBody>{
-                    override fun onResponse(call: Call<HomeDataResponseBody>, response: Response<HomeDataResponseBody>) {
-                        if(response.isSuccessful){
+            service.HomeDataGet(region)
+                .enqueue(object : retrofit2.Callback<HomeDataResponseBody>{
+                    override fun onResponse(
+                        call: Call<HomeDataResponseBody>,
+                        response: Response<HomeDataResponseBody>,
+                    ) {
+                        if(response.isSuccessful()) {
                             val result = response.body()
-                            Log.d("정책 불러오기 성공","$result")
+                            Log.e("정책 불러오기 성공","$result")
+
+                        }
+                        else {
+                            val code = response.code()
+                            Log.e("정책 불러오기 상태","$code")
                         }
                     }
-
                     override fun onFailure(call: Call<HomeDataResponseBody>, t: Throwable) {
-                        Log.d("정책 불러오기 실패",t.message.toString())
+                        Log.e("정책 불러오기 실패",t.message.toString())
                     }
-
                 })
         }
     }
