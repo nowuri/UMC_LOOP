@@ -95,7 +95,7 @@ class SignUp2Activity: AppCompatActivity() {
             val date: Int = today.get(Calendar.DATE)
             val dlg = DatePickerDialog(this, object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                    viewBinding.birth.setText("${year}년 ${month + 1}월 ${dayOfMonth}일")
+                    viewBinding.birth.setText("${year}-${month + 1}-${dayOfMonth}")
                     viewBinding.birth.setTextColor(Color.BLACK)
                 }
             }, year, month, date)

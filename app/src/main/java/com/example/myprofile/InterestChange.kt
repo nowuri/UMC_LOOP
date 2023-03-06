@@ -29,7 +29,25 @@ class InterestChange : AppCompatActivity() {
     val jsonInterest = JSONArray()
     val jsonUnInterest = JSONArray()
     val interest = ArrayList<String>()
-    val uninterest = ArrayList<String>()
+    val uninterest = arrayListOf(
+        //취업
+        "004001","004001001","004001002","004001003","004001004",
+        //창업
+        "004002","004002001","004002002","004002003",
+        //금융
+        "004003001","004003003",
+        //주거
+        "004003","004003002",
+        //건강
+        "004004","004004001",
+        //문화
+        "004004002",
+        //기타
+        "004005","004005001","004005002","004005003",
+        //코로나
+        "004006","004006001","004006002","004006003","004006004","004006006","004006005"
+
+    )
     val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8"
     val jsonObject = JSONObject("{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8\"}")
     val data = token(
@@ -43,26 +61,25 @@ class InterestChange : AppCompatActivity() {
 
         Log.e("관심분야 수정","관심분야 가져오기 시작")
 
-        uninterest.add("004003002")
-        uninterest.add("004004002")
-        uninterest.add("004003001")
-        uninterest.add("004003003")
-        uninterest.add("004001")
-        uninterest.add("004006")
-        uninterest.add("004002")
-        uninterest.add("004004001")
-        uninterest.add("004005")
         val service = RetrofitClient.emgMedService
 
         fun paint(string: String){
-            if(string == "004003002"){
+            if(string == "004003002" || string == "004003"){
+                l++
                 viewBinding.live.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.live.setTextColor(Color.parseColor("#ffffff"))
                 num++
-                uninterest.remove("004003002")
-                interest.add("004003002")
+
+                if(uninterest.contains(string)) {
+                    uninterest.remove("004003002")
+                    uninterest.remove("004003")
+
+                    interest.add("004003002")
+                    interest.add("004003")
+                }
             }
             else if(string == "004004002"){
+                t++
                 viewBinding.transport.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.transport.setTextColor(Color.parseColor("#ffffff"))
                 num++
@@ -70,48 +87,108 @@ class InterestChange : AppCompatActivity() {
                 interest.add("004004002")
             }
             else if(string == "004003001" || string == "004003003"){
+                m++
                 viewBinding.money.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.money.setTextColor(Color.parseColor("#ffffff"))
                 num++
-                uninterest.remove("004003001")
-                uninterest.remove("004003003")
-                interest.add("004003001")
-                interest.add("004003003")
+                if(uninterest.contains(string)) {
+                    uninterest.remove("004003001")
+                    uninterest.remove("004003003")
+                    interest.add("004003001")
+                    interest.add("004003003")
+                }
             }
-            else if(string == "004001"){
+            else if(string == "004001" || string == "004001001" || string == "004001002"
+                || string == "004001003" || string == "004001004"){
+                w++
                 viewBinding.work.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.work.setTextColor(Color.parseColor("#ffffff"))
                 num++
-                uninterest.remove("004001")
-                interest.add("004001")
+                if(uninterest.contains(string)) {
+                    uninterest.remove("004001")
+                    uninterest.remove("004001001")
+                    uninterest.remove("004001002")
+                    uninterest.remove("004001003")
+                    uninterest.remove("004001004")
+
+                    interest.add("004001")
+                    interest.add("004001001")
+                    interest.add("004001002")
+                    interest.add("004001003")
+                    interest.add("004001004")
+                }
             }
-            else if(string == "004006"){
+            else if(string == "004006" || string == "004006001" || string == "004006002" ||
+                    string == "004006003" || string == "004006004" || string == "004006005" ||
+                    string == "004006006"){
+                e++
                 viewBinding.edu.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.edu.setTextColor(Color.parseColor("#ffffff"))
                 num++
-                uninterest.remove("004006")
-                interest.add("004006")
+                if(uninterest.contains(string)) {
+                    uninterest.remove("004006")
+                    uninterest.remove("004006001")
+                    uninterest.remove("004006002")
+                    uninterest.remove("004006003")
+                    uninterest.remove("004006004")
+                    uninterest.remove("004006005")
+                    uninterest.remove("004006006")
+
+                    interest.add("004006")
+                    interest.add("004006001")
+                    interest.add("004006002")
+                    interest.add("004006003")
+                    interest.add("004006004")
+                    interest.add("004006005")
+                    interest.add("004006006")
+                }
             }
-            else if(string == "004002"){
+            else if(string == "004002" || string == "004002001" || string == "004002002" || string == "004002003"){
+                f++
                 viewBinding.found.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.found.setTextColor(Color.parseColor("#ffffff"))
                 num++
-                uninterest.remove("004002")
-                interest.add("004002")
+                if(uninterest.contains(string)) {
+                    uninterest.remove("004002")
+                    uninterest.remove("004002001")
+                    uninterest.remove("004002002")
+                    uninterest.remove("004002003")
+
+                    interest.add("004002")
+                    interest.add("004002001")
+                    interest.add("004002002")
+                    interest.add("004002003")
+                }
             }
-            else if(string == "004004001"){
+            else if(string == "004004001" || string == "004004"){
+                h++
                 viewBinding.health.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.health.setTextColor(Color.parseColor("#ffffff"))
                 num++
-                uninterest.remove("004004001")
-                interest.add("004004001")
+                if(uninterest.contains(string)) {
+                    uninterest.remove("004004001")
+                    uninterest.remove("004004")
+
+                    interest.add("004004001")
+                    interest.add("004004")
+                }
             }
-            else{
+            else if(string == "004005" || string == "004005001" || string == "004005002" || string == "004005003"){
+                etc++
                 viewBinding.etc.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.etc.setTextColor(Color.parseColor("#ffffff"))
                 num++
-                uninterest.remove("004005")
-                interest.add("004005")
+                if(uninterest.contains(string)) {
+                    uninterest.remove("004005")
+                    uninterest.remove("004005001")
+                    uninterest.remove("004005002")
+                    uninterest.remove("004005003")
+
+                    interest.add("004005")
+                    interest.add("004005001")
+                    interest.add("004005002")
+                    interest.add("004005003")
+                }
             }
         }
 
@@ -165,10 +242,15 @@ class InterestChange : AppCompatActivity() {
                     }
                     Log.e("getChecked", "$getChecked")
 
+                    Log.e("before","$interest")
+
                     var k = 0
                     while(k < getChecked.size){
-                        Log.e("paint","paint")
-                        paint(getChecked[k])
+                        var n = getChecked[k]
+                        Log.e("paint $k","$n")
+                        paint(n)
+                        Log.e("interest","$interest")
+                        Log.e("uninterest","$uninterest")
                         k++
                     }
                 }
@@ -406,8 +488,8 @@ class InterestChange : AppCompatActivity() {
                 val input = interestChangeRequestBody(token,interest,uninterest)
                 patch(input).work()
 
-                Log.d("Interest",jsonInterest.toString())
-                Log.d("UnInterest",jsonUnInterest.toString())
+                Log.d("Interest",interest.toString())
+                Log.d("UnInterest",uninterest.toString())
 
                 val intent = Intent(this, MyProfileActivity::class.java)
                 startActivity(intent)

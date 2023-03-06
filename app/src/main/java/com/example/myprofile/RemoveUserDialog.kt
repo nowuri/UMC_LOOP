@@ -6,10 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.DialogRemoveuserBinding
 import com.example.login.Login
 import com.example.network.RetrofitClient
-
-//eraseUserRequestBody를 아직 안 적용하신 것 같아 주석처리 해놓겠습니다! (에러가 나네요ㅠㅠ)
-//import com.example.network.eraseUserRequestBody
-
 import com.example.network.eraseUserResponseBody
 import com.example.network.token
 import org.json.JSONObject
