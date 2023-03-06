@@ -12,7 +12,13 @@ module.exports = function(app) {
   app.put('/app/users/interests', isAuthenticated, user.changeInterest);
 
   // 비밀번호 변경
-  app.get('/app/users/changePasswd', isAuthenticated, user.changePasswd);
+  app.post('/app/users/changePasswd', user.changePasswd);
+
+  // 회원 탈퇴 API
+  app.patch('/app/users/withdraw', isAuthenticated, user.withdrawUser);
+
+  // 회원 정보 수정 API
+  // app.patch('/app/users/info', isAuthenticated, user.changeInfo);
 
   // Small APIs
   // 닉제임 중복 확인 API
