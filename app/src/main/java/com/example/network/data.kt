@@ -116,3 +116,50 @@ data class HomeDataResponseBody(
     @SerializedName("result")
     val result: String?
 )
+
+data class PolicyFieldRequestBody(
+    val field: String?
+)
+
+data class PolicyFieldResponseBody(
+    @SerializedName("result")
+    val result: String?
+)
+
+data class PolicyRegionRequestBody(
+    val region: String?
+)
+
+data class PolicyRegionResponseBody(
+    @SerializedName("result")
+    val result: String?
+)
+
+data class PolicyFieldSearchRequestBody(
+    var keyword: String?,
+    val field: String?
+)
+
+data class PolicyFieldSearchResponseBody(
+    @SerializedName("result")
+    val result: String?
+)
+
+data class PolicyRegionSearchRequestBody(
+    var keyword: String?,
+    val region: String?
+)
+
+data class PolicyRegionSearchResponseBody(
+    @SerializedName("result")
+    val result: String?
+)
+
+data class PolicyDetailRequestBody(
+    val policyId: String?
+)
+
+data class PolicyDetailResponseBody(
+    @SerializedName("result")
+    val result: String?
+)

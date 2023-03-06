@@ -55,6 +55,32 @@ interface RetrofitService {
     //홈화면 정책 GET
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("policies/home")
-    fun HomeDataGet(@Body PolicyList: HomeDataRequestBody): Call<HomeDataResponseBody>
+    fun HomeDataGet(@Body region: HomeDataRequestBody): Call<HomeDataResponseBody>
+
+    //정책검색화면 분야별 GET
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("policies/field")
+    fun PolicyFieldGet(@Body field: PolicyFieldRequestBody): Call<PolicyFieldResponseBody>
+
+    //정책검색화면 지역별 GET
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("policies/region")
+    fun PolicyRegionGet(@Body field: PolicyRegionRequestBody): Call<PolicyRegionResponseBody>
+
+    //정책검색화면 분야별 검색어와 GET
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("policies/field/search")
+    fun PolicyFieldGet(@Body field: PolicyFieldSearchRequestBody): Call<PolicyFieldSearchResponseBody>
+
+    //정책검색화면 지역별 검색어와 GET
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("policies/region/search")
+    fun PolicyRegionSearchGet(@Body field: PolicyRegionSearchRequestBody): Call<PolicyRegionSearchResponseBody>
+
+    //정책검색화면 지역별 검색어와 GET
+    //토큰 추가해야하나..?
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("policies/{policyId}")
+    fun PolicyDetailGet(@Body field: PolicyDetailRequestBody): Call<PolicyDetailResponseBody>
 
 }

@@ -113,7 +113,7 @@ class Home : AppCompatActivity() {
         //val retrofitWork = RetrofitWork()
         //retrofitWork.work()
 
-        val region = HomeDataRequestBody("서울")
+        val region = HomeDataRequestBody("제주")
         RetrofitWork(region).work()
 
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_DOWN)
@@ -133,7 +133,7 @@ class Home : AppCompatActivity() {
                         response: Response<HomeDataResponseBody>,
                     ) {
                         if(response.isSuccessful()) {
-                            val result = response.body()
+                            val result = response.body().toString()
                             Log.e("정책 불러오기 성공","$result")
 
                         }
