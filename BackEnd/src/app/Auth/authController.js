@@ -145,8 +145,8 @@ exports.kakaoLogin = async (req, res) => {
         return res.send(response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, { token, "userIdx": user.idx }));
       }
 
-    return res.send(response(baseResponseStatus.SUCCESS, { token }));
-  }
-)(req, res);
-}
+      return res.send(response(baseResponseStatus.SUCCESS, { token }));
+    }
+  ) (req, res);
+};
 
