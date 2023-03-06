@@ -166,3 +166,15 @@ data class PolicyDetailResponseBody(
     @SerializedName("result")
     val result: String?
 )
+
+data class pwFindRequestBody(
+    val user_email: String?,
+    val user_name: String?
+)
+
+data class pwFindResponseBody(
+    @SerializedName("result")
+    val result: Object?,
+    @SerializedName("status")
+    val status: String?
+)

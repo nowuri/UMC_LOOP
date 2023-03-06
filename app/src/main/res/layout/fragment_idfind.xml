@@ -12,6 +12,7 @@
         android:layout_height="23dp"
         android:text="이름"
         android:textStyle="bold"
+        android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:id="@+id/name"
         app:layout_constraintStart_toStartOf="parent"
