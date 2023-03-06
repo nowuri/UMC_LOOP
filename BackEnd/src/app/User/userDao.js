@@ -109,15 +109,27 @@ async function selectUserPassword(connection, selectUserPasswordParams) {
 }
 
 // 비번 찾기 유저 계정 존재 여부 체크 (status 가입 탈퇴 1차가입 상태 확인 필요??)
-async function selectUserIdForPassword(connection, name, email) {
+async function selectUserIdForPassword(connection, email, name) {
+  console.log("sql문 시작 들어왔음");
+  console.log(email, name);
   const selectUserAccountQuery = `
-        SELECT id
+        SELECT idx
         FROM user 
-        WHERE user_email = ? AND user_name = ?;`;
+        WHERE user_email = ? AND user_name = ?;`;  
+  /*
+  const selectUserAccountQuery = `
+        SELECT idx
+        FROM (SELECT *
+            FROM user 
+            WHERE user_email = ? AND user_name = ?) as A
+        WHERE A.provider="local";`;
+        */
   const selectUserAccountRow = await connection.query(
     selectUserAccountQuery,
-    name, email
+    [email, name]
   );
+  console.log("sql문 리턴하기 전 들어왔음");
+  console.log(selectUserAccountRow);
   return selectUserAccountRow[0];
 }
 

@@ -6,19 +6,15 @@ const baseResponseStatus = require('../baseResponseStatus.js');
 const userProvider = require('../../src/app/User/userProvider.js');
 const userService = require('../../src/app/User/userService.js')
  
-var redirectURI = encodeURI("http://127.0.0.1:3001/app/auth/naver/callback");
 
 module.exports = () => {
-   passport.use('naver-login',
-    new NaverStrategy({ //passport.js에이동. 하고 export로이동해서하기....인
+   passport.use('naver', new NaverStrategy({
         clientID: process.env.NAVER_CLIENT,
-        callbackURL: redirectURI,
         clientSecret: process.env.NAVER_SECRET,
-
-
+        callbackURL: 'http://helptheyouth-lope.com/app/auth/naver/callback',
+        session: false,
       }, async (accessToken, refreshToken, profile, done) => {
         console.log(accessToken);
-
         const result = JSON.parse(JSON.stringify(profile));
         const userEmail=result.email;
         const userName=result.name;

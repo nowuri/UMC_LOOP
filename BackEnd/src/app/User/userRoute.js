@@ -15,7 +15,7 @@ module.exports = function(app) {
   app.patch('/app/users/interests', isAuthenticated, user.changeInterest);
 
   // 비밀번호 변경
-  // app.get('/app/users/changePasswd', isAuthenticated, user.changePasswd);
+  app.post('/app/users/changePasswd', user.changePasswd);
 
   // 회원 탈퇴 API
   app.patch('/app/users/withdraw', isAuthenticated, user.withdrawUser);
