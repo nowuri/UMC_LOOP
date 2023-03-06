@@ -46,7 +46,7 @@ exports.HomeListForRegion = async function(req, res) {
     params: {
       openApiVlak: process.env.OPEN_API_KEY,
       srchPolyBizSecd: region, //지역 id
-      display: 100,
+      display: 5,
       pageIndex: 1
     },
   }
@@ -59,7 +59,7 @@ exports.HomeListForRegion = async function(req, res) {
 
     var jsonArray = new Array();
     
-    for(var i = 0; i < totalcnt[0]; i++){
+    for(var i = 0; i < 5; i++){
       var json = new Object();
       json.policyName = parsedData.empsInfo.emp[i].polyBizSjnm;
       json.id = parsedData.empsInfo.emp[i].bizId;
@@ -315,7 +315,7 @@ exports.SearchPoliciesForField = async function(req, res) {
 // 특정 정책 상세 정보 조회
 exports.getPolicyById = async function(req, res) {
 
-  const policyId = req.body.policyId;
+  const policyId = req.params.policyId;
 
   const config = {
     method: 'get',
