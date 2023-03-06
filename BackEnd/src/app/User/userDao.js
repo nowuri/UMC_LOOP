@@ -57,6 +57,15 @@ async function insertUserInfo(connection, insertUserInfoParams) {
   return insertUserInfoRow;
 }
 
+async function selectUserInterest(connection, userIdx) {
+  const selectInterestQuery = SQL`
+    SELECT category_code, status FROM interest WHERE user_idx = ${userIdx};
+  `;
+  const [ selectInterestRow ] = await connection.query(selectInterestQuery);
+
+  return selectInterestRow;
+}
+
 // 네이버 유저 생성
 async function insertNaverUserInfo(connection, insertNaverUserInfoParams) {
   const insertNaverUserInfoQuery = `
@@ -127,19 +136,17 @@ async function selectUserIdForPassword(connection, email, name) {
 // * infoParams = {
 // *    "phoneNumber": string,
 // *    "userBirth": string,
-// *    "postalCode": string, 
 // *    "address": string, 
 // *    "agreePICU": int, 
 // *    "agreeSMS": int, 
 // *    "agreeKakao": int,
 // * }
-async function updateUserInfo(connection, idx, infoParams) {
-  // console.log(idx, infoParams);
-  const { phoneNumber, userBirth, postalCode, address, agreeSMS, agreePICU, agreeKakao } = infoParams;
+async function updateUserAdditionalInfo(connection, idx, infoParams) {
+  const { phoneNumber, userBirth, address, agreeSMS, agreePICU, agreeKakao } = infoParams;
 
   const updateUserQuery = SQL`
   UPDATE user 
-  SET user_phone = ${phoneNumber}, user_birth = ${userBirth}, user_postal = ${postalCode}, user_address = ${address}, agree_SMS = ${agreeSMS}, agree_kakao = ${agreeKakao}, agree_PICU = ${agreePICU}
+  SET user_phone = ${phoneNumber}, user_birth = ${userBirth}, user_address = ${address}, agree_SMS = ${agreeSMS}, agree_kakao = ${agreeKakao}, agree_PICU = ${agreePICU}
   WHERE idx = ${idx};`;
 
   const updateUserRow = await connection.query(updateUserQuery);
@@ -179,6 +186,28 @@ async function upsertInterest(connection, userIdx, code, val) {
   return;
 }
 
+async function updateUserStatus(connection, userIdx, val) {
+  const updateUserStatusQuery = SQL`
+    UPDATE user
+    set status = ${val}
+    WHERE idx = ${userIdx};
+  `;
+
+  const updateUserStatusRow = await connection.query(updateUserStatusQuery);
+
+  return updateUserStatusRow[0];
+};
+
+async function updateUserInfo(connection, userIdx, info) {
+  const updateuserInfoQuery = SQL`
+
+  `;
+
+  const [ updateUserInfoRow ] = await connection.query(updateuserInfoQuery);
+
+  return updateUserInfoRow;
+}
+
 module.exports = {
   selectUser,
   selectUserEmail,
@@ -190,7 +219,10 @@ module.exports = {
   selectUserPassword,
   selectUserIdForPassword,
   selectUserAccount,
-  updateUserInfo,
   updateUserPasswordInfo,
-  upsertInterest
+  updateUserAdditionalInfo,
+  updateUserInfo,
+  upsertInterest,
+  updateUserStatus,
+  selectUserInterest,
 };

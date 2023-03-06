@@ -13,20 +13,20 @@ const { response, errResponse } = require("../../../config/response");
 // }
 exports.localSignUp = async (req, res) => {
   try {
-    const { newUserData } = req.body;
-    if (!newUserData)
+    let { userName, userEmail, password } = req.body;
+    if (!userEmail)
       return res.status(400).send(errResponse(baseResponseStatus.SIGNUP_EMAIL_EMPTY));
 
     // Validate Email
-    if (!emailValidator.validate(newUserData.userEmail)) {
+    if (!emailValidator.validate(userEmail)) {
       return res.send(errResponse(baseResponseStatus.SIGNUP_EMAIL_ERROR_TYPE));
     }
 
     // 비밀번호 암호화
-    const hashed = await bcrypt.hash(newUserData.password, 10);
-    newUserData.password = hashed;
+    const hashed = await bcrypt.hash(password, 10);
+    password = hashed;
 
-    const createUserResult = await userService.createUser(newUserData);
+    const createUserResult = await userService.createUser({userName, userEmail, password});
 
     // console.log(createUserResult);
 

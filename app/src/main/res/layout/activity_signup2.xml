@@ -114,7 +114,7 @@
                 android:background="@null"
                 android:hint="@string/telephone"
                 android:inputType="number"
-                android:maxLength="10"
+                android:maxLength="20"
                 android:textColor="@color/gray"
                 android:textColorHint="@color/gray"
                 android:textSize="20sp"

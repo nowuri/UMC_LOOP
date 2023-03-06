@@ -1,74 +1,47 @@
-package com.example.interested
+package com.example.myprofile
 
-import android.app.Application
-import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.graphics.Color
-import android.location.Geocoder.isPresent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.auth0.jwt.exceptions.TokenExpiredException
-import com.bumptech.glide.load.PreferredColorSpace
-import com.example.home.Home
-import com.example.interested.databinding.ActivityMainBinding
-import com.example.login.Login.Companion.prefs
+import com.example.interested.R
+import com.example.interested.databinding.ActivityInterestChangeBinding
 import com.example.network.*
-import com.example.search.Search
-import retrofit2.Retrofit
-import com.google.gson.JsonArray
-import kotlinx.coroutines.runBlocking
-import okhttp3.Authenticator
-import okhttp3.Interceptor
-import okhttp3.Request
-import okhttp3.Route
+import com.google.gson.JsonParser
 import org.json.JSONArray
 import org.json.JSONObject
+import org.json.JSONStringer
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.IllegalArgumentException
-import java.security.SignatureException
 import java.sql.Types.NULL
+import java.util.logging.Level.parse
 
+class InterestChange : AppCompatActivity() {
 
-class MainActivity_interest : AppCompatActivity() {
-    private lateinit var viewBinding: ActivityMainBinding
-
+    private lateinit var viewBinding : ActivityInterestChangeBinding
 
     var num = 0
     var l =0; var t=0; var m=0; var w=0; var e=0; var f=0; var h=0; var etc=0
     var possible=-1
 
-    var ID4 : String = ""
-    var pw4 : String = ""
-    var Name4: String = ""
-    var tel4 : String = ""
-    var birth4: String = ""
-    var address4: String = ""
-
-    var checkbox_status_sms4: String = ""
-    var checkbox_status_kkt4: String = ""
-    var checkbox_status_info4: String = ""
-
     val jsonInterest = JSONArray()
     val jsonUnInterest = JSONArray()
     val interest = ArrayList<String>()
     val uninterest = ArrayList<String>()
-
+    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8"
     val jsonObject = JSONObject("{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8\"}")
     val data = token(
         jsonObject.getString("token")
     )
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        viewBinding = ActivityInterestChangeBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
+        Log.e("관심분야 수정","관심분야 가져오기 시작")
 
         uninterest.add("004003002")
         uninterest.add("004004002")
@@ -79,6 +52,134 @@ class MainActivity_interest : AppCompatActivity() {
         uninterest.add("004002")
         uninterest.add("004004001")
         uninterest.add("004005")
+        val service = RetrofitClient.emgMedService
+
+        fun paint(string: String){
+            if(string == "004003002"){
+                viewBinding.live.setBackgroundResource(R.drawable.changed_btn)
+                viewBinding.live.setTextColor(Color.parseColor("#ffffff"))
+                num++
+                uninterest.remove("004003002")
+                interest.add("004003002")
+            }
+            else if(string == "004004002"){
+                viewBinding.transport.setBackgroundResource(R.drawable.changed_btn)
+                viewBinding.transport.setTextColor(Color.parseColor("#ffffff"))
+                num++
+                uninterest.remove("004004002")
+                interest.add("004004002")
+            }
+            else if(string == "004003001" || string == "004003003"){
+                viewBinding.money.setBackgroundResource(R.drawable.changed_btn)
+                viewBinding.money.setTextColor(Color.parseColor("#ffffff"))
+                num++
+                uninterest.remove("004003001")
+                uninterest.remove("004003003")
+                interest.add("004003001")
+                interest.add("004003003")
+            }
+            else if(string == "004001"){
+                viewBinding.work.setBackgroundResource(R.drawable.changed_btn)
+                viewBinding.work.setTextColor(Color.parseColor("#ffffff"))
+                num++
+                uninterest.remove("004001")
+                interest.add("004001")
+            }
+            else if(string == "004006"){
+                viewBinding.edu.setBackgroundResource(R.drawable.changed_btn)
+                viewBinding.edu.setTextColor(Color.parseColor("#ffffff"))
+                num++
+                uninterest.remove("004006")
+                interest.add("004006")
+            }
+            else if(string == "004002"){
+                viewBinding.found.setBackgroundResource(R.drawable.changed_btn)
+                viewBinding.found.setTextColor(Color.parseColor("#ffffff"))
+                num++
+                uninterest.remove("004002")
+                interest.add("004002")
+            }
+            else if(string == "004004001"){
+                viewBinding.health.setBackgroundResource(R.drawable.changed_btn)
+                viewBinding.health.setTextColor(Color.parseColor("#ffffff"))
+                num++
+                uninterest.remove("004004001")
+                interest.add("004004001")
+            }
+            else{
+                viewBinding.etc.setBackgroundResource(R.drawable.changed_btn)
+                viewBinding.etc.setTextColor(Color.parseColor("#ffffff"))
+                num++
+                uninterest.remove("004005")
+                interest.add("004005")
+            }
+        }
+
+        service.getInterest(data)
+            .enqueue(object: retrofit2.Callback<changeGetResponseBody>{
+                override fun onResponse(
+                    call: Call<changeGetResponseBody>,
+                    response: Response<changeGetResponseBody>,
+                ) {
+                    val content = response.body()
+                    Log.e("관심분야 가져오기 성공","$content")
+
+                    val jsonObject = content?.result
+                    Log.e("jsonObject","$jsonObject")
+
+                    val jsonToString = jsonObject.toString()
+                    Log.e("jsonToString","$jsonToString")
+
+                    var getChecked : ArrayList<String> = arrayListOf()
+                    var getUnchecked : ArrayList<String> = arrayListOf()
+                    var i = 0
+                    var code = ""
+
+                    while(i < jsonToString.length){
+                        if(jsonToString[i] == ','){
+                            getChecked.add(code)
+                            code = ""
+                        }
+                        else if(jsonToString[i] >= '0' && jsonToString[i] <= '9'){
+                            code += jsonToString[i]
+                        }
+                        else if (jsonToString[i] == 'u'){
+                            break
+                        }
+                        i++
+                    }
+
+                    var j = i
+                    while(j < jsonToString.length){
+                        if(jsonToString[j] == ','){
+                            getUnchecked.add(code)
+                            code = ""
+                        }
+                        else if(jsonToString[j] >= '0' && jsonToString[j] <= '9'){
+                            code += jsonToString[j]
+                        }
+                        else {
+
+                        }
+                        j++
+                    }
+                    Log.e("getChecked", "$getChecked")
+
+                    var k = 0
+                    while(k < getChecked.size){
+                        Log.e("paint","paint")
+                        paint(getChecked[k])
+                        k++
+                    }
+                }
+
+                override fun onFailure(call: Call<changeGetResponseBody>, t: Throwable) {
+                    Log.e("관심분야 가져오기 실패",t.message.toString())
+                }
+
+            })
+
+
 
         Thread{
             var i=0
@@ -99,11 +200,10 @@ class MainActivity_interest : AppCompatActivity() {
             }
         }.start()
 
-        viewBinding.back.setOnClickListener(){
+        viewBinding.back2.setOnClickListener(){
 //            이전 화면으로 돌아갈 수 있도록 함
-            val intent = Intent(this, SignUp3Activity::class.java)
-            startActivity(intent)
-            Toast.makeText(this@MainActivity_interest,"뒤로 돌아가기",Toast.LENGTH_SHORT).show()
+            val intent2 = Intent(this, MyProfileActivity::class.java)
+            startActivity(intent2)
         }
 
         //여기서부터는 관심분야 선택했을 때 일어날 activity
@@ -133,7 +233,7 @@ class MainActivity_interest : AppCompatActivity() {
 
         viewBinding.transport.setOnClickListener(){
             t++
-            if(l % 2 == 1){
+            if(t % 2 == 1){
                 viewBinding.transport.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.transport.setTextColor(Color.parseColor("#ffffff"))
                 num++
@@ -291,23 +391,6 @@ class MainActivity_interest : AppCompatActivity() {
             }
         }
 
-        if(intent.hasExtra("ID") && intent.hasExtra("pw") && intent.hasExtra("Name") && intent.hasExtra("tel")
-            && intent.hasExtra("birth") && intent.hasExtra("address")){
-            ID4 = intent.getStringExtra("ID").toString()
-            pw4 = intent.getStringExtra("pw").toString()
-            Name4 = intent.getStringExtra("Name").toString()
-            tel4 = intent.getStringExtra("tel").toString()
-            birth4 = intent.getStringExtra("birth").toString()
-            address4 = intent.getStringExtra("address").toString()
-            checkbox_status_sms4 = intent.getStringExtra("checkbox_status_sms").toString()
-            checkbox_status_kkt4 = intent.getStringExtra("checkbox_status_kkt").toString()
-            checkbox_status_info4 = intent.getStringExtra("checkbox_status_info").toString()
-
-
-        }
-        else{
-            Log.e("받은 값이 없습니다.","받은 값이 없습니다.")
-        }
 
         viewBinding.finish.setOnClickListener{
             Log.e("finish num",num.toString())
@@ -320,59 +403,43 @@ class MainActivity_interest : AppCompatActivity() {
                 jsonUnInterest.put(v)
             }
             if(possible == 1){
-                Toast.makeText(this@MainActivity_interest,"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
+                val input = interestChangeRequestBody(token,interest,uninterest)
+                patch(input).work()
+
                 Log.d("Interest",jsonInterest.toString())
                 Log.d("UnInterest",jsonUnInterest.toString())
 
-                //우편번호를 받아오지 않음음
-                Log.e("가져온 값",ID4+" "+ pw4 + " "+ Name4 + " "+ tel4+" "+birth4+ " "+address4+" / "
-                        +checkbox_status_sms4+" / "+checkbox_status_kkt4+" / "+checkbox_status_info4)
-
-                val userData = Signup2RequestBody(token(jsonObject.getString("token")),tel4, address4,
-                    checkbox_status_info4.toInt(), checkbox_status_sms4.toInt(), checkbox_status_kkt4.toInt(),
-                    interest,uninterest
-                )
-
-                Log.d("userData","$userData")
-
-                val retrofitWork = RetrofitWork(userData)
-                retrofitWork.work()
-
-                val intent = Intent(this, Home::class.java)
+                val intent = Intent(this, MyProfileActivity::class.java)
                 startActivity(intent)
             }
             else{
-                Toast.makeText(this@MainActivity_interest,"선택된 관심분야가 없습니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"선택된 관심분야가 없습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
+
+
     }
-}
 
-    class RetrofitWork(private val userInfo: Signup2RequestBody){
+    class patch(private val info: interestChangeRequestBody){
         fun work(){
-            val service= RetrofitClient.emgMedService
+            val service = RetrofitClient.emgMedService
 
-            //        Call 작업은 두 가지로 실행됨
-//        execute 를 사용하면 request 를 보내고 response 를 받는 행위를 동기적으로 수행한다.
-//        enqueue 작업을 실행하면 request 는 비동기적으로 보내고, response 는 콜백으로 받게 된다.
-            service.Signup23Patch(userInfo)
-                .enqueue(object: retrofit2.Callback<Signup2ResponseBody>{
-                    override fun onFailure(call: Call<Signup2ResponseBody>, t: Throwable) {
-                        Log.d("회원가입 실패",t.message.toString())
-
+            service.interestChange(info)
+                .enqueue(object : retrofit2.Callback<interestChangeResponseBody>{
+                    override fun onResponse(
+                        call: Call<interestChangeResponseBody>,
+                        response: Response<interestChangeResponseBody>,
+                    ) {
+                        val result = response.body()
+                        Log.e("관심분야 변경 성공","$result")
                     }
 
-                    override fun onResponse(
-                        call: Call<Signup2ResponseBody>,
-                        response: Response<Signup2ResponseBody>,
-                    ) {
-                        if(response.isSuccessful){
-                            val result = response.body()
-                            Log.d("회원가입 성공","$result")
-                        }
+                    override fun onFailure(call: Call<interestChangeResponseBody>, t: Throwable) {
+                        Log.e("관심분야 변경 실패",t.message.toString())
                     }
 
                 })
         }
     }
+}

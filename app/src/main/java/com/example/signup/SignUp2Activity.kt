@@ -12,7 +12,14 @@ import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.ActivitySignup2Binding
+import com.example.login.Login
+import com.example.network.NumberSendRequestBody
+import com.example.network.NumberSendResponseBody
+import com.example.network.RetrofitClient
 import com.example.signup.SignUp1Activity
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -72,6 +79,11 @@ class SignUp2Activity: AppCompatActivity() {
         //SMS 인증번호 확인
         //1분 카운트다운
         viewBinding.btnNumauth.setOnClickListener{
+            val numberSend = NumberSendRequestBody(viewBinding.ETTelephone.text.toString())
+
+            val retrofitWork = SignUp2Activity.RetrofitWork(numberSend)
+            retrofitWork.work()
+
             mCountDown.start()
         }
 
@@ -107,14 +119,14 @@ class SignUp2Activity: AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {}
         })
 
-        if(intent.hasExtra("ID") && intent.hasExtra("PW")&& intent.hasExtra("name")   ){
-            ID = intent.getStringExtra("ID").toString()
-            pw = intent.getStringExtra("PW").toString()
-            name = intent.getStringExtra("name").toString()
-        }
-        else{
-            Toast.makeText(this,"받아온 값이 없습니다.",Toast.LENGTH_SHORT).show()
-        }
+//        if(intent.hasExtra("ID") && intent.hasExtra("PW")&& intent.hasExtra("name")   ){
+//            ID = intent.getStringExtra("ID").toString()
+//          pw = intent.getStringExtra("PW").toString()
+//            name = intent.getStringExtra("name").toString()
+//        }
+//        else{
+//            Log.e("받아온 값","받아온 값이 없습니다.")
+//        }
 
         //다음 버튼 클릭
         viewBinding.next.setOnClickListener {
@@ -160,5 +172,28 @@ class SignUp2Activity: AppCompatActivity() {
         }
 
 
+    class RetrofitWork(private val phoneNum: NumberSendRequestBody){
+        fun work(){
+            val service = RetrofitClient.emgMedService
+
+            service.snsToken(phoneNum)
+                .enqueue(object: retrofit2.Callback<NumberSendResponseBody>{
+                    override fun onResponse(
+                        call: Call<NumberSendResponseBody>,
+                        response: Response<NumberSendResponseBody>,
+                    ) {
+                        if(response.isSuccessful){
+                            val result = response.body()
+                            Log.d("번호 보내기 성공","$result")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<NumberSendResponseBody>, t: Throwable) {
+                        Log.d("번호 보내기 실패",t.message.toString())
+                    }
+
+                })
+        }
+    }
 }
 

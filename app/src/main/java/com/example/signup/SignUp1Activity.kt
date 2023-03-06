@@ -2,21 +2,31 @@ package com.example.signup
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivitySignup1Binding
 import com.example.login.Login
+import com.example.network.RetrofitClient
+import com.example.network.SignUp1RequestBody
+import com.example.network.SignUp1ResponseBody
+import com.google.gson.JsonObject
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Response
 
 class SignUp1Activity : AppCompatActivity() {
     private lateinit var viewBinding: ActivitySignup1Binding
 
     var name: String = ""
+    var id: String = ""
+    var pw: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +34,7 @@ class SignUp1Activity : AppCompatActivity() {
         setContentView(viewBinding.root)
 
         val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        val id = viewBinding.idinput
-        val pw = viewBinding.pwinput.getText().toString()
+
         val pwcheck = viewBinding.pwcheckinput.getText().toString()
 
         //일단 이름 edittext로 해놨음. 추후 데이터 받아오는 것으로 바꿔야 됨
@@ -70,13 +79,19 @@ class SignUp1Activity : AppCompatActivity() {
         }
 
         viewBinding.next.setOnClickListener(){
+            id = viewBinding.idinput.text.toString()
+            pw = viewBinding.pwinput.text.toString()
+            val userData = SignUp1RequestBody(viewBinding.idinput.text.toString(),name, viewBinding.pwinput.text.toString())
+            Log.e("test","id: $id, name: $name, pw: $pw")
+
             if(viewBinding.idinput.getText().toString().length >=6){
                 if(viewBinding.pwinput.getText().toString().equals(viewBinding.pwcheckinput.getText().toString()) && viewBinding.pwinput.getText().length >= 8){
+                    val retrofitWork = RetrofitWork(userData)
+                    retrofitWork.work()
+
                     val intent = Intent(this,SignUp2Activity::class.java)
-                    intent.putExtra("ID",viewBinding.idinput.getText().toString())
-                    intent.putExtra("PW",viewBinding.pwinput.getText().toString())
-                    intent.putExtra("name",name)
                     startActivity(intent)
+
                 }
                 else if(viewBinding.pwinput.getText().length < 8){
                     Toast.makeText(this,"비밀번호를 8자리 미만입니다.",Toast.LENGTH_SHORT).show()
@@ -92,6 +107,29 @@ class SignUp1Activity : AppCompatActivity() {
         viewBinding.back.setOnClickListener(){
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
+        }
+    }
+
+    class RetrofitWork(private val userInfo: SignUp1RequestBody){
+        fun work(){
+            val service = RetrofitClient.emgMedService
+
+            service.addUser(userInfo)
+                .enqueue(object: retrofit2.Callback<SignUp1ResponseBody>{
+                    override fun onResponse(
+                        call: Call<SignUp1ResponseBody>,
+                        response: Response<SignUp1ResponseBody>
+                    ) {
+                        if(response.isSuccessful){
+                            val result = response.body()
+                            Log.d("1차 회원가입 성공","$result")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<SignUp1ResponseBody>, t: Throwable) {
+                        Log.d("1차 회원가입 실패",t.message.toString())
+                    }
+                })
         }
     }
 }

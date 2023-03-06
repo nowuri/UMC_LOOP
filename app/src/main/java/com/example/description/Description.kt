@@ -10,6 +10,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.SignUp3Activity
 import com.example.interested.databinding.ActivityDescriptionBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class Description : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewBinding: ActivityDescriptionBinding
@@ -22,6 +24,15 @@ class Description : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
 
+        val tabTitle = arrayOf("신청 정보", "정책 정보", "심사 절차")
+        val desAdapter =VPAdapter4(this)
+        viewBinding.vp2.adapter = desAdapter
+
+        TabLayoutMediator(viewBinding.tab, viewBinding.vp2){
+            tab,position -> tab.text = tabTitle[position]
+        }.attach()
+
+        viewBinding.tab.setTabTextColors(Color.rgb(147,147,147), Color.rgb(255,255,255))
         var commentView = LayoutInflater.from(this).inflate(R.layout.policy_comment, null, false)
 
         //TODO: 정책 정보들(이름, 기관, 날짜, 내용, 홈피) 넘어온 데이터로 텍스트 세팅

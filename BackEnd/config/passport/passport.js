@@ -8,7 +8,7 @@ const userProvider = require('../../src/app/User/userProvider.js');
 
 module.exports = () => {
 
-  jwt();
+  // jwt();
   local();
   naver();
   kakao();

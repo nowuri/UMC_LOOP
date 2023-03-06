@@ -13,11 +13,7 @@ class NotRecommend : AppCompatActivity() {
         RecommendData("ID ㅇㅇㅇ","2023.1.29","이유를 적어주세요"),
         RecommendData("ID ㄹㄹㄹ","2023.1.30","이유를 적어주세요"),
         RecommendData("ID ㄷㄷㄷ","2023.2.1","이유를 적어주세요"),
-        RecommendData("ID ㅈㅈㅈ","2023.2.2","이유를 적어주세요"),
-        RecommendData("ID ㅋㅋㅋ","2023.2.3","이유를 적어주세요"),
-        RecommendData("ID ㄹㄹㄹ","2023.2.4","이유를 적어주세요"),
-        RecommendData("ID ㅎㅎㅎ","2023.2.5","이유를 적어주세요"),
-        RecommendData("ID ㅠㅠㅠ","2023.2.6","이유를 적어주세요")
+        RecommendData("ID ㅈㅈㅈ","2023.2.2","이유를 적어주세요")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

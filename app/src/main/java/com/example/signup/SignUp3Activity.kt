@@ -10,6 +10,12 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.interested.databinding.ActivitySignup3Binding
+import com.example.network.RetrofitClient
+import com.example.network.Signup2RequestBody
+import com.example.network.Signup2ResponseBody
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
 import java.util.*
 
 class SignUp3Activity: AppCompatActivity() {
@@ -23,9 +29,9 @@ class SignUp3Activity: AppCompatActivity() {
     var birth: String = ""
     var address: String = ""
 
-    var checkbox_status_sms: String = ""
-    var checkbox_status_kkt: String = ""
-    var checkbox_status_info: String = ""
+    var checkbox_status_sms: String = "0"
+    var checkbox_status_kkt: String = "0"
+    var checkbox_status_info: String = "0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,9 +99,9 @@ class SignUp3Activity: AppCompatActivity() {
             birth = intent.getStringExtra("birth").toString()
             address = intent.getStringExtra("address").toString()
 
-            checkbox_status_sms = intent.getStringExtra("checkbox_status_sms").toString()
-            checkbox_status_kkt = intent.getStringExtra("checkbox_status_kkt").toString()
-            checkbox_status_info = intent.getStringExtra("checkbox_status_info").toString()
+//            checkbox_status_sms = intent.getStringExtra("checkbox_status_sms").toString()
+//            checkbox_status_kkt = intent.getStringExtra("checkbox_status_kkt").toString()
+//            checkbox_status_info = intent.getStringExtra("checkbox_status_info").toString()
 
             Log.e("가져온 값",ID+" "+ pw + " "+ Name + " "+ tel+" "+birth+ " "+address+" "
                     +checkbox_status_sms+" "+checkbox_status_kkt+" "+checkbox_status_info)
@@ -105,18 +111,24 @@ class SignUp3Activity: AppCompatActivity() {
         }
         //다음 버튼 클릭
         viewBinding.next.setOnClickListener{
-            val intent = Intent(this, MainActivity_interest::class.java)
-            intent.putExtra("ID",ID)
-            intent.putExtra("pw",pw)
-            intent.putExtra("Name",Name)
-            intent.putExtra("tel",tel)
-            intent.putExtra("birth",birth)
-            intent.putExtra("address",address)
-            intent.putExtra("checkbox_status_sms",checkbox_status_sms)
-            intent.putExtra("checkbox_status_kkt",checkbox_status_kkt)
-            intent.putExtra("checkbox_status_info",checkbox_status_info)
+            if(viewBinding.checkboxConsent.text == "0"){
+                Toast.makeText(this,"개인 정보 동의에 체크해주세요",Toast.LENGTH_SHORT).show()
+            }
+            else{
 
-            startActivity(intent)
+                val intent = Intent(this, MainActivity_interest::class.java)
+                intent.putExtra("ID",ID)
+                intent.putExtra("pw",pw)
+                intent.putExtra("Name",Name)
+                intent.putExtra("tel",tel)
+                intent.putExtra("birth",birth)
+                intent.putExtra("address",address)
+                intent.putExtra("checkbox_status_sms",checkbox_status_sms)
+                intent.putExtra("checkbox_status_kkt",checkbox_status_kkt)
+                intent.putExtra("checkbox_status_info",checkbox_status_info)
+                startActivity(intent)
+            }
         }
     }
+
 }

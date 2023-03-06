@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
@@ -17,12 +18,16 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.home.Home
 import com.example.interested.R
+import com.example.interested.RetrofitWork
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMainSearchBinding
 import com.example.login.Login
 import com.example.mypage.MyPage_MainActivity
+import com.example.network.*
 import com.example.qna.Question
 import com.google.android.material.tabs.TabLayoutMediator
+import retrofit2.Call
+import retrofit2.Response
 
 class Search : AppCompatActivity() {
     private lateinit var viewBinding: com.example.interested.databinding.ActivityMainSearchBinding
@@ -131,9 +136,70 @@ class Search : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val field = PolicyFieldRequestBody("취업")
+        val retrofitWork = RetrofitWork(field)
+        retrofitWork.work()
+
+        var region = PolicyRegionRequestBody("제주")
+        val retrofitWork2 = RetrofitWork2(region)
+        retrofitWork2.work()
     }
 
-    /////////////////이거 뭐지..?
+    class RetrofitWork(private val info: PolicyFieldRequestBody){
+        fun work(){
+            val service = RetrofitClient.emgMedService
+
+            service.PolicyFieldGet(info)
+                .enqueue(object : retrofit2.Callback<PolicyFieldResponseBody>{
+                    override fun onResponse(
+                        call: Call<PolicyFieldResponseBody>,
+                        response: Response<PolicyFieldResponseBody>,
+                    ) {
+                        if(response.isSuccessful()) {
+                            val result = response.body().toString()
+                            Log.e("정책 불러오기 성공","$result")
+                        }
+                        else {
+                            val code = response.code()
+                            Log.e("정책 불러오기 상태","$code")
+                        }
+                    }
+                    override fun onFailure(call: Call<PolicyFieldResponseBody>, t: Throwable) {
+                        Log.e("정책 불러오기 실패",t.message.toString())
+                    }
+
+                })
+        }
+    }
+
+    class RetrofitWork2(private val info: PolicyRegionRequestBody){
+        fun work(){
+            val service = RetrofitClient.emgMedService
+
+            service.PolicyRegionGet(info)
+                .enqueue(object : retrofit2.Callback<PolicyRegionResponseBody>{
+                    override fun onResponse(
+                        call: Call<PolicyRegionResponseBody>,
+                        response: Response<PolicyRegionResponseBody>,
+                    ) {
+                        if(response.isSuccessful()) {
+                            val result = response.body().toString()
+                            Log.e("정책 불러오기 성공","$result")
+                        }
+                        else {
+                            val code = response.code()
+                            Log.e("정책 불러오기 상태","$code")
+                        }
+                    }
+                    override fun onFailure(call: Call<PolicyRegionResponseBody>, t: Throwable) {
+                        Log.e("정책 불러오기 실패",t.message.toString())
+                    }
+
+                })
+        }
+    }
+
+    /////////////////이거 뭐지..?(레나)
     private fun setupSpinnerHandler(){
         viewBinding.spinner2.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
