@@ -57,8 +57,27 @@ class MainActivity_interest : AppCompatActivity() {
     val jsonInterest = JSONArray()
     val jsonUnInterest = JSONArray()
     val interest = ArrayList<String>()
-    val uninterest = ArrayList<String>()
+    val uninterest = arrayListOf(
+        //취업
+        "004001","004001001","004001002","004001003","004001004",
+        //창업
+        "004002","004002001","004002002","004002003",
+        //금융
+        "004003001","004003003",
+        //주거
+        "004003","004003002",
+        //건강
+        "004004","004004001",
+        //문화
+        "004004002",
+        //기타
+        "004005","004005001","004005002","004005003",
+        //코로나
+        "004006","004006001","004006002","004006003","004006004","004006006","004006005"
 
+    )
+
+    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8"
     val jsonObject = JSONObject("{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8\"}")
     val data = token(
         jsonObject.getString("token")
@@ -69,16 +88,6 @@ class MainActivity_interest : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
-
-        uninterest.add("004003002")
-        uninterest.add("004004002")
-        uninterest.add("004003001")
-        uninterest.add("004003003")
-        uninterest.add("004001")
-        uninterest.add("004006")
-        uninterest.add("004002")
-        uninterest.add("004004001")
-        uninterest.add("004005")
 
         Thread{
             var i=0
@@ -115,9 +124,12 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.live.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
-                if(uninterest.contains("004003002"))
+                if(uninterest.contains("004003002")) {
                     uninterest.remove("004003002")
+                    uninterest.remove("004003")
+                }
                 interest.add("004003002")
+                interest.add("004003")
             }
             else{
                 viewBinding.live.setBackgroundResource(R.drawable.btn_style)
@@ -126,14 +138,16 @@ class MainActivity_interest : AppCompatActivity() {
                 Log.e("num",num.toString())
                 if(interest.contains("004003002")){
                     interest.remove("004003002")
+                    interest.remove("004003")
                 }
                 uninterest.add("004003002")
+                uninterest.add("004003")
             }
         }
 
         viewBinding.transport.setOnClickListener(){
             t++
-            if(l % 2 == 1){
+            if(t % 2 == 1){
                 viewBinding.transport.setBackgroundResource(R.drawable.changed_btn)
                 viewBinding.transport.setTextColor(Color.parseColor("#ffffff"))
                 num++
@@ -188,18 +202,36 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.work.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
-                if(uninterest.contains("004001"))
+                if(uninterest.contains("004001")) {
                     uninterest.remove("004001")
+                    uninterest.remove("004001001")
+                    uninterest.remove("004001002")
+                    uninterest.remove("004001003")
+                    uninterest.remove("004001004")
+                }
                 interest.add("004001")
+                interest.add("004001001")
+                interest.add("004001002")
+                interest.add("004001003")
+                interest.add("004001004")
             }
             else{
                 viewBinding.work.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.work.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
-                if(interest.contains("004001"))
+                if(interest.contains("004001")) {
                     interest.remove("004001")
+                    interest.remove("004001001")
+                    interest.remove("004001002")
+                    interest.remove("004001003")
+                    interest.remove("004001004")
+                }
                 uninterest.add("004001")
+                uninterest.add("004001001")
+                uninterest.add("004001002")
+                uninterest.add("004001003")
+                uninterest.add("004001004")
             }
         }
 
@@ -210,18 +242,44 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.edu.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
-                if(uninterest.contains("004006"))
+                if(uninterest.contains("004006")) {
                     uninterest.remove("004006")
+                    uninterest.remove("004006001")
+                    uninterest.remove("004006002")
+                    uninterest.remove("004006003")
+                    uninterest.remove("004006004")
+                    uninterest.remove("004006005")
+                    uninterest.remove("004006006")
+                }
                 interest.add("004006")
+                interest.add("004006001")
+                interest.add("004006002")
+                interest.add("004006003")
+                interest.add("004006004")
+                interest.add("004006005")
+                interest.add("004006006")
             }
             else{
                 viewBinding.edu.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.edu.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
-                if(interest.contains("004006"))
+                if(interest.contains("004006")) {
                     interest.remove("004006")
+                    interest.remove("004006001")
+                    interest.remove("004006002")
+                    interest.remove("004006003")
+                    interest.remove("004006004")
+                    interest.remove("004006005")
+                    interest.remove("004006006")
+                }
                 uninterest.add("004006")
+                uninterest.add("004006001")
+                uninterest.add("004006002")
+                uninterest.add("004006003")
+                uninterest.add("004006004")
+                uninterest.add("004006005")
+                uninterest.add("004006006")
             }
         }
 
@@ -232,18 +290,32 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.found.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
-                if(uninterest.contains("004002"))
+                if(uninterest.contains("004002")) {
                     uninterest.remove("004002")
+                    uninterest.remove("004002001")
+                    uninterest.remove("004002002")
+                    uninterest.remove("004002003")
+                }
                 interest.add("004002")
+                interest.add("004002001")
+                interest.add("004002002")
+                interest.add("004002003")
             }
             else{
                 viewBinding.found.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.found.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
-                if(interest.contains("004002"))
+                if(interest.contains("004002")) {
                     interest.remove("004002")
+                    interest.remove("004002001")
+                    interest.remove("004002002")
+                    interest.remove("004002003")
+                }
                 uninterest.add("004002")
+                uninterest.add("004002001")
+                uninterest.add("004002002")
+                uninterest.add("004002003")
             }
         }
 
@@ -254,18 +326,24 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.health.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
-                if(uninterest.contains("004004001"))
+                if(uninterest.contains("004004001")) {
+                    uninterest.remove("004004")
                     uninterest.remove("004004001")
+                }
                 interest.add("004004001")
+                interest.add("004004")
             }
             else{
                 viewBinding.health.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.health.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
-                if(interest.contains("004004001"))
+                if(interest.contains("004004001")) {
+                    interest.remove("004004")
                     interest.remove("004004001")
+                }
                 uninterest.add("004004001")
+                uninterest.add("004004")
             }
         }
 
@@ -276,18 +354,32 @@ class MainActivity_interest : AppCompatActivity() {
                 viewBinding.etc.setTextColor(Color.parseColor("#ffffff"))
                 num++
                 Log.e("num",num.toString())
-                if(uninterest.contains("004005"))
+                if(uninterest.contains("004005")) {
                     uninterest.remove("004005")
+                    uninterest.remove("004005001")
+                    uninterest.remove("004005002")
+                    uninterest.remove("004005003")
+                }
                 interest.add("004005")
+                interest.add("004005001")
+                interest.add("004005002")
+                interest.add("004005003")
             }
             else{
                 viewBinding.etc.setBackgroundResource(R.drawable.btn_style)
                 viewBinding.etc.setTextColor(Color.parseColor("#1D2D69"))
                 num--
                 Log.e("num",num.toString())
-                if(interest.contains("004005"))
+                if(interest.contains("004005")) {
                     interest.remove("004005")
-                interest.add("004005")
+                    interest.remove("004005001")
+                    interest.remove("004005002")
+                    interest.remove("004005003")
+                }
+                uninterest.add("004005")
+                uninterest.add("004005001")
+                uninterest.add("004005002")
+                uninterest.add("004005003")
             }
         }
 
@@ -324,19 +416,14 @@ class MainActivity_interest : AppCompatActivity() {
                 Log.d("Interest",jsonInterest.toString())
                 Log.d("UnInterest",jsonUnInterest.toString())
 
-                //우편번호를 받아오지 않음음
-                Log.e("가져온 값",ID4+" "+ pw4 + " "+ Name4 + " "+ tel4+" "+birth4+ " "+address4+" / "
-                        +checkbox_status_sms4+" / "+checkbox_status_kkt4+" / "+checkbox_status_info4)
-
-                val userData = Signup2RequestBody(token(jsonObject.getString("token")),tel4, address4,
+                val userData = Signup2RequestBody(token,tel4, birth4,address4,
                     checkbox_status_info4.toInt(), checkbox_status_sms4.toInt(), checkbox_status_kkt4.toInt(),
                     interest,uninterest
                 )
 
                 Log.d("userData","$userData")
 
-                val retrofitWork = RetrofitWork(userData)
-                retrofitWork.work()
+                RetrofitWork(userData).work()
 
                 val intent = Intent(this, Home::class.java)
                 startActivity(intent)
@@ -358,19 +445,18 @@ class MainActivity_interest : AppCompatActivity() {
 //        enqueue 작업을 실행하면 request 는 비동기적으로 보내고, response 는 콜백으로 받게 된다.
             service.Signup23Patch(userInfo)
                 .enqueue(object: retrofit2.Callback<Signup2ResponseBody>{
+                    override fun onResponse(
+                    call: Call<Signup2ResponseBody>,
+                    response: Response<Signup2ResponseBody>,
+                ) {
+                    if(response.isSuccessful){
+                        val result = response.body()
+                        Log.d("회원가입 성공","$result")
+                    }
+                }
                     override fun onFailure(call: Call<Signup2ResponseBody>, t: Throwable) {
                         Log.d("회원가입 실패",t.message.toString())
 
-                    }
-
-                    override fun onResponse(
-                        call: Call<Signup2ResponseBody>,
-                        response: Response<Signup2ResponseBody>,
-                    ) {
-                        if(response.isSuccessful){
-                            val result = response.body()
-                            Log.d("회원가입 성공","$result")
-                        }
                     }
 
                 })

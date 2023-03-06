@@ -5,6 +5,10 @@ import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 
+data class token(
+    val token : String
+)
+
 data class SignUpRequestBody(
     val id: String?,
 )
@@ -60,14 +64,15 @@ data class kakaoResponseBody(
 )
 
 data class Signup2RequestBody(
-    val token: token,
+    val token: String?,
     val phoneNumber: String?,
+    val birth: String?,
     val address: String?,
-    val agreePICU: Int,
-    val agreeeSMS: Int,
-    val agreeKakao: Int,
-    val interested: ArrayList<String>,
-    val uninterested: ArrayList<String>,
+    val agreePICU: Int?,
+    val agreeeSMS: Int?,
+    val agreeKakao: Int?,
+    val interested: ArrayList<String>?,
+    val uninterested: ArrayList<String>?
 )
 
 data class Signup2ResponseBody(
@@ -97,9 +102,7 @@ data class eraseUserResponseBody(
     val status: String?
 )
 
-data class token(
-    val token : String
-)
+
 
 data class changeGetResponseBody(
     @SerializedName("result")
