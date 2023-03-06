@@ -74,13 +74,15 @@ interface RetrofitService {
 
     //정책검색화면 지역별 검색어와 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/region/search")
-    fun PolicyRegionSearchGet(@Body field: PolicyRegionSearchRequestBody): Call<PolicyRegionSearchResponseBody>
+    @POST("policies/search/region")
+    fun PolicyRegionSearchGet(@Body info: PolicyRegionSearchRequestBody): Call<PolicyRegionSearchResponseBody>
 
     //정책검색화면 지역별 검색어와 GET
     //토큰 추가해야하나..?
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("policies/{policyId}")
-    fun PolicyDetailGet(@Body field: PolicyDetailRequestBody): Call<PolicyDetailResponseBody>
-
+    fun PolicyDetailGet(
+        @Path("policyId") policyId: String,
+        @Body policyID: PolicyDetailRequestBody
+    ): Call<PolicyDetailResponseBody>
 }
