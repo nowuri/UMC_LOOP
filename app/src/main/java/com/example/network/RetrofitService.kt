@@ -82,8 +82,4 @@ interface RetrofitService {
     @POST("policies/{policyId}")
     fun PolicyDetailGet(@Body field: PolicyDetailRequestBody): Call<PolicyDetailResponseBody>
 
-    @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("users/changePasswd")
-    fun changePW(@Body userInfo: pwFindRequestBody): Call<pwFindResponseBody>
-
 }
