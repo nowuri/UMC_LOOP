@@ -5,7 +5,7 @@ const user = require("../User/userController");
 module.exports = function(app) {
 
     // 홈화면 지역별 정책 api
-    app.post('/app/policies/home', policy.HomeListForRegion);
+    app.get('/app/policies/home', policy.HomeListForRegion);
     // 지역별 정책 api
     app.post('/app/policies/region', policy.getPolicyListForRegion);
     // 분야별 정책 api
