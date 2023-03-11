@@ -15,7 +15,7 @@ const axiosConfig = require('../../../config/axios.js');
 // 홈화면 지역 정책
 exports.HomeListForRegion = async function(req, res) {
   //let region = '제주'; 
-  let region = req.body.region;
+  let region = req.query.region;
 
   switch (region) {
     case '서울':
