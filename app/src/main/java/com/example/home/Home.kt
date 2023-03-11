@@ -111,21 +111,21 @@ class Home : AppCompatActivity() {
         //val retrofitWork = RetrofitWork()
         //retrofitWork.work()
 
-        val region = HomeDataRequestBody("서울")
+        val region = "제주"
         RetrofitWork(region).work()
 
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_DOWN)
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_UP)
 
         val info = PolicyRegionSearchRequestBody("청년", "서울")
-        RetrofitWork2(info).work()
+        //RetrofitWork2(info).work()
 
         val policyID = PolicyDetailRequestBody("R2023080504223")
-        RetrofitWork3(policyID).work()
+        //RetrofitWork3(policyID).work()
 
     }
 
-    class RetrofitWork(private val region: HomeDataRequestBody){
+    class RetrofitWork(private val region: String){
         fun work(){
             Log.e("정책 불러오기","시작")
             val service = RetrofitClient.emgMedService
@@ -153,62 +153,11 @@ class Home : AppCompatActivity() {
         }
     }
 
-    class RetrofitWork2(private val info: PolicyRegionSearchRequestBody){
-        fun work(){
-            Log.e("정책 불러오기","시작")
-            val service = RetrofitClient.emgMedService
-
-            service.PolicyRegionSearchGet(info)
-                .enqueue(object : retrofit2.Callback<PolicyRegionSearchResponseBody>{
-                    override fun onResponse(
-                        call: Call<PolicyRegionSearchResponseBody>,
-                        response: Response<PolicyRegionSearchResponseBody>,
-                    ) {
-                        if(response.isSuccessful()) {
-                            val result = response.body().toString()
-                            Log.e("정책 불러오기 성공","$result")
-
-                        }
-                        else {
-                            val code = response.code()
-                            Log.e("정책 불러오기 상태","$code")
-                        }
-                    }
-                    override fun onFailure(call: Call<PolicyRegionSearchResponseBody>, t: Throwable) {
-                        Log.e("정책 불러오기 실패",t.message.toString())
-                    }
-                })
-        }
-    }
 
 
-    class RetrofitWork3(private val policyID: PolicyDetailRequestBody){
-        fun work(){
-            Log.e("정책 정보 불러오기","시작")
-            val service = RetrofitClient.emgMedService
 
-            service.PolicyDetailGet("R2023080504223", policyID)
-                .enqueue(object : retrofit2.Callback<PolicyDetailResponseBody>{
-                    override fun onResponse(
-                        call: Call<PolicyDetailResponseBody>,
-                        response: Response<PolicyDetailResponseBody>,
-                    ) {
-                        if(response.isSuccessful()) {
-                            val result = response.body().toString()
-                            Log.e("정책 불러오기 성공","$result")
 
-                        }
-                        else {
-                            val code = response.code()
-                            Log.e("정책 불러오기 상태","$code")
-                        }
-                    }
-                    override fun onFailure(call: Call<PolicyDetailResponseBody>, t: Throwable) {
-                        Log.e("정책 불러오기 실패",t.message.toString())
-                    }
-                })
-        }
-    }
+
 
 
 }

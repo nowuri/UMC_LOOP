@@ -33,7 +33,8 @@ interface RetrofitService {
 
     //2차회원가입 PATCH
     @Headers("accept: application/json", "Content-Type: application/json")
-    @PATCH("users/additional")
+    @HTTP(method="PATCH", path="users/additional", hasBody = true)
+    //@PATCH("users/additional")
     fun Signup23Patch(@Body userInfo:Signup2RequestBody): Call<Signup2ResponseBody>
 
     //관심분야 변경 GET
@@ -54,7 +55,8 @@ interface RetrofitService {
     //홈화면 정책 GET
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("policies/home")
-    fun HomeDataGet(@Body region: HomeDataRequestBody): Call<HomeDataResponseBody>
+    fun HomeDataGet(
+        @Query("region")region:String) : Call<HomeDataResponseBody>
 
     //정책검색화면 분야별 GET
     @Headers("accept: application/json", "Content-Type: application/json")
@@ -68,18 +70,25 @@ interface RetrofitService {
 
     //정책검색화면 분야별 검색어와 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/field/search")
+    @POST("policies/search/field")
     fun PolicyFieldGet(@Body field: PolicyFieldSearchRequestBody): Call<PolicyFieldSearchResponseBody>
 
     //정책검색화면 지역별 검색어와 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/region/search")
-    fun PolicyRegionSearchGet(@Body field: PolicyRegionSearchRequestBody): Call<PolicyRegionSearchResponseBody>
+    @POST("policies/search/region")
+    fun PolicyRegionSearchGet(@Body info: PolicyRegionSearchRequestBody): Call<PolicyRegionSearchResponseBody>
 
     //정책검색화면 지역별 검색어와 GET
     //토큰 추가해야하나..?
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("policies/{policyId}")
-    fun PolicyDetailGet(@Body field: PolicyDetailRequestBody): Call<PolicyDetailResponseBody>
+    fun PolicyDetailGet(
+        @Path("policyId") policyId: String,
+        @Body policyID: PolicyDetailRequestBody
+    ): Call<PolicyDetailResponseBody>
 
+    //비밀번호 찾기
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("users/changePasswd")
+    fun changePW(@Body userInfo: pwFindRequestBody): Call<pwFindResponseBody>
 }
