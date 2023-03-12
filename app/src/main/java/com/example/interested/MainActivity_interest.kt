@@ -417,7 +417,7 @@ class MainActivity_interest : AppCompatActivity() {
                 Log.d("UnInterest",jsonUnInterest.toString())
 
                 val userData = Signup2RequestBody(token,tel4, birth4,address4,
-                    checkbox_status_info4.toInt(), checkbox_status_sms4.toInt(), checkbox_status_kkt4.toInt(),
+                    1,1,1,
                     interest,uninterest
                 )
 
