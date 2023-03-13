@@ -14,8 +14,11 @@ module.exports = function(app) {
   // 관심 카테고리 변경 API
   app.patch('/app/users/interests', isAuthenticated, user.changeInterest);
 
-  // 비밀번호 변경
-  app.post('/app/users/changePasswd', user.changePasswd);
+  // 아이디 찾기
+  app.post('/app/users/findEmail', user.findEmail);
+  
+  // 비밀번호 찾기
+  app.post('/app/users/findPasswd', user.findPasswd);
 
   // 회원 탈퇴 API
   app.patch('/app/users/withdraw', isAuthenticated, user.withdrawUser);
