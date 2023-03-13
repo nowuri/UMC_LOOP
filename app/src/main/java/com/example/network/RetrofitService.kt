@@ -2,6 +2,7 @@ package com.example.network
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
+import com.google.gson.JsonObject
 
 // 서버에서 호출할 메서드를 선언하는 인터페이스
 // POST 방식으로 데이터를 주고 받을 때 넘기는 변수는 Field라고 해야한다.
@@ -33,8 +34,7 @@ interface RetrofitService {
 
     //2차회원가입 PATCH
     @Headers("accept: application/json", "Content-Type: application/json")
-    @HTTP(method="PATCH", path="users/additional", hasBody = true)
-    //@PATCH("users/additional")
+    @PATCH("users/additional")
     fun Signup23Patch(@Body userInfo:Signup2RequestBody): Call<Signup2ResponseBody>
 
     //관심분야 변경 GET
@@ -54,9 +54,9 @@ interface RetrofitService {
 
     //홈화면 정책 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/home")
+    @GET("policies/home")
     fun HomeDataGet(
-        @Query("region")region:String) : Call<HomeDataResponseBody>
+        @Query("region")region:String) : Call<JsonObject>
 
     //정책검색화면 분야별 GET
     @Headers("accept: application/json", "Content-Type: application/json")

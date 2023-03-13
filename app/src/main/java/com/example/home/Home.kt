@@ -1,5 +1,7 @@
 package com.example.home
 
+import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -19,11 +21,14 @@ import com.example.network.*
 import com.example.qna.Question
 import com.example.search.Search
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Response
 
 // 아직 유튜브를 구현안하신 것 같아 주석처리 해놓겠습니다!
 import org.json.JSONObject
+
 
 class Home : AppCompatActivity() {
     private lateinit var viewBinding: ActivityHomeBinding
@@ -111,7 +116,7 @@ class Home : AppCompatActivity() {
         //val retrofitWork = RetrofitWork()
         //retrofitWork.work()
 
-        val region = "제주"
+        val region = "서울"
         RetrofitWork(region).work()
 
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_DOWN)
@@ -131,22 +136,22 @@ class Home : AppCompatActivity() {
             val service = RetrofitClient.emgMedService
 
             service.HomeDataGet(region)
-                .enqueue(object : retrofit2.Callback<HomeDataResponseBody>{
+                .enqueue(object : retrofit2.Callback<JsonObject>{
                     override fun onResponse(
-                        call: Call<HomeDataResponseBody>,
-                        response: Response<HomeDataResponseBody>,
+                        call: Call<JsonObject>,
+                        response: Response<JsonObject>,
                     ) {
                         if(response.isSuccessful()) {
-                            val result = response.body().toString()
-                            Log.e("정책 불러오기 성공","$result")
-
+                            val responsebody = response.body().toString()
+                            Log.e("정책 불러오기 성공","$responsebody")
                         }
                         else {
                             val code = response.code()
                             Log.e("정책 불러오기 상태","$code")
                         }
                     }
-                    override fun onFailure(call: Call<HomeDataResponseBody>, t: Throwable) {
+
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                         Log.e("정책 불러오기 실패",t.message.toString())
                     }
                 })
@@ -161,3 +166,4 @@ class Home : AppCompatActivity() {
 
 
 }
+
