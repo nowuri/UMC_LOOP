@@ -2,6 +2,7 @@ package com.example.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.interested.R
 import com.example.interested.databinding.FragmentHomeSeoulBinding
 import com.example.interested.databinding.FragmentMoneyBinding
+import com.example.network.HomeDataResponseBody
+import com.example.network.RetrofitClient
 import com.example.search.DataRVAdapter4
 import com.example.search.RVdata
 import com.example.search.Search
+import retrofit2.Call
+import retrofit2.Response
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

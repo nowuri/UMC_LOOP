@@ -2,6 +2,7 @@ package com.example.network
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
+import com.google.gson.JsonObject
 
 // 서버에서 호출할 메서드를 선언하는 인터페이스
 // POST 방식으로 데이터를 주고 받을 때 넘기는 변수는 Field라고 해야한다.
@@ -53,8 +54,9 @@ interface RetrofitService {
 
     //홈화면 정책 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/home")
-    fun HomeDataGet(@Body region: HomeDataRequestBody): Call<HomeDataResponseBody>
+    @GET("policies/home")
+    fun HomeDataGet(
+        @Query("region")region:String) : Call<JsonObject>
 
     //정책검색화면 분야별 GET
     @Headers("accept: application/json", "Content-Type: application/json")
@@ -68,18 +70,25 @@ interface RetrofitService {
 
     //정책검색화면 분야별 검색어와 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/field/search")
+    @POST("policies/search/field")
     fun PolicyFieldGet(@Body field: PolicyFieldSearchRequestBody): Call<PolicyFieldSearchResponseBody>
 
     //정책검색화면 지역별 검색어와 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/region/search")
-    fun PolicyRegionSearchGet(@Body field: PolicyRegionSearchRequestBody): Call<PolicyRegionSearchResponseBody>
+    @POST("policies/search/region")
+    fun PolicyRegionSearchGet(@Body info: PolicyRegionSearchRequestBody): Call<PolicyRegionSearchResponseBody>
 
     //정책검색화면 지역별 검색어와 GET
     //토큰 추가해야하나..?
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("policies/{policyId}")
-    fun PolicyDetailGet(@Body field: PolicyDetailRequestBody): Call<PolicyDetailResponseBody>
+    fun PolicyDetailGet(
+        @Path("policyId") policyId: String,
+        @Body policyID: PolicyDetailRequestBody
+    ): Call<PolicyDetailResponseBody>
 
+    //비밀번호 찾기
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @POST("users/changePasswd")
+    fun changePW(@Body userInfo: pwFindRequestBody): Call<pwFindResponseBody>
 }
