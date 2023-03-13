@@ -219,26 +219,57 @@ exports.createNaverUser = async function(newNaverUserData) {
   }
 };
 
+exports.getUserEmail = async function(userData) {
+  try {
+    // 이름 전화번호 일치하는 data 존재 확인
+    const id = await userProvider.namePhoneCheck(userData.user_name, userData.user_phone);
+    const result = JSON.parse(JSON.stringify(id));
+
+    // const obj = JSON.stringify(id);
+    // console.log(obj);
+    // const newObj = JSON.parse(obj);
+    // const obj2 = {
+    //   user_email: obj.user_email
+    // };
+    console.log("id는..........",result.userEmail);
+    if (id.length > 0) { //혹은 if(id)
+      console.log("email 길이가 0보다 길면 여기임.")
+      const connection = await pool.getConnection(async (conn) => conn);
+      console.log(userData);
+      //임시비번생성
+ //     console.log(`userIdResult : ${userIdResult[0].insertId}`)
+      connection.release();
+      return response(baseResponseStatus.SUCCESS, {id});
+
+    }
+    console.log("트라이문 에러 뜨기 직전 임");
+    return errResponse(baseResponseStatus.SIGNUP_REDUNDANT_EMAIL);
+
+  } catch (err) {
+    logger.error(`App - updateUserPassword Service error\n: ${err.message}`);
+    return errResponse(baseResponseStatus.DB_ERROR);
+  }
+};
+
 exports.updateUserPassword = async function(userData) {
   try {
     // 이메일 이름 일치하는 data 존재 확인
-    console.log("try 들어왔음");
     const id = await userProvider.emailNameCheck(userData.user_email, userData.user_name);
-    console.log("이메일네임체크 했음");
+    console.log("id는..........",id);
     if (id.length > 0) { //혹은 if(id)
-      console.log("if문 들어왔음");
+      console.log("if문에 들어와버렸다?")
       const connection = await pool.getConnection(async (conn) => conn);
       console.log(userData);
       //임시비번생성
       const tempPassword = Math.floor(Math.random() * 10 ** 8).toString().padStart("0", 8);
       const hashed = await bcrypt.hash(tempPassword, 10);
-      console.log(`tempPass: ${tempPassword}, hashed: ${hashed}`);
       const userIdResult = await userDao.updateUserPasswordInfo(connection, userData.user_email, hashed);
  //     console.log(`userIdResult : ${userIdResult[0].insertId}`)
       connection.release();
       return response(baseResponseStatus.SUCCESS);
 
     }
+    console.log("트라이문 에러 뜨기 직전 임");
     return errResponse(baseResponseStatus.SIGNUP_REDUNDANT_EMAIL);
 
   } catch (err) {
