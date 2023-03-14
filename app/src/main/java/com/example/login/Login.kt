@@ -33,6 +33,7 @@ class Login : AppCompatActivity() {
 
         viewBinding.naverlogin.setOnClickListener(){
             Toast.makeText(this,"네이버 로그인을 시작합니다.", Toast.LENGTH_SHORT).show()
+            getNaverLogin().work()
         }
 
         viewBinding.kakologin.setOnClickListener(){
@@ -97,6 +98,28 @@ class Login : AppCompatActivity() {
 
                     override fun onFailure(call: Call<kakaoResponseBody>, t: Throwable) {
                         Log.d("카카오 로그인 실패",t.message.toString())
+                    }
+
+                })
+        }
+    }
+
+    class getNaverLogin(){
+        fun work(){
+            val service = RetrofitClient.emgMedService
+
+            service.naverLogin()
+                .enqueue(object: retrofit2.Callback<naverLoginResponseBody>{
+                    override fun onResponse(
+                        call: Call<naverLoginResponseBody>,
+                        response: Response<naverLoginResponseBody>,
+                    ) {
+                        val result = response
+                        Log.d("네이버 로그인 성공","$result")
+                    }
+
+                    override fun onFailure(call: Call<naverLoginResponseBody>, t: Throwable) {
+                        Log.d("네이버 로그인 실패",t.message.toString())
                     }
 
                 })
