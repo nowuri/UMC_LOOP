@@ -9,16 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.interested.R
 import com.example.interested.databinding.FragmentHomeSeoulBinding
-import com.example.interested.databinding.FragmentMoneyBinding
-import com.example.network.HomeDataResponseBody
-import com.example.network.RetrofitClient
-import com.example.search.DataRVAdapter4
-import com.example.search.RVdata
-import com.example.search.Search
-import retrofit2.Call
-import retrofit2.Response
+import com.example.interested.SignUp2Activity
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,14 +35,12 @@ class HomeSeoul : Fragment() {
 
         mainActivity = context as Home
     }
-    var dataList: ArrayList<Homedata> = arrayListOf(
-        Homedata("정책이름","부서이름"),
-        Homedata("정책이름","부서이름"),
-        Homedata("정책이름","부서이름"),
-        Homedata("정책이름","부서이름"),
-        Homedata("정책이름","부서이름")
-    )
 
+    var dataList: ArrayList<Homedata> = arrayListOf()
+
+    fun setList(list: ArrayList<Homedata>) {
+        this.dataList = list
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -58,7 +48,7 @@ class HomeSeoul : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -71,8 +61,10 @@ class HomeSeoul : Fragment() {
         val DataRVAdapter = HomeAdapter1(mainActivity,list)
         viewbinding.rvRefrigerator.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL,false)
         viewbinding.rvRefrigerator.adapter = DataRVAdapter
+        Log.e("homeseoul.kt의 datalist:","$list")
 
         return viewbinding.root
+
     }
 
     companion object {
