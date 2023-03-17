@@ -61,7 +61,7 @@ class HomeSeoul : Fragment() {
         val DataRVAdapter = HomeAdapter1(mainActivity,list)
         viewbinding.rvRefrigerator.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL,false)
         viewbinding.rvRefrigerator.adapter = DataRVAdapter
-        Log.e("homeseoul datalist","$list")
+        Log.e("homeseoul.kt의 datalist:","$list")
 
         return viewbinding.root
 
