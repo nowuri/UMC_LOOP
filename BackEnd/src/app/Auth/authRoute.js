@@ -14,7 +14,7 @@ module.exports = function(app) {
 
 
   // app.post('/app/auth/naver/login', auth.naverLogin);
-  app.get('/app/auth/naver/login', auth.naverLogin);
+  app.get('/app/auth/naver', auth.naverLogin);
   app.get('/app/auth/naver/callback', auth.naverLogin);
 
 

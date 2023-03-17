@@ -91,4 +91,9 @@ interface RetrofitService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @POST("users/changePasswd")
     fun changePW(@Body userInfo: pwFindRequestBody): Call<pwFindResponseBody>
+
+    //네이버 로그인
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @GET("auth/naver")
+    fun naverLogin(): Call<naverLoginResponseBody>
 }

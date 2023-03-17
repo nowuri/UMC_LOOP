@@ -89,8 +89,8 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="306dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="350dp"
         android:layout_height="500dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

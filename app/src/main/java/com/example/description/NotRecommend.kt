@@ -3,6 +3,8 @@ package com.example.description
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.interested.databinding.ActivityNotRecommendBinding
 
 class NotRecommend : AppCompatActivity() {
@@ -22,6 +24,7 @@ class NotRecommend : AppCompatActivity() {
         setContentView(viewBinding.root)
 
         val RecommendVPAdapter = RecommendVPAdapter(this, dataList)
+        viewBinding.recommendVPAdapter.layoutManager= LinearLayoutManager(this,RecyclerView.VERTICAL,false)
         viewBinding.recommendVPAdapter.adapter = RecommendVPAdapter
 
         viewBinding.good.setOnClickListener(){
