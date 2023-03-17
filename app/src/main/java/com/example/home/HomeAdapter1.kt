@@ -1,12 +1,18 @@
 package com.example.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.interested.databinding.HomeItemBinding
 
-class HomeAdapter1(val context: Context, private val dataList: ArrayList<Homedata>): RecyclerView.Adapter<HomeAdapter1.DataViewHolder>() {
+class HomeAdapter1(val context: Home, private var dataList: ArrayList<Homedata>): RecyclerView.Adapter<HomeAdapter1.DataViewHolder>() {
+    fun setList(list: ArrayList<Homedata>) {
+        this.dataList = list
+        notifyDataSetChanged()
+    }
+
     inner class DataViewHolder(private val viewBinding: HomeItemBinding): RecyclerView.ViewHolder(viewBinding.root){
         fun bind(data: Homedata, context: Context){
             viewBinding.name.text = data.name
@@ -21,7 +27,10 @@ class HomeAdapter1(val context: Context, private val dataList: ArrayList<Homedat
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bind(dataList[position],context)
+        Log.e("homeadapter datalist","$dataList")
+
     }
 
     override fun getItemCount(): Int = dataList.size
+
 }

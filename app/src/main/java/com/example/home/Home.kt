@@ -1,16 +1,15 @@
 package com.example.home
 
-import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
+// 아직 유튜브를 구현안하신 것 같아 주석처리 해놓겠습니다!
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.ScrollView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.RecommedVPAdpager
@@ -21,13 +20,10 @@ import com.example.network.*
 import com.example.qna.Question
 import com.example.search.Search
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
-
-// 아직 유튜브를 구현안하신 것 같아 주석처리 해놓겠습니다!
-import org.json.JSONObject
 
 
 class Home : AppCompatActivity() {
@@ -39,6 +35,9 @@ class Home : AppCompatActivity() {
     val data = token(
         jsonObject.getString("token")
     )
+    var datalist = arrayListOf<Homedata>()
+    val mAdapter = HomeAdapter1(this, datalist)
+    val mAdapter2 = HomeSeoul()
 
     inner class PagerRunnable: Runnable{
         var currentPage = 0
@@ -70,6 +69,10 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
 
+        //지역별 정책 데이터 가져오기 (일단, 서울만 불러오도록 해봤음)
+        val region = "서울"
+        RetrofitWork(region).work()
+
         val tabTitle = arrayOf("서울","경기","충청 전라","강원 경상","제주")
         val HomeAdapter = VPAdapter3(this)
         viewBinding.vpAdapter3.adapter = HomeAdapter
@@ -77,6 +80,9 @@ class Home : AppCompatActivity() {
         TabLayoutMediator(viewBinding.tab, viewBinding.vpAdapter3){
                 tab, position -> tab.text = tabTitle[position]
         }.attach()
+
+        //지역별 정책 데이터 가져오기 (일단, 서울만 불러오도록 해봤음)
+        RetrofitWork(region).work()
 
         viewBinding.tab.setTabTextColors(Color.rgb(29,45,105), Color.rgb(255,255,255))
 
@@ -89,6 +95,7 @@ class Home : AppCompatActivity() {
         viewBinding.recommendVPAdapter.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         val child = viewBinding.recommendVPAdapter.getChildAt(0)
         (child as? RecyclerView)?.overScrollMode = View.OVER_SCROLL_NEVER
+
 
         var thread = Thread(PagerRunnable())
         thread.start()
@@ -113,24 +120,17 @@ class Home : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //val retrofitWork = RetrofitWork()
-        //retrofitWork.work()
-
-        val region = "서울"
-        RetrofitWork(region).work()
-
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_DOWN)
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_UP)
 
-        val info = PolicyRegionSearchRequestBody("청년", "서울")
+        //val info = PolicyRegionSearchRequestBody("청년", "서울")
         //RetrofitWork2(info).work()
 
-        val policyID = PolicyDetailRequestBody("R2023080504223")
+        //val policyID = PolicyDetailRequestBody("R2023080504223")
         //RetrofitWork3(policyID).work()
 
     }
-
-    class RetrofitWork(private val region: String){
+    inner class RetrofitWork(private val region: String){
         fun work(){
             Log.e("정책 불러오기","시작")
             val service = RetrofitClient.emgMedService
@@ -144,6 +144,33 @@ class Home : AppCompatActivity() {
                         if(response.isSuccessful()) {
                             val responsebody = response.body().toString()
                             Log.e("정책 불러오기 성공","$responsebody")
+
+                            val jsonArray = response.body()?.getAsJsonArray("result")
+                            Log.e("정책 array","$jsonArray")
+
+
+                            if (jsonArray != null) {
+                                //for(i: Int in 0..jsonArray.                                                                                                                     size()){
+                                    val Jsonfor = jsonArray[0].getAsJsonObject()
+                                    val policyname = Jsonfor.get("policyName").getAsString()
+                                    val department = Jsonfor.get("department").getAsString()
+                                    Log.e("정책 이름, 정책 부서", "$policyname $department")
+
+                                    datalist.add(
+                                        Homedata(
+                                            policyname,
+                                            department
+                                        )
+                                    )
+                                mAdapter.setList(datalist)
+                                mAdapter2.dataList = datalist
+                                mAdapter2.setList(datalist)
+
+                                Log.e("정책 datalist","$datalist")
+
+                                //val dto = Homedata(name = policyname, publicName = department)
+                                //}
+                            }
                         }
                         else {
                             val code = response.code()
@@ -151,19 +178,14 @@ class Home : AppCompatActivity() {
                         }
                     }
 
+
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                         Log.e("정책 불러오기 실패",t.message.toString())
                     }
                 })
         }
+
+
     }
-
-
-
-
-
-
-
-
 }
 
