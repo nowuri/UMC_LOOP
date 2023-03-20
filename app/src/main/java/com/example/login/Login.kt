@@ -32,8 +32,10 @@ class Login : AppCompatActivity() {
         prefs = PreferenceUtil(applicationContext)
 
         viewBinding.naverlogin.setOnClickListener(){
-            Toast.makeText(this,"네이버 로그인을 시작합니다.", Toast.LENGTH_SHORT).show()
             getNaverLogin().work()
+            val uri = "https://nid.naver.com/oauth2.0/authorize?response_type=code&redirect_uri=http%3A%2F%2Fhelptheyouth-lope.com%2Fapp%2Fauth%2Fnaver%2Fcallback&client_id=BBXy0ZRkIXzeMyTYbl63"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            startActivity(intent)
         }
 
         viewBinding.kakologin.setOnClickListener(){

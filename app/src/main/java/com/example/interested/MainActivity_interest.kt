@@ -413,11 +413,9 @@ class MainActivity_interest : AppCompatActivity() {
             }
             if(possible == 1){
                 Toast.makeText(this@MainActivity_interest,"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
-                Log.d("Interest",jsonInterest.toString())
-                Log.d("UnInterest",jsonUnInterest.toString())
 
                 val userData = Signup2RequestBody(token,tel4, birth4,address4,
-                    1,1,1,
+                    checkbox_status_info4.toInt(),checkbox_status_sms4.toInt(),checkbox_status_kkt4.toInt(),
                     interest,uninterest
                 )
 
