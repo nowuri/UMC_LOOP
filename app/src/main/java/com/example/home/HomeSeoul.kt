@@ -41,7 +41,6 @@ class HomeSeoul : Fragment() {
 
     var dataList: ArrayList<Homedata> = arrayListOf()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -65,7 +64,6 @@ class HomeSeoul : Fragment() {
         return viewbinding.root
 
     }
-
 
     inner class RetrofitWork(private val region: String){
         fun work(){
