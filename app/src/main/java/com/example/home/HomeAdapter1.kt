@@ -4,14 +4,14 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.interested.databinding.HomeItemBinding
 
-class HomeAdapter1(val context: Home, private var dataList: ArrayList<Homedata>): RecyclerView.Adapter<HomeAdapter1.DataViewHolder>() {
-    fun setList(list: ArrayList<Homedata>) {
-        this.dataList = list
-        notifyDataSetChanged()
-    }
+class HomeAdapter1(val context: Home, private var dataList: ArrayList<Homedata>)
+    : RecyclerView.Adapter<HomeAdapter1.DataViewHolder>() {
 
     inner class DataViewHolder(private val viewBinding: HomeItemBinding): RecyclerView.ViewHolder(viewBinding.root){
         fun bind(data: Homedata, context: Context){
@@ -27,10 +27,6 @@ class HomeAdapter1(val context: Home, private var dataList: ArrayList<Homedata>)
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bind(dataList[position],context)
-        Log.e("homeadapter datalist","$dataList")
-
     }
-
     override fun getItemCount(): Int = dataList.size
-
 }

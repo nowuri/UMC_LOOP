@@ -28,6 +28,8 @@ import retrofit2.Response
 
 class Home : AppCompatActivity() {
     private lateinit var viewBinding: ActivityHomeBinding
+    private lateinit var adapter:HomeAdapter1
+
     public val API_KEY = "AIzaSyBw2owx9ckx0xwCtDdO7Xz4Dp3MnelSuTE"
     public val VIDEO_ID = "0_OqbQArcGg&t=4s"
 
@@ -35,9 +37,6 @@ class Home : AppCompatActivity() {
     val data = token(
         jsonObject.getString("token")
     )
-    var datalist = arrayListOf<Homedata>()
-    val mAdapter = HomeAdapter1(this, datalist)
-    val mAdapter2 = HomeSeoul()
 
     inner class PagerRunnable: Runnable{
         var currentPage = 0
@@ -68,10 +67,6 @@ class Home : AppCompatActivity() {
         viewBinding = ActivityHomeBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
-
-        //1. 지역별 정책 데이터 가져오기 (일단, 서울만 불러오도록 해봤음)
-        val region = "서울"
-        RetrofitWork(region).work()
 
         val tabTitle = arrayOf("서울","경기","충청 전라","강원 경상","제주")
         val HomeAdapter = VPAdapter3(this)
@@ -125,62 +120,6 @@ class Home : AppCompatActivity() {
 
         //val policyID = PolicyDetailRequestBody("R2023080504223")
         //RetrofitWork3(policyID).work()
-
-    }
-    inner class RetrofitWork(private val region: String){
-        fun work(){
-            Log.e("정책 불러오기","시작")
-            val service = RetrofitClient.emgMedService
-
-            service.HomeDataGet(region)
-                .enqueue(object : retrofit2.Callback<JsonObject>{
-                    override fun onResponse(
-                        call: Call<JsonObject>,
-                        response: Response<JsonObject>,
-                    ) {
-                        if(response.isSuccessful()) {
-                            val responsebody = response.body().toString()
-                            Log.e("정책 불러오기 성공","$responsebody")
-
-                            //2.정책 result array 형식으로 뽑아옴
-                            val jsonArray = response.body()?.getAsJsonArray("result")
-                            Log.e("정책 array:","$jsonArray")
-
-                            //3. 정책 array에서 첫번째 정책만(인덱스0)뽑아옴. (추후 반복문으로 4개 뽑아오게 해야함)
-                            if (jsonArray != null) {
-                                //for(i: Int in 0..jsonArray.                                                                                                                     size()){
-                                    val Jsonfor = jsonArray[0].getAsJsonObject()
-                                    val policyname = Jsonfor.get("policyName").getAsString()
-                                    val department = Jsonfor.get("department").getAsString()
-                                    Log.e("정책 이름, 정책 부서:", "$policyname $department")
-
-                                //4. '서울' 어댑터에 들어갈 datalist에 해당 첫번째 정책을 추가해줌
-                                    datalist.add(
-                                        Homedata(
-                                            policyname,
-                                            department
-                                        )
-                                    )
-                                //혹시 몰라서 HomeApater1, HomeSeoul 모두에 들어가게 해놓음.. 근데 둘다 해도 안 받아지는 상황 ㅠㅠ
-                                mAdapter.setList(datalist)
-                                mAdapter2.dataList = datalist
-                                mAdapter2.setList(datalist)
-
-                                //로그로 보면 잘 찍히는데.. 어댑터에 적용이 안되고 있는 상황.
-                                Log.e("정책 datalist","$datalist")
-                            }
-                        }
-                        else {
-                            val code = response.code()
-                            Log.e("정책 불러오기 상태","$code")
-                        }
-                    }
-                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                        Log.e("정책 불러오기 실패",t.message.toString())
-                    }
-                })
-        }
-
 
     }
 }
