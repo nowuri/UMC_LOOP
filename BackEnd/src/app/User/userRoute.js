@@ -16,11 +16,7 @@ module.exports = function(app) {
 
   // 아이디 찾기
   app.post('/app/users/findEmail', user.findEmail);
-<<<<<<< Updated upstream
-  
-=======
 
->>>>>>> Stashed changes
   // 비밀번호 찾기
   app.post('/app/users/findPasswd', user.findPasswd);
 
