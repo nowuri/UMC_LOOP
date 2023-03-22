@@ -151,15 +151,8 @@ exports.findEmail = async (req, res) => {
 
 
   // 만약 비어있는 폼 문항이 있다면
-<<<<<<< Updated upstream
-  const userData = { user_name: user_name, user_phone: user_phone };
-  const email = userService.getUserEmail(userData);
-  console.log("이메일이뭐냐면",email);
-=======
   const userData = { "user_name": user_name, "user_phone": user_phone };
   const email = await userService.getUserEmail(userData);
-  console.log("findEmail_이메일이뭐냐면",email);
->>>>>>> Stashed changes
   return res.send(email);
 
 };
