@@ -11,6 +11,7 @@ module.exports = () => {
    passport.use('naver', new NaverStrategy({
         clientID: process.env.NAVER_CLIENT,
         clientSecret: process.env.NAVER_SECRET,
+        //callbackURL: 'http://127.0.0.1:3001/app/auth/naver/callback',
         callbackURL: 'http://helptheyouth-lope.com/app/auth/naver/callback',
         session: false,
       }, async (accessToken, refreshToken, profile, done) => {
