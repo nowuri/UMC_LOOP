@@ -27,6 +27,7 @@ class SignUp1Activity : AppCompatActivity() {
     var name: String = ""
     var id: String = ""
     var pw: String = ""
+    var tokenGet : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,6 +124,7 @@ class SignUp1Activity : AppCompatActivity() {
                         if(response.isSuccessful){
                             val result = response.body()
                             Log.d("1차 회원가입 성공","$result")
+
                         }
                     }
 
