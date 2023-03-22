@@ -95,7 +95,7 @@ exports.verifyJWT = async (req, res) => {
 };
 
 exports.naverLogin = async (req, res) => {
-  passport.authenticate('naver-login', {session: false},
+  passport.authenticate('naver', {session: false},
   (authError, user, info) => {
     if (authError) {
       console.log(info);

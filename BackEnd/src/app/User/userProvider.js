@@ -111,6 +111,7 @@ exports.emailNameCheck = async function(userEmail, userName) {
   return userResult;
 }
 
+<<<<<<< Updated upstream
 exports.namePhoneCheck = async function(userName, userPhone) {
   const connection = await pool.getConnection(async (conn) => conn);
   console.log(userPhone, userName);
@@ -118,3 +119,12 @@ exports.namePhoneCheck = async function(userName, userPhone) {
   connection.release();
   return userResult;
 }
+=======
+
+exports.namePhoneCheck = async function(userName, userPhone) {
+  const connection = await pool.getConnection(async (conn) => conn);
+  const userResult = await userDao.selectUserEmailForId(connection, userName, userPhone);
+  connection.release();
+  return userResult;
+}
+>>>>>>> Stashed changes

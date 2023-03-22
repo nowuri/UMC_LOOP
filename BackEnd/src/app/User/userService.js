@@ -223,6 +223,7 @@ exports.getUserEmail = async function(userData) {
   try {
     // 이름 전화번호 일치하는 data 존재 확인
     const id = await userProvider.namePhoneCheck(userData.user_name, userData.user_phone);
+<<<<<<< Updated upstream
     const result = JSON.parse(JSON.stringify(id));
 
     // const obj = JSON.stringify(id);
@@ -247,6 +248,19 @@ exports.getUserEmail = async function(userData) {
 
   } catch (err) {
     logger.error(`App - updateUserPassword Service error\n: ${err.message}`);
+=======
+    console.log("id는..........",id);
+    if (id.length > 0) {
+      const connection = await pool.getConnection(async (conn) => conn);
+      console.log("userData:",userData);
+      connection.release();
+      return response(baseResponseStatus.SUCCESS, id);
+    }
+    return errResponse(baseResponseStatus.SIGNUP_REDUNDANT_EMAIL);
+
+  } catch (err) {
+    logger.error(`App - findUserEmail Service error\n: ${err.message}`);
+>>>>>>> Stashed changes
     return errResponse(baseResponseStatus.DB_ERROR);
   }
 };
