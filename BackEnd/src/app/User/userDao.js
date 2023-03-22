@@ -110,26 +110,13 @@ async function selectUserPassword(connection, selectUserPasswordParams) {
 
 // 비번 찾기 유저 계정 존재 여부 체크 (status 가입 탈퇴 1차가입 상태 확인 필요??)
 async function selectUserIdForPassword(connection, email, name) {
-  console.log(email, name);
-  /*
   const selectUserAccountQuery = `
         SELECT idx
-<<<<<<< Updated upstream
-        FROM user 
-        WHERE user_email = ? AND user_name = ?;`;  
-  */
-  const selectUserAccountQuery = `
-        SELECT idx
-=======
->>>>>>> Stashed changes
         FROM (SELECT *
             FROM user 
             WHERE user_email = ? AND user_name = ?) as A
         WHERE A.provider="local";`;
-<<<<<<< Updated upstream
-        
-=======
->>>>>>> Stashed changes
+  
   const selectUserAccountRow = await connection.query(
     selectUserAccountQuery,
     [email, name]
@@ -141,38 +128,23 @@ async function selectUserIdForPassword(connection, email, name) {
 // 이메일 찾기 유저 계정 존재 여부 체크
 async function selectUserEmailForId(connection, name, phone) {
   console.log(phone, name);
-<<<<<<< Updated upstream
-  
-=======
 
->>>>>>> Stashed changes
   const selectUserAccountQuery = `
         SELECT user_email
         FROM user 
         WHERE user_name = ? AND user_phone = ?;`;
-<<<<<<< Updated upstream
-        
-=======
 
->>>>>>> Stashed changes
   const selectUserAccountRow = await connection.query(
     selectUserAccountQuery,
     [name, phone]
   );
+  
   const email = selectUserAccountRow;
-<<<<<<< Updated upstream
-  console.log("리턴받는결과값 이메일",email, JSON.parse(JSON.stringify(selectUserAccountRow)).user_email);
-  return selectUserAccountRow[0];
+  var data = JSON.parse(JSON.stringify(email));
+  console.log("리턴받는결과값 이메일", data[0][0].user_email); //JSON.stringify(email).user_email
+  return data[0][0].user_email;
 }
 
-
-=======
-  var hi = JSON.parse(JSON.stringify(email));
-  console.log("리턴받는결과값 이메일", hi[0][0].user_email); //JSON.stringify(email).user_email
-  return hi[0][0].user_email;
-}
-
->>>>>>> Stashed changes
 // * infoParams = {
 // *    "phoneNumber": string,
 // *    "userBirth": string,
