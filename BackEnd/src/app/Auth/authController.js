@@ -147,6 +147,8 @@ exports.kakaoLogin = async (req, res) => {
 
       return res.send(response(baseResponseStatus.SUCCESS, { token }));
     }
-  ) (req, res);
+  )(req, res, () => { 
+    res.redirect('/');
+  });
 };
 
