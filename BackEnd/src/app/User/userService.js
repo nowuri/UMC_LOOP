@@ -170,10 +170,15 @@ exports.createKakaoUser = async function(newKakaoUserData) {
     const connection = await pool.getConnection(async (conn) => conn);
 
     const kakaoUserIdResult = await userDao.insertKakaoUserInfo(connection, Object.values(newKakaoUserData));
-    console.log(`추가된 회원 : ${kakaoUserIdResult[0].insertId}`)
-    connection.release();
-    return response(baseResponseStatus.SUCCESS);
+    //console.log(`추가된 회원 : ${kakaoUserIdResult[0].insertId}`)
+    const userIdx = kakaoUserIdResult[0].insertId;
 
+    const [kakaoResult] = await userDao.selectUserIdx(connection, userIdx); 
+    const token = createJwtToken(kakaoResult);
+    console.log(token);
+    
+    connection.release();
+    return response(baseResponseStatus.SUCCESS, {token, userIdx} );
 
   } catch (err) {
     logger.error(`App - createKakaoUser Service error\n: ${err.message}`);

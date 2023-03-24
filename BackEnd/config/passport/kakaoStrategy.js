@@ -11,8 +11,8 @@ module.exports = () => {
         session: false,
     }, async (accessToken, refreshToken, profile, done) => {
         
-        const profile_json = JSON.stringify(profile);
-        console.log(profile_json + "**json으로 변환한 데이터**");
+        //const profile_json = JSON.stringify(profile);
+        //console.log(profile_json + "**json으로 변환한 데이터**");
         
         const newUser = await userService.createKakaoUser({
           user_email: profile._json.kakao_account.email,
