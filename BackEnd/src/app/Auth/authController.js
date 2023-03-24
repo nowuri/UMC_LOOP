@@ -125,6 +125,7 @@ exports.naverLogin = async (req, res) => {
 exports.kakaoLogin = async (req, res) => {
   passport.authenticate('kakao', { session: false },
     (authError, user, info) => {
+      console.log(user);
       if (authError) {
         console.log(info);
         console.error(authError);
@@ -142,13 +143,14 @@ exports.kakaoLogin = async (req, res) => {
       // 만약 유저의 회원가입이 완료되지 않았다면
       if (user.status === 2) {
         res.status(300);
-        return res.send(response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, { token, "userIdx": user.idx }));
+        return res.json(response(baseResponseStatus.SIGNUP_ADDITIONAL_INFO_NEEDED, { token, "userIdx": user.idx }));
       }
 
-      return res.send(response(baseResponseStatus.SUCCESS, { token }));
+      return res.json(response(baseResponseStatus.SUCCESS, { token }));
+      //return res.send(response(baseResponseStatus.SUCCESS, { token }));
     }
   )(req, res, () => { 
-    res.redirect('/');
+    //res.redirect('/app/policies/home');
   });
 };
 
