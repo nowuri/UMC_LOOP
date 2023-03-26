@@ -66,7 +66,7 @@ data class kakaoResponseBody(
 data class Signup2RequestBody(
     val token: String?,
     val phoneNumber: String?,
-    val birth: String?,
+    val userBirth: String?,
     val address: String?,
     val agreePICU: Int?,
     val agreeeSMS: Int?,

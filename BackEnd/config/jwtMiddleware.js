@@ -34,11 +34,12 @@ exports.isAuthenticated = async (req, res, next) => {
 exports.isNotAuthenticated = async (req, res, next) => {
   try {
     const token = req.body.token;
-    if (!token) {
+    if (token) {
+      return res.status(400).send(errResponse(baseResponseStatus.LOGIN_DONE));
+    }
+    else {
       next();
     }
-
-    return res.status(400).send(errResponse(baseResponseStatus.LOGIN_DONE));
   } catch (error) {
     console.error(error);
   }
