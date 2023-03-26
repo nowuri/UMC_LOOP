@@ -60,28 +60,33 @@ interface RetrofitService {
 
     //정책검색화면 분야별 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/field")
-    fun PolicyFieldGet(@Body field: PolicyFieldRequestBody): Call<PolicyFieldResponseBody>
+    @GET("policies/field")
+    fun PolicyFieldGet(
+        @Query("field")field:String) : Call<JsonObject>
 
     //정책검색화면 지역별 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/region")
-    fun PolicyRegionGet(@Body field: PolicyRegionRequestBody): Call<PolicyRegionResponseBody>
+    @GET("policies/region")
+    fun PolicyRegionGet(
+        @Query("region")region:String) : Call<JsonObject>
 
     //정책검색화면 분야별 검색어와 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/search/field")
-    fun PolicyFieldGet(@Body field: PolicyFieldSearchRequestBody): Call<PolicyFieldSearchResponseBody>
+    @GET("policies/search/field")
+    fun PolicyFieldSearchGet(
+        @Query("keyword")keyword:String,
+        @Query("field")field:String) : Call<JsonObject>
 
     //정책검색화면 지역별 검색어와 GET
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/search/region")
-    fun PolicyRegionSearchGet(@Body info: PolicyRegionSearchRequestBody): Call<PolicyRegionSearchResponseBody>
+    @GET("policies/search/region")
+    fun PolicyRegionSearchGet(
+        @Query("keyword")keyword:String,
+        @Query("region")region:String) : Call<JsonObject>
 
     //정책검색화면 지역별 검색어와 GET
-    //토큰 추가해야하나..?
     @Headers("accept: application/json", "Content-Type: application/json")
-    @POST("policies/{policyId}")
+    @GET("policies/{policyId}")
     fun PolicyDetailGet(
         @Path("policyId") policyId: String,
         @Body policyID: PolicyDetailRequestBody
