@@ -80,7 +80,7 @@ exports.HomeListForRegion = async function(req, res) {
 // 지역별 정책 리스트 불러오기
 exports.getPolicyListForRegion = async function(req, res) {
   //let region = '제주'; 
-  let region = req.body.region;
+  let region = req.query.region;
 
   switch (region) {
     case '서울':
@@ -134,7 +134,7 @@ exports.getPolicyListForRegion = async function(req, res) {
 exports.getPolicyListForField = async function(req, res) {
 
   //let field = '주거';
-  let field = req.body.field;
+  let field = req.query.field;
 
   // 주거 문화 금융 일자리 코로나 창업 건강 기타
   switch (field) {
@@ -195,9 +195,9 @@ exports.getPolicyListForField = async function(req, res) {
 exports.SearchPoliciesForRegion = async function(req, res) {
 
   //const keyword = '창업';
-  const keyword = req.body.keyword;
+  const keyword = req.query.keyword;
   //let region = '제주'; 
-  let region = req.body.region;
+  let region = req.query.region;
 
   switch (region) {
     case '서울':
@@ -252,9 +252,9 @@ exports.SearchPoliciesForRegion = async function(req, res) {
 exports.SearchPoliciesForField = async function(req, res) {
 
   //const keyword = '창업'; 
-  const keyword = req.body.keyword;
+  const keyword = req.query.keyword;
   //let field = '주거';
-  let field = req.body.field;
+  let field = req.query.field;
 
   // 주거 문화 금융 일자리 코로나 창업 건강 기타
   switch (field) {

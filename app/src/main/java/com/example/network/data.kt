@@ -124,10 +124,10 @@ data class PolicyFieldRequestBody(
     val field: String?
 )
 
-data class PolicyFieldResponseBody(
-    @SerializedName("result")
-    val result: String?
-)
+//data class PolicyFieldResponseBody(
+    //@SerializedName("result")
+    //val result: String?
+//)
 
 data class PolicyRegionRequestBody(
     val region: String?

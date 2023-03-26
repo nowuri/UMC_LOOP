@@ -145,8 +145,19 @@ exports.changeInfo = async (req, res) => {
 
 };
 
+exports.findEmail = async (req, res) => {
+  const user = req.user;
+  const { user_name, user_phone } = req.body;
 
-exports.changePasswd = async (req, res) => {
+
+  // 만약 비어있는 폼 문항이 있다면
+  const userData = { "user_name": user_name, "user_phone": user_phone };
+  const email = await userService.getUserEmail(userData);
+  return res.send(email);
+
+};
+
+exports.findPasswd = async (req, res) => {
   const user = req.user;
   const { user_email, user_name } = req.body;
 

@@ -2,13 +2,19 @@ package com.example.search
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.interested.databinding.FragmentFoundBinding
 import com.example.interested.databinding.FragmentSeoulBinding
+import com.example.network.RetrofitClient
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,45 +38,88 @@ class Seoul : Fragment() {
 
         mainActivity = context as Search
     }
-    var dataList: ArrayList<RVdata> = arrayListOf(
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그"),
-        RVdata("정책이름","부서이름","분야","나이","정책한줄설명","#해시태그")
-    )
+    var dataList: ArrayList<RVdata> = arrayListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        val region = "서울"
+        RetrofitWork(region).work()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         viewbinding = FragmentSeoulBinding.inflate(layoutInflater)
-        //setOnClickListener()
 
-        var list: ArrayList<RVdata> = dataList
-        val DataRVAdapter = DataRVAdapter7(mainActivity,list)
-        viewbinding.rvRefrigerator.layoutManager = LinearLayoutManager(activity,
-            RecyclerView.VERTICAL,false)
-        viewbinding.rvRefrigerator.adapter = DataRVAdapter
-
+        val DataRVAdapter7 = DataRVAdapter7(mainActivity, dataList)
         return viewbinding.root
     }
+
+    inner class RetrofitWork(private val field: String){
+        fun work(){
+            Log.e("정책 불러오기","시작")
+            val service = RetrofitClient.emgMedService
+
+            service.PolicyRegionGet(field)
+                .enqueue(object : retrofit2.Callback<JsonObject>{
+                    override fun onResponse(
+                        call: Call<JsonObject>,
+                        response: Response<JsonObject>,
+                    ) {
+                        if(response.isSuccessful()) {
+                            val responsebody = response.body().toString()
+                            Log.e("정책 불러오기 성공","$responsebody")
+
+                            val jsonObject = response.body()?.getAsJsonObject("result")
+                            val jsonObject2 = jsonObject?.getAsJsonObject("empsInfo")
+                            val jsonArray = jsonObject2?.getAsJsonArray("emp")
+
+                            if (jsonArray != null) {
+                                var a: Int = 0
+                                while(a <= jsonArray.size()-1){
+                                    val Jsonfor = jsonArray[a].getAsJsonObject()
+                                    val name = Jsonfor.get("polyBizSjnm").getAsString()
+                                    val publicName = Jsonfor.get("cnsgNmor").getAsString()
+                                    val field = Jsonfor.get("plcyTpNm").getAsString()
+                                    val age = Jsonfor.get("ageInfo").getAsString()
+                                    val explain = Jsonfor.get("polyItcnCn").getAsString()
+                                    val date = Jsonfor.get("rqutPrdCn").getAsString()
+
+                                    dataList.add(
+                                        RVdata(
+                                            name,
+                                            publicName,
+                                            field,
+                                            age,
+                                            explain,
+                                            date
+                                        )
+                                    )
+                                    a+=1
+                                }
+                                val DataRVAdapter7 = DataRVAdapter7(mainActivity, dataList)
+                                viewbinding.rvRefrigerator.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL,false)
+                                viewbinding.rvRefrigerator.adapter = DataRVAdapter7
+                            }
+                        }
+                        else {
+                            val code = response.code()
+                            Log.e("정책 불러오기 상태","$code")
+                        }
+                    }
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                        Log.e("정책 불러오기 실패",t.message.toString())
+                    }
+                })
+        }
+    }
+
 
     companion object {
         /**

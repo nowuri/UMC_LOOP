@@ -110,3 +110,10 @@ exports.emailNameCheck = async function(userEmail, userName) {
   connection.release();
   return userResult;
 }
+
+exports.namePhoneCheck = async function(userName, userPhone) {
+  const connection = await pool.getConnection(async (conn) => conn);
+  const userResult = await userDao.selectUserEmailForId(connection, userName, userPhone);
+  connection.release();
+  return userResult;
+}

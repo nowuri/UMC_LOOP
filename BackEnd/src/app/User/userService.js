@@ -219,22 +219,35 @@ exports.createNaverUser = async function(newNaverUserData) {
   }
 };
 
+exports.getUserEmail = async function(userData) {
+  try {
+    // 이름 전화번호 일치하는 data 존재 확인
+    const id = await userProvider.namePhoneCheck(userData.user_name, userData.user_phone);
+    if (id.length > 0) {
+      const connection = await pool.getConnection(async (conn) => conn);
+      console.log("userData:",userData);
+      connection.release();
+      return response(baseResponseStatus.SUCCESS, id);
+    }
+    return errResponse(baseResponseStatus.SIGNUP_REDUNDANT_EMAIL);
+
+  } catch (err) {
+    logger.error(`App - findUserEmail Service error\n: ${err.message}`);
+    return errResponse(baseResponseStatus.DB_ERROR);
+  }
+};
+
 exports.updateUserPassword = async function(userData) {
   try {
     // 이메일 이름 일치하는 data 존재 확인
-    console.log("try 들어왔음");
     const id = await userProvider.emailNameCheck(userData.user_email, userData.user_name);
-    console.log("이메일네임체크 했음");
     if (id.length > 0) { //혹은 if(id)
-      console.log("if문 들어왔음");
       const connection = await pool.getConnection(async (conn) => conn);
       console.log(userData);
       //임시비번생성
       const tempPassword = Math.floor(Math.random() * 10 ** 8).toString().padStart("0", 8);
       const hashed = await bcrypt.hash(tempPassword, 10);
-      console.log(`tempPass: ${tempPassword}, hashed: ${hashed}`);
       const userIdResult = await userDao.updateUserPasswordInfo(connection, userData.user_email, hashed);
- //     console.log(`userIdResult : ${userIdResult[0].insertId}`)
       connection.release();
       return response(baseResponseStatus.SUCCESS);
 
