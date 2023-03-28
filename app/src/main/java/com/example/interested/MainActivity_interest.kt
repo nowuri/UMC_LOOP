@@ -49,6 +49,7 @@ class MainActivity_interest : AppCompatActivity() {
     var tel4 : String = ""
     var birth4: String = ""
     var address4: String = ""
+    var gettoken: String =""
 
     var checkbox_status_sms4: String = ""
     var checkbox_status_kkt4: String = ""
@@ -77,11 +78,11 @@ class MainActivity_interest : AppCompatActivity() {
 
     )
 
-    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8"
-    val jsonObject = JSONObject("{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8\"}")
-    val data = token(
-        jsonObject.getString("token")
-    )
+//    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8"
+//    val jsonObject = JSONObject("{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZHgiOjEsInVzZXJuYW1lIjoiam9vbiJ9LCJpYXQiOjE2NzUzNTQ3OTh9.MaPPaQjlXqgDR6P84mO2UNj8Oi6lvtUsljGEJZxbuc8\"}")
+//    val data = token(
+//        jsonObject.getString("token")
+//    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -384,7 +385,7 @@ class MainActivity_interest : AppCompatActivity() {
         }
 
         if(intent.hasExtra("ID") && intent.hasExtra("pw") && intent.hasExtra("Name") && intent.hasExtra("tel")
-            && intent.hasExtra("birth") && intent.hasExtra("address")){
+            && intent.hasExtra("birth") && intent.hasExtra("address") && intent.hasExtra("token")){
             ID4 = intent.getStringExtra("ID").toString()
             pw4 = intent.getStringExtra("pw").toString()
             Name4 = intent.getStringExtra("Name").toString()
@@ -394,6 +395,7 @@ class MainActivity_interest : AppCompatActivity() {
             checkbox_status_sms4 = intent.getStringExtra("checkbox_status_sms").toString()
             checkbox_status_kkt4 = intent.getStringExtra("checkbox_status_kkt").toString()
             checkbox_status_info4 = intent.getStringExtra("checkbox_status_info").toString()
+            gettoken = intent.getStringExtra("token").toString()
 
 
         }
@@ -414,7 +416,7 @@ class MainActivity_interest : AppCompatActivity() {
             if(possible == 1){
                 Toast.makeText(this@MainActivity_interest,"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show()
 
-                val userData = Signup2RequestBody(token,tel4, birth4,address4,
+                val userData = Signup2RequestBody(gettoken,tel4, birth4,address4,
                     checkbox_status_info4.toInt(),checkbox_status_sms4.toInt(),checkbox_status_kkt4.toInt(),
                     interest,uninterest
                 )

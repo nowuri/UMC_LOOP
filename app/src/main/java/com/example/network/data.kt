@@ -28,7 +28,7 @@ data class SignUp1RequestBody(
 
 data class SignUp1ResponseBody(
     @SerializedName("result")
-    val result: String?,
+    val result: Object?,
     @SerializedName("status")
     val ststus: String?
 )

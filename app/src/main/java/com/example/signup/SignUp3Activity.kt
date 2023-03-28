@@ -32,6 +32,7 @@ class SignUp3Activity: AppCompatActivity() {
     var checkbox_status_sms: String = "0"
     var checkbox_status_kkt: String = "0"
     var checkbox_status_info: String = "0"
+    var token : String =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,12 +99,14 @@ class SignUp3Activity: AppCompatActivity() {
             tel = intent.getStringExtra("tel").toString()
             birth = intent.getStringExtra("birth").toString()
             address = intent.getStringExtra("address").toString()
+            token = intent.getStringExtra("token").toString()
+
 
 //            checkbox_status_sms = intent.getStringExtra("checkbox_status_sms").toString()
 //            checkbox_status_kkt = intent.getStringExtra("checkbox_status_kkt").toString()
 //            checkbox_status_info = intent.getStringExtra("checkbox_status_info").toString()
 
-            Log.e("가져온 값",ID+" "+ pw + " "+ Name + " "+ tel+" "+birth+ " "+address+" "
+            Log.e("가져온 값",token+" "+ID+" "+ pw + " "+ Name + " "+ tel+" "+birth+ " "+address+" "
                     +checkbox_status_sms+" "+checkbox_status_kkt+" "+checkbox_status_info)
         }
         else{
@@ -126,6 +129,7 @@ class SignUp3Activity: AppCompatActivity() {
                 intent.putExtra("checkbox_status_sms",checkbox_status_sms)
                 intent.putExtra("checkbox_status_kkt",checkbox_status_kkt)
                 intent.putExtra("checkbox_status_info",checkbox_status_info)
+                intent.putExtra("token",token)
                 startActivity(intent)
             }
         }

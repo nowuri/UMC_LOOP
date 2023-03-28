@@ -28,6 +28,7 @@ class SignUp1Activity : AppCompatActivity() {
     var id: String = ""
     var pw: String = ""
     var tokenGet : String = ""
+    var gettoken: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,11 +88,41 @@ class SignUp1Activity : AppCompatActivity() {
 
             if(viewBinding.idinput.getText().toString().length >=6){
                 if(viewBinding.pwinput.getText().toString().equals(viewBinding.pwcheckinput.getText().toString()) && viewBinding.pwinput.getText().length >= 8){
-                    val retrofitWork = RetrofitWork(userData)
-                    retrofitWork.work()
+                    val service = RetrofitClient.emgMedService
 
-                    val intent = Intent(this,SignUp2Activity::class.java)
-                    startActivity(intent)
+                    service.addUser(userData)
+                        .enqueue(object: retrofit2.Callback<SignUp1ResponseBody>{
+                            override fun onResponse(
+                                call: Call<SignUp1ResponseBody>,
+                                response: Response<SignUp1ResponseBody>
+                            ) {
+                                if(response.isSuccessful){
+                                    val result = response.body()
+                                    Log.d("1차 회원가입 성공","$result")
+
+                                    val getresult = response.body()?.result.toString()
+                                    Log.d("result","$getresult")
+                                    val split = getresult.split(':',',','=')
+                                    Log.d("result 나누기","$split")
+                                    gettoken = split[1]
+                                    Log.d("token","$gettoken")
+
+                                    val intent = Intent(this@SignUp1Activity,SignUp2Activity::class.java)
+                                    Log.e("token check!","$gettoken")
+                                    intent.putExtra("token",gettoken)
+                                    startActivity(intent)
+                                }
+                            }
+
+                            override fun onFailure(call: Call<SignUp1ResponseBody>, t: Throwable) {
+                                Log.d("1차 회원가입 실패",t.message.toString())
+                            }
+                        })
+
+//                    val intent = Intent(this,SignUp2Activity::class.java)
+//                    Log.e("token check!","$gettoken")
+//                    intent.putExtra("token",gettoken)
+//                    startActivity(intent)
 
                 }
                 else if(viewBinding.pwinput.getText().length < 8){
@@ -125,6 +156,12 @@ class SignUp1Activity : AppCompatActivity() {
                             val result = response.body()
                             Log.d("1차 회원가입 성공","$result")
 
+                            val getresult = response.body()?.result.toString()
+                            Log.d("result","$getresult")
+                            val split = getresult.split(':',',','=')
+                            Log.d("result 나누기","$split")
+                            val gettoken = split[1]
+                            Log.d("token","$gettoken")
                         }
                     }
 

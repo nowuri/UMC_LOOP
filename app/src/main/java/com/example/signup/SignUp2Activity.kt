@@ -35,6 +35,7 @@ class SignUp2Activity: AppCompatActivity() {
     var inputUserAddress: String = ""
     var ID: String =""
     var pw : String =""
+    var token: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,14 +120,13 @@ class SignUp2Activity: AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {}
         })
 
-//        if(intent.hasExtra("ID") && intent.hasExtra("PW")&& intent.hasExtra("name")   ){
-//            ID = intent.getStringExtra("ID").toString()
-//          pw = intent.getStringExtra("PW").toString()
-//            name = intent.getStringExtra("name").toString()
-//        }
-//        else{
-//            Log.e("받아온 값","받아온 값이 없습니다.")
-//        }
+        if(intent.hasExtra("token")){
+            token = intent.getStringExtra("token").toString()
+            Log.e("token Cheking in Signup","$token")
+        }
+        else{
+            Log.e("받아온 값","받아온 값이 없습니다.")
+        }
 
         //다음 버튼 클릭
         viewBinding.next.setOnClickListener {
@@ -139,6 +139,7 @@ class SignUp2Activity: AppCompatActivity() {
             intent.putExtra("tel",tel)
             intent.putExtra("birth",viewBinding.birth.getText().toString())
             intent.putExtra("address",inputUserAddress)
+            intent.putExtra("token",token)
             startActivity(intent)
         }
     }
