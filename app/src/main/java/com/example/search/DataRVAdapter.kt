@@ -39,7 +39,7 @@ class DataRVAdapter(val context: Context, private val dataList: ArrayList<RVdata
             viewBinding.field.text = data.field
             viewBinding.age.text = data.age
             viewBinding.explain.text = data.explain
-            viewBinding.hashtag.text = data.hashtag
+            viewBinding.date.text = data.date
             viewBinding.share.setOnClickListener(){
                 val shareIntent = Intent().apply{
                     action = Intent.ACTION_SEND
