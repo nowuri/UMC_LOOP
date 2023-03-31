@@ -1,6 +1,7 @@
 package com.example.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.description.Description
 import com.example.interested.databinding.FragmentHomeSeoulBinding
 import com.example.network.RetrofitClient
 import com.google.gson.JsonObject
@@ -33,6 +35,7 @@ class HomeSeoul : Fragment() {
     private lateinit var viewbinding: FragmentHomeSeoulBinding
 
     lateinit var mainActivity: Home
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -47,6 +50,9 @@ class HomeSeoul : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
+
         val region = "서울"
         RetrofitWork(region).work()
     }
@@ -101,6 +107,10 @@ class HomeSeoul : Fragment() {
                                     )
                                     a+=1
                                 }
+
+
+
+
                                 Log.e("Homeseoul 정책 datalist","$dataList")
                                 val DataRVAdapter = HomeAdapter1(mainActivity, dataList)
                                 viewbinding.rvRefrigerator.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL,false)

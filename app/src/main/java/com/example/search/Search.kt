@@ -135,14 +135,6 @@ class Search : AppCompatActivity() {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
-
-        //val field = PolicyFieldRequestBody("취업")
-        //val retrofitWork = RetrofitWork(field)
-        //retrofitWork.work()
-
-        //var region = PolicyRegionRequestBody("제주")
-        //val retrofitWork2 = RetrofitWork2(region)
-        //retrofitWork2.work()
     }
 
 

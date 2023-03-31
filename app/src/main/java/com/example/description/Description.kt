@@ -60,6 +60,11 @@ class Description : AppCompatActivity(), View.OnClickListener {
         //    val intent = Intent(this,Recommend::class.java)
         //    startActivity(intent)
         //}
+
+        if(intent.hasExtra("name")){
+            val name = intent.getStringExtra("name").toString()
+            Log.e("HomeSeoul에서 가져온 값:",name)
+        }
     }
 
     override fun onClick(v: View?) {

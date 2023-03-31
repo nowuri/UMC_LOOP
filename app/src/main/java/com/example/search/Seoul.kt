@@ -9,7 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.interested.databinding.FragmentFoundBinding
+import android.content.Intent
+import com.example.description.Description
 import com.example.interested.databinding.FragmentSeoulBinding
 import com.example.network.RetrofitClient
 import com.google.gson.JsonObject
@@ -46,9 +47,14 @@ class Seoul : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
         val region = "서울"
         RetrofitWork(region).work()
+        //viewbinding.rvRefrigerator.setOnClickListener(){
+        //    val myIntent = Intent(bizId, Description::class.java)
+        //    myIntent.putExtra("bizId", bizId)
+        //    startActivity(myIntent)
+        //}
+
     }
 
     override fun onCreateView(
