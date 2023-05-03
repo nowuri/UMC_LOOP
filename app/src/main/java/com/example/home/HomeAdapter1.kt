@@ -21,21 +21,17 @@ class HomeAdapter1(val context: Home, private var dataList: ArrayList<Homedata>)
     }
     val intent = Intent(context, Description::class.java)
 
-    //lateinit var dataPassListener: onDataPassListener
-
     inner class DataViewHolder(private val viewBinding: HomeItemBinding): RecyclerView.ViewHolder(viewBinding.root){
         fun bind(data: Homedata, context: Context){
             viewBinding.name.text = data.name
             viewBinding.publicName.text = data.publicName
 
             viewBinding.name.setOnClickListener{
-                //dataPassListener.onDataPass(data.name)
-                intent.putExtra("name", data.name)
+                intent.putExtra("id", data.id)
                 context.startActivity(intent)
             }
             viewBinding.publicName.setOnClickListener{
-                //dataPassListener.onDataPass(data.name)
-                intent.putExtra("name", data.name)
+                intent.putExtra("id", data.id)
                 context.startActivity(intent)
             }
         }

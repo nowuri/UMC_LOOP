@@ -97,7 +97,8 @@ class HomeChung : Fragment() {
                                     dataList.add(
                                         Homedata(
                                             policyname,
-                                            department
+                                            department,
+                                            id
                                         )
                                     )
                                     a+=1
