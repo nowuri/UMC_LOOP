@@ -50,9 +50,6 @@ class HomeSeoul : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
-
         val region = "서울"
         RetrofitWork(region).work()
     }

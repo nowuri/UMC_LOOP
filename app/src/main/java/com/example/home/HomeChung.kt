@@ -92,6 +92,8 @@ class HomeChung : Fragment() {
                                     val Jsonfor = jsonArray[a].getAsJsonObject()
                                     val policyname = Jsonfor.get("policyName").getAsString()
                                     val department = Jsonfor.get("department").getAsString()
+                                    val id = Jsonfor.get("id").getAsString()
+
                                     Log.e("정책 이름, 정책 부서:", "$policyname $department")
 
                                     dataList.add(
