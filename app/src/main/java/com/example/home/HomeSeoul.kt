@@ -50,9 +50,6 @@ class HomeSeoul : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-
-
         val region = "서울"
         RetrofitWork(region).work()
     }
@@ -97,19 +94,17 @@ class HomeSeoul : Fragment() {
                                     val Jsonfor = jsonArray[a].getAsJsonObject()
                                     val policyname = Jsonfor.get("policyName").getAsString()
                                     val department = Jsonfor.get("department").getAsString()
-                                    Log.e("정책 이름, 정책 부서:", "$policyname $department")
+                                    val id = Jsonfor.get("id").getAsString()
 
                                     dataList.add(
                                         Homedata(
                                             policyname,
-                                            department
+                                            department,
+                                            id
                                         )
                                     )
                                     a+=1
                                 }
-
-
-
 
                                 Log.e("Homeseoul 정책 datalist","$dataList")
                                 val DataRVAdapter = HomeAdapter1(mainActivity, dataList)

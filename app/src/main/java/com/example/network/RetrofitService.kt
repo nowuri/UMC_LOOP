@@ -84,13 +84,14 @@ interface RetrofitService {
         @Query("keyword")keyword:String,
         @Query("region")region:String) : Call<JsonObject>
 
-    //정책검색화면 지역별 검색어와 GET
+    //정책세부화면 GET
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("policies/{policyId}")
     fun PolicyDetailGet(
-        @Path("policyId") policyId: String,
-        @Body policyID: PolicyDetailRequestBody
-    ): Call<PolicyDetailResponseBody>
+        @Path("policyId") policyId: String
+    ): Call<JsonObject>
+
+    //@Query("region")region:String) : Call<JsonObject>
 
     //비밀번호 찾기
     @Headers("accept: application/json", "Content-Type: application/json")
