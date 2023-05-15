@@ -17,12 +17,22 @@ class Description : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewBinding: ActivityDescriptionBinding
     var recomm_comment: String = ""
     var unrecomm_comment: String = ""
-
+    //var id:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         viewBinding = ActivityDescriptionBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
+
+        if(intent.hasExtra("id")){
+            val id = intent.getStringExtra("id").toString()
+            Log.e("HomeSeoul에서 가져온 id:",id)
+
+            val bundle: Bundle = Bundle()
+            bundle.putString("id", id)
+            val fragment1 = Fragment1()
+            fragment1.arguments = bundle
+        }
 
         val tabTitle = arrayOf("신청 정보", "정책 정보", "심사 절차")
         val desAdapter =VPAdapter4(this)
@@ -61,10 +71,6 @@ class Description : AppCompatActivity(), View.OnClickListener {
         //    startActivity(intent)
         //}
 
-        if(intent.hasExtra("name")){
-            val name = intent.getStringExtra("name").toString()
-            Log.e("HomeSeoul에서 가져온 값:",name)
-        }
     }
 
     override fun onClick(v: View?) {
