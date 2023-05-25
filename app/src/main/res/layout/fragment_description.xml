@@ -2,13 +2,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.example.description.DescriptionFragment">
+    tools:context="com.example.description.Description2">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/policy_url"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#E6E6E6"
+            android:gravity="center_vertical"
+            android:text="* 신청 URL"
+            android:textColor="#1D2D69" />
+
+        <TextView
+            android:id="@+id/policy_process"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#E6E6E6"
+            android:gravity="center_vertical"
+            android:text="* 신청 절차"
+            android:textColor="#1D2D69" />
+
+        <TextView
+            android:id="@+id/policy_requirements"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#E6E6E6"
+            android:gravity="center_vertical"
+            android:text="* 참여 요건"
+            android:textColor="#1D2D69" />
+
+        <TextView
+            android:id="@+id/policy_introduce"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#E6E6E6"
+            android:gravity="center_vertical"
+            android:text="* 정책 소개 "
+            android:textColor="#1D2D69" />
+
+        <TextView
+            android:id="@+id/policy_assist"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#E6E6E6"
+            android:gravity="center_vertical"
+            android:text="* 지원 내용 "
+            android:textColor="#1D2D69" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

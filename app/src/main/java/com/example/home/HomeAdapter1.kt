@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.description.Description
+import com.example.description.Description2
 import com.example.interested.databinding.HomeItemBinding
 
 class HomeAdapter1(val context: Home, private var dataList: ArrayList<Homedata>) : RecyclerView.Adapter<HomeAdapter1.DataViewHolder>() {
     interface onDataPassListener {
         fun onDataPass(data:String?)
     }
-    val intent = Intent(context, Description::class.java)
+    val intent = Intent(context, Description2::class.java)
 
     inner class DataViewHolder(private val viewBinding: HomeItemBinding): RecyclerView.ViewHolder(viewBinding.root){
         fun bind(data: Homedata, context: Context){

@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
@@ -18,12 +17,10 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.home.Home
 import com.example.interested.R
-import com.example.interested.RetrofitWork
 import com.example.interested.SignUp2Activity
 import com.example.interested.databinding.ActivityMainSearchBinding
 import com.example.login.Login
 import com.example.mypage.MyPage_MainActivity
-import com.example.network.*
 import com.example.qna.Question
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call

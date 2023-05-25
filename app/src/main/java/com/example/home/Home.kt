@@ -115,12 +115,6 @@ class Home : AppCompatActivity() {
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_DOWN)
         viewBinding.scrollview.fullScroll(ScrollView.FOCUS_UP)
 
-        //val info = PolicyRegionSearchRequestBody("청년", "서울")
-        //RetrofitWork2(info).work()
-
-        //val policyID = PolicyDetailRequestBody("R2023080504223")
-        //RetrofitWork3(policyID).work()
-
     }
 }
 
