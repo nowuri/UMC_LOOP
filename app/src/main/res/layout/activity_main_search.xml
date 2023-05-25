@@ -107,7 +107,7 @@
             android:background="@color/white"
             android:layout_marginLeft="2dp"
             style="?android:attr/borderlessButtonStyle"
-            android:id="@+id/search"/>
+            android:id="@+id/searchBtn"/>
 
         <EditText
             android:id="@+id/searchinput"

@@ -71,7 +71,7 @@ class Login : AppCompatActivity() {
                         response: Response<SigninResponseBody>,
                     ) {
                         if(response.isSuccessful){
-                            val result = response.body()
+                            val result = response.body()?.result
                             Log.d("로그인 성공","$result")
                         }
                     }

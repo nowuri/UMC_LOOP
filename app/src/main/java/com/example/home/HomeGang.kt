@@ -92,8 +92,7 @@ class HomeGang : Fragment() {
                                     val Jsonfor = jsonArray[a].getAsJsonObject()
                                     val policyname = Jsonfor.get("policyName").getAsString()
                                     val department = Jsonfor.get("department").getAsString()
-                                    val id = Jsonfor.get("id").getAsString()
-
+                                    val id = ""
                                     dataList.add(
                                         Homedata(
                                             policyname,

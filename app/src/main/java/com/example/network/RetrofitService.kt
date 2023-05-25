@@ -102,4 +102,15 @@ interface RetrofitService {
     @Headers("accept: application/json", "Content-Type: application/json")
     @GET("auth/naver")
     fun naverLogin(): Call<naverLoginResponseBody>
+
+    //지역별 키워드 검색
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @GET("/app/policies/region/search")
+    fun regionSearch(@Query("keyword") keyword: String , @Query("region") region: String): Call<JsonObject>
+
+    //분야별 키워드 검색
+    @Headers("accept: application/json", "Content-Type: application/json")
+    @GET("/app/policies/field/search")
+    fun fieldSearch(@Query("keyword") keyword: String, @Query("field") field: String): Call<JsonObject>
+
 }

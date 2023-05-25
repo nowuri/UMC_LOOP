@@ -185,3 +185,26 @@ data class naverLoginResponseBody(
     @SerializedName("status")
     val status: String?
 )
+
+data class regoinSearchRequestBody(
+    val keyword:String?,
+    val region: String?
+)
+data class regionSearchResponseBody(
+    @SerializedName("result")
+    val result: Objects?,
+    @SerializedName("status")
+    val status: String?
+)
+
+data class fieldSearchRequestBody(
+    val keyword:String?,
+    val field: String?
+)
+
+data class fieldSearchReponseBody(
+    @SerializedName("result")
+    val result: Objects?,
+    @SerializedName("status")
+    val status: String?
+)
