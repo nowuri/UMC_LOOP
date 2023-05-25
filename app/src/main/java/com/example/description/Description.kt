@@ -15,8 +15,6 @@ import com.example.home.Homedata
 import com.example.interested.SignUp3Activity
 import com.example.interested.databinding.ActivityDescriptionBinding
 import com.example.network.RetrofitClient
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Response
@@ -25,7 +23,6 @@ class Description : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewBinding: ActivityDescriptionBinding
     var recomm_comment: String = ""
     var unrecomm_comment: String = ""
-    //var id:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         viewBinding = ActivityDescriptionBinding.inflate(layoutInflater)
@@ -35,7 +32,7 @@ class Description : AppCompatActivity(), View.OnClickListener {
         if(intent.hasExtra("id")){
             val policyId = intent.getStringExtra("id").toString()
             RetrofitWork(policyId).work()
-            Log.e("HomeSeoul에서 가져온 id:",policyId)
+            Log.e("세부 화면| 가져온 id:",policyId)
         }
 
         var commentView = LayoutInflater.from(this).inflate(R.layout.policy_comment, null, false)
@@ -91,9 +88,12 @@ class Description : AppCompatActivity(), View.OnClickListener {
                             //3. 정책 array에서 정책 다섯개 뽑아옴
                             if (jsonArray != null) {
                                 var a: Int = 0
-                                while(a <= 0){
+                                while(a <= 1){
                                     val Jsonfor = jsonArray[a].getAsJsonObject()
                                     val policyname = Jsonfor.get("policyName").getAsString()
+
+                                    Log.e("세부화면| 정책 이름:","$policyname")
+
                                     val department = Jsonfor.get("cnsgNmor").getAsString()
                                     val applydate = Jsonfor.get("rqutPrdCn").getAsString()
                                     val url = Jsonfor.get("rqutUrla").getAsString()
@@ -110,11 +110,11 @@ class Description : AppCompatActivity(), View.OnClickListener {
 
                                     viewBinding.name.setText(policyname)
                                     viewBinding.applydate.setText(applydate)
-                                    viewBinding.policyUrl.setText(url)
-                                    viewBinding.policyProcess.setText(applyprocess)
-                                    viewBinding.policyRequirements.setText(requirements)
-                                    viewBinding.policyIntroduce.setText(introduction)
-                                    viewBinding.policyAssist.setText(assitdetail)
+                                    //viewBinding.policyUrl.setText(url)
+                                    //viewBinding.policyProcess.setText(applyprocess)
+                                    //viewBinding.policyRequirements.setText(requirements)
+                                    //viewBinding.policyIntroduce.setText(introduction)
+                                    //viewBinding.policyAssist.setText(assitdetail)
                                     a+=1
                                 }
                             }
